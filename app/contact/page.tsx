@@ -4,14 +4,14 @@ import { useState } from "react";
 export default function Contact() {
   const [status, setStatus] = useState("idle");
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
     const form = e.currentTarget;
     const data = {
-      name: form.elements.namedItem("name").value,
-      email: form.elements.namedItem("email").value,
-      message: form.elements.namedItem("message").value,
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
     const res = await fetch("/api/contact", {
       method: "POST",
