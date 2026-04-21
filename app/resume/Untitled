@@ -1,0 +1,76 @@
+export default function Resume() {
+  return (
+    <main style={{ paddingTop: "8rem", paddingBottom: "6rem", paddingLeft: "4rem", paddingRight: "4rem", maxWidth: "56rem", margin: "0 auto" }}>
+
+      {/* Header */}
+      <section style={{ marginBottom: "5rem" }}>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "1rem" }}>Resume</p>
+        <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-ink)", lineHeight: 1.15, marginBottom: "0.5rem" }}>
+          Shane Maris
+        </h1>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", marginBottom: "0.25rem" }}>Design Ops & Systems Leader</p>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)" }}>
+          contact@shanemaris.com · shanemaris.com · +1 (214) 546 3047
+        </p>
+      </section>
+
+      <hr style={{ border: "none", borderTop: "1px solid #E8E4DE", marginBottom: "5rem" }} />
+
+      {/* Experience */}
+      <section style={{ marginBottom: "5rem" }}>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2rem" }}>Experience</p>
+
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>Southwest Airlines · 2014 – present</p>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Digital Product Manager, Design Ops</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2022 – present</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>
+              Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers. Partner with teams across Marketing, Customer Experience, Technology, and Innovation to optimize design processes.
+            </p>
+          </div>
+
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Lead UX Designer</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2022</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>
+              Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps.
+            </p>
+          </div>
+
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Sr. UX Designer</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2019 – 2022</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>
+              Explored design systems and design ops as a formal role within Southwest. Supported design efforts for Revenue Products. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020.
+            </p>
+          </div>
+
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>UX Designer</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2014 – 2019</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>
+              Primary designer on Vision — the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <hr style={{ border: "none", borderTop: "1px solid #E8E4DE", marginBottom: "5rem" }} />
+
+      {/* Expertise */}
+      <section style={{ marginBottom: "5rem" }}>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2rem" }}>Expertise</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem" }}>
+          {["Design Ops", "Design Systems", "UI/UX Design", "UX Strategy", "Design Leadership
