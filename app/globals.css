@@ -11,3 +11,73 @@
 html {
   background-color: var(--color-base);
 }
+
+body {
+  line-height: 1.6;
+}
+
+/* Vertical Rhythm & Typography */
+p {
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 1.25rem;
+}
+
+h2 {
+  margin-bottom: 1.25rem;
+  margin-top: 2rem;
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
+/* Spacing between sections */
+article > div {
+  margin-bottom: 1.5rem;
+}
+
+/* Blockquotes */
+blockquote {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+blockquote p {
+  margin-bottom: 0;
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code blocks */
+code {
+  line-height: 1.6;
+}
+
+/* Images */
+img {
+  margin-bottom: 1.5rem;
+}

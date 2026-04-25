@@ -1,4 +1,15 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useKonamiCode } from '@/lib/konami';
+
 export default function Home() {
+  useEffect(() => {
+    useKonamiCode(() => {
+      window.location.href = '/labs';
+    });
+  }, []);
+
   return (
     <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem" }}>
       <div style={{ maxWidth: "48rem" }}>
