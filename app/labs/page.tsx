@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { labsProjects } from '@/lib/projects';
 import PasswordGate from '@/components/PasswordGate';
 import LabsHeader from '@/components/LabsHeader';
+import ParticleBackgroundNetwork from '@/components/ParticleBackgroundNetwork';
 
 function LabsContent() {
   return (
     <>
       <LabsHeader />
-      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
+      <ParticleBackgroundNetwork />
+      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem', position: 'relative', zIndex: 2 }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
           {/* Header */}
           <div style={{ marginBottom: '4rem' }}>
