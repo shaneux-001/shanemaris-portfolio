@@ -6,6 +6,8 @@ export default function Resume() {
         <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-ink)", lineHeight: 1.15, marginBottom: "0.5rem" }}>Shane Maris</h1>
         <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", marginBottom: "0.25rem" }}>Design Ops and Systems Leader</p>
         <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>contact@shanemaris.com · shanemaris.com · +1 (214) 546 3047</p>
+        <a href="/Shane_Maris_Resume.docx" download style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-accent)", textDecoration: "none", borderBottom: "1px solid var(--color-accent)" }}>Download resume</a>
+        <p style={{ marginBottom: "2rem" }} />
       <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", lineHeight: 1.8, maxWidth: "42rem", marginBottom: "1rem" }}>I help designers do their best work by building scalable processes, enabling the right tools, and aligning teams around shared standards so design can move faster, with clarity and confidence.</p>
         <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", lineHeight: 1.8, maxWidth: "42rem" }}>I am a designer by trade who grew into systems thinking. I have spent the last several years at Southwest Airlines building and scaling the Heart Design System across web and native platforms.</p>
       </section>

@@ -20,80 +20,19 @@ function ParticleCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    interface Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-      opacity: number;
+    // Draw network particles once (like particle-test)
+    ctx.fillStyle = 'rgba(123, 94, 167, 0.4)';
+
+    for (let i = 0; i < 20; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const radius = Math.random() * 1.2 + 0.4;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
     }
 
-    const particles: Particle[] = Array.from({ length: 20 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      radius: Math.random() * 1.2 + 0.4,
-      opacity: Math.random() * 0.4 + 0.15,
-    }));
-
-    let animationId: number | null = null;
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x - p.radius < 0 || p.x + p.radius > canvas.width) {
-          p.vx *= -1;
-          p.x = Math.max(p.radius, Math.min(canvas.width - p.radius, p.x));
-        }
-        if (p.y - p.radius < 0 || p.y + p.radius > canvas.height) {
-          p.vy *= -1;
-          p.y = Math.max(p.radius, Math.min(canvas.height - p.radius, p.y));
-        }
-      });
-
-      const connectionDistance = 150;
-      ctx.strokeStyle = 'rgba(123, 94, 167, 0.1)';
-      ctx.lineWidth = 1;
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionDistance) {
-            ctx.globalAlpha = (1 - distance / connectionDistance) * 0.2;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      ctx.fillStyle = 'rgba(123, 94, 167, 0.4)';
-      particles.forEach((p) => {
-        ctx.globalAlpha = p.opacity;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      ctx.globalAlpha = 1;
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      if (animationId) cancelAnimationFrame(animationId);
-    };
+    ctx.fillText('Canvas is working on /labs', 50, 50);
   }, []);
 
   return (
