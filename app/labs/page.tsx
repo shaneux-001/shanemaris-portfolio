@@ -124,20 +124,6 @@ function LabsContent() {
                   {project.title}
                 </h3>
 
-                {project.description && (
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: '0.9375rem',
-                      color: 'var(--color-muted)',
-                      lineHeight: 1.5,
-                      margin: 0,
-                      flex: 1,
-                    }}
-                  >
-                    {project.description}
-                  </p>
-                )}
               </div>
             </Link>
           ))}
