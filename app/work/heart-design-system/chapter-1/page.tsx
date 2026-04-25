@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { readTimes } from '@/lib/readTime';
 
 export default function Chapter1() {
   return (
@@ -60,11 +61,23 @@ export default function Chapter1() {
               fontFamily: 'var(--font-inter)',
               fontSize: '1rem',
               color: 'var(--color-muted)',
-              marginBottom: '2rem',
+              marginBottom: '1rem',
               marginTop: 0,
             }}
           >
             Origin Story
+          </p>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: '0.875rem',
+              color: 'var(--color-muted)',
+              marginBottom: 0,
+              marginTop: 0,
+            }}
+          >
+            Read time: {readTimes.chapter1}
           </p>
         </div>
 

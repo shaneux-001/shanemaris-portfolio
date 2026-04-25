@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { readTimes } from '@/lib/readTime';
 
 export default function Chapter2() {
   return (
@@ -67,11 +68,23 @@ export default function Chapter2() {
               fontFamily: 'var(--font-inter)',
               fontSize: '1rem',
               color: 'var(--color-muted)',
-              marginBottom: 0,
+              marginBottom: '1rem',
               marginTop: 0,
             }}
           >
             Pandemic
+          </p>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: '0.875rem',
+              color: 'var(--color-muted)',
+              marginBottom: 0,
+              marginTop: 0,
+            }}
+          >
+            Read time: {readTimes.chapter2}
           </p>
         </div>
 

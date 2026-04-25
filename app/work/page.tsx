@@ -157,6 +157,16 @@ export default function WorkPage() {
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
+                  transition: 'padding 0.2s',
+                  padding: '0 0 0 0',
+                }}
+                onMouseEnter={(e) => {
+                  const parent = e.currentTarget as HTMLDivElement;
+                  parent.style.padding = '0 1rem 0 1rem';
+                }}
+                onMouseLeave={(e) => {
+                  const parent = e.currentTarget as HTMLDivElement;
+                  parent.style.padding = '0 0 0 0';
                 }}
               >
                 {/* Project Image */}
@@ -172,6 +182,9 @@ export default function WorkPage() {
                     color: 'var(--color-muted)',
                     fontSize: '0.875rem',
                     fontFamily: 'var(--font-inter)',
+                    marginLeft: '-1rem',
+                    marginRight: '-1rem',
+                    width: 'calc(100% + 2rem)',
                   }}
                 >
                   Placeholder

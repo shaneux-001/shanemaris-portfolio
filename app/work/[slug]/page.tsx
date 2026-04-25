@@ -3,12 +3,23 @@
 import { use } from 'react';
 import Link from 'next/link';
 import { portfolioProjects } from '@/lib/projects';
+import { readTimes } from '@/lib/readTime';
 
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+// Map project slugs to read times
+const projectReadTimes: Record<string, string> = {
+  'my-account-redesign': readTimes.myAccountRedesign,
+  'mobile-check-in': readTimes.mobileCheckIn,
+  'change-cancel-experience': readTimes.changeCancelExperience,
+  'homepage-redesign': readTimes.homepageRedesignV1,
+  'homepage-v2': readTimes.homepageV2,
+  'enhanced-reaccom': readTimes.enhancedReaccom,
+};
 
 export default function ProjectPage({ params }: PageProps) {
   const { slug } = use(params);
@@ -28,6 +39,8 @@ export default function ProjectPage({ params }: PageProps) {
       </main>
     );
   }
+
+  const readTime = projectReadTimes[slug] || '3 minutes';
 
   return (
     <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
@@ -66,6 +79,18 @@ export default function ProjectPage({ params }: PageProps) {
           >
             {project.title}
           </h1>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: '0.875rem',
+              color: 'var(--color-muted)',
+              marginBottom: 0,
+              marginTop: '0.5rem',
+            }}
+          >
+            Read time: {readTime}
+          </p>
         </div>
 
         {/* Hero Image */}
