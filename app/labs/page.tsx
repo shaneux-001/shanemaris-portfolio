@@ -166,13 +166,5 @@ function LabsContent() {
 }
 
 export default function LabsPage() {
-  return (
-    <PasswordGate
-      projectSlug="labs"
-      projectTitle="Labs"
-      config={{ expiryDays: 30 }}
-    >
-      <LabsContent />
-    </PasswordGate>
-  );
+  return <LabsContent />;
 }
