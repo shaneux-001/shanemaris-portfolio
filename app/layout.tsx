@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.svg",
   },
   openGraph: {
-    title: "Shane Maris",
-    description: "Design Ops & Systems Leader",
+    title: "Shane Maris — Design Ops & Systems Leader",
+    description: "Experienced Design Operations and Systems leader focused on building scalable design infrastructure, mentoring teams, and creating meaningful digital experiences.",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Shane Maris — Design Ops & Systems Leader",
