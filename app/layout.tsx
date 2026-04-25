@@ -23,10 +23,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Shane Maris — Design Ops & Systems Leader",
-    description: "Experienced Design Operations and Systems leader focused on building scalable design infrastructure, mentoring teams, and creating meaningful digital experiences.",
+    description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Shane Maris — Design Ops & Systems Leader",
