@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   title: "Shane Maris",
   description: "Design Ops & Systems Leader",
   icons: {
-    icon: "/favicon.ico",
     apple: "/apple-touch-icon.svg",
   },
   openGraph: {
