@@ -17,6 +17,22 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Shane Maris",
   description: "Design Ops & Systems Leader",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.svg",
+  },
+  openGraph: {
+    title: "Shane Maris",
+    description: "Design Ops & Systems Leader",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Shane Maris — Design Ops & Systems Leader",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

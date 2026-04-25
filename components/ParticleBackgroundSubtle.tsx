@@ -39,13 +39,13 @@ export default function ParticleBackgroundSubtle() {
       vx: (Math.random() - 0.5) * 0.2,
       vy: (Math.random() - 0.5) * 0.2,
       radius: Math.random() * 1 + 0.5,
-      opacity: Math.random() * 0.3 + 0.1,
+      opacity: Math.random() * 0.5 + 0.4,
     }));
 
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(123, 94, 167, 0.25)';
+      ctx.fillStyle = 'rgba(123, 94, 167, 0.7)';
 
       particlesRef.current.forEach((particle) => {
         // Gentle movement

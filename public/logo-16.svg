@@ -1,0 +1,17 @@
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3x3 grid tight (no gaps) for favicon -->
+  <!-- Row 1 -->
+  <rect x="0" y="0" width="5" height="5" fill="rgba(123, 94, 167, 0.30)"/>
+  <rect x="5.33" y="0" width="5" height="5" fill="rgba(123, 94, 167, 0.45)"/>
+  <rect x="10.66" y="0" width="5" height="5" fill="rgba(123, 94, 167, 0.60)"/>
+
+  <!-- Row 2 -->
+  <rect x="0" y="5.33" width="5" height="5" fill="rgba(123, 94, 167, 0.45)"/>
+  <rect x="5.33" y="5.33" width="5" height="5" fill="rgba(123, 94, 167, 0.60)"/>
+  <rect x="10.66" y="5.33" width="5" height="5" fill="rgba(123, 94, 167, 0.75)"/>
+
+  <!-- Row 3 -->
+  <rect x="0" y="10.66" width="5" height="5" fill="rgba(123, 94, 167, 0.60)"/>
+  <rect x="5.33" y="10.66" width="5" height="5" fill="rgba(123, 94, 167, 0.75)"/>
+  <rect x="10.66" y="10.66" width="5" height="5" fill="rgba(123, 94, 167, 0.90)"/>
+</svg>

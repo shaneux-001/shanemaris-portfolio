@@ -4,11 +4,21 @@ import Link from 'next/link';
 import { labsProjects } from '@/lib/projects';
 import PasswordGate from '@/components/PasswordGate';
 import LabsHeader from '@/components/LabsHeader';
-import ParticleBackgroundNetwork from '@/components/ParticleBackgroundNetwork';
 import { useEffect, useRef } from 'react';
 
-function ParticleCanvas() {
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  opacity: number;
+}
+
+function AnimatedParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particlesRef = useRef<Particle[]>([]);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,22 +27,56 @@ function ParticleCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Draw network particles once (like particle-test)
-    ctx.fillStyle = 'rgba(123, 94, 167, 0.4)';
+    const particleCount = 15;
+    particlesRef.current = Array.from({ length: particleCount }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      radius: Math.random() * 1 + 0.5,
+      opacity: (Math.random() * 0.5 + 0.4) * 0.9,
+    }));
 
-    for (let i = 0; i < 20; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const radius = Math.random() * 1.2 + 0.4;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(123, 94, 167, 0.36)';
 
-    ctx.fillText('Canvas is working on /labs', 50, 50);
+      particlesRef.current.forEach((particle, idx) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x - particle.radius < 0 || particle.x + particle.radius > canvas.width) {
+          particle.vx *= -1;
+          particle.x = Math.max(particle.radius, Math.min(canvas.width - particle.radius, particle.x));
+        }
+        if (particle.y - particle.radius < 0 || particle.y + particle.radius > canvas.height) {
+          particle.vy *= -1;
+          particle.y = Math.max(particle.radius, Math.min(canvas.height - particle.radius, particle.y));
+        }
+
+        ctx.globalAlpha = particle.opacity;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius * 6.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -47,17 +91,18 @@ function ParticleCanvas() {
         pointerEvents: 'none',
         zIndex: 1,
         backgroundColor: 'transparent',
+        mixBlendMode: 'multiply',
       }}
     />
   );
 }
 
+
 function LabsContent() {
   return (
     <>
       <LabsHeader />
-      <ParticleCanvas />
-      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem', position: 'relative', zIndex: 2 }}>
+      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
           {/* Header */}
           <div style={{ marginBottom: '4rem' }}>
@@ -161,6 +206,7 @@ function LabsContent() {
         </div>
       </div>
     </main>
+    <AnimatedParticles />
     </>
   );
 }

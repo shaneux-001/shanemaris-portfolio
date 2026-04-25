@@ -39,7 +39,7 @@ export default function ParticleBackgroundNetwork() {
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,
       radius: Math.random() * 1.2 + 0.4,
-      opacity: Math.random() * 0.4 + 0.15,
+      opacity: Math.random() * 0.5 + 0.5,
     }));
 
     // Animation loop
@@ -64,7 +64,7 @@ export default function ParticleBackgroundNetwork() {
 
       // Draw connecting lines
       const connectionDistance = 150;
-      ctx.strokeStyle = 'rgba(123, 94, 167, 0.1)';
+      ctx.strokeStyle = 'rgba(123, 94, 167, 0.3)';
       ctx.lineWidth = 1;
 
       for (let i = 0; i < particlesRef.current.length; i++) {
@@ -84,7 +84,7 @@ export default function ParticleBackgroundNetwork() {
       }
 
       // Draw particles
-      ctx.fillStyle = 'rgba(123, 94, 167, 0.4)';
+      ctx.fillStyle = 'rgba(123, 94, 167, 0.8)';
       particlesRef.current.forEach((particle) => {
         ctx.globalAlpha = particle.opacity;
         ctx.beginPath();

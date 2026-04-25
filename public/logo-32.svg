@@ -1,0 +1,17 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3x3 grid with rounded corners and minimal spacing (1px gap) -->
+  <!-- Row 1 -->
+  <rect x="1" y="1" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.30)"/>
+  <rect x="11" y="1" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.45)"/>
+  <rect x="21" y="1" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.60)"/>
+
+  <!-- Row 2 -->
+  <rect x="1" y="11" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.45)"/>
+  <rect x="11" y="11" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.60)"/>
+  <rect x="21" y="11" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.75)"/>
+
+  <!-- Row 3 -->
+  <rect x="1" y="21" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.60)"/>
+  <rect x="11" y="21" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.75)"/>
+  <rect x="21" y="21" width="8" height="8" rx="3" ry="3" fill="rgba(123, 94, 167, 0.90)"/>
+</svg>

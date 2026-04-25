@@ -1,0 +1,20 @@
+<svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- Background for iOS home screen -->
+  <rect width="180" height="180" fill="#faf7fc" rx="40"/>
+
+  <!-- Logo centered (180px scale) -->
+  <g transform="translate(27, 27)">
+    <!-- 3x3 grid -->
+    <rect x="0" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.30)"/>
+    <rect x="54" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.45)"/>
+    <rect x="108" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
+
+    <rect x="0" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.45)"/>
+    <rect x="54" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
+    <rect x="108" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.75)"/>
+
+    <rect x="0" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
+    <rect x="54" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.75)"/>
+    <rect x="108" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.90)"/>
+  </g>
+</svg>
