@@ -78,8 +78,9 @@ export default function Chapter2() {
           <p
             style={{
               fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
+              fontSize: '0.8125rem',
               color: 'var(--color-muted)',
+              opacity: 0.7,
               marginBottom: 0,
               marginTop: 0,
             }}

@@ -3,58 +3,41 @@
 import Link from 'next/link';
 import { labsProjects } from '@/lib/projects';
 import PasswordGate from '@/components/PasswordGate';
+import LabsHeader from '@/components/LabsHeader';
 
 function LabsContent() {
   return (
-    <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
-      <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
-        {/* Header */}
-        <div style={{ marginBottom: '4rem' }}>
-          <Link
-            href="/"
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
-              color: 'var(--color-accent)',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: '1.5rem',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.7';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
-            }}
-          >
-            ← Back home
-          </Link>
+    <>
+      <LabsHeader />
+      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
+          {/* Header */}
+          <div style={{ marginBottom: '4rem' }}>
+            <h1
+              style={{
+                fontFamily: 'var(--font-playfair)',
+                fontSize: 'clamp(2rem, 5vw, 3rem)',
+                color: 'var(--color-ink)',
+                lineHeight: 1.1,
+                marginBottom: '0.5rem',
+                marginTop: 0,
+              }}
+            >
+              Labs
+            </h1>
 
-          <h1
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              color: 'var(--color-ink)',
-              lineHeight: 1.1,
-              marginBottom: '0.5rem',
-              marginTop: 0,
-            }}
-          >
-            Labs
-          </h1>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '1rem',
-              color: 'var(--color-muted)',
-              marginBottom: 0,
-              marginTop: 0,
-            }}
-          >
-            Experimental work and side projects
-          </p>
-        </div>
+            <p
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '1rem',
+                color: 'var(--color-muted)',
+                marginBottom: 0,
+                marginTop: 0,
+              }}
+            >
+              Experimental work and side projects
+            </p>
+          </div>
 
         {/* Projects Grid */}
         <div
@@ -130,6 +113,7 @@ function LabsContent() {
         </div>
       </div>
     </main>
+    </>
   );
 }
 

@@ -208,7 +208,7 @@ export default function WorkPage() {
                 <p
                   style={{
                     fontFamily: 'var(--font-inter)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.9375rem',
                     color: 'var(--color-muted)',
                     lineHeight: 1.6,
                     marginBottom: 0,
