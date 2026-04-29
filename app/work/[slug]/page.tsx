@@ -1,28 +1,20 @@
-'use client';
+/**
+ * Case study detail page — SERVER COMPONENT.
+ * Reads content from content/work/[slug].md via lib/parseProjectMd.ts.
+ * Interactive hover links are delegated to components/HoverLink.tsx (client).
+ */
 
-import { use } from 'react';
 import Link from 'next/link';
 import { portfolioProjects } from '@/lib/projects';
-import { readTimes } from '@/lib/readTime';
+import { getProjectMd } from '@/lib/parseProjectMd';
+import HoverLink from '@/components/HoverLink';
 
 interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }
 
-// Map project slugs to read times
-const projectReadTimes: Record<string, string> = {
-  'my-account-redesign': readTimes.myAccountRedesign,
-  'mobile-check-in': readTimes.mobileCheckIn,
-  'change-cancel-experience': readTimes.changeCancelExperience,
-  'homepage-redesign': readTimes.homepageRedesignV1,
-  'homepage-v2': readTimes.homepageV2,
-  'enhanced-reaccom': readTimes.enhancedReaccom,
-};
-
-export default function ProjectPage({ params }: PageProps) {
-  const { slug } = use(params);
+export default async function ProjectPage({ params }: PageProps) {
+  const { slug } = await params;
   const project = portfolioProjects.find((p) => p.slug === slug);
 
   if (!project) {
@@ -40,14 +32,15 @@ export default function ProjectPage({ params }: PageProps) {
     );
   }
 
-  const readTime = projectReadTimes[slug] || '3 minutes';
+  const content = getProjectMd(slug);
 
   return (
     <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
       <article style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 4rem' }}>
-        {/* Header */}
+
+        {/* ── Header ── */}
         <div style={{ marginBottom: '3rem' }}>
-          <Link
+          <HoverLink
             href="/work"
             style={{
               fontFamily: 'var(--font-inter)',
@@ -57,15 +50,26 @@ export default function ProjectPage({ params }: PageProps) {
               display: 'inline-block',
               marginBottom: '1.5rem',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.7';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
-            }}
           >
             ← Back to work
-          </Link>
+          </HoverLink>
+
+          {/* Eyebrow */}
+          {content?.eyebrow && (
+            <p
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '0.75rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--color-accent)',
+                marginBottom: '0.75rem',
+                marginTop: 0,
+              }}
+            >
+              {content.eyebrow}
+            </p>
+          )}
 
           <h1
             style={{
@@ -80,21 +84,31 @@ export default function ProjectPage({ params }: PageProps) {
             {project.title}
           </h1>
 
+          {/* Meta row */}
           <p
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.8125rem',
               color: 'var(--color-muted)',
-              opacity: 0.7,
               marginBottom: 0,
-              marginTop: '0.5rem',
+              marginTop: '0.75rem',
             }}
           >
-            Read time: {readTime}
+            {content ? (
+              <>
+                {content.role}
+                {content.timeline && <> · {content.timeline}</>}
+                {content.platform && <> · {content.platform}</>}
+                {' · '}
+                {content.readTime} read
+              </>
+            ) : (
+              '3 minutes read'
+            )}
           </p>
         </div>
 
-        {/* Hero Image */}
+        {/* ── Hero image placeholder ── */}
         <div
           style={{
             backgroundColor: 'rgba(123, 94, 167, 0.08)',
@@ -109,10 +123,10 @@ export default function ProjectPage({ params }: PageProps) {
             fontFamily: 'var(--font-inter)',
           }}
         >
-          {project.title} Hero Image
+          {project.title} — Hero Image
         </div>
 
-        {/* Project Content */}
+        {/* ── Case study body ── */}
         <div
           style={{
             fontFamily: 'var(--font-inter)',
@@ -120,89 +134,68 @@ export default function ProjectPage({ params }: PageProps) {
             color: 'var(--color-ink)',
           }}
         >
-          <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '1.5rem',
-              color: 'var(--color-ink)',
-              marginBottom: '1rem',
-              marginTop: 0,
-            }}
-          >
-            Context
-          </h2>
-          <p>
-            This project demonstrates [context]. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          {content ? (
+            <>
+              {/* Summary */}
+              <p
+                style={{
+                  lineHeight: 1.8,
+                  marginTop: 0,
+                  marginBottom: '3rem',
+                  fontSize: '1.125rem',
+                }}
+              >
+                {content.summary}
+              </p>
 
-          {/* Image Break */}
-          <div
-            style={{
-              backgroundColor: 'rgba(123, 94, 167, 0.08)',
-              borderRadius: '8px',
-              aspectRatio: '1.5 / 1',
-              margin: '3rem 0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--color-muted)',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-inter)',
-            }}
-          >
-            Project screenshot or artifact
-          </div>
+              {/* Sections */}
+              {content.sections.map((section, i) => (
+                <div key={section.heading}>
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-playfair)',
+                      fontSize: '1.5rem',
+                      color: 'var(--color-ink)',
+                      marginBottom: '1rem',
+                      marginTop: 0,
+                    }}
+                  >
+                    {section.heading}
+                  </h2>
 
-          <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '1.5rem',
-              color: 'var(--color-ink)',
-              marginBottom: '1rem',
-              marginTop: 0,
-            }}
-          >
-            Key Constraint
-          </h2>
-          <p>
-            The primary constraint was [constraint]. This required careful consideration and creative problem-solving to navigate successfully.
-          </p>
+                  <p style={{ lineHeight: 1.8, marginTop: 0, marginBottom: 0 }}>
+                    {section.body}
+                  </p>
 
-          {/* Image Break */}
-          <div
-            style={{
-              backgroundColor: 'rgba(123, 94, 167, 0.08)',
-              borderRadius: '8px',
-              aspectRatio: '1.5 / 1',
-              margin: '3rem 0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--color-muted)',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-inter)',
-            }}
-          >
-            Process or decision diagram
-          </div>
-
-          <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '1.5rem',
-              color: 'var(--color-ink)',
-              marginBottom: '1rem',
-              marginTop: 0,
-            }}
-          >
-            Outcome
-          </h2>
-          <p>
-            The final result was [outcome]. This delivered measurable value and taught us important lessons about [learning].
-          </p>
+                  {/* Image placeholder between sections (not after the last) */}
+                  {i < content.sections.length - 1 && (
+                    <div
+                      style={{
+                        backgroundColor: 'rgba(123, 94, 167, 0.08)',
+                        borderRadius: '8px',
+                        aspectRatio: '1.5 / 1',
+                        margin: '3rem 0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--color-muted)',
+                        fontSize: '0.875rem',
+                        fontFamily: 'var(--font-inter)',
+                      }}
+                    >
+                      Image — {section.heading}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </>
+          ) : (
+            /* Fallback for slugs without a content file yet */
+            <p>Case study coming soon.</p>
+          )}
         </div>
 
-        {/* Back Link */}
+        {/* ── Footer link ── */}
         <div
           style={{
             marginTop: '4rem',
@@ -210,8 +203,9 @@ export default function ProjectPage({ params }: PageProps) {
             borderTop: '1px solid rgba(123, 94, 167, 0.15)',
           }}
         >
-          <Link
+          <HoverLink
             href="/work"
+            hoverOpacity={0.85}
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.875rem',
@@ -221,19 +215,13 @@ export default function ProjectPage({ params }: PageProps) {
               color: '#fff',
               borderRadius: '6px',
               textDecoration: 'none',
-              transition: 'opacity 0.2s',
               display: 'inline-block',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.85';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
             }}
           >
             Back to work
-          </Link>
+          </HoverLink>
         </div>
+
       </article>
     </main>
   );

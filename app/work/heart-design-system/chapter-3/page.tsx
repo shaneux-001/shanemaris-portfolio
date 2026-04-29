@@ -109,11 +109,11 @@ export default function Chapter3() {
           }}
         >
           <p>
-            Southwest's gift card experience worked. Customers could buy and redeem without issue. But underneath, it was still wearing Leapfrog — our 2008 design language — untouched through years of rebrands. Years of piecemealing a site of this scale meant some corners never got updated. They just waited.
+            Southwest&apos;s gift card experience worked. Customers could buy and redeem without issue. But underneath, it was still wearing Leapfrog — our 2008 design language — untouched through years of rebrands. Years of piecemealing a site of this scale meant some corners never got updated. They just waited.
           </p>
 
           <p>
-            Which made the gift card flow a perfect candidate for something I'd been wanting to prove.
+            Which made the gift card flow a perfect candidate for something I&apos;d been wanting to prove.
           </p>
 
           {/* Image Break */}

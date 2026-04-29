@@ -7,7 +7,7 @@
 
 const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
-export function useKonamiCode(onUnlock: () => void) {
+export function initKonamiCode(onUnlock: () => void) {
   if (typeof window === 'undefined') return;
 
   let konamiIndex = 0;

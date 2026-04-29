@@ -10,6 +10,24 @@ export default function About() {
       </section>
       <hr style={{ border: "none", borderTop: "1px solid #E8E4DE", marginBottom: "5rem" }} />
       <section style={{ marginBottom: "5rem" }}>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2.5rem" }}>Design Principles</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
+          {[
+            { n: "1", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
+            { n: "2", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
+            { n: "3", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
+            { n: "4", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
+          ].map(({ n, title, copy }) => (
+            <div key={n}>
+              <p style={{ fontFamily: "var(--font-playfair)", fontSize: "2.5rem", fontWeight: 700, color: "#D9D5CF", lineHeight: 1, marginBottom: "0.75rem" }}>{n}</p>
+              <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", fontWeight: 600, color: "var(--color-accent)", marginBottom: "0.5rem" }}>{title}</p>
+              <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", lineHeight: 1.7, margin: 0 }}>{copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <hr style={{ border: "none", borderTop: "1px solid #E8E4DE", marginBottom: "5rem" }} />
+      <section style={{ marginBottom: "5rem" }}>
         <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2rem" }}>Experience</p>
         <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>Southwest Airlines 2014 to present</p>
         <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>

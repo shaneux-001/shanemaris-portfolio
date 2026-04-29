@@ -10,10 +10,25 @@
 
 html {
   background-color: var(--color-base);
+  /* Lock the sans stack at the root so EVERY element inherits Inter
+     regardless of theme. Without this, anything missing an explicit
+     fontFamily falls through to the browser default (Times). */
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 body {
   line-height: 1.6;
+  font-family: inherit;
+}
+
+/* Headings default to the serif display face. Inline overrides still win. */
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* Browsers reset form controls to system fonts — opt back in */
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 /* Vertical Rhythm & Typography */

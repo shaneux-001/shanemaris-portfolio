@@ -109,7 +109,7 @@ export default function Chapter1() {
           }}
         >
           <p>
-            I've known design systems were the answer since before most people were calling them that.
+            I&apos;ve known design systems were the answer since before most people were calling them that.
           </p>
 
           <p>
@@ -159,7 +159,7 @@ export default function Chapter1() {
           </p>
 
           <p>
-            So I started with my manager. He'd been a UX designer himself, which helped — he didn't need a long explanation. He got it. From there it was our director, then the brand director. Each conversation was a rung.
+            So I started with my manager. He&apos;d been a UX designer himself, which helped — he didn&apos;t need a long explanation. He got it. From there it was our director, then the brand director. Each conversation was a rung.
           </p>
 
           {/* Another Image Break */}
@@ -181,7 +181,7 @@ export default function Chapter1() {
           </div>
 
           <p>
-            Eventually I made the case plainly: give me the space to try to fix this. He was supportive — and while the business realities meant he couldn't hand me a team or a budget, he gave me what he could: permission to spend part of my time on it.
+            Eventually I made the case plainly: give me the space to try to fix this. He was supportive — and while the business realities meant he couldn&apos;t hand me a team or a budget, he gave me what he could: permission to spend part of my time on it.
           </p>
 
           <p>

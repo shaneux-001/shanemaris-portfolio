@@ -142,15 +142,15 @@ export default function Chapter2() {
           </div>
 
           <p>
-            I thought I was going to lose the whole thing. Aviation didn't pause — it collapsed. Southwest, like every carrier, was in survival mode. Design systems are easy to believe in when business is good. They're a much harder sell when the company is fighting to stay solvent.
+            I thought I was going to lose the whole thing. Aviation didn&apos;t pause — it collapsed. Southwest, like every carrier, was in survival mode. Design systems are easy to believe in when business is good. They&apos;re a much harder sell when the company is fighting to stay solvent.
           </p>
 
           <p>
-            But out of the prep work we'd already done with Lippincott, and the exceptional partnership we'd built, we were able to salvage what mattered most — the color system, the typography, and the grid. It wasn't everything we'd planned. But it was a foundation. And a foundation was enough to keep going.
+            But out of the prep work we&apos;d already done with Lippincott, and the exceptional partnership we&apos;d built, we were able to salvage what mattered most — the color system, the typography, and the grid. It wasn&apos;t everything we&apos;d planned. But it was a foundation. And a foundation was enough to keep going.
           </p>
 
           <p>
-            That's when I was connected to Vince Bratton.
+            That&apos;s when I was connected to Vince Bratton.
           </p>
 
           <p>
@@ -180,7 +180,7 @@ export default function Chapter2() {
           </p>
 
           <p>
-            My argument was never abstract. Southwest's culture is built on cost discipline. So I spoke that language. <em>Efficiency. Reduced rework. Faster delivery with fewer people.</em> If we could do more with less, the system paid for itself.
+            My argument was never abstract. Southwest&apos;s culture is built on cost discipline. So I spoke that language. <em>Efficiency. Reduced rework. Faster delivery with fewer people.</em> If we could do more with less, the system paid for itself.
           </p>
 
           <p>
@@ -192,11 +192,11 @@ export default function Chapter2() {
           </p>
 
           <p>
-            We finally got Figma in the door, replacing Sketch, Abstract, and Zeplin in one move. I attended my first Config — Figma's annual conference — and it's hard to overstate the timing. That was the year Figma announced variables, modes, and Dev Mode from the Config stage. The tooling was finally catching up to the vision. I came back a different kind of energized.
+            We finally got Figma in the door, replacing Sketch, Abstract, and Zeplin in one move. I attended my first Config — Figma&apos;s annual conference — and it&apos;s hard to overstate the timing. That was the year Figma announced variables, modes, and Dev Mode from the Config stage. The tooling was finally catching up to the vision. I came back a different kind of energized.
           </p>
 
           <p>
-            What had been a slow burn started moving. Shortly after, I was asked to take what we'd built for responsive web and extend the system's thinking to iOS and Android. Both apps were heavily webview and hybrid at the time, which created its own challenges — but it also opened a door.
+            What had been a slow burn started moving. Shortly after, I was asked to take what we&apos;d built for responsive web and extend the system&apos;s thinking to iOS and Android. Both apps were heavily webview and hybrid at the time, which created its own challenges — but it also opened a door.
           </p>
 
           {/* Image Break */}
@@ -218,11 +218,11 @@ export default function Chapter2() {
           </div>
 
           <p>
-            That's when the team started to take real shape. The foundation pod on the technology side became a consistent crew. A couple of native dev allies came on board. I got my first dedicated contractor. What had been a grassroots effort run mostly on conviction and borrowed time started to look, for the first time, like an actual program.
+            That&apos;s when the team started to take real shape. The foundation pod on the technology side became a consistent crew. A couple of native dev allies came on board. I got my first dedicated contractor. What had been a grassroots effort run mostly on conviction and borrowed time started to look, for the first time, like an actual program.
           </p>
 
           <p>
-            It wasn't official. But it was real.
+            It wasn&apos;t official. But it was real.
           </p>
         </div>
 

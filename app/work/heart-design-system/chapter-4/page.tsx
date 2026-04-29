@@ -113,7 +113,7 @@ export default function Chapter4() {
           </p>
 
           <p>
-            That's where I've been living for the past few years.
+            That&apos;s where I&apos;ve been living for the past few years.
           </p>
 
           {/* Image Break */}
@@ -176,7 +176,7 @@ export default function Chapter4() {
               lineHeight: 1.4,
             }}
           >
-            A design system isn't just a technical challenge. It's an organizational one.
+            A design system isn&apos;t just a technical challenge. It&apos;s an organizational one.
           </blockquote>
 
           <p>
@@ -184,11 +184,11 @@ export default function Chapter4() {
           </p>
 
           <p>
-            But this year feels different. Efficiency is at the top of leadership's agenda. I have a new leader who gets it. And for the first time, I have the organizational momentum to right-size the program — solidify the foundation, build the tools we've always needed, and turn what has been an exceptionally resilient grassroots effort into something that scales.
+            But this year feels different. Efficiency is at the top of leadership&apos;s agenda. I have a new leader who gets it. And for the first time, I have the organizational momentum to right-size the program — solidify the foundation, build the tools we&apos;ve always needed, and turn what has been an exceptionally resilient grassroots effort into something that scales.
           </p>
 
           <p>
-            The system survived things it probably shouldn't have. Now it's time to let it thrive.
+            The system survived things it probably shouldn&apos;t have. Now it&apos;s time to let it thrive.
           </p>
         </div>
 

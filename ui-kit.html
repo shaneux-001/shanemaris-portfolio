@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shane Maris — UI Kit (working doc)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  /* === Source-of-truth tokens (mirrored from app/globals.css + tailwind.config.ts) === */
+  :root {
+    --color-base:           #F7F5F2;
+    --color-ink:            #1C1B17;
+    --color-muted:          #6B655F;  /* WCAG-fixed (was #7A7470) */
+    --color-accent:         #7B5EA7;  /* primary — plum */
+    --color-accent-2:       #B8442B;  /* secondary — terracotta */
+
+    /* Lines */
+    --color-divider:        #E8E4DE;  /* decorative dividers (exempt from 1.4.11) */
+    --color-control-border: #6B655F;  /* form inputs, controls */
+    --color-hairline:       #E8E4DE;  /* legacy alias for kit chrome */
+
+    /* Semantic */
+    --color-error:    #B4452F;        /* WCAG-fixed (was #D95F4B) */
+    --color-surface:  #FFFFFF;
+
+    /* Display scale (single h1) */
+    --display-h1: clamp(2.5rem, 7vw, 4.5rem);
+
+    /* Type — not theme-specific, always available */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Radii — not theme-specific */
+    --radius-sm: 6px;   /* buttons, inputs, chips */
+    --radius-md: 8px;   /* small cards, image blocks */
+    --radius-lg: 12px;  /* featured cards */
+
+    /* Spacing scale (rem) — observed in source */
+    --s-1:   0.25rem;
+    --s-2:   0.5rem;
+    --s-3:   0.75rem;
+    --s-4:   1rem;
+    --s-5:   1.25rem;
+    --s-6:   1.5rem;
+    --s-8:   2rem;
+    --s-10:  2.5rem;
+    --s-12:  3rem;
+    --s-16:  4rem;
+    --s-20:  5rem;
+    --s-24:  6rem;
+    --s-32:  8rem;
+  }
+
+  /* === Dark mode (mirror of source) — toggled via .theme-dark class === */
+  :root.theme-dark {
+    --color-base:           #1E1C19;
+    --color-ink:            #F0EDE6;
+    --color-muted:          #948E85;
+    --color-surface:        #252220;
+
+    --color-accent:         #A88AD0;
+    --color-accent-2:       #E0764A;
+
+    --color-divider:        #2A2724;
+    --color-control-border: #948E85;
+    --color-hairline:       #2A2724;
+    --color-error:          #E07659;
+
+    --accent-tint-08: rgba(168, 138, 208, 0.08);
+    --accent-tint-10: rgba(168, 138, 208, 0.10);
+    --accent-tint-15: rgba(168, 138, 208, 0.15);
+    --accent2-tint-08: rgba(224, 118, 74, 0.08);
+    --accent2-tint-10: rgba(224, 118, 74, 0.10);
+    --accent2-tint-15: rgba(224, 118, 74, 0.15);
+  }
+
+  /* === Kit chrome (not part of the brand — just for navigating this doc) === */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  /* Lock the sans stack at root so EVERY element inherits Inter
+     regardless of theme. Mirror of source globals.css. */
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    background: var(--color-base);
+    color: var(--color-ink);
+    font-family: inherit;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Browsers reset form controls to system fonts — opt back in */
+  button, input, select, textarea {
+    font-family: inherit;
+  }
+  .kit-shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+  .kit-side {
+    position: sticky; top: 0; align-self: start; height: 100vh;
+    border-right: 1px solid var(--color-hairline);
+    padding: 1.5rem 1.25rem;
+    background: var(--color-base);
+    overflow-y: auto;
+  }
+  .kit-side .brand {
+    display: flex; align-items: center; gap: 0.625rem;
+    font-family: var(--font-serif); font-size: 1rem; color: var(--color-ink);
+    margin-bottom: 1.5rem;
+  }
+  .kit-side .brand svg { width: 22px; height: 22px; }
+  .kit-side .meta {
+    font-size: 0.6875rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+  .kit-side nav { display: flex; flex-direction: column; gap: 0.125rem; margin-bottom: 1.5rem; }
+  .kit-side nav a {
+    color: var(--color-ink); text-decoration: none;
+    font-size: 0.8125rem; padding: 0.375rem 0.5rem;
+    border-radius: 4px;
+  }
+  .kit-side nav a:hover { background: var(--accent-tint-08); color: var(--color-accent); }
+  .kit-main { padding: 2.5rem 3rem 6rem; max-width: 1100px; }
+  .kit-section { padding: 2.5rem 0; border-bottom: 1px solid var(--color-hairline); }
+  .kit-section:last-child { border-bottom: none; }
+  .kit-h2 {
+    font-family: var(--font-serif); font-size: 1.75rem; font-weight: 500;
+    color: var(--color-ink); margin: 0 0 0.5rem;
+  }
+  .kit-lede {
+    font-size: 0.9375rem; color: var(--color-muted);
+    margin: 0 0 1.75rem; max-width: 38rem;
+  }
+  .kit-eyebrow {
+    font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--color-accent); margin: 0 0 0.5rem;
+  }
+  .kit-subhead {
+    font-family: var(--font-sans); font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--color-muted); margin: 1.5rem 0 0.75rem;
+  }
+  .kit-grid { display: grid; gap: 1rem; }
+  .kit-grid.g-2 { grid-template-columns: repeat(2, 1fr); }
+  .kit-grid.g-3 { grid-template-columns: repeat(3, 1fr); }
+  .kit-grid.g-4 { grid-template-columns: repeat(4, 1fr); }
+  .demo {
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+  }
+  .demo-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem; color: var(--color-muted);
+    background: var(--color-base);
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px; padding: 0.125rem 0.375rem;
+  }
+  .note {
+    font-size: 0.8125rem; color: var(--color-muted);
+    margin-top: 0.75rem;
+  }
+
+  /* === Color swatches === */
+  .swatch {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 1rem; border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline); background: var(--color-surface);
+  }
+  .swatch .chip {
+    height: 80px; border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch .row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .swatch .name { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .swatch .var  { font-size: 0.6875rem; color: var(--color-muted); font-family: ui-monospace, monospace; }
+  .swatch input[type="color"] {
+    width: 28px; height: 28px; border: 1px solid var(--color-hairline);
+    border-radius: 4px; padding: 0; cursor: pointer; background: transparent;
+  }
+  .swatch .hex {
+    font-family: ui-monospace, monospace; font-size: 0.75rem; color: var(--color-muted);
+    background: var(--color-base); padding: 0.125rem 0.375rem; border-radius: 4px;
+    cursor: pointer; border: 1px solid var(--color-hairline);
+  }
+  .swatch .hex:hover { color: var(--color-accent); }
+
+  /* === Type specimens === */
+  .type-row {
+    display: grid; grid-template-columns: 110px 1fr; gap: 1.5rem;
+    align-items: baseline; padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--color-hairline);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-row .label {
+    font-size: 0.6875rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* === BRAND component styles (mirror of portfolio code) === */
+  .b-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 2rem;
+    background: var(--color-base);
+    border-radius: var(--radius-md);
+  }
+  .b-header .logo {
+    font-family: var(--font-serif); font-size: 1.125rem;
+    color: var(--color-ink); text-decoration: none; font-weight: 500;
+  }
+  .b-header nav { display: flex; gap: 2rem; align-items: center; }
+  .b-header nav a {
+    font-family: var(--font-sans); font-size: 0.875rem;
+    color: var(--color-muted); text-decoration: none;
+  }
+  .b-header nav a.cta { color: var(--color-accent); font-weight: 500; }
+
+  .btn-primary {
+    background: var(--color-accent); color: #fff;
+    font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+    padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+    text-decoration: none; border: none; cursor: pointer;
+    display: inline-block; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-outline {
+    color: var(--color-accent); background: transparent;
+    font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+    padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+    text-decoration: none; border: 1.5px solid var(--color-accent);
+    display: inline-block; cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-outline:hover { opacity: 0.7; }
+
+  .text-link {
+    color: var(--color-accent); font-family: var(--font-sans);
+    font-size: 0.875rem; text-decoration: none;
+  }
+  .text-link:hover { opacity: 0.7; }
+
+  .eyebrow {
+    font-family: var(--font-sans); font-size: 0.75rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--color-accent); margin: 0;
+  }
+  .eyebrow.muted { color: var(--color-muted); }
+
+  .chip {
+    font-family: var(--font-sans); font-size: 0.9rem;
+    color: var(--color-ink); padding: 0.75rem 1rem;
+    border: 1px solid var(--color-hairline); border-radius: var(--radius-sm);
+    background: var(--color-base); display: inline-block;
+  }
+
+  .divider {
+    border: none; border-top: 1px solid var(--color-hairline);
+    margin: 0;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .field label {
+    font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink);
+  }
+  .field input, .field textarea {
+    font-family: var(--font-sans); font-size: 1rem;
+    padding: 0.75rem 1rem; border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm); background: #fff;
+    color: var(--color-ink); outline: none;
+  }
+  .field input:focus, .field textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--accent-tint-15);
+  }
+
+  /* === PATTERN: Hero === */
+  .p-hero {
+    padding: 3rem 2rem; max-width: 100%;
+  }
+  .p-hero h1 {
+    font-family: var(--font-serif); color: var(--color-ink);
+    font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.1;
+    margin: 1rem 0 1.25rem;
+  }
+  .p-hero .lede {
+    font-family: var(--font-sans); font-size: 1.125rem;
+    color: var(--color-muted); max-width: 36rem;
+    line-height: 1.75; margin: 0 0 2rem;
+  }
+
+  /* === PATTERN: Featured project === */
+  .p-featured {
+    padding: 3rem;
+    background: var(--accent-tint-08);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--accent-tint-15);
+  }
+  .p-featured-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
+    align-items: center;
+  }
+  .placeholder-img {
+    background: var(--accent-tint-10);
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-muted); font-size: 0.8125rem;
+    font-family: var(--font-sans);
+  }
+  .p-featured h2 {
+    font-family: var(--font-serif); color: var(--color-ink);
+    font-size: 2.25rem; line-height: 1.1; margin: 0.75rem 0 1.25rem;
+  }
+  .p-featured p.lede {
+    font-family: var(--font-sans); font-size: 1rem; color: var(--color-muted);
+    line-height: 1.75; margin: 0 0 1.75rem; max-width: 26rem;
+  }
+
+  /* === PATTERN: Project card grid === */
+  .p-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .p-card { text-decoration: none; color: inherit; display: block; transition: transform 0.2s, opacity 0.2s; }
+  .p-card:hover { transform: translateY(-4px); opacity: 0.92; }
+  .p-card .img {
+    background: var(--accent-tint-08); border-radius: var(--radius-md);
+    aspect-ratio: 1 / 0.67; margin-bottom: 1.25rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-muted); font-size: 0.8125rem;
+  }
+  .p-card h4 {
+    font-family: var(--font-serif); font-size: 1.25rem;
+    color: var(--color-ink); margin: 0 0 0.5rem; line-height: 1.2;
+  }
+  .p-card p {
+    font-family: var(--font-sans); font-size: 0.9375rem;
+    color: var(--color-muted); line-height: 1.6; margin: 0;
+  }
+
+  /* === PATTERN: Project card v2 (calmer hover, padding, tags) === */
+  .p-card-v2 {
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    background: transparent;
+    transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+  }
+  .p-card-v2:hover {
+    transform: translateY(-4px);
+    background: var(--accent-tint-08);
+    border-color: var(--accent-tint-15);
+  }
+  .p-card-v2 .img {
+    background: var(--accent-tint-08); border-radius: var(--radius-md);
+    aspect-ratio: 1 / 0.67; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-muted); font-size: 0.8125rem;
+  }
+  .p-card-v2 h4 {
+    font-family: var(--font-serif); font-size: 1.25rem;
+    color: var(--color-ink); margin: 0 0 0.5rem; line-height: 1.2;
+  }
+  .p-card-v2 p {
+    font-family: var(--font-sans); font-size: 0.9375rem;
+    color: var(--color-muted); line-height: 1.6; margin: 0 0 1rem;
+  }
+  .tag-row { display: flex; gap: 0.375rem; flex-wrap: wrap; margin-top: auto; }
+  .tag {
+    font-family: var(--font-sans); font-size: 0.6875rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border-radius: var(--radius-sm); padding: 0.25rem 0.5rem;
+    line-height: 1.2; display: inline-block;
+  }
+  .tag-primary {
+    color: var(--color-accent);
+    background: var(--accent-tint-08);
+    border: 1px solid var(--accent-tint-15);
+  }
+  .tag-secondary {
+    color: var(--color-accent-2);
+    background: var(--accent2-tint-08);
+    border: 1px solid var(--accent2-tint-15);
+  }
+
+  /* === PATTERN: Case study layout === */
+  .p-case {
+    max-width: 48rem; margin: 0 auto;
+    padding: 2rem;
+  }
+  .p-case h1 {
+    font-family: var(--font-serif); color: var(--color-ink);
+    font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; margin: 0;
+  }
+  .p-case .meta {
+    font-family: var(--font-sans); font-size: 0.8125rem;
+    color: var(--color-muted); opacity: 0.7; margin: 0.5rem 0 2rem;
+  }
+  .p-case .hero-img {
+    background: var(--accent-tint-08); border-radius: var(--radius-md);
+    aspect-ratio: 1 / 0.56; margin-bottom: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-muted); font-size: 0.8125rem;
+  }
+  .p-case h2 {
+    font-family: var(--font-serif); font-size: 1.5rem;
+    color: var(--color-ink); margin: 1.5rem 0 1rem;
+  }
+  .p-case p {
+    font-family: var(--font-sans); font-size: 1.0625rem;
+    color: var(--color-ink); line-height: 1.65; margin: 0 0 1.5rem;
+  }
+
+  /* === Misc layout === */
+  .reset-controls {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .reset-btn {
+    font-family: var(--font-sans); font-size: 0.75rem;
+    color: var(--color-muted); background: transparent;
+    border: 1px solid var(--color-hairline); border-radius: var(--radius-sm);
+    padding: 0.375rem 0.75rem; cursor: pointer;
+  }
+  .reset-btn:hover { color: var(--color-accent); border-color: var(--color-accent); }
+
+  .toast {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: var(--color-ink); color: var(--color-base);
+    font-family: var(--font-sans); font-size: 0.8125rem;
+    padding: 0.625rem 1rem; border-radius: var(--radius-sm);
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 900px) {
+    .kit-shell { grid-template-columns: 1fr; }
+    .kit-side { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--color-hairline); }
+    .kit-main { padding: 2rem 1.5rem 4rem; }
+    .p-featured-grid, .p-card-grid, .kit-grid.g-3, .kit-grid.g-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="kit-shell">
+
+  <!-- Side nav -->
+  <aside class="kit-side">
+    <div class="brand">
+      <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.30)"/>
+        <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.45)"/>
+        <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.60)"/>
+        <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.45)"/>
+        <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.60)"/>
+        <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.75)"/>
+        <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.60)"/>
+        <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.75)"/>
+        <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="rgba(123,94,167,0.90)"/>
+      </svg>
+      Shane Maris
+    </div>
+    <div class="meta">UI Kit · v0.2 working doc</div>
+    <nav>
+      <a href="#identity">Identity</a>
+      <a href="#color">Color</a>
+      <a href="#duo">Two-color system</a>
+      <a href="#a11y">Accessibility audit</a>
+      <a href="#dark">Dark mode</a>
+      <a href="#type">Typography</a>
+      <a href="#space">Spacing &amp; Radii</a>
+      <a href="#components">Components</a>
+      <a href="#figure">Figure component</a>
+      <a href="#icons">Icons</a>
+      <a href="#patterns">Content patterns</a>
+      <a href="#voice">Voice &amp; tone</a>
+      <a href="#openq">Open questions</a>
+    </nav>
+    <div class="meta">Theme</div>
+    <div class="reset-controls">
+      <button class="reset-btn" id="themeToggle">Toggle dark mode</button>
+    </div>
+    <div class="meta" style="margin-top: 1rem;">Reset</div>
+    <div class="reset-controls">
+      <button class="reset-btn" id="resetBtn">Reset all colors</button>
+    </div>
+    <p class="note" style="margin: 0.5rem 0 0;">
+      Tip: every swatch is editable. Changes propagate live to every component below.
+    </p>
+  </aside>
+
+  <!-- Main -->
+  <main class="kit-main">
+
+    <!-- Header / Identity -->
+    <section class="kit-section" id="identity">
+      <p class="kit-eyebrow">01 — Identity</p>
+      <h2 class="kit-h2">Mark, name, tagline</h2>
+      <p class="kit-lede">A 3×3 grid of rounded squares that grows from light to deep accent — visualizing systems thinking, gradient and grid both. The wordmark uses Playfair Display 500.</p>
+
+      <div class="demo">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <svg width="64" height="64" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-accent);">
+            <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.30"/>
+            <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.90"/>
+          </svg>
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--color-ink); font-weight: 500;">Shane Maris</div>
+            <div style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-muted);">Design Ops &amp; Systems Leader</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Mark variants</p>
+      <p class="note" style="margin-top: 0;">Three accent-driven options. Edit the <strong>Accent 1</strong> and <strong>Accent 2</strong> swatches in the Color section to riff live.</p>
+      <div class="kit-grid g-3">
+        <div class="demo" style="text-align: center;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin-bottom: 1rem;">Solo · Accent 1</div>
+          <svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-accent);">
+            <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.30"/>
+            <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.90"/>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 1rem;">Plum gradient · classic</div>
+        </div>
+        <div class="demo" style="text-align: center;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent-2); margin-bottom: 1rem;">Solo · Accent 2</div>
+          <svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-accent-2);">
+            <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.30"/>
+            <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+            <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.90"/>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 1rem;">Terracotta gradient · warmer</div>
+        </div>
+        <div class="demo" style="text-align: center; background: linear-gradient(180deg, transparent, var(--accent-tint-08));">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-ink); margin-bottom: 1rem;">Duo · gradient ★</div>
+          <svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="duoGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"  stop-color="var(--color-accent-2)"/>
+                <stop offset="100%" stop-color="var(--color-accent)"/>
+              </linearGradient>
+            </defs>
+            <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.30"/>
+            <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.45"/>
+            <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.60"/>
+            <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.45"/>
+            <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.60"/>
+            <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.75"/>
+            <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.60"/>
+            <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.75"/>
+            <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="url(#duoGrad)" fill-opacity="0.90"/>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 1rem;">Top-left → bottom-right blend</div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Per-cell duo (alternative)</p>
+      <p class="note" style="margin-top: 0;">A more graphic version — no SVG gradient, just two colors picked per cell. The diagonal still reads as a transition, but the cells stay distinct.</p>
+      <div class="kit-grid g-2">
+        <div class="demo" style="text-align: center;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 1rem;">Anti-diagonal split</div>
+          <svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top-left triangle: accent-2 -->
+            <g style="color: var(--color-accent-2);">
+              <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.90"/>
+              <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+              <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+            </g>
+            <!-- Anti-diagonal: blend (50/50 mix visually) -->
+            <g>
+              <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="var(--color-accent-2)" fill-opacity="0.55"/>
+              <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="var(--color-accent-2)" fill-opacity="0.45"/>
+              <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="var(--color-accent)"   fill-opacity="0.55"/>
+            </g>
+            <!-- Bottom-right triangle: accent (plum) -->
+            <g style="color: var(--color-accent);">
+              <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+              <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.75"/>
+              <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.90"/>
+            </g>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 1rem;">Terracotta NW → Plum SE</div>
+        </div>
+        <div class="demo" style="text-align: center;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 1rem;">Center-out</div>
+          <svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer ring: accent-2 (terracotta) -->
+            <g style="color: var(--color-accent-2);">
+              <rect x="6"  y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+              <rect x="47" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+              <rect x="88" y="6"  width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+              <rect x="6"  y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+              <rect x="88" y="47" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+              <rect x="6"  y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+              <rect x="47" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.60"/>
+              <rect x="88" y="88" width="34" height="34" rx="12" ry="12" fill="currentColor" fill-opacity="0.45"/>
+            </g>
+            <!-- Center: accent (plum) -->
+            <rect x="47" y="47" width="34" height="34" rx="12" ry="12" fill="var(--color-accent)" fill-opacity="0.95"/>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 1rem;">Plum core, terracotta orbit</div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Solo presets (sets Accent 1)</p>
+      <div class="demo" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+        <span style="font-size: 0.8125rem; color: var(--color-muted); margin-right: 0.5rem;">Try:</span>
+        <button class="reset-btn" data-accent="#7B5EA7">Plum</button>
+        <button class="reset-btn" data-accent="#2F6F4F">Forest</button>
+        <button class="reset-btn" data-accent="#B8442B">Terracotta</button>
+        <button class="reset-btn" data-accent="#1E5F8C">Inkwell blue</button>
+        <button class="reset-btn" data-accent="#C9A227">Saffron</button>
+        <button class="reset-btn" data-accent="#1C1B17">Mono ink</button>
+      </div>
+
+      <p class="kit-subhead">Duo presets (sets both)</p>
+      <div class="demo" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+        <span style="font-size: 0.8125rem; color: var(--color-muted); margin-right: 0.5rem;">Pairs:</span>
+        <button class="reset-btn" data-duo='["#7B5EA7","#B8442B"]'>Plum + Terracotta ★</button>
+        <button class="reset-btn" data-duo='["#B8442B","#7B5EA7"]'>Terracotta + Plum (swap)</button>
+        <button class="reset-btn" data-duo='["#7B5EA7","#2F6F4F"]'>Plum + Forest</button>
+        <button class="reset-btn" data-duo='["#1E5F8C","#C9A227"]'>Inkwell + Saffron</button>
+        <button class="reset-btn" data-duo='["#7B5EA7","#C9A227"]'>Plum + Saffron</button>
+        <button class="reset-btn" data-duo='["#1C1B17","#B8442B"]'>Mono ink + Terracotta</button>
+      </div>
+
+      <div class="demo" style="margin-top: 1rem; background: var(--color-base);">
+        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 0.75rem;">Implementation — swap this</div>
+<pre style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.75rem; line-height: 1.6; color: var(--color-ink); background: #fff; padding: 1rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); overflow-x: auto; margin: 0;">&lt;svg viewBox="0 0 128 128" style="color: var(--color-accent)"&gt;
+  &lt;rect x="6"  y="6"  width="34" height="34" rx="12" fill="currentColor" fill-opacity="0.30"/&gt;
+  &lt;rect x="47" y="6"  width="34" height="34" rx="12" fill="currentColor" fill-opacity="0.45"/&gt;
+  ...
+  &lt;rect x="88" y="88" width="34" height="34" rx="12" fill="currentColor" fill-opacity="0.90"/&gt;
+&lt;/svg&gt;</pre>
+      </div>
+    </section>
+
+    <!-- Color -->
+    <section class="kit-section" id="color">
+      <p class="kit-eyebrow">02 — Color</p>
+      <h2 class="kit-h2">The four-color palette</h2>
+      <p class="kit-lede">Warm paper base, near-black ink, dusty muted, plum accent. Click any hex to copy. Pick any chip to riff — every component on this page updates live.</p>
+
+      <p class="kit-subhead">Core tokens</p>
+      <div class="kit-grid g-4" id="coreSwatches">
+        <!-- swatches injected by JS -->
+      </div>
+
+      <p class="kit-subhead">Surfaces &amp; supporting</p>
+      <div class="kit-grid g-4" id="supportSwatches"></div>
+
+      <p class="kit-subhead">Accent tints (used for cards, image placeholders)</p>
+      <div class="kit-grid g-3">
+        <div class="swatch">
+          <div class="chip" style="background: var(--accent-tint-08); border: 1px solid var(--accent-tint-15);"></div>
+          <div class="row"><span class="name">Tint 8%</span><span class="hex" data-copy="rgba(123, 94, 167, 0.08)">rgba(.., 0.08)</span></div>
+          <div class="var">--accent-tint-08 · card backgrounds</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: var(--accent-tint-10);"></div>
+          <div class="row"><span class="name">Tint 10%</span><span class="hex" data-copy="rgba(123, 94, 167, 0.10)">rgba(.., 0.10)</span></div>
+          <div class="var">--accent-tint-10 · image placeholders</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: var(--accent-tint-15);"></div>
+          <div class="row"><span class="name">Tint 15%</span><span class="hex" data-copy="rgba(123, 94, 167, 0.15)">rgba(.., 0.15)</span></div>
+          <div class="var">--accent-tint-15 · card borders, focus rings</div>
+        </div>
+      </div>
+
+      <p class="note">
+        <strong>Riff prompt:</strong> the accent does a lot of heavy lifting (CTAs, eyebrows, focus, card tints, the entire mark).
+        Want to introduce a secondary accent for case-study tags or status colors? Drop a hex into the picker above and screenshot.
+      </p>
+    </section>
+
+    <!-- Two-color system -->
+    <section class="kit-section" id="duo">
+      <p class="kit-eyebrow">02.5 — Two-color system</p>
+      <h2 class="kit-h2">Duo in action</h2>
+      <p class="kit-lede">If a second color is going to earn its keep, it needs a job. Here's the duo running side-by-side across the patterns where it matters most — eyebrows, featured cards, hover/active states, and category framing.</p>
+
+      <p class="kit-subhead">Semantic split — three options</p>
+      <div class="kit-grid g-3">
+        <div class="demo">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin-bottom: 0.5rem;">Option A · brand vs UI</div>
+          <p style="margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--color-ink);">Accent 1 = brand identity (logo, eyebrows, hero). Accent 2 = UI action (CTAs, hover, focus).</p>
+          <p class="note" style="margin: 0;">Cleanest separation. Lets you change one without changing the other. Good if you ever want a tonal shift on a campaign page.</p>
+        </div>
+        <div class="demo" style="border-color: var(--color-accent-2); background: var(--accent2-tint-08);">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent-2); margin-bottom: 0.5rem;">Option B · default vs featured ★</div>
+          <p style="margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--color-ink);">Accent 1 for everything by default. Accent 2 reserved for "this matters more" — featured case study, current role, primary CTA.</p>
+          <p class="note" style="margin: 0;">Most natural fit for a portfolio. Earns attention without overwhelming.</p>
+        </div>
+        <div class="demo">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin-bottom: 0.5rem;">Option C · work vs labs</div>
+          <p style="margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--color-ink);">Accent 1 colors /work and /about. Accent 2 colors /labs and experimental things.</p>
+          <p class="note" style="margin: 0;">Personality split. The Konami-code labs section gets to feel different — playful vs professional.</p>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Eyebrows in both colors</p>
+      <div class="demo">
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent); margin: 0;">Featured Case Study · Accent 1</p>
+          <p style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-2); margin: 0;">Now Reading · Accent 2</p>
+          <p style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-muted); margin: 0;">Design Ops &amp; Systems · Muted (existing)</p>
+        </div>
+        <p class="note">Three voices for three jobs: brand framing (1), live/active framing (2), category framing (muted).</p>
+      </div>
+
+      <p class="kit-subhead">Featured project — duo variant</p>
+      <div class="p-featured" style="background: linear-gradient(135deg, var(--accent2-tint-08), var(--accent-tint-08)); border-color: var(--accent2-tint-15);">
+        <div class="p-featured-grid">
+          <div class="placeholder-img" style="aspect-ratio: 1 / 0.85; background: var(--accent2-tint-10);">Hero image</div>
+          <div>
+            <p style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-2); margin: 0;">Featured · Currently Shipping</p>
+            <h2 style="font-family: var(--font-serif); color: var(--color-ink); font-size: 2.25rem; line-height: 1.1; margin: 0.75rem 0 1.25rem;">Heart Design System</h2>
+            <p style="font-family: var(--font-sans); font-size: 1rem; color: var(--color-muted); line-height: 1.75; margin: 0 0 1.75rem; max-width: 26rem;">From grassroots effort to enterprise-scale design infrastructure across web, iOS, and Android.</p>
+            <a href="#" class="btn-primary">Read full case study</a>
+          </div>
+        </div>
+      </div>
+      <p class="note">Featured card uses the duo gradient as a soft background, terracotta border tint, and terracotta eyebrow. Plum CTA still does the work — it's the strongest action signal.</p>
+
+      <p class="kit-subhead">CTA hierarchy — primary &amp; alternate</p>
+      <div class="demo">
+        <div class="demo-row">
+          <a href="#" class="btn-primary">Primary action (Accent 1)</a>
+          <a href="#" class="btn-primary" style="background: var(--color-accent-2);">Alternate (Accent 2)</a>
+          <a href="#" class="btn-outline">Outline (A1)</a>
+          <a href="#" class="btn-outline" style="color: var(--color-accent-2); border-color: var(--color-accent-2);">Outline (A2)</a>
+        </div>
+        <p class="note">Reserve Accent 2 buttons for context-specific actions ("Subscribe", "Book a chat") so the primary action stays unambiguous.</p>
+      </div>
+
+      <p class="kit-subhead">Category chips</p>
+      <div class="demo">
+        <div class="demo-row">
+          <span class="chip" style="background: var(--accent-tint-08); border-color: var(--accent-tint-15); color: var(--color-accent);">Design Systems</span>
+          <span class="chip" style="background: var(--accent-tint-08); border-color: var(--accent-tint-15); color: var(--color-accent);">Design Ops</span>
+          <span class="chip" style="background: var(--accent2-tint-08); border-color: var(--accent2-tint-15); color: var(--color-accent-2);">Mobile</span>
+          <span class="chip" style="background: var(--accent2-tint-08); border-color: var(--accent2-tint-15); color: var(--color-accent-2);">iOS</span>
+          <span class="chip" style="background: var(--color-base); border-color: var(--color-hairline);">Research</span>
+        </div>
+        <p class="note">Two-toned tags let you scan a project list by domain — process work vs. product work, for example.</p>
+      </div>
+
+      <p class="kit-subhead">Color pair — at-a-glance</p>
+      <div class="demo" style="padding: 0; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div style="background: var(--color-accent); padding: 2rem; color: #fff;">
+            <div style="font-family: var(--font-sans); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.8;">Accent 1</div>
+            <div style="font-family: var(--font-serif); font-size: 1.75rem; margin-top: 0.5rem;">Plum</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 0.8125rem; opacity: 0.85; margin-top: 0.25rem;" id="duo-a1-hex">#7B5EA7</div>
+          </div>
+          <div style="background: var(--color-accent-2); padding: 2rem; color: #fff;">
+            <div style="font-family: var(--font-sans); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.8;">Accent 2</div>
+            <div style="font-family: var(--font-serif); font-size: 1.75rem; margin-top: 0.5rem;">Terracotta</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 0.8125rem; opacity: 0.85; margin-top: 0.25rem;" id="duo-a2-hex">#B8442B</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility audit -->
+    <section class="kit-section" id="a11y">
+      <p class="kit-eyebrow">02.75 — Accessibility</p>
+      <h2 class="kit-h2">WCAG 2.1 AA contrast audit</h2>
+      <p class="kit-lede">Computed against the actual portfolio palette. AA requires 4.5:1 for normal text, 3:1 for large text (≥ 24px or ≥ 19px bold) and non-text UI controls. AAA requires 7:1 / 4.5:1.</p>
+
+      <p class="kit-subhead">What passes today</p>
+      <div class="demo">
+        <table style="width: 100%; font-family: var(--font-sans); font-size: 0.875rem; border-collapse: collapse;">
+          <thead>
+            <tr style="text-align: left; color: var(--color-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+              <th style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 500;">Combination</th>
+              <th style="padding: 0.5rem 0.75rem; font-weight: 500;">Ratio</th>
+              <th style="padding: 0.5rem 0; font-weight: 500;">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Ink #1C1B17 on Base</td><td style="padding: 0.5rem 0.75rem;">15.84 : 1</td><td style="color: #2F6F4F;">PASS AAA</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Ink #1C1B17 on White surface</td><td style="padding: 0.5rem 0.75rem;">17.23 : 1</td><td style="color: #2F6F4F;">PASS AAA</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Accent 1 #7B5EA7 on Base</td><td style="padding: 0.5rem 0.75rem;">4.82 : 1</td><td style="color: #2F6F4F;">PASS AA · (fail AAA)</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Accent 2 #B8442B on Base</td><td style="padding: 0.5rem 0.75rem;">4.95 : 1</td><td style="color: #2F6F4F;">PASS AA · (fail AAA)</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">White on Accent 1 button</td><td style="padding: 0.5rem 0.75rem;">5.25 : 1</td><td style="color: #2F6F4F;">PASS AA</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">White on Accent 2 button</td><td style="padding: 0.5rem 0.75rem;">5.38 : 1</td><td style="color: #2F6F4F;">PASS AA</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Muted on White surface</td><td style="padding: 0.5rem 0.75rem;">4.61 : 1</td><td style="color: #2F6F4F;">PASS AA (just barely)</td></tr>
+            <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;">Accent 1/2 outline border</td><td style="padding: 0.5rem 0.75rem;">4.82–4.95 : 1</td><td style="color: #2F6F4F;">PASS UI 3:1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="kit-subhead">What fails — needs attention</p>
+      <div class="demo" style="border-color: rgba(180, 69, 47, 0.3); background: rgba(180, 69, 47, 0.04);">
+        <table style="width: 100%; font-family: var(--font-sans); font-size: 0.875rem; border-collapse: collapse;">
+          <thead>
+            <tr style="text-align: left; color: var(--color-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+              <th style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 500;">Combination</th>
+              <th style="padding: 0.5rem 0.75rem; font-weight: 500;">Ratio</th>
+              <th style="padding: 0.5rem 0.75rem; font-weight: 500;">Used for</th>
+              <th style="padding: 0.5rem 0; font-weight: 500;">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Muted #7A7470 on Base</td>
+              <td style="padding: 0.625rem 0.75rem;">4.23 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Ledes, captions, project descriptions, "read time"</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL AA</td>
+            </tr>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Muted on Accent 1 tint card</td>
+              <td style="padding: 0.625rem 0.75rem;">3.83 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Featured project card description</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL AA</td>
+            </tr>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Error #D95F4B on White</td>
+              <td style="padding: 0.625rem 0.75rem;">3.69 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Contact form error message</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL AA</td>
+            </tr>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Accent 1 #7B5EA7 on its own tint</td>
+              <td style="padding: 0.625rem 0.75rem;">4.37 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Eyebrow on featured project card</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL AA</td>
+            </tr>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Accent 2 #B8442B on its own tint</td>
+              <td style="padding: 0.625rem 0.75rem;">4.44 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Duo eyebrow on terracotta-tinted card</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL AA</td>
+            </tr>
+            <tr style="border-top: 1px solid rgba(180, 69, 47, 0.15);">
+              <td style="padding: 0.625rem 0.75rem 0.625rem 0;">Hairline #E8E4DE on Base (as control border)</td>
+              <td style="padding: 0.625rem 0.75rem;">1.16 : 1</td>
+              <td style="padding: 0.625rem 0.75rem; color: var(--color-muted);">Contact form input borders, skill chips</td>
+              <td style="color: #B4452F; font-weight: 500;">FAIL UI 3:1</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin-top: 1rem;">
+          The hairline failure is the most nuanced. <strong>Decorative</strong> dividers between sections are exempt from 1.4.11 — they're not communicating state. <strong>Control borders</strong> on inputs are not exempt: when border is the only thing distinguishing the field from the page, it must hit 3:1. Skill chips that look interactive but aren't are a gray area.
+        </p>
+      </div>
+
+      <p class="kit-subhead">Proposed token fixes</p>
+      <div class="kit-grid g-2">
+        <div class="demo">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 0.75rem;">Today</div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #7A7470;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">#7A7470</span>
+            <span style="font-size: 0.75rem; color: #B4452F;">4.23 : 1 ✗</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #D95F4B;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">#D95F4B</span>
+            <span style="font-size: 0.75rem; color: #B4452F;">3.69 : 1 ✗</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #E8E4DE; border: 1px solid #D6D0C7;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">#E8E4DE</span>
+            <span style="font-size: 0.75rem; color: #B4452F;">1.16 : 1 ✗</span>
+          </div>
+        </div>
+        <div class="demo" style="background: rgba(47, 111, 79, 0.05); border-color: rgba(47, 111, 79, 0.25);">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: #2F6F4F; margin-bottom: 0.75rem;">Proposed</div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #6B655F;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">#6B655F muted</span>
+            <span style="font-size: 0.75rem; color: #2F6F4F;">5.28 : 1 ✓</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #B4452F;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">#B4452F error</span>
+            <span style="font-size: 0.75rem; color: #2F6F4F;">5.03 : 1 ✓</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="display: inline-block; width: 28px; height: 28px; border-radius: 4px; background: #6B655F;"></span>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">muted as input border</span>
+            <span style="font-size: 0.75rem; color: #2F6F4F;">5.28 : 1 ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Side-by-side: contact form input</p>
+      <div class="kit-grid g-2">
+        <div class="demo">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 0.75rem;">Today (1.16:1 border)</div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="" style="border: 1px solid #E8E4DE;" />
+          </div>
+          <p style="font-family: var(--font-sans); font-size: 0.875rem; color: #D95F4B; margin: 0.75rem 0 0;">Something went wrong. Please try again.</p>
+        </div>
+        <div class="demo" style="background: rgba(47, 111, 79, 0.04); border-color: rgba(47, 111, 79, 0.25);">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: #2F6F4F; margin-bottom: 0.75rem;">Proposed (5.28:1 border)</div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="" style="border: 1px solid #6B655F;" />
+          </div>
+          <p style="font-family: var(--font-sans); font-size: 0.875rem; color: #B4452F; margin: 0.75rem 0 0;">Something went wrong. Please try again.</p>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Recommendations, in order</p>
+      <div class="demo">
+        <ol style="margin: 0; padding-left: 1.25rem; line-height: 1.85; font-size: 0.9375rem;">
+          <li><strong>Darken muted</strong> from <span class="code">#7A7470</span> → <span class="code">#6B655F</span>. Single-token change, fixes ~80% of the issues. Same warm-gray family, just one step deeper.</li>
+          <li><strong>Darken error</strong> from <span class="code">#D95F4B</span> → <span class="code">#B4452F</span>. Same hue, deeper saturation. Bonus: it's now in the same family as the terracotta accent.</li>
+          <li><strong>Split the hairline token in two</strong>. Keep <span class="code">#E8E4DE</span> for decorative section dividers (they're exempt from 1.4.11 because they're not control state). Add <span class="code">--color-control-border: #6B655F</span> for input fields and any "looks like a control" element.</li>
+          <li><strong>Eyebrows on tinted cards</strong>: either bump font-size to ≥ 24px (qualifies as large text, drops to 3:1), use a darker accent variant on tint backgrounds, or color those eyebrows with ink/muted instead of accent.</li>
+          <li><strong>Add a visible focus ring</strong>. Currently inputs/buttons have no focus state in source — a 3px <span class="code">accent-tint-15</span> ring is a low-cost win.</li>
+          <li><strong>Test custom duo presets</strong>. The presets I added (Forest, Saffron, Mono ink, etc.) aren't audited — if you commit to one, run it through this matrix first.</li>
+        </ol>
+      </div>
+
+      <p class="note">
+        <strong>Caveats.</strong> WCAG contrast is a floor, not a ceiling — passing 4.5:1 doesn't guarantee readable, and failing slightly doesn't mean unusable. But for a portfolio that bills design-systems work, hitting AA is table stakes. The proposed muted/error darkening is so subtle visually that most viewers won't notice the change while screen-reader and low-vision users will.
+      </p>
+    </section>
+
+    <!-- Dark mode -->
+    <section class="kit-section" id="dark">
+      <p class="kit-eyebrow">02.9 — Dark mode</p>
+      <h2 class="kit-h2">Warm-paper, deep-plum dark variant</h2>
+      <p class="kit-lede">Shipping in <span class="code">app/globals.css</span> via <span class="code">prefers-color-scheme: dark</span>, with manual override via the <span class="code">.theme-dark</span> class on <span class="code">&lt;html&gt;</span>. Toggle the kit itself with the button in the sidebar.</p>
+
+      <p class="kit-subhead">Token map — light → dark</p>
+      <div class="demo" style="padding: 0; overflow: hidden;">
+        <table style="width: 100%; font-family: var(--font-sans); font-size: 0.875rem; border-collapse: collapse;">
+          <thead>
+            <tr style="text-align: left; color: var(--color-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+              <th style="padding: 0.75rem 1rem; font-weight: 500; background: var(--color-base);">Token</th>
+              <th style="padding: 0.75rem 1rem; font-weight: 500; background: var(--color-base);">Light</th>
+              <th style="padding: 0.75rem 1rem; font-weight: 500; background: var(--color-base);">Dark</th>
+              <th style="padding: 0.75rem 1rem; font-weight: 500; background: var(--color-base);">Dark contrast</th>
+            </tr>
+          </thead>
+          <tbody style="font-family: ui-monospace, monospace; font-size: 0.8125rem;">
+            <tr><td style="padding: 0.5rem 1rem;">--color-base</td><td style="padding: 0.5rem 1rem;">#F7F5F2</td><td style="padding: 0.5rem 1rem;">#1E1C19</td><td style="padding: 0.5rem 1rem; color: var(--color-muted);">—</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-ink</td><td style="padding: 0.5rem 1rem;">#1C1B17</td><td style="padding: 0.5rem 1rem;">#F0EDE6</td><td style="padding: 0.5rem 1rem; color: #2F6F4F;">14.54:1 AAA</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-muted</td><td style="padding: 0.5rem 1rem;">#6B655F</td><td style="padding: 0.5rem 1rem;">#948E85</td><td style="padding: 0.5rem 1rem; color: #2F6F4F;">5.24:1 AA</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-accent</td><td style="padding: 0.5rem 1rem;">#7B5EA7</td><td style="padding: 0.5rem 1rem;">#A88AD0</td><td style="padding: 0.5rem 1rem; color: #2F6F4F;">5.84:1 AA</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-accent-2</td><td style="padding: 0.5rem 1rem;">#B8442B</td><td style="padding: 0.5rem 1rem;">#E0764A</td><td style="padding: 0.5rem 1rem; color: #2F6F4F;">5.55:1 AA</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-error</td><td style="padding: 0.5rem 1rem;">#B4452F</td><td style="padding: 0.5rem 1rem;">#E07659</td><td style="padding: 0.5rem 1rem; color: #2F6F4F;">5.59:1 AA</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-surface</td><td style="padding: 0.5rem 1rem;">#FFFFFF</td><td style="padding: 0.5rem 1rem;">#252220</td><td style="padding: 0.5rem 1rem; color: var(--color-muted);">—</td></tr>
+            <tr><td style="padding: 0.5rem 1rem;">--color-divider</td><td style="padding: 0.5rem 1rem;">#E8E4DE</td><td style="padding: 0.5rem 1rem;">#2A2724</td><td style="padding: 0.5rem 1rem; color: var(--color-muted);">decorative</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="kit-subhead">Hero pattern — both themes inline</p>
+      <div class="kit-grid g-2">
+        <!-- Light preview (locked) -->
+        <div class="demo" style="background: #F7F5F2; color: #1C1B17; padding: 2rem;">
+          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.12em; color: #6B655F; margin-bottom: 0.5rem;">Light · Locked preview</div>
+          <p style="font-family: var(--font-sans); font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6B655F; margin: 0 0 0.75rem;">Design Ops &amp; Systems</p>
+          <h3 style="font-family: var(--font-serif); font-size: 1.875rem; line-height: 1.1; margin: 0 0 1rem; color: #1C1B17;">Shane Maris</h3>
+          <p style="font-family: var(--font-sans); font-size: 0.9375rem; color: #6B655F; line-height: 1.6; margin: 0 0 1.25rem;">I design systems that scale, building the foundations product teams rely on at Southwest Airlines.</p>
+          <a href="#" style="background: #7B5EA7; color: #F7F5F2; font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none;">View my resume</a>
+        </div>
+
+        <!-- Dark preview (locked) -->
+        <div class="demo" style="background: #1E1C19; color: #F0EDE6; padding: 2rem; border-color: #2A2724;">
+          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.12em; color: #948E85; margin-bottom: 0.5rem;">Dark · Locked preview</div>
+          <p style="font-family: var(--font-sans); font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: #948E85; margin: 0 0 0.75rem;">Design Ops &amp; Systems</p>
+          <h3 style="font-family: var(--font-serif); font-size: 1.875rem; line-height: 1.1; margin: 0 0 1rem; color: #F0EDE6;">Shane Maris</h3>
+          <p style="font-family: var(--font-sans); font-size: 0.9375rem; color: #948E85; line-height: 1.6; margin: 0 0 1.25rem;">I design systems that scale, building the foundations product teams rely on at Southwest Airlines.</p>
+          <a href="#" style="background: #A88AD0; color: #1E1C19; font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none;">View my resume</a>
+        </div>
+      </div>
+
+      <p class="note">
+        Buttons swap text color via <span class="code">color: var(--color-base)</span> rather than hard-coded white — in light mode that's near-white on plum (5.0:1), in dark mode it becomes the dark base on lifted plum (5.0:1). Same token, two correct outcomes.
+      </p>
+
+      <p class="kit-subhead">Implementation notes</p>
+      <div class="demo">
+        <ol style="margin: 0; padding-left: 1.25rem; line-height: 1.85; font-size: 0.9375rem;">
+          <li>Default behavior follows OS via <span class="code">@media (prefers-color-scheme: dark)</span>.</li>
+          <li>Manual override: add <span class="code">class="theme-light"</span> or <span class="code">class="theme-dark"</span> to <span class="code">&lt;html&gt;</span>. The CSS uses <span class="code">:root:not(.theme-light)</span> for the system query so an explicit light class wins.</li>
+          <li>Since every color goes through a CSS variable, a theme toggle UI just needs to add/remove the class on <span class="code">&lt;html&gt;</span> and persist the preference to <span class="code">localStorage</span>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="kit-section" id="type">
+      <p class="kit-eyebrow">03 — Typography</p>
+      <h2 class="kit-h2">Two faces, clear roles</h2>
+      <p class="kit-lede">Playfair Display for display and serif moments (logo, h1–h4). Inter for everything else — body, eyebrows, UI, captions.</p>
+
+      <div class="demo">
+        <p class="kit-subhead" style="margin-top: 0;">Display scale (Playfair Display)</p>
+        <div class="type-row">
+          <div class="label">Hero h1</div>
+          <div style="font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.1;">Shane Maris</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Page h1</div>
+          <div style="font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.15;">I design the systems behind great design.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Featured h2</div>
+          <div style="font-family: var(--font-serif); font-size: 3rem; line-height: 1.1;">Heart Design System</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Section h2</div>
+          <div style="font-family: var(--font-serif); font-size: 1.75rem;">Want to work together?</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Section h3 / case h2</div>
+          <div style="font-family: var(--font-serif); font-size: 1.5rem;">Other Work</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Card h4</div>
+          <div style="font-family: var(--font-serif); font-size: 1.25rem;">My Account Redesign</div>
+        </div>
+      </div>
+
+      <div class="demo" style="margin-top: 1rem;">
+        <p class="kit-subhead" style="margin-top: 0;">Text scale (Inter)</p>
+        <div class="type-row">
+          <div class="label">Lede 18</div>
+          <div style="font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.75; color: var(--color-muted); max-width: 36rem;">I design systems that scale, building the foundations product teams rely on at Southwest Airlines.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Body 17</div>
+          <div style="font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.65; color: var(--color-ink); max-width: 36rem;">The primary constraint was scale. This required careful consideration and creative problem-solving to navigate successfully.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Body 16</div>
+          <div style="font-family: var(--font-sans); font-size: 1rem; line-height: 1.75; color: var(--color-muted); max-width: 36rem;">Manage and maintain the commercial design system. Co-lead the UX Community of Practice.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">UI 14</div>
+          <div style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink);">Send message</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Caption 13</div>
+          <div style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted);">Read time: 4 minutes</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Eyebrow 12</div>
+          <div class="eyebrow">Featured Case Study</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Spacing & Radii -->
+    <section class="kit-section" id="space">
+      <p class="kit-eyebrow">04 — Layout</p>
+      <h2 class="kit-h2">Spacing, radii &amp; container widths</h2>
+      <p class="kit-lede">Spacing is generous and consistent — most pages use 4rem horizontal padding and 5–6rem vertical breathing room.</p>
+
+      <p class="kit-subhead">Spacing scale (rem)</p>
+      <div class="demo">
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-2</span><span class="code">0.5rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 0.5rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-4</span><span class="code">1rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 1rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-6</span><span class="code">1.5rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 1.5rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-8</span><span class="code">2rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 2rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-12</span><span class="code">3rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 3rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-16</span><span class="code">4rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 4rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-20</span><span class="code">5rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 5rem;"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 80px 1fr; gap: 0.75rem; align-items: center; font-size: 0.8125rem;">
+            <span class="code">--s-24</span><span class="code">6rem</span><div style="height: 12px; background: var(--accent-tint-15); width: 6rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Container widths</p>
+      <div class="demo">
+        <div style="font-family: var(--font-sans); font-size: 0.875rem; line-height: 2; color: var(--color-ink);">
+          <div><span class="code">36rem</span> &nbsp; lede paragraphs, contact form</div>
+          <div><span class="code">42rem</span> &nbsp; about-page body</div>
+          <div><span class="code">48rem</span> &nbsp; hero block, case study article</div>
+          <div><span class="code">56rem</span> &nbsp; about/contact main column</div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Radii</p>
+      <div class="kit-grid g-3">
+        <div class="demo" style="text-align: center;">
+          <div style="height: 80px; background: var(--accent-tint-10); border-radius: var(--radius-sm); margin-bottom: 0.75rem;"></div>
+          <div style="font-size: 0.875rem;">6px <span class="code">--radius-sm</span></div>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 0.25rem;">buttons, inputs, chips</div>
+        </div>
+        <div class="demo" style="text-align: center;">
+          <div style="height: 80px; background: var(--accent-tint-10); border-radius: var(--radius-md); margin-bottom: 0.75rem;"></div>
+          <div style="font-size: 0.875rem;">8px <span class="code">--radius-md</span></div>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 0.25rem;">cards, image blocks</div>
+        </div>
+        <div class="demo" style="text-align: center;">
+          <div style="height: 80px; background: var(--accent-tint-10); border-radius: var(--radius-lg); margin-bottom: 0.75rem;"></div>
+          <div style="font-size: 0.875rem;">12px <span class="code">--radius-lg</span></div>
+          <div style="font-size: 0.75rem; color: var(--color-muted); margin-top: 0.25rem;">featured card</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="kit-section" id="components">
+      <p class="kit-eyebrow">05 — Components</p>
+      <h2 class="kit-h2">Building blocks</h2>
+      <p class="kit-lede">The atomic pieces. Each one is live — change a swatch above and watch.</p>
+
+      <p class="kit-subhead">Buttons</p>
+      <div class="demo">
+        <div class="demo-row">
+          <a href="#" class="btn-primary">View my resume</a>
+          <a href="#" class="btn-outline">About me</a>
+          <a href="#" class="text-link">← Back to work</a>
+          <button class="btn-primary" disabled style="opacity: 0.6; cursor: not-allowed;">Sending…</button>
+        </div>
+        <p class="note">Primary: solid accent, white text. Outline: 1.5px accent border, accent text. Hover: opacity drop only — no transform on buttons.</p>
+      </div>
+
+      <p class="kit-subhead">Header / nav</p>
+      <div class="demo" style="padding: 0;">
+        <div class="b-header" style="border-radius: var(--radius-md);">
+          <a href="#" class="logo">Shane Maris</a>
+          <nav>
+            <a href="#">Work</a>
+            <a href="#">About</a>
+            <a href="#" class="cta">Contact</a>
+          </nav>
+        </div>
+        <p class="note" style="padding: 1rem;">Header is fixed in the live site (<span class="code">position: fixed; padding: 1.25rem 4rem</span>). Last nav item uses accent + 500 weight as a soft CTA.</p>
+      </div>
+
+      <p class="kit-subhead">Eyebrow labels</p>
+      <div class="demo">
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p class="eyebrow">Featured Case Study</p>
+          <p style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-2); margin: 0;">Currently Shipping</p>
+        </div>
+        <p class="note">12px, uppercase, 0.15em letter-spacing. All eyebrows now use accent (plum) by default, with accent-2 (terracotta) reserved for "active / featured" framing. The home page previously used muted color for its eyebrow — switched to accent for consistency since the WCAG-darkened muted made the hero feel heavy.</p>
+      </div>
+
+      <p class="kit-subhead">Chips (skills, tags)</p>
+      <div class="demo">
+        <div class="demo-row">
+          <span class="chip">Design Ops</span>
+          <span class="chip">Design Systems</span>
+          <span class="chip">UI/UX Design</span>
+          <span class="chip">UX Strategy</span>
+          <span class="chip">Design Leadership</span>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Form fields</p>
+      <div class="demo" style="max-width: 36rem;">
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" placeholder="" />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="" />
+          </div>
+          <div class="field">
+            <label>Message</label>
+            <textarea rows="4"></textarea>
+          </div>
+          <button class="btn-primary" style="align-self: flex-start;">Send message</button>
+          <p style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-error); margin: 0;">Something went wrong. Please try again.</p>
+        </div>
+        <p class="note">Focus state added in this kit (<span class="code">3px tint-15 ring</span>) — not in the live site yet. Worth adding for accessibility.</p>
+      </div>
+
+      <p class="kit-subhead">Divider</p>
+      <div class="demo">
+        <hr class="divider" />
+        <p class="note">Single hairline (<span class="code">--color-divider</span> · #E8E4DE) used between sections on About, Contact, Resume.</p>
+      </div>
+
+      <p class="kit-subhead" id="figure">Figure component</p>
+      <div class="demo">
+        <p class="note" style="margin-top: 0;">New <span class="code">&lt;Figure /&gt;</span> in <span class="code">components/Figure.tsx</span>. Replaces the inline image-break divs on case study pages with a typed component that supports placeholders, real images, captions, ratio presets, and accent-2 tinting.</p>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div>
+            <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 0.5rem;">ratio="ultrawide" — case study top hero</div>
+            <div style="background: var(--accent-tint-08); border-radius: var(--radius-md); aspect-ratio: 1 / 0.56; display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: 0.8125rem; font-family: var(--font-sans);">Heart DS Hero Image</div>
+          </div>
+          <div>
+            <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-muted); margin-bottom: 0.5rem;">ratio="wide" + caption</div>
+            <figure style="margin: 0;">
+              <div style="background: var(--accent-tint-08); border-radius: var(--radius-md); aspect-ratio: 1.5 / 1; display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: 0.8125rem; font-family: var(--font-sans);">Process or decision diagram</div>
+              <figcaption style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted); line-height: 1.6; margin-top: 0.75rem; text-align: center;">Caption: brief description of what this image shows.</figcaption>
+            </figure>
+          </div>
+          <div>
+            <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent-2); margin-bottom: 0.5rem;">ratio="square" accent2 + caption</div>
+            <figure style="margin: 0;">
+              <div style="background: var(--accent2-tint-08); border-radius: var(--radius-md); aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: 0.8125rem; font-family: var(--font-sans); max-width: 24rem; margin: 0 auto;">Sketch from week one</div>
+              <figcaption style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted); line-height: 1.6; margin-top: 0.75rem; text-align: center;">Optional accent-2 tint for contrast across long case studies.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <pre style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.75rem; line-height: 1.6; color: var(--color-ink); background: var(--color-base); padding: 1rem; border: 1px solid var(--color-divider); border-radius: var(--radius-sm); overflow-x: auto; margin-top: 1rem;">// app/work/[slug]/page.tsx
+&lt;Figure ratio="ultrawide" placeholder={`${project.title} Hero Image`} /&gt;
+&lt;Figure ratio="wide" placeholder="Process diagram" caption="Caption text" /&gt;
+&lt;Figure src="/work/x.png" alt="..." caption="..." accent2 /&gt;</pre>
+      </div>
+    </section>
+
+    <!-- Icons -->
+    <section class="kit-section" id="icons">
+      <p class="kit-eyebrow">05.5 — Icons</p>
+      <h2 class="kit-h2">Phosphor icon library</h2>
+      <p class="kit-lede">Three weights available: Regular (outline), Filled, and Duotone. Duotone uses the foreground color at full opacity and a second layer at 20% — naturally pairs with the accent tokens.</p>
+
+      <style>
+        .icon-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+          gap: 0.5rem;
+        }
+        .icon-cell {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.75rem 0.5rem;
+          border-radius: var(--radius-md);
+          border: 1px solid var(--color-hairline);
+          background: var(--color-surface);
+          font-size: 0.6rem;
+          color: var(--color-muted);
+          text-align: center;
+          letter-spacing: 0.04em;
+          line-height: 1.3;
+        }
+        .icon-cell i { font-size: 1.5rem; color: var(--color-ink); }
+        .icon-cell.accent i { color: var(--color-accent); }
+        .icon-cell.accent-2 i { color: var(--color-accent-2); }
+        .icon-cell.muted i { color: var(--color-muted); }
+      </style>
+
+      <!-- Regular -->
+      <p class="kit-subhead">Regular</p>
+      <div class="demo">
+        <div class="icon-grid">
+          <div class="icon-cell"><i class="ph ph-house"></i>house</div>
+          <div class="icon-cell"><i class="ph ph-user"></i>user</div>
+          <div class="icon-cell"><i class="ph ph-users"></i>users</div>
+          <div class="icon-cell"><i class="ph ph-briefcase"></i>briefcase</div>
+          <div class="icon-cell"><i class="ph ph-envelope"></i>envelope</div>
+          <div class="icon-cell"><i class="ph ph-magnifying-glass"></i>search</div>
+          <div class="icon-cell"><i class="ph ph-arrow-right"></i>arrow-right</div>
+          <div class="icon-cell"><i class="ph ph-arrow-up-right"></i>arrow-up-right</div>
+          <div class="icon-cell"><i class="ph ph-arrow-left"></i>arrow-left</div>
+          <div class="icon-cell"><i class="ph ph-x"></i>x</div>
+          <div class="icon-cell"><i class="ph ph-check"></i>check</div>
+          <div class="icon-cell"><i class="ph ph-check-circle"></i>check-circle</div>
+          <div class="icon-cell"><i class="ph ph-warning"></i>warning</div>
+          <div class="icon-cell"><i class="ph ph-info"></i>info</div>
+          <div class="icon-cell"><i class="ph ph-link"></i>link</div>
+          <div class="icon-cell"><i class="ph ph-file"></i>file</div>
+          <div class="icon-cell"><i class="ph ph-folder"></i>folder</div>
+          <div class="icon-cell"><i class="ph ph-code"></i>code</div>
+          <div class="icon-cell"><i class="ph ph-terminal"></i>terminal</div>
+          <div class="icon-cell"><i class="ph ph-palette"></i>palette</div>
+          <div class="icon-cell"><i class="ph ph-layers"></i>layers</div>
+          <div class="icon-cell"><i class="ph ph-gear"></i>gear</div>
+          <div class="icon-cell"><i class="ph ph-star"></i>star</div>
+          <div class="icon-cell"><i class="ph ph-lightning"></i>lightning</div>
+          <div class="icon-cell"><i class="ph ph-robot"></i>robot</div>
+          <div class="icon-cell"><i class="ph ph-brain"></i>brain</div>
+          <div class="icon-cell"><i class="ph ph-chat-circle"></i>chat-circle</div>
+          <div class="icon-cell"><i class="ph ph-sparkle"></i>sparkle</div>
+          <div class="icon-cell"><i class="ph ph-download"></i>download</div>
+          <div class="icon-cell"><i class="ph ph-upload"></i>upload</div>
+          <div class="icon-cell"><i class="ph ph-share-network"></i>share</div>
+          <div class="icon-cell"><i class="ph ph-eye"></i>eye</div>
+        </div>
+      </div>
+
+      <!-- Filled -->
+      <p class="kit-subhead">Filled</p>
+      <div class="demo">
+        <div class="icon-grid">
+          <div class="icon-cell"><i class="ph-fill ph-house"></i>house</div>
+          <div class="icon-cell"><i class="ph-fill ph-user"></i>user</div>
+          <div class="icon-cell"><i class="ph-fill ph-users"></i>users</div>
+          <div class="icon-cell"><i class="ph-fill ph-briefcase"></i>briefcase</div>
+          <div class="icon-cell"><i class="ph-fill ph-envelope"></i>envelope</div>
+          <div class="icon-cell"><i class="ph-fill ph-magnifying-glass"></i>search</div>
+          <div class="icon-cell"><i class="ph-fill ph-arrow-right"></i>arrow-right</div>
+          <div class="icon-cell"><i class="ph-fill ph-arrow-up-right"></i>arrow-up-right</div>
+          <div class="icon-cell"><i class="ph-fill ph-arrow-left"></i>arrow-left</div>
+          <div class="icon-cell"><i class="ph-fill ph-x"></i>x</div>
+          <div class="icon-cell"><i class="ph-fill ph-check"></i>check</div>
+          <div class="icon-cell"><i class="ph-fill ph-check-circle"></i>check-circle</div>
+          <div class="icon-cell"><i class="ph-fill ph-warning"></i>warning</div>
+          <div class="icon-cell"><i class="ph-fill ph-info"></i>info</div>
+          <div class="icon-cell"><i class="ph-fill ph-link"></i>link</div>
+          <div class="icon-cell"><i class="ph-fill ph-file"></i>file</div>
+          <div class="icon-cell"><i class="ph-fill ph-folder"></i>folder</div>
+          <div class="icon-cell"><i class="ph-fill ph-code"></i>code</div>
+          <div class="icon-cell"><i class="ph-fill ph-terminal"></i>terminal</div>
+          <div class="icon-cell"><i class="ph-fill ph-palette"></i>palette</div>
+          <div class="icon-cell"><i class="ph-fill ph-layers"></i>layers</div>
+          <div class="icon-cell"><i class="ph-fill ph-gear"></i>gear</div>
+          <div class="icon-cell"><i class="ph-fill ph-star"></i>star</div>
+          <div class="icon-cell"><i class="ph-fill ph-lightning"></i>lightning</div>
+          <div class="icon-cell"><i class="ph-fill ph-robot"></i>robot</div>
+          <div class="icon-cell"><i class="ph-fill ph-brain"></i>brain</div>
+          <div class="icon-cell"><i class="ph-fill ph-chat-circle"></i>chat-circle</div>
+          <div class="icon-cell"><i class="ph-fill ph-sparkle"></i>sparkle</div>
+          <div class="icon-cell"><i class="ph-fill ph-download"></i>download</div>
+          <div class="icon-cell"><i class="ph-fill ph-upload"></i>upload</div>
+          <div class="icon-cell"><i class="ph-fill ph-share-network"></i>share</div>
+          <div class="icon-cell"><i class="ph-fill ph-eye"></i>eye</div>
+        </div>
+      </div>
+
+      <!-- Duotone -->
+      <p class="kit-subhead">Duotone</p>
+      <div class="demo">
+        <div class="icon-grid">
+          <div class="icon-cell accent"><i class="ph-duotone ph-house"></i>house</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-user"></i>user</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-users"></i>users</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-briefcase"></i>briefcase</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-envelope"></i>envelope</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-magnifying-glass"></i>search</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-arrow-right"></i>arrow-right</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-arrow-up-right"></i>arrow-up-right</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-arrow-left"></i>arrow-left</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-x"></i>x</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-check"></i>check</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-check-circle"></i>check-circle</div>
+          <div class="icon-cell accent-2"><i class="ph-duotone ph-warning"></i>warning</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-info"></i>info</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-link"></i>link</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-file"></i>file</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-folder"></i>folder</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-code"></i>code</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-terminal"></i>terminal</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-palette"></i>palette</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-layers"></i>layers</div>
+          <div class="icon-cell muted"><i class="ph-duotone ph-gear"></i>gear</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-star"></i>star</div>
+          <div class="icon-cell accent-2"><i class="ph-duotone ph-lightning"></i>lightning</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-robot"></i>robot</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-brain"></i>brain</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-chat-circle"></i>chat-circle</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-sparkle"></i>sparkle</div>
+          <div class="icon-cell muted"><i class="ph-duotone ph-download"></i>download</div>
+          <div class="icon-cell muted"><i class="ph-duotone ph-upload"></i>upload</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-share-network"></i>share</div>
+          <div class="icon-cell accent"><i class="ph-duotone ph-eye"></i>eye</div>
+        </div>
+      </div>
+
+      <!-- Size scale -->
+      <p class="kit-subhead">Size scale</p>
+      <div class="demo" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <i class="ph-duotone ph-layers" style="font-size: 1rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">16px · inline</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <i class="ph-duotone ph-layers" style="font-size: 1.25rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">20px · UI</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <i class="ph-duotone ph-layers" style="font-size: 1.5rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">24px · default</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <i class="ph-duotone ph-layers" style="font-size: 2rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">32px · emphasis</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <i class="ph-duotone ph-layers" style="font-size: 3rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">48px · hero</span>
+        </div>
+      </div>
+
+      <!-- Color pairings -->
+      <p class="kit-subhead">Color pairings</p>
+      <div class="demo" style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+          <i class="ph-duotone ph-sparkle" style="font-size: 2rem; color: var(--color-accent);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">Accent · brand</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+          <i class="ph-duotone ph-lightning" style="font-size: 2rem; color: var(--color-accent-2);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">Accent 2 · action</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+          <i class="ph-duotone ph-gear" style="font-size: 2rem; color: var(--color-muted);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">Muted · utility</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+          <i class="ph-fill ph-check-circle" style="font-size: 2rem; color: #2F6F4F;"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">Success · one-off</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+          <i class="ph-fill ph-warning" style="font-size: 2rem; color: var(--color-error);"></i>
+          <span style="font-size: 0.6875rem; color: var(--color-muted);">Error · warning</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Patterns -->
+    <section class="kit-section" id="patterns">
+      <p class="kit-eyebrow">06 — Content patterns</p>
+      <h2 class="kit-h2">How the site composes itself</h2>
+      <p class="kit-lede">The portfolio reuses a small handful of patterns. Here they are at scale, drawn from the live pages.</p>
+
+      <p class="kit-subhead">Hero (home)</p>
+      <div class="demo" style="padding: 0; overflow: hidden;">
+        <div class="p-hero">
+          <p class="eyebrow">Design Ops and Systems Leader</p>
+          <h1>Shane Maris</h1>
+          <p class="lede">I design systems that scale, building the foundations product teams rely on at Southwest Airlines.</p>
+          <div class="demo-row">
+            <a href="#" class="btn-primary">View my resume</a>
+            <a href="#" class="btn-outline">About me</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Section header (eyebrow → h1 → lede)</p>
+      <div class="demo">
+        <p class="eyebrow">About</p>
+        <h1 style="font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4rem); color: var(--color-ink); line-height: 1.15; margin: 0 0 1.5rem;">I design the systems behind great design.</h1>
+        <p style="font-family: var(--font-sans); font-size: 1.125rem; color: var(--color-muted); line-height: 1.8; max-width: 42rem; margin: 0;">I help designers do their best work by building scalable processes, enabling the right tools, and aligning teams around shared standards.</p>
+      </div>
+
+      <p class="kit-subhead">Featured project card</p>
+      <div class="p-featured">
+        <div class="p-featured-grid">
+          <div class="placeholder-img" style="aspect-ratio: 1 / 0.85;">Hero image</div>
+          <div>
+            <p class="eyebrow">Featured Case Study</p>
+            <h2>Heart Design System</h2>
+            <p class="lede">From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.</p>
+            <a href="#" class="btn-primary">Read full case study</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Project card grid (3-up) — updated</p>
+      <p class="note" style="margin-top: 0;">Calmer hover (no padding shift), built-in 1.5rem padding, accent-2 category tags. First tag uses primary accent, the rest use secondary so the most important category leads.</p>
+      <div class="p-card-grid">
+        <a href="#" class="p-card-v2">
+          <div class="img">Image</div>
+          <h4>My Account Redesign</h4>
+          <p>Account hub redesign that consolidated booking, profile, and rewards into one cohesive flow.</p>
+          <div class="tag-row">
+            <span class="tag tag-primary">Web</span>
+            <span class="tag tag-secondary">Account</span>
+          </div>
+        </a>
+        <a href="#" class="p-card-v2">
+          <div class="img">Image</div>
+          <h4>Mobile Check-in Flow</h4>
+          <p>Native check-in flow shipped across iOS and Android, handling 60M check-ins per year.</p>
+          <div class="tag-row">
+            <span class="tag tag-primary">Mobile</span>
+            <span class="tag tag-secondary">iOS</span>
+            <span class="tag tag-secondary">Android</span>
+          </div>
+        </a>
+        <a href="#" class="p-card-v2">
+          <div class="img">Image</div>
+          <h4>Change/Cancel Experience</h4>
+          <p>Reduced cancellation friction by 40% with a redesigned, predictable change/cancel flow.</p>
+          <div class="tag-row">
+            <span class="tag tag-primary">Web</span>
+            <span class="tag tag-secondary">Booking</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="kit-subhead">Case study layout</p>
+      <div class="demo" style="padding: 0;">
+        <div class="p-case">
+          <a href="#" class="text-link" style="display: inline-block; margin-bottom: 1.5rem;">← Back to work</a>
+          <h1>Mobile Check-in Flow</h1>
+          <p class="meta">Read time: 4 minutes</p>
+          <div class="hero-img">Hero image</div>
+          <h2>Context</h2>
+          <p>This project demonstrates context. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <div class="hero-img" style="aspect-ratio: 1.5 / 1;">Process or decision diagram</div>
+          <h2>Outcome</h2>
+          <p>The final result was outcome. This delivered measurable value and taught us important lessons about scaling design.</p>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Expertise grid</p>
+      <div class="demo">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
+          <span class="chip" style="text-align: left;">Design Ops</span>
+          <span class="chip" style="text-align: left;">Design Systems</span>
+          <span class="chip" style="text-align: left;">UI/UX Design</span>
+          <span class="chip" style="text-align: left;">UX Strategy</span>
+          <span class="chip" style="text-align: left;">Design Leadership</span>
+          <span class="chip" style="text-align: left;">App Design</span>
+          <span class="chip" style="text-align: left;">Agentic Design</span>
+          <span class="chip" style="text-align: left;">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <p class="kit-subhead">Footer CTA</p>
+      <div class="demo">
+        <p style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--color-ink); margin: 0 0 1rem;">Want to work together?</p>
+        <a href="#" class="btn-primary">Get in touch</a>
+      </div>
+
+      <p class="kit-subhead">Inline social row</p>
+      <div class="demo">
+        <p class="eyebrow" style="margin-bottom: 1rem;">Find me online</p>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+          <a href="#" style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); text-decoration: none; font-weight: 500;">LinkedIn</a>
+          <a href="#" style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); text-decoration: none; font-weight: 500;">Twitter</a>
+          <a href="#" style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); text-decoration: none; font-weight: 500;">contact@shanemaris.com</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voice -->
+    <section class="kit-section" id="voice">
+      <p class="kit-eyebrow">07 — Voice &amp; tone</p>
+      <h2 class="kit-h2">How the site sounds</h2>
+      <p class="kit-lede">First-person, plainspoken, declarative. Headlines lean into "I" and the verbs do the work — design, build, scale, lead.</p>
+
+      <div class="demo">
+        <p style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-ink); margin: 0 0 1rem;">"I design systems that scale."</p>
+        <p style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-ink); margin: 0 0 1rem;">"I design the systems behind great design."</p>
+        <p style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-ink); margin: 0;">"From grassroots effort to enterprise-scale design infrastructure."</p>
+        <p class="note">
+          Patterns: short sentences, active voice, no buzzwords, occasional rhythm via parallel structure ("design / build / scale / lead").
+          Buttons follow the same rule — <em>"View my resume"</em>, <em>"Get in touch"</em>, <em>"Read full case study"</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Open questions -->
+    <section class="kit-section" id="openq">
+      <p class="kit-eyebrow">08 — Open questions</p>
+      <h2 class="kit-h2">Still to do</h2>
+      <p class="kit-lede">Everything else in this kit is the design target. These two items still need input before they can close.</p>
+
+      <div class="demo">
+        <ol style="margin: 0; padding-left: 1.25rem; line-height: 1.95; font-size: 0.9375rem;">
+          <li>Inline styles → Tailwind utilities. All tokens are defined; the visual refactor (<span class="code">style={{…}}</span> → <span class="code">className</span>) is still pending. Needs Tailwind v4 theme wired up correctly first — the prior attempt silently broke the site because v4 doesn't read <span class="code">tailwind.config.ts</span> the way v3 did. Worth a focused, careful PR once v4 config is validated.</li>
+          <li>Real project thumbnails + summaries — only you can supply these. Current cards use lorem ipsum + placeholder tags. Update <span class="code">lib/projects.ts</span> when ready.</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // === Color swatch state ===
+  const CORE = [
+    { var: '--color-base',     name: 'Base',      role: 'page background',  default: '#F7F5F2' },
+    { var: '--color-ink',      name: 'Ink',       role: 'primary text',     default: '#1C1B17' },
+    { var: '--color-muted',    name: 'Muted',     role: 'secondary text',   default: '#7A7470' },
+    { var: '--color-accent',   name: 'Accent 1',  role: 'primary · CTAs',   default: '#7B5EA7' },
+    { var: '--color-accent-2', name: 'Accent 2',  role: 'secondary · tags', default: '#B8442B' },
+  ];
+  const SUPPORT = [
+    { var: '--color-hairline', name: 'Hairline', role: 'borders, dividers', default: '#E8E4DE' },
+    { var: '--color-surface',  name: 'Surface',  role: 'cards on base',     default: '#FFFFFF' },
+    { var: '--color-error',    name: 'Error',    role: 'form errors',       default: '#D95F4B' },
+  ];
+
+  function hexFromVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function buildSwatch(token) {
+    const wrap = document.createElement('div');
+    wrap.className = 'swatch';
+    wrap.innerHTML = `
+      <div class="chip" style="background: var(${token.var});"></div>
+      <div class="row">
+        <span class="name">${token.name}</span>
+        <input type="color" value="${token.default}" data-var="${token.var}" />
+      </div>
+      <div class="row">
+        <span class="hex" data-copy="${token.default}">${token.default}</span>
+        <span class="var">${token.var}</span>
+      </div>
+      <div style="font-size: 0.75rem; color: var(--color-muted);">${token.role}</div>
+    `;
+    return wrap;
+  }
+
+  const coreEl = document.getElementById('coreSwatches');
+  const supportEl = document.getElementById('supportSwatches');
+  CORE.forEach(t => coreEl.appendChild(buildSwatch(t)));
+  SUPPORT.forEach(t => supportEl.appendChild(buildSwatch(t)));
+
+  // === Live editing ===
+  document.addEventListener('input', (e) => {
+    if (e.target.matches('input[type="color"][data-var]')) {
+      const v = e.target.getAttribute('data-var');
+      const val = e.target.value;
+      document.documentElement.style.setProperty(v, val);
+      // also update the visible hex chip in same swatch
+      const swatch = e.target.closest('.swatch');
+      const hexEl = swatch.querySelector('.hex');
+      hexEl.textContent = val.toUpperCase();
+      hexEl.setAttribute('data-copy', val.toUpperCase());
+
+      // If accent changed, update the rgba tints to match
+      if (v === '--color-accent') {
+        applyAccentTints(val);
+        const a1 = document.getElementById('duo-a1-hex'); if (a1) a1.textContent = val.toUpperCase();
+      }
+      if (v === '--color-accent-2') {
+        applyAccent2Tints(val);
+        const a2 = document.getElementById('duo-a2-hex'); if (a2) a2.textContent = val.toUpperCase();
+      }
+    }
+  });
+
+  function applyAccentTints(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    document.documentElement.style.setProperty('--accent-tint-08', `rgba(${r}, ${g}, ${b}, 0.08)`);
+    document.documentElement.style.setProperty('--accent-tint-10', `rgba(${r}, ${g}, ${b}, 0.10)`);
+    document.documentElement.style.setProperty('--accent-tint-15', `rgba(${r}, ${g}, ${b}, 0.15)`);
+  }
+  function applyAccent2Tints(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    document.documentElement.style.setProperty('--accent2-tint-08', `rgba(${r}, ${g}, ${b}, 0.08)`);
+    document.documentElement.style.setProperty('--accent2-tint-10', `rgba(${r}, ${g}, ${b}, 0.10)`);
+    document.documentElement.style.setProperty('--accent2-tint-15', `rgba(${r}, ${g}, ${b}, 0.15)`);
+  }
+
+  // === Copy hex on click ===
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-copy]');
+    if (!el) return;
+    const text = el.getAttribute('data-copy');
+    navigator.clipboard?.writeText(text);
+    showToast(`Copied ${text}`);
+  });
+
+  // === Solo accent presets ===
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-accent]');
+    if (!btn) return;
+    const hex = btn.getAttribute('data-accent');
+    setAccent(hex);
+    showToast(`Accent 1 → ${hex}`);
+  });
+
+  // === Duo presets ===
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-duo]');
+    if (!btn) return;
+    let pair;
+    try { pair = JSON.parse(btn.getAttribute('data-duo')); } catch { return; }
+    setAccent(pair[0]);
+    setAccent2(pair[1]);
+    showToast(`Duo → ${pair[0]} + ${pair[1]}`);
+  });
+
+  function setAccent(hex) {
+    document.documentElement.style.setProperty('--color-accent', hex);
+    applyAccentTints(hex);
+    const input = document.querySelector('input[data-var="--color-accent"]');
+    if (input) input.value = hex;
+    const swatch = input?.closest('.swatch');
+    const hexEl = swatch?.querySelector('.hex');
+    if (hexEl) {
+      hexEl.textContent = hex.toUpperCase();
+      hexEl.setAttribute('data-copy', hex.toUpperCase());
+    }
+    const a1 = document.getElementById('duo-a1-hex'); if (a1) a1.textContent = hex.toUpperCase();
+  }
+
+  function setAccent2(hex) {
+    document.documentElement.style.setProperty('--color-accent-2', hex);
+    applyAccent2Tints(hex);
+    const input = document.querySelector('input[data-var="--color-accent-2"]');
+    if (input) input.value = hex;
+    const swatch = input?.closest('.swatch');
+    const hexEl = swatch?.querySelector('.hex');
+    if (hexEl) {
+      hexEl.textContent = hex.toUpperCase();
+      hexEl.setAttribute('data-copy', hex.toUpperCase());
+    }
+    const a2 = document.getElementById('duo-a2-hex'); if (a2) a2.textContent = hex.toUpperCase();
+  }
+
+  // === Reset ===
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    [...CORE, ...SUPPORT].forEach(t => {
+      document.documentElement.style.setProperty(t.var, t.default);
+      const input = document.querySelector(`input[data-var="${t.var}"]`);
+      if (input) input.value = t.default;
+      const swatch = input?.closest('.swatch');
+      const hexEl = swatch?.querySelector('.hex');
+      if (hexEl) {
+        hexEl.textContent = t.default;
+        hexEl.setAttribute('data-copy', t.default);
+      }
+    });
+    // reset tints
+    applyAccentTints('#7B5EA7');
+    applyAccent2Tints('#B8442B');
+    const a1 = document.getElementById('duo-a1-hex'); if (a1) a1.textContent = '#7B5EA7';
+    const a2 = document.getElementById('duo-a2-hex'); if (a2) a2.textContent = '#B8442B';
+    showToast('Reset to source-of-truth tokens');
+  });
+
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+  }
+
+  // === Theme toggle ===
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const root = document.documentElement;
+    if (root.classList.contains('theme-dark')) {
+      root.classList.remove('theme-dark');
+      showToast('Light mode');
+    } else {
+      root.classList.add('theme-dark');
+      showToast('Dark mode');
+    }
+  });
+
+  let toastT;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => el.classList.remove('show'), 1400);
+  }
+</script>
+</body>
+</html>

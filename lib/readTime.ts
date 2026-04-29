@@ -20,11 +20,21 @@ export const readTimes = {
   chapter3: '3 minutes',
   chapter4: '2 minutes',
 
-  // Supporting projects (estimated)
+  // HDS adoption stories
+  homepageV2: '4 minutes',
   myAccountRedesign: '4 minutes',
+  nativeAppHomepage: '3 minutes',
+
+  // Design language transition
+  visionDecommission: '5 minutes',
+  ifeStarling: '3 minutes',
+
+  // Earlier work
   mobileCheckIn: '3 minutes',
-  changeCancelExperience: '3 minutes',
   homepageRedesignV1: '3 minutes',
-  homepageV2: '3 minutes',
+  changeCancelExperience: '3 minutes',
   enhancedReaccom: '4 minutes',
+
+  // Labs (password-gated)
+  projectOasis: '4 minutes',
 };

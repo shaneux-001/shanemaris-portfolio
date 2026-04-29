@@ -1,12 +1,29 @@
-'use client';
+/**
+ * Work index page — SERVER COMPONENT.
+ * Reads taglines from content/work/*.md files via lib/parseProjectMd.ts.
+ * Interactive card grid is delegated to components/ProjectCardGrid.tsx (client).
+ */
 
 import { portfolioProjects } from '@/lib/projects';
+import { getProjectTaglines } from '@/lib/parseProjectMd';
+import ProjectCardGrid from '@/components/ProjectCardGrid';
+import HoverLink from '@/components/HoverLink';
 
 const supportingProjects = portfolioProjects.filter(p => p.slug !== 'heart-design-system');
 
 export default function WorkPage() {
+  // Read taglines from MD files (server-side — fs is available here)
+  const taglines = getProjectTaglines(supportingProjects.map(p => p.slug));
+
+  const cardData = supportingProjects.map(p => ({
+    slug: p.slug,
+    title: p.title,
+    tagline: taglines[p.slug] ?? '',
+  }));
+
   return (
     <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
+
       {/* Featured Project: Heart DS */}
       <section style={{ padding: '0 4rem' }}>
         <div
@@ -26,7 +43,7 @@ export default function WorkPage() {
               alignItems: 'center',
             }}
           >
-            {/* Featured Image */}
+            {/* Featured image placeholder */}
             <div
               style={{
                 backgroundColor: 'rgba(123, 94, 167, 0.1)',
@@ -43,7 +60,7 @@ export default function WorkPage() {
               Placeholder: Heart DS Hero Image
             </div>
 
-            {/* Featured Content */}
+            {/* Featured content */}
             <div>
               <p
                 style={{
@@ -85,8 +102,9 @@ export default function WorkPage() {
                 From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.
               </p>
 
-              <a
+              <HoverLink
                 href="/work/heart-design-system"
+                hoverOpacity={0.85}
                 style={{
                   fontFamily: 'var(--font-inter)',
                   fontSize: '0.875rem',
@@ -97,23 +115,16 @@ export default function WorkPage() {
                   borderRadius: '6px',
                   textDecoration: 'none',
                   display: 'inline-block',
-                  transition: 'opacity 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = '0.85';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = '1';
                 }}
               >
                 Read Full Case Study
-              </a>
+              </HoverLink>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Supporting Projects Grid */}
+      {/* Supporting projects grid */}
       <section style={{ padding: '0 4rem' }}>
         <h3
           style={{
@@ -127,100 +138,7 @@ export default function WorkPage() {
           Other Work
         </h3>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '2rem',
-          }}
-        >
-          {supportingProjects.map((project) => (
-            <a
-              key={project.slug}
-              href={`/work/${project.slug}`}
-              style={{
-                textDecoration: 'none',
-                transition: 'transform 0.2s, opacity 0.2s',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.opacity = '1';
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  transition: 'padding 0.2s',
-                  padding: '0 0 0 0',
-                }}
-                onMouseEnter={(e) => {
-                  const parent = e.currentTarget as HTMLDivElement;
-                  parent.style.padding = '0 1rem 0 1rem';
-                }}
-                onMouseLeave={(e) => {
-                  const parent = e.currentTarget as HTMLDivElement;
-                  parent.style.padding = '0 0 0 0';
-                }}
-              >
-                {/* Project Image */}
-                <div
-                  style={{
-                    backgroundColor: 'rgba(123, 94, 167, 0.08)',
-                    borderRadius: '8px',
-                    aspectRatio: '1 / 0.67',
-                    marginBottom: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--color-muted)',
-                    fontSize: '0.875rem',
-                    fontFamily: 'var(--font-inter)',
-                    marginLeft: '-1rem',
-                    marginRight: '-1rem',
-                    width: 'calc(100% + 2rem)',
-                  }}
-                >
-                  Placeholder
-                </div>
-
-                {/* Project Title */}
-                <h4
-                  style={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontSize: '1.25rem',
-                    color: 'var(--color-ink)',
-                    marginBottom: '0.5rem',
-                    marginTop: 0,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {project.title}
-                </h4>
-
-                {/* Project Description */}
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '0.9375rem',
-                    color: 'var(--color-muted)',
-                    lineHeight: 1.6,
-                    marginBottom: 0,
-                    marginTop: '0.5rem',
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-                </p>
-              </div>
-            </a>
-          ))}
-        </div>
+        <ProjectCardGrid projects={cardData} />
       </section>
     </main>
   );

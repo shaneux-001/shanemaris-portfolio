@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useKonamiCode } from '@/lib/konami';
+import { initKonamiCode } from '@/lib/konami';
 
 export default function Home() {
   useEffect(() => {
-    useKonamiCode(() => {
+    const cleanup = initKonamiCode(() => {
       window.location.href = '/labs';
     });
+    return cleanup;
   }, []);
 
   return (
