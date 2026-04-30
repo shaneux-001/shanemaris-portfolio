@@ -1,12 +1,131 @@
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
 
+/* ============================================================
+   DESIGN TOKENS — single source of truth
+   Mirrors ui-kit.html (v0.2). Values are referenced as
+   var(--token-name) in inline styles throughout the app.
+
+   Tailwind v4 note: utility classes are NOT wired up. These
+   tokens are read via var() in inline styles — DO NOT switch
+   to className-based theming until v4's @theme block is
+   validated in a separate, focused PR.
+   ============================================================ */
+
 :root {
-  --color-base: #F7F5F2;
-  --color-ink: #1C1B17;
-  --color-muted: #7A7470;
-  --color-accent: #7B5EA7;
+  /* --- Core palette --- */
+  --color-base:           #F7F5F2;  /* warm paper, page bg */
+  --color-ink:            #1C1B17;  /* primary text */
+  --color-muted:          #6B655F;  /* secondary text · WCAG-fixed (was #7A7470) */
+  --color-accent:         #7B5EA7;  /* primary · plum · CTAs, eyebrows */
+  --color-accent-2:       #B8442B;  /* secondary · terracotta · tag pills, warnings */
+
+  /* --- Surfaces & lines --- */
+  --color-surface:        #FFFFFF;  /* cards on base */
+  --color-divider:        #E8E4DE;  /* decorative dividers */
+  --color-control-border: #6B655F;  /* form inputs, controls */
+  --color-hairline:       #E8E4DE;  /* legacy alias / kit chrome */
+
+  /* --- Semantic --- */
+  --color-error:          #B4452F;  /* WCAG-fixed (was #D95F4B) */
+
+  /* --- Accent tints (used for cards, image placeholders, focus rings) --- */
+  --accent-tint-08:  rgba(123, 94, 167, 0.08);
+  --accent-tint-10:  rgba(123, 94, 167, 0.10);
+  --accent-tint-15:  rgba(123, 94, 167, 0.15);
+
+  /* --- Accent-2 tints (used for tag pills, warning callouts) --- */
+  --accent2-tint-08: rgba(184, 68, 43, 0.08);
+  --accent2-tint-10: rgba(184, 68, 43, 0.10);
+  --accent2-tint-15: rgba(184, 68, 43, 0.15);
+
+  /* --- Type stack aliases ---
+     Next.js next/font/google populates --font-inter and --font-playfair.
+     We expose --font-sans/--font-serif as semantic aliases so component
+     code can reference role rather than face. */
+  --font-sans:  var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  /* Display scale (single h1) */
+  --display-h1: clamp(2.5rem, 7vw, 4.5rem);
+
+  /* --- Radii --- */
+  --radius-sm: 6px;   /* buttons, inputs, chips */
+  --radius-md: 8px;   /* small cards, image blocks */
+  --radius-lg: 12px;  /* featured cards */
+
+  /* --- Spacing scale (rem) --- */
+  --s-1:   0.25rem;
+  --s-2:   0.5rem;
+  --s-3:   0.75rem;
+  --s-4:   1rem;
+  --s-5:   1.25rem;
+  --s-6:   1.5rem;
+  --s-8:   2rem;
+  --s-10:  2.5rem;
+  --s-12:  3rem;
+  --s-16:  4rem;
+  --s-20:  5rem;
+  --s-24:  6rem;
+  --s-32:  8rem;
+
+  /* --- Motion --- */
+  --motion-fast:    0.15s;
+  --motion-default: 0.2s;
+  --motion-slow:    0.3s;
+  --ease-default:   ease;
+
+  /* --- Elevation / interaction shadows ---
+     Defined as tokens so dark mode can recolor them.
+     `underglow-*` values mirror the kit interaction spec. */
+  --shadow-underglow-strong:
+    0 6px 24px rgba(123, 94, 167, 0.40),
+    0 2px 8px  rgba(123, 94, 167, 0.20);
+  --shadow-underglow-soft:
+    0 6px 20px rgba(123, 94, 167, 0.28),
+    0 2px 6px  rgba(123, 94, 167, 0.14);
+  --shadow-focus-ring:
+    0 0 0 3px var(--accent-tint-15);
 }
+
+/* ============================================================
+   DARK MODE — token mirror only
+   No toggle UI yet. Add `.theme-dark` to <html> to flip.
+   ============================================================ */
+
+:root.theme-dark {
+  --color-base:           #1E1C19;
+  --color-ink:            #F0EDE6;
+  --color-muted:          #948E85;
+  --color-surface:        #252220;
+
+  --color-accent:         #A88AD0;
+  --color-accent-2:       #E0764A;
+
+  --color-divider:        #2A2724;
+  --color-control-border: #948E85;
+  --color-hairline:       #2A2724;
+  --color-error:          #E07659;
+
+  --accent-tint-08:  rgba(168, 138, 208, 0.08);
+  --accent-tint-10:  rgba(168, 138, 208, 0.10);
+  --accent-tint-15:  rgba(168, 138, 208, 0.15);
+
+  --accent2-tint-08: rgba(224, 118, 74, 0.08);
+  --accent2-tint-10: rgba(224, 118, 74, 0.10);
+  --accent2-tint-15: rgba(224, 118, 74, 0.15);
+
+  --shadow-underglow-strong:
+    0 6px 24px rgba(168, 138, 208, 0.40),
+    0 2px 8px  rgba(168, 138, 208, 0.20);
+  --shadow-underglow-soft:
+    0 6px 20px rgba(168, 138, 208, 0.28),
+    0 2px 6px  rgba(168, 138, 208, 0.14);
+}
+
+/* ============================================================
+   ROOT STYLES
+   ============================================================ */
 
 html {
   background-color: var(--color-base);

@@ -17,7 +17,7 @@ export default function LabsHeader() {
         paddingLeft: '2rem',
         paddingRight: '2rem',
         backgroundColor: 'var(--color-base)',
-        borderBottom: '1px solid rgba(123, 94, 167, 0.1)',
+        borderBottom: '1px solid var(--accent-tint-10)',
         zIndex: 10000,
       }}
     >

@@ -1,33 +1,25 @@
 'use client';
 
 /**
- * Thin wrapper around next/link that adds hover interaction effects.
- * Exists because onMouseEnter/onMouseLeave require a client component,
- * but the parent page can remain a server component.
- *
- * hoverEffect options:
- *   'opacity'   — simple opacity fade (default, existing behavior)
- *   'highlight' — accent-tint block sweeps up from the bottom (text links)
- *   'underglow' — soft accent bloom below + 1px lift (CTA buttons)
+ * Sibling of HoverLink, but for plain <a> elements (downloads, mailto:,
+ * external URLs) where next/link is the wrong fit. Same hoverEffect
+ * surface — pick one of 'opacity' | 'highlight' | 'underglow'.
  *
  * All effect colors come from CSS tokens in app/globals.css, so dark
  * mode (when toggled) flips them automatically.
  */
 
-import Link from 'next/link';
-import { CSSProperties, ReactNode } from 'react';
+import { AnchorHTMLAttributes, CSSProperties, ReactNode } from 'react';
 
 type HoverEffect = 'opacity' | 'highlight' | 'underglow';
 
-interface HoverLinkProps {
-  href: string;
-  style?: CSSProperties;
-  hoverOpacity?: number;
+interface HoverAnchorProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'style'> {
   hoverEffect?: HoverEffect;
+  hoverOpacity?: number;
+  style?: CSSProperties;
   children: ReactNode;
 }
 
-// Base styles injected per effect — caller's `style` prop wins on conflicts.
 const highlightBase: CSSProperties = {
   backgroundImage:
     'linear-gradient(var(--accent-tint-15), var(--accent-tint-15))',
@@ -43,13 +35,13 @@ const underglowBase: CSSProperties = {
     'box-shadow var(--motion-slow) var(--ease-default), transform var(--motion-default) var(--ease-default), background-color var(--motion-default) var(--ease-default)',
 };
 
-export default function HoverLink({
-  href,
+export default function HoverAnchor({
   style,
-  hoverOpacity = 0.75,
   hoverEffect = 'opacity',
+  hoverOpacity = 0.75,
   children,
-}: HoverLinkProps) {
+  ...rest
+}: HoverAnchorProps) {
   const baseStyle: CSSProperties =
     hoverEffect === 'highlight'
       ? { ...highlightBase, ...style }
@@ -57,11 +49,6 @@ export default function HoverLink({
       ? { ...underglowBase, ...style }
       : { ...style };
 
-  // Underglow strong vs soft varies with whether the caller is a filled
-  // CTA (background present) or an outline button. We can't reliably
-  // detect that from style alone, so we always use the strong shadow
-  // and let outlines pick up an accent-tint background simultaneously
-  // (matches the kit's outline-button hover spec).
   const handleEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (hoverEffect === 'opacity') {
       e.currentTarget.style.opacity = String(hoverOpacity);
@@ -85,13 +72,13 @@ export default function HoverLink({
   };
 
   return (
-    <Link
-      href={href}
+    <a
+      {...rest}
       style={baseStyle}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
       {children}
-    </Link>
+    </a>
   );
 }

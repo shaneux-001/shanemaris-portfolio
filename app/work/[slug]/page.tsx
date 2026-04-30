@@ -4,7 +4,7 @@
  * Interactive hover links are delegated to components/HoverLink.tsx (client).
  */
 
-import Link from 'next/link';
+import { Clock, CalendarBlank, Monitor, Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
 import HoverLink from '@/components/HoverLink';
@@ -23,9 +23,13 @@ export default async function ProjectPage({ params }: PageProps) {
         <div style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 4rem' }}>
           <h1>Project not found</h1>
           <p>
-            <Link href="/work" style={{ color: 'var(--color-accent)' }}>
+            <HoverLink
+              href="/work"
+              hoverEffect="highlight"
+              style={{ color: 'var(--color-accent)', textDecoration: 'none' }}
+            >
               Back to work
-            </Link>
+            </HoverLink>
           </p>
         </div>
       </main>
@@ -42,6 +46,7 @@ export default async function ProjectPage({ params }: PageProps) {
         <div style={{ marginBottom: '3rem' }}>
           <HoverLink
             href="/work"
+            hoverEffect="highlight"
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.875rem',
@@ -65,8 +70,13 @@ export default async function ProjectPage({ params }: PageProps) {
                 color: 'var(--color-accent)',
                 marginBottom: '0.75rem',
                 marginTop: 0,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                width: 'fit-content',
               }}
             >
+              <Briefcase size={14} weight="duotone" />
               {content.eyebrow}
             </p>
           )}
@@ -85,33 +95,56 @@ export default async function ProjectPage({ params }: PageProps) {
           </h1>
 
           {/* Meta row */}
-          <p
+          <div
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.8125rem',
               color: 'var(--color-muted)',
               marginBottom: 0,
               marginTop: '0.75rem',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1.25rem',
+              alignItems: 'center',
             }}
           >
             {content ? (
               <>
-                {content.role}
-                {content.timeline && <> · {content.timeline}</>}
-                {content.platform && <> · {content.platform}</>}
-                {' · '}
-                {content.readTime} read
+                {content.readTime && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <Clock size={14} />
+                    {content.readTime} read
+                  </span>
+                )}
+                {content.timeline && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <CalendarBlank size={14} />
+                    {content.timeline}
+                  </span>
+                )}
+                {content.platform && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <Monitor size={14} />
+                    {content.platform}
+                  </span>
+                )}
+                {content.role && (
+                  <span style={{ opacity: 0.85 }}>{content.role}</span>
+                )}
               </>
             ) : (
-              '3 minutes read'
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                <Clock size={14} />
+                3 minutes read
+              </span>
             )}
-          </p>
+          </div>
         </div>
 
         {/* ── Hero image placeholder ── */}
         <div
           style={{
-            backgroundColor: 'rgba(123, 94, 167, 0.08)',
+            backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
@@ -171,7 +204,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   {i < content.sections.length - 1 && (
                     <div
                       style={{
-                        backgroundColor: 'rgba(123, 94, 167, 0.08)',
+                        backgroundColor: 'var(--accent-tint-08)',
                         borderRadius: '8px',
                         aspectRatio: '1.5 / 1',
                         margin: '3rem 0',
@@ -200,12 +233,12 @@ export default async function ProjectPage({ params }: PageProps) {
           style={{
             marginTop: '4rem',
             paddingTop: '2rem',
-            borderTop: '1px solid rgba(123, 94, 167, 0.15)',
+            borderTop: '1px solid var(--accent-tint-15)',
           }}
         >
           <HoverLink
             href="/work"
-            hoverOpacity={0.85}
+            hoverEffect="underglow"
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.875rem',
@@ -213,7 +246,7 @@ export default async function ProjectPage({ params }: PageProps) {
               padding: '0.75rem 1.5rem',
               backgroundColor: 'var(--color-accent)',
               color: '#fff',
-              borderRadius: '6px',
+              borderRadius: 'var(--radius-sm)',
               textDecoration: 'none',
               display: 'inline-block',
             }}

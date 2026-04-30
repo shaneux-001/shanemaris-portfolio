@@ -14,6 +14,14 @@ interface ProjectConfig {
   expiryDays?: number; // Days until password expires (default: 30)
   public?: boolean; // If true, accessible as guest in /labs
   external?: string; // Optional external URL link
+
+  /**
+   * Optional category/platform tags rendered as pills on project cards.
+   * First tag uses the primary accent (plum); the rest use accent-2 (terracotta)
+   * per the kit's project-card-v2 spec. Keep tags short — 1–2 words each.
+   * Leave undefined to render the card without pills.
+   */
+  tags?: string[];
 }
 
 /**

@@ -4,6 +4,7 @@
  * Interactive card grid is delegated to components/ProjectCardGrid.tsx (client).
  */
 
+import { Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectTaglines } from '@/lib/parseProjectMd';
 import ProjectCardGrid from '@/components/ProjectCardGrid';
@@ -19,6 +20,7 @@ export default function WorkPage() {
     slug: p.slug,
     title: p.title,
     tagline: taglines[p.slug] ?? '',
+    tags: p.tags,
   }));
 
   return (
@@ -30,9 +32,9 @@ export default function WorkPage() {
           style={{
             marginBottom: '6rem',
             padding: '4rem',
-            backgroundColor: 'rgba(123, 94, 167, 0.08)',
+            backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '12px',
-            border: '1px solid rgba(123, 94, 167, 0.15)',
+            border: '1px solid var(--accent-tint-15)',
           }}
         >
           <div
@@ -46,7 +48,7 @@ export default function WorkPage() {
             {/* Featured image placeholder */}
             <div
               style={{
-                backgroundColor: 'rgba(123, 94, 167, 0.1)',
+                backgroundColor: 'var(--accent-tint-10)',
                 borderRadius: '8px',
                 aspectRatio: '1 / 0.85',
                 display: 'flex',
@@ -71,8 +73,13 @@ export default function WorkPage() {
                   color: 'var(--color-accent)',
                   marginBottom: '1rem',
                   marginTop: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  width: 'fit-content',
                 }}
               >
+                <Briefcase size={14} weight="duotone" />
                 Featured Case Study
               </p>
 
@@ -104,7 +111,7 @@ export default function WorkPage() {
 
               <HoverLink
                 href="/work/heart-design-system"
-                hoverOpacity={0.85}
+                hoverEffect="underglow"
                 style={{
                   fontFamily: 'var(--font-inter)',
                   fontSize: '0.875rem',
@@ -112,7 +119,7 @@ export default function WorkPage() {
                   padding: '0.75rem 1.5rem',
                   backgroundColor: 'var(--color-accent)',
                   color: '#fff',
-                  borderRadius: '6px',
+                  borderRadius: 'var(--radius-sm)',
                   textDecoration: 'none',
                   display: 'inline-block',
                 }}

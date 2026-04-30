@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Link from "next/link";
+import Mark from "@/components/Mark";
+import NavLink from "@/components/NavLink";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,13 +46,27 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body style={{ backgroundColor: "var(--color-base)", color: "var(--color-ink)", margin: 0 }}>
         <header style={{ position: "fixed", top: 0, left: 0, right: 0, padding: "1.25rem 4rem", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 100, backgroundColor: "var(--color-base)" }}>
-          <Link href="/" style={{ fontFamily: "var(--font-playfair)", fontSize: "1.125rem", color: "var(--color-ink)", textDecoration: "none", fontWeight: 500 }}>
+          <Link
+            href="/"
+            aria-label="Shane Maris — home"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.625rem",
+              fontFamily: "var(--font-playfair)",
+              fontSize: "1.125rem",
+              color: "var(--color-ink)",
+              textDecoration: "none",
+              fontWeight: 500,
+            }}
+          >
+            <Mark size={22} />
             Shane Maris
           </Link>
           <nav style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-            <Link href="/work" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", textDecoration: "none" }}>Work</Link>
-            <Link href="/about" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", textDecoration: "none" }}>About</Link>
-            <Link href="/contact" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-accent)", textDecoration: "none", fontWeight: 500 }}>Contact</Link>
+            <NavLink href="/work" icon="briefcase">Work</NavLink>
+            <NavLink href="/about" icon="user">About</NavLink>
+            <NavLink href="/contact" icon="envelope">Contact</NavLink>
           </nav>
         </header>
         {children}

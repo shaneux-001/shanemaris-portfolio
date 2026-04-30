@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import HoverLink from '@/components/HoverLink';
 import { readTimes } from '@/lib/readTime';
 
 export default function Chapter1() {
@@ -9,8 +10,9 @@ export default function Chapter1() {
       <article style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 4rem' }}>
         {/* Chapter Header */}
         <div style={{ marginBottom: '4rem' }}>
-          <Link
+          <HoverLink
             href="/work/heart-design-system"
+            hoverEffect="highlight"
             style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.875rem',
@@ -19,15 +21,9 @@ export default function Chapter1() {
               display: 'inline-block',
               marginBottom: '1.5rem',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.7';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
-            }}
           >
             ← Back to Heart DS
-          </Link>
+          </HoverLink>
 
           <p
             style={{
@@ -85,7 +81,7 @@ export default function Chapter1() {
         {/* Hero Image */}
         <div
           style={{
-            backgroundColor: 'rgba(123, 94, 167, 0.08)',
+            backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
@@ -139,7 +135,7 @@ export default function Chapter1() {
           {/* Image Break */}
           <div
             style={{
-              backgroundColor: 'rgba(123, 94, 167, 0.08)',
+              backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
@@ -165,7 +161,7 @@ export default function Chapter1() {
           {/* Another Image Break */}
           <div
             style={{
-              backgroundColor: 'rgba(123, 94, 167, 0.08)',
+              backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
@@ -197,7 +193,7 @@ export default function Chapter1() {
             alignItems: 'center',
             marginTop: '4rem',
             paddingTop: '2rem',
-            borderTop: '1px solid rgba(123, 94, 167, 0.15)',
+            borderTop: '1px solid var(--accent-tint-15)',
           }}
         >
           <div />
@@ -211,15 +207,18 @@ export default function Chapter1() {
               padding: '0.75rem 1.5rem',
               backgroundColor: 'var(--color-accent)',
               color: '#fff',
-              borderRadius: '6px',
+              borderRadius: 'var(--radius-sm)',
               textDecoration: 'none',
-              transition: 'opacity 0.2s',
+              display: 'inline-block',
+              transition: 'box-shadow var(--motion-slow) var(--ease-default), transform var(--motion-default) var(--ease-default)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.85';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = 'var(--shadow-underglow-strong)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.transform = '';
+              e.currentTarget.style.boxShadow = '';
             }}
           >
             Next Chapter →

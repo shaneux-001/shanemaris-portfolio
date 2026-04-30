@@ -127,7 +127,7 @@ export default function HeartDSLanding() {
                 {/* Chapter Image */}
                 <div
                   style={{
-                    backgroundColor: 'rgba(123, 94, 167, 0.08)',
+                    backgroundColor: 'var(--accent-tint-08)',
                     borderRadius: '8px',
                     aspectRatio: '1 / 0.67',
                     marginBottom: '1.5rem',

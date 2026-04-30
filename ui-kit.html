@@ -474,6 +474,7 @@
       <a href="#components">Components</a>
       <a href="#figure">Figure component</a>
       <a href="#icons">Icons</a>
+      <a href="#interactions">Interactions &amp; elevation</a>
       <a href="#patterns">Content patterns</a>
       <a href="#voice">Voice &amp; tone</a>
       <a href="#openq">Open questions</a>
@@ -1445,6 +1446,450 @@
         <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
           <i class="ph-fill ph-warning" style="font-size: 2rem; color: var(--color-error);"></i>
           <span style="font-size: 0.6875rem; color: var(--color-muted);">Error · warning</span>
+        </div>
+      </div>
+
+      <!-- Icon usage patterns -->
+      <p class="kit-subhead">Icon usage in the portfolio</p>
+      <div class="demo" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+        <!-- Eyebrow + icon lockup -->
+        <div>
+          <p style="font-size: 0.6875rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Eyebrow + icon</p>
+          <div style="display: flex; gap: 0.375rem; align-items: center;">
+            <i class="ph-duotone ph-briefcase" style="font-size: 1rem; color: var(--color-accent);"></i>
+            <span style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent);">Case Study</span>
+          </div>
+          <div style="display: flex; gap: 0.375rem; align-items: center; margin-top: 0.5rem;">
+            <i class="ph-duotone ph-palette" style="font-size: 1rem; color: var(--color-accent);"></i>
+            <span style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent);">Design Systems</span>
+          </div>
+          <div style="display: flex; gap: 0.375rem; align-items: center; margin-top: 0.5rem;">
+            <i class="ph-duotone ph-users" style="font-size: 1rem; color: var(--color-muted);"></i>
+            <span style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-muted);">Design Ops and Systems Leader</span>
+          </div>
+        </div>
+
+        <!-- Skills / expertise chips with icons -->
+        <div>
+          <p style="font-size: 0.6875rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Expertise chips with icon</p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); padding: 0.625rem 1rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-base); display: inline-flex; align-items: center; gap: 0.375rem;">
+              <i class="ph-duotone ph-layers" style="color: var(--color-accent);"></i> Design Systems
+            </span>
+            <span style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); padding: 0.625rem 1rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-base); display: inline-flex; align-items: center; gap: 0.375rem;">
+              <i class="ph-duotone ph-gear" style="color: var(--color-muted);"></i> Design Ops
+            </span>
+            <span style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); padding: 0.625rem 1rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-base); display: inline-flex; align-items: center; gap: 0.375rem;">
+              <i class="ph-duotone ph-sparkle" style="color: var(--color-accent);"></i> Agentic Design
+            </span>
+            <span style="font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink); padding: 0.625rem 1rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-base); display: inline-flex; align-items: center; gap: 0.375rem;">
+              <i class="ph-duotone ph-devices" style="color: var(--color-muted);"></i> UI/UX Design
+            </span>
+          </div>
+        </div>
+
+        <!-- Read time / meta with icon -->
+        <div>
+          <p style="font-size: 0.6875rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Case study meta</p>
+          <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+            <span style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
+              <i class="ph ph-clock" style="font-size: 1rem;"></i> 4 min read
+            </span>
+            <span style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
+              <i class="ph ph-calendar-blank" style="font-size: 1rem;"></i> 2022–2023
+            </span>
+            <span style="font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
+              <i class="ph ph-monitor" style="font-size: 1rem;"></i> Web · iOS · Android
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <p class="note" style="margin-top: 0.75rem;">Rule of thumb: duotone for hero/brand moments, regular for UI chrome, filled for status/feedback states. Never decorate for decoration's sake — every icon should label or reinforce, not just fill space.</p>
+
+    </section>
+
+    <!-- Interactions & Elevation -->
+    <section class="kit-section" id="interactions">
+      <p class="kit-eyebrow">05.7 — Interactions &amp; elevation</p>
+      <h2 class="kit-h2">Texture, glow, and motion</h2>
+      <p class="kit-lede">Prototypes only — none of these are live yet. Pick the direction that feels right, then we'll port winners to source. Hover everything below.</p>
+
+      <style>
+        /* ── Button glow variants ── */
+
+        /* A: Current — live today */
+        .btn-v-current {
+          background: var(--color-accent); color: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: none; cursor: pointer;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          transition: opacity 0.2s;
+        }
+        .btn-v-current:hover { opacity: 0.85; }
+
+        .btn-outline-v-current {
+          color: var(--color-accent); background: transparent;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1.5px solid var(--color-accent);
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          cursor: pointer; transition: opacity 0.2s;
+        }
+        .btn-outline-v-current:hover { opacity: 0.7; }
+
+        /* B: Underglow — soft bloom below the button */
+        .btn-v-underglow {
+          background: var(--color-accent); color: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: none; cursor: pointer;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .btn-v-underglow:hover {
+          transform: translateY(-1px);
+          box-shadow:
+            0 6px 24px rgba(123, 94, 167, 0.40),
+            0 2px 8px  rgba(123, 94, 167, 0.20);
+        }
+
+        .btn-outline-v-underglow {
+          color: var(--color-accent); background: transparent;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1.5px solid var(--color-accent);
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          cursor: pointer;
+          transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+        }
+        .btn-outline-v-underglow:hover {
+          transform: translateY(-1px);
+          background: rgba(123, 94, 167, 0.06);
+          box-shadow:
+            0 6px 20px rgba(123, 94, 167, 0.28),
+            0 2px 6px  rgba(123, 94, 167, 0.14);
+        }
+
+        /* C: Surface glow — halo lives on the face of the button */
+        .btn-v-surface {
+          background: var(--color-accent); color: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: none; cursor: pointer;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          transition: box-shadow 0.25s ease, filter 0.25s ease;
+        }
+        .btn-v-surface:hover {
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+          filter: brightness(1.08) saturate(1.1);
+        }
+
+        .btn-outline-v-surface {
+          color: var(--color-accent); background: transparent;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1.5px solid var(--color-accent);
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          cursor: pointer;
+          transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-outline-v-surface:hover {
+          background: rgba(123, 94, 167, 0.08);
+          box-shadow: inset 0 0 0 1px rgba(123, 94, 167, 0.25);
+        }
+
+        /* D: Lift — clean elevation, no glow */
+        .btn-v-lift {
+          background: var(--color-accent); color: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: none; cursor: pointer;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          box-shadow: 0 1px 3px rgba(28,27,23,0.12), 0 1px 2px rgba(28,27,23,0.08);
+          transition: box-shadow 0.2s ease, transform 0.15s ease;
+        }
+        .btn-v-lift:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(28,27,23,0.14), 0 2px 6px rgba(28,27,23,0.10);
+        }
+
+        .btn-outline-v-lift {
+          color: var(--color-accent); background: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1.5px solid var(--color-accent);
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          cursor: pointer;
+          box-shadow: 0 1px 3px rgba(28,27,23,0.10);
+          transition: box-shadow 0.2s ease, transform 0.15s ease;
+        }
+        .btn-outline-v-lift:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(28,27,23,0.12), 0 2px 6px rgba(28,27,23,0.08);
+        }
+
+        /* ── Variant comparison layout ── */
+        .variant-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1px;
+          background: var(--color-hairline);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+        }
+        .variant-cell {
+          background: var(--color-surface);
+          padding: 1.75rem 1.25rem 1.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: flex-start;
+        }
+        .variant-label {
+          font-size: 0.6875rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--color-muted);
+          margin: 0 0 0.25rem;
+        }
+        .variant-desc {
+          font-size: 0.75rem;
+          color: var(--color-muted);
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        /* ── Text link variants ── */
+
+        /* A: Current */
+        .tl-current {
+          color: var(--color-accent);
+          font-family: var(--font-sans); font-size: 0.9375rem;
+          text-decoration: none; transition: opacity 0.2s;
+        }
+        .tl-current:hover { opacity: 0.7; }
+
+        /* B: Pill wash */
+        .tl-pill {
+          color: var(--color-accent);
+          font-family: var(--font-sans); font-size: 0.9375rem;
+          text-decoration: none;
+          padding: 0.2rem 0.45rem;
+          margin: -0.2rem -0.45rem;
+          border-radius: 4px;
+          transition: background-color 0.2s ease;
+        }
+        .tl-pill:hover { background: rgba(123, 94, 167, 0.09); }
+
+        /* C: Animated underline */
+        .tl-underline {
+          color: var(--color-accent);
+          font-family: var(--font-sans); font-size: 0.9375rem;
+          text-decoration: none;
+          background-image: linear-gradient(var(--color-accent), var(--color-accent));
+          background-size: 0% 1.5px;
+          background-repeat: no-repeat;
+          background-position: left bottom;
+          padding-bottom: 2px;
+          transition: background-size 0.25s ease;
+        }
+        .tl-underline:hover { background-size: 100% 1.5px; }
+
+        /* D: Highlight sweep (block color rising from bottom) */
+        .tl-highlight {
+          color: var(--color-accent);
+          font-family: var(--font-sans); font-size: 0.9375rem;
+          text-decoration: none;
+          background-image: linear-gradient(rgba(123, 94, 167, 0.14), rgba(123, 94, 167, 0.14));
+          background-size: 100% 0%;
+          background-repeat: no-repeat;
+          background-position: left bottom;
+          padding: 0.15rem 0.25rem;
+          margin: -0.15rem -0.25rem;
+          border-radius: 3px;
+          transition: background-size 0.2s ease;
+        }
+        .tl-highlight:hover { background-size: 100% 100%; }
+
+        /* ── Icon + button combos ── */
+        .btn-icon {
+          background: var(--color-accent); color: #fff;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: none; cursor: pointer;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .btn-icon:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 24px rgba(123, 94, 167, 0.40), 0 2px 8px rgba(123, 94, 167, 0.20);
+        }
+        .btn-icon i { font-size: 1rem; }
+
+        .btn-icon-outline {
+          color: var(--color-accent); background: transparent;
+          font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+          padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1.5px solid var(--color-accent);
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          cursor: pointer;
+          transition: background-color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .btn-icon-outline:hover {
+          transform: translateY(-1px);
+          background: rgba(123, 94, 167, 0.06);
+          box-shadow: 0 6px 20px rgba(123, 94, 167, 0.28), 0 2px 6px rgba(123, 94, 167, 0.14);
+        }
+        .btn-icon-outline i { font-size: 1rem; }
+
+        .btn-ghost-icon {
+          color: var(--color-muted); background: transparent;
+          font-family: var(--font-sans); font-size: 0.875rem;
+          padding: 0.625rem; border-radius: var(--radius-sm);
+          text-decoration: none; border: 1px solid transparent;
+          display: inline-flex; align-items: center;
+          cursor: pointer;
+          transition: color 0.15s ease, background-color 0.15s ease;
+        }
+        .btn-ghost-icon i { font-size: 1.25rem; }
+        .btn-ghost-icon:hover { color: var(--color-accent); background: rgba(123, 94, 167, 0.08); }
+
+        /* ── Icon in context ── */
+        .nav-link-icon {
+          color: var(--color-muted);
+          font-family: var(--font-sans); font-size: 0.875rem;
+          text-decoration: none;
+          display: inline-flex; align-items: center; gap: 0.375rem;
+          transition: color 0.15s ease;
+        }
+        .nav-link-icon:hover { color: var(--color-accent); }
+        .nav-link-icon i { font-size: 1rem; }
+
+        .inline-link-icon {
+          color: var(--color-accent);
+          font-family: var(--font-sans); font-size: 0.9375rem;
+          text-decoration: none;
+          display: inline-flex; align-items: center; gap: 0.25rem;
+          background-image: linear-gradient(var(--color-accent), var(--color-accent));
+          background-size: 0% 1.5px;
+          background-repeat: no-repeat;
+          background-position: left bottom;
+          padding-bottom: 2px;
+          transition: background-size 0.25s ease;
+        }
+        .inline-link-icon:hover { background-size: 100% 1.5px; }
+        .inline-link-icon i { font-size: 0.875rem; vertical-align: middle; }
+
+        /* Stat callout with icon */
+        .stat-callout {
+          display: flex; align-items: flex-start; gap: 0.875rem;
+          padding: 1.25rem 1.5rem;
+          background: rgba(123, 94, 167, 0.05);
+          border-left: 3px solid var(--color-accent);
+          border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .stat-callout i { font-size: 1.5rem; color: var(--color-accent); flex-shrink: 0; margin-top: 0.1rem; }
+        .stat-callout .stat-text { font-family: var(--font-sans); font-size: 0.9375rem; color: var(--color-ink); line-height: 1.5; }
+        .stat-callout .stat-label { font-size: 0.8125rem; color: var(--color-muted); margin-top: 0.2rem; }
+      </style>
+
+      <!-- CTA button — decided: underglow -->
+      <p class="kit-subhead">CTA button — underglow <span style="color: var(--color-accent); font-weight: 600;">✓ decided · live in source</span></p>
+      <p class="note" style="margin: -0.25rem 0 1rem;">Soft purple bloom below the button + 1px lift on hover. Implemented in <code style="font-family: ui-monospace, monospace; font-size: 0.75rem; background: var(--color-base); padding: 0.1rem 0.3rem; border-radius: 3px;">app/page.tsx</code> and <code style="font-family: ui-monospace, monospace; font-size: 0.75rem; background: var(--color-base); padding: 0.1rem 0.3rem; border-radius: 3px;">HoverLink hoverEffect="underglow"</code>.</p>
+
+      <div class="demo">
+        <div class="demo-row">
+          <a href="#" class="btn-v-underglow">View my resume</a>
+          <a href="#" class="btn-outline-v-underglow">About me</a>
+        </div>
+      </div>
+
+      <!-- Text link — decided: highlight sweep -->
+      <p class="kit-subhead" style="margin-top: 2rem;">Text link — highlight sweep <span style="color: var(--color-accent); font-weight: 600;">✓ decided · live in source</span></p>
+      <p class="note" style="margin: -0.25rem 0 1rem;">Accent tint floods up from the bottom on hover. Implemented via <code style="font-family: ui-monospace, monospace; font-size: 0.75rem; background: var(--color-base); padding: 0.1rem 0.3rem; border-radius: 3px;">HoverLink hoverEffect="highlight"</code>.</p>
+
+      <div class="demo">
+        <p style="font-family: var(--font-sans); font-size: 0.9375rem; color: var(--color-ink); margin: 0 0 1rem;">
+          Read about my approach to
+          <a href="#" class="tl-highlight">design systems</a>
+          and how I built Heart from scratch.
+        </p>
+        <a href="#" class="tl-highlight" style="font-size: 0.875rem;">← Back to work</a>
+      </div>
+
+      <!-- Icon + button combos -->
+      <p class="kit-subhead" style="margin-top: 2rem;">Icons in buttons</p>
+      <p class="note" style="margin: -0.25rem 0 1rem;">Using underglow (option B above). Hover to see the full effect with the icon present.</p>
+      <div class="demo">
+        <div class="demo-row">
+          <a href="#" class="btn-icon">
+            View my resume <i class="ph ph-arrow-right"></i>
+          </a>
+          <a href="#" class="btn-icon-outline">
+            <i class="ph ph-download"></i> Download PDF
+          </a>
+          <a href="#" class="btn-icon-outline">
+            <i class="ph-duotone ph-envelope"></i> Get in touch
+          </a>
+          <button class="btn-ghost-icon" title="Share">
+            <i class="ph ph-share-network"></i>
+          </button>
+          <button class="btn-ghost-icon" title="Link">
+            <i class="ph ph-link"></i>
+          </button>
+          <button class="btn-ghost-icon" title="Settings">
+            <i class="ph ph-gear"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Icons in context -->
+      <p class="kit-subhead" style="margin-top: 2rem;">Icons in context</p>
+      <div class="demo">
+        <!-- Nav links with icons -->
+        <p class="kit-subhead" style="margin: 0 0 0.75rem;">Nav links</p>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <a href="#" class="nav-link-icon"><i class="ph ph-house"></i> Home</a>
+          <a href="#" class="nav-link-icon"><i class="ph ph-briefcase"></i> Work</a>
+          <a href="#" class="nav-link-icon"><i class="ph ph-user"></i> About</a>
+          <a href="#" class="nav-link-icon"><i class="ph ph-envelope"></i> Contact</a>
+        </div>
+
+        <!-- Inline links with icon -->
+        <p class="kit-subhead" style="margin: 0 0 0.75rem;">Inline link + external indicator</p>
+        <p style="font-family: var(--font-sans); font-size: 1rem; color: var(--color-ink); line-height: 1.7; margin-bottom: 1.5rem;">
+          I led the team that built
+          <a href="#" class="inline-link-icon">Heart Design System <i class="ph ph-arrow-up-right"></i></a>
+          — a full-stack design infrastructure that shipped across web, iOS, and Android.
+          I also contributed to
+          <a href="#" class="inline-link-icon">Southwest.com <i class="ph ph-arrow-up-right"></i></a>
+          homepage and booking flows.
+        </p>
+
+        <!-- Stat callouts with icons -->
+        <p class="kit-subhead" style="margin: 0 0 0.75rem;">Stat / callout blocks</p>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="stat-callout">
+            <i class="ph-duotone ph-users"></i>
+            <div>
+              <div class="stat-text">Heart Design System shipped across 14 product teams, eliminating 60% of one-off component requests.</div>
+            </div>
+          </div>
+          <div class="stat-callout">
+            <i class="ph-duotone ph-lightning"></i>
+            <div>
+              <div class="stat-text">Mobile check-in redesign reduced task time by 30% in usability testing across iOS and Android.</div>
+            </div>
+          </div>
+          <div class="stat-callout">
+            <i class="ph-duotone ph-sparkle"></i>
+            <div>
+              <div class="stat-text">Built and maintained Southwest's first accessible, token-driven color system — AA-compliant across all platforms.</div>
+            </div>
+          </div>
         </div>
       </div>
 
