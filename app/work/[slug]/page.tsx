@@ -9,6 +9,7 @@ import { Clock, CalendarBlank, Monitor, Briefcase } from '@phosphor-icons/react/
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
 import HoverLink from '@/components/HoverLink';
+import CaseStudyHero from '@/components/CaseStudyHero';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -165,23 +166,8 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* ── Hero image placeholder ── */}
-        <div
-          style={{
-            backgroundColor: 'var(--accent-tint-08)',
-            borderRadius: '8px',
-            aspectRatio: '1 / 0.56',
-            marginBottom: '4rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-muted)',
-            fontSize: '0.875rem',
-            fontFamily: 'var(--font-inter)',
-          }}
-        >
-          {project.title} — Hero Image
-        </div>
+        {/* ── Hero illustration ── */}
+        <CaseStudyHero slug={slug} title={project.title} />
 
         {/* ── Case study body ── */}
         <div
