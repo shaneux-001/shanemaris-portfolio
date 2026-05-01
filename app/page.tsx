@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem" }}>
+    <main style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem" }}>
       <div style={{ maxWidth: "48rem" }}>
         <p style={{ fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-muted)", marginBottom: "1.5rem", fontFamily: "var(--font-inter)" }}>Design Ops and Systems Leader</p>
         <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(3rem, 8vw, 5.5rem)", color: "var(--color-ink)", lineHeight: 1.1, marginBottom: "1.5rem" }}>Shane Maris</h1>

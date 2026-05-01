@@ -2,7 +2,9 @@
 
 Read this before touching anything. **To-do list lives in the Cowork roadmap artifact** ("Shane Portfolio Roadmap") — this file is project brief + session history only.
 
-Last updated: 2026-04-30.
+The roadmap artifact is a Cowork artifact stored at `~/Documents/Claude/Artifacts/shane-portfolio-roadmap/index.html` — it is **not** in the portfolio folder. Open it via the Cowork artifacts panel, not the filesystem.
+
+Last updated: 2026-05-01.
 
 ---
 

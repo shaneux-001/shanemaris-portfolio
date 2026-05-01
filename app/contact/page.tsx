@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Envelope, ShareNetwork, ArrowUpRight } from "@phosphor-icons/react";
+import { Envelope, ShareNetwork, LinkedinLogo, ThreadsLogo } from "@phosphor-icons/react";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
@@ -90,9 +90,9 @@ export default function Contact() {
         </p>
         <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
           {[
-            { href: "https://linkedin.com/in/shanemaris", external: true, label: "LinkedIn", trailingIcon: <ArrowUpRight size={14} /> },
-            { href: "https://twitter.com/shanemaris",     external: true, label: "Twitter",  trailingIcon: <ArrowUpRight size={14} /> },
-            { href: "mailto:contact@shanemaris.com",       external: false, label: "contact@shanemaris.com", leadingIcon: <Envelope size={14} /> },
+            { href: "https://linkedin.com/in/shanemaris",   external: true,  label: "LinkedIn",               leadingIcon: <LinkedinLogo size={14} /> },
+            { href: "https://www.threads.com/@_shaneux_",    external: true,  label: "Threads",                leadingIcon: <ThreadsLogo size={14} /> },
+            { href: "mailto:contact@shanemaris.com",        external: false, label: "contact@shanemaris.com", leadingIcon: <Envelope size={14} /> },
           ].map((link) => (
             <a
               key={link.href}
@@ -119,7 +119,7 @@ export default function Contact() {
               onMouseEnter={(e) => { e.currentTarget.style.backgroundSize = "100% 100%"; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundSize = "100% 0%"; }}
             >
-              {link.leadingIcon}{link.label}{link.trailingIcon}
+              {link.leadingIcon}{link.label}
             </a>
           ))}
         </div>

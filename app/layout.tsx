@@ -68,25 +68,19 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('theme-dark');}catch(e){}})();` }} />
       </head>
       <body style={{ backgroundColor: "var(--color-base)", color: "var(--color-ink)", margin: 0 }}>
-        <header style={{ position: "fixed", top: 0, left: 0, right: 0, padding: "1.25rem 4rem", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 100, backgroundColor: "var(--color-base)" }}>
+        <header className="site-header">
           <Link
             href="/"
             aria-label="Shane Maris — home"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.625rem",
-              fontFamily: "var(--font-playfair)",
-              fontSize: "1.125rem",
-              color: "var(--color-ink)",
-              textDecoration: "none",
-              fontWeight: 500,
-            }}
+            className="site-logo"
           >
             <Mark size={22} />
-            Shane Maris
+            <div className="site-logo-text">
+              <span style={{ fontFamily: "var(--font-playfair)", fontSize: "1.125rem", color: "var(--color-ink)", fontWeight: 500 }}>Shane Maris</span>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.6875rem", color: "var(--color-muted)" }}>Design Ops &amp; Systems Leader</span>
+            </div>
           </Link>
-          <nav style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <nav className="site-nav">
             <NavLink href="/work" icon="briefcase">Work</NavLink>
             <NavLink href="/about" icon="user">About</NavLink>
             <NavLink href="/contact" icon="envelope">Contact</NavLink>

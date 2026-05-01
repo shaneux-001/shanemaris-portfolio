@@ -67,17 +67,27 @@ export default function NavLink({
         display: 'inline-flex',
         alignItems: 'center',
         gap: '0.4rem',
-        transition: 'color var(--motion-fast) var(--ease-default)',
+        // Highlight sweep
+        backgroundImage: 'linear-gradient(var(--accent-tint-15), var(--accent-tint-15))',
+        backgroundSize: '100% 0%',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'left bottom',
+        borderRadius: '3px',
+        padding: '0.15rem 0.25rem',
+        margin: '-0.15rem -0.25rem',
+        transition: 'color var(--motion-fast) var(--ease-default), background-size var(--motion-default) var(--ease-default)',
         ...style,
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.color = 'var(--color-accent)';
+        e.currentTarget.style.backgroundSize = '100% 100%';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.color = 'var(--color-muted)';
+        e.currentTarget.style.backgroundSize = '100% 0%';
       }}
     >
-      {IconComp && <IconComp size={16} weight={iconWeight} />}
+      {IconComp && <IconComp size={16} weight={iconWeight} color="var(--color-accent)" />}
       {children}
     </Link>
   );
