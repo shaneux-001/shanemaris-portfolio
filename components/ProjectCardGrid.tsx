@@ -6,7 +6,7 @@
  * Implements the kit's project-card-v2 pattern:
  *   - Built-in 1.5rem padding (so hover doesn't shift surrounding layout)
  *   - Calmer hover: background tint + accent border, no opacity drop
- *   - Optional tag pills (first = primary accent, rest = accent-2)
+ *   - Optional tag pills (all terracotta / accent-2)
  *
  * All data arrives as props from the server-rendered /work page.
  */
@@ -39,6 +39,17 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
             ? tagline.slice(0, tagline.lastIndexOf(' ', 120)) + '…'
             : tagline;
 
+        const activateCard = (el: HTMLAnchorElement) => {
+          el.style.transform = 'translateY(-4px)';
+          el.style.background = 'var(--accent-tint-08)';
+          el.style.borderColor = 'var(--accent-tint-15)';
+        };
+        const resetCard = (el: HTMLAnchorElement) => {
+          el.style.transform = '';
+          el.style.background = '';
+          el.style.borderColor = '';
+        };
+
         return (
           <a
             key={project.slug}
@@ -53,19 +64,14 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
               border: '1px solid transparent',
               background: 'transparent',
               cursor: 'pointer',
+              outline: 'none', // suppress ring — focus state uses card highlight instead
               transition:
                 'transform var(--motion-default) var(--ease-default), background-color var(--motion-default) var(--ease-default), border-color var(--motion-default) var(--ease-default)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.background = 'var(--accent-tint-08)';
-              e.currentTarget.style.borderColor = 'var(--accent-tint-15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = '';
-              e.currentTarget.style.background = '';
-              e.currentTarget.style.borderColor = '';
-            }}
+            onMouseEnter={(e) => activateCard(e.currentTarget)}
+            onMouseLeave={(e) => resetCard(e.currentTarget)}
+            onFocus={(e) => activateCard(e.currentTarget)}
+            onBlur={(e) => resetCard(e.currentTarget)}
           >
             {/* Project Image placeholder */}
             <div
@@ -113,7 +119,7 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
               {shortTagline || 'Case study coming soon.'}
             </p>
 
-            {/* Tag pills — primary accent for the first, accent-2 for the rest */}
+            {/* Tag pills — all terracotta (accent-2) */}
             {project.tags && project.tags.length > 0 && (
               <div
                 style={{
@@ -123,9 +129,7 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
                   marginTop: 'auto',
                 }}
               >
-                {project.tags.map((tag, i) => {
-                  const isPrimary = i === 0;
-                  return (
+                {project.tags.map((tag) => (
                     <span
                       key={tag}
                       style={{
@@ -137,20 +141,13 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
                         padding: '0.25rem 0.5rem',
                         lineHeight: 1.2,
                         color: 'var(--color-ink)',
-                        background: isPrimary
-                          ? 'var(--accent-tint-08)'
-                          : 'var(--accent2-tint-08)',
-                        border: `1px solid ${
-                          isPrimary
-                            ? 'var(--accent-tint-15)'
-                            : 'var(--accent2-tint-15)'
-                        }`,
+                        background: 'var(--accent2-tint-08)',
+                        border: '1px solid var(--accent2-tint-15)',
                       }}
                     >
                       {tag}
                     </span>
-                  );
-                })}
+                  ))}
               </div>
             )}
           </a>
