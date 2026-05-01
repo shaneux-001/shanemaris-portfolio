@@ -4,6 +4,7 @@
  * Interactive hover links are delegated to components/HoverLink.tsx (client).
  */
 
+import type { Metadata } from "next";
 import { Clock, CalendarBlank, Monitor, Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
@@ -11,6 +12,29 @@ import HoverLink from '@/components/HoverLink';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = portfolioProjects.find((p) => p.slug === slug);
+  if (!project) return { title: "Case Study" };
+
+  const md = getProjectMd(slug);
+  const description = md?.tagline ?? `A case study by Shane Maris — ${project.title}`;
+
+  return {
+    title: project.title,
+    description,
+    openGraph: {
+      title: `${project.title} · Shane Maris`,
+      description,
+      url: `https://shanemaris.com/work/${slug}`,
+    },
+    twitter: {
+      title: `${project.title} · Shane Maris`,
+      description,
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: PageProps) {

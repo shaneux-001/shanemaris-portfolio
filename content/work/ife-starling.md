@@ -1,26 +1,26 @@
 ---
-tagline: "Designing a dark mode theme for Southwest's in-flight entertainment system — purpose-built for a cabin environment where ambient light and context of use change everything."
-eyebrow: UX Designer · Southwest Airlines
-role: UX Designer
-timeline: 2023–2024
-platform: In-Flight Entertainment
+tagline: "Designing the Southwest inflight Wi-Fi portal experience — a T-Mobile powered product built for passengers' own devices at 30,000 feet."
+eyebrow: Digital Product Manager, Design Ops · Southwest Airlines
+role: Digital Product Manager, Design Ops
+timeline: Q4 2025
+platform: "Mobile · Web · Passenger Devices"
 readTime: 3 minutes
 ---
 
-Starling is a dark mode theme for Southwest's in-flight entertainment (IFE) system — the seatback or personal device experience customers use during flights. Designing for IFE is a fundamentally different context than designing for a phone or laptop. The cabin environment, the display hardware, the viewing angles, and the emotional register of the experience all push in directions that standard design system defaults don't anticipate.
+Known internally as Project Firework, the Southwest inflight Wi-Fi portal is the experience customers encounter when they connect to the T-Mobile-powered Starlink network on their own phones, tablets, and laptops during a Southwest flight. This isn't a seatback entertainment system — it's a lightweight, device-agnostic portal designed to work on whatever the passenger brought onboard.
 
-## Why dark mode for IFE
+## Context
 
-At 30,000 feet, cabin lighting changes. Night flights dim the overhead lights and passengers are often trying to watch content or sleep. A bright, white-background interface is jarring in that context — both for the individual using it and for neighbors. Dark mode isn't a preference here; it's the ergonomically correct choice for the environment. Starling was designed from that principle outward.
+Inflight Wi-Fi portals occupy a specific and often underserved design space. They run in a constrained environment — browser-based, on hardware the team doesn't control, in a connectivity context that ranges from smooth to unreliable. Customers arrive at the portal with a simple goal: get online. The design job is to get out of their way.
 
-## The design constraints
+## The Design Ops lens
 
-IFE displays have different color reproduction characteristics than the calibrated screens designers use. Contrast ratios that look fine on a design tool or browser don't always translate reliably to the range of hardware deployed across a fleet. The Starling token set was built with that variation in mind — more conservative contrast minimums, careful testing against display profiles, and deliberate choices about saturation that hold up across the range of hardware.
+This project was a Design Ops effort, not a solo one. The team brought Heart DS components and patterns to bear on a product context that had its own constraints: varied device sizes, limited session context, and the need to work in both light and dark conditions depending on cabin lighting. My role was to guide the design direction, manage the team's work, and ensure the approach held together across those variables.
 
-## Theming within HDS
+## Heart DS in a new environment
 
-Starling was built as a theme layer on top of Heart DS rather than a separate system. The token architecture that HDS established made this feasible — by overriding the semantic color tokens (surface, on-surface, primary, on-primary, etc.) with dark-appropriate values, the same component library renders correctly in the dark context without needing separate component implementations. Starling validated the theming architecture of HDS in a demanding real-world environment.
+Bringing HDS to the portal was an opportunity to validate the system in yet another product context beyond the core southwest.com surfaces. It confirmed that the token architecture and component library could flex to a stripped-down, portal-style experience without losing coherence — useful signal for future products that live at the edges of the Southwest digital ecosystem.
 
 ## Outcome
 
-Starling demonstrated that Heart DS's token layer was robust enough to support genuine theming — a question the team had been working toward since tokens shipped. It also gave Southwest a purpose-built dark experience for IFE that respects the cabin context rather than treating it as a secondary use case.
+The Starlink portal launched in Q4 2025 as part of Southwest's T-Mobile inflight connectivity rollout. It gave passengers a cleaner, more intentional first touchpoint when connecting inflight, and gave the design system team another real-world proof point for HDS beyond the web.

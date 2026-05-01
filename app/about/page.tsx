@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { Sparkle, Stack, Gear, Devices, Compass, Users, DeviceMobile, Briefcase, Robot, Code } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import HoverLink from "@/components/HoverLink";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
+  openGraph: {
+    title: "About · Shane Maris",
+    description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
+    url: "https://shanemaris.com/about",
+  },
+  twitter: {
+    title: "About · Shane Maris",
+    description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity.",
+  },
+};
 
 type ExpertiseTone = "accent" | "muted";
 interface ExpertiseEntry { skill: string; Icon: Icon; tone: ExpertiseTone }

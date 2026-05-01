@@ -19,14 +19,22 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Shane Maris",
-  description: "Design Ops & Systems Leader",
+  metadataBase: new URL("https://shanemaris.com"),
+  title: {
+    default: "Shane Maris — Design Ops & Systems Leader",
+    template: "%s · Shane Maris",
+  },
+  description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
   icons: {
     apple: "/apple-touch-icon.svg",
   },
   openGraph: {
     title: "Shane Maris — Design Ops & Systems Leader",
     description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
+    url: "https://shanemaris.com",
+    siteName: "Shane Maris",
+    locale: "en_US",
+    type: "website",
     images: [
       {
         url: "/og-image.svg",
@@ -35,6 +43,16 @@ export const metadata: Metadata = {
         alt: "Shane Maris — Design Ops & Systems Leader",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shane Maris — Design Ops & Systems Leader",
+    description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
+    images: ["/og-image.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

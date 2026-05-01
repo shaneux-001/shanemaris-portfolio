@@ -4,10 +4,25 @@
  * Interactive card grid is delegated to components/ProjectCardGrid.tsx (client).
  */
 
+import type { Metadata } from "next";
 import { Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectTaglines } from '@/lib/parseProjectMd';
 import ProjectCardGrid from '@/components/ProjectCardGrid';
+
+export const metadata: Metadata = {
+  title: "Work",
+  description: "Case studies from 14+ years designing and building at Southwest Airlines — design systems, design ops, and product UX.",
+  openGraph: {
+    title: "Work · Shane Maris",
+    description: "Case studies from 14+ years designing and building at Southwest Airlines — design systems, design ops, and product UX.",
+    url: "https://shanemaris.com/work",
+  },
+  twitter: {
+    title: "Work · Shane Maris",
+    description: "Case studies — design systems, design ops, and product UX at Southwest Airlines.",
+  },
+};
 import HoverLink from '@/components/HoverLink';
 
 const supportingProjects = portfolioProjects.filter(p => p.slug !== 'heart-design-system');

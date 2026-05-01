@@ -40,16 +40,16 @@ export default function Contact() {
       ) : (
         <form onSubmit={handleSubmit} style={{ maxWidth: "36rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Name</label>
-            <input name="name" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)", outline: "none" }} />
+            <label htmlFor="contact-name" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Name</label>
+            <input id="contact-name" name="name" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)" }} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Email</label>
-            <input name="email" type="email" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)", outline: "none" }} />
+            <label htmlFor="contact-email" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Email</label>
+            <input id="contact-email" name="email" type="email" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)" }} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Message</label>
-            <textarea name="message" required rows={6} style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)", outline: "none", resize: "vertical" }} />
+            <label htmlFor="contact-message" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Message</label>
+            <textarea id="contact-message" name="message" required rows={6} style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)", resize: "vertical" }} />
           </div>
           <button
             type="submit"

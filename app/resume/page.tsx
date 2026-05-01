@@ -1,5 +1,20 @@
+import type { Metadata } from "next";
 import HoverLink from "@/components/HoverLink";
 import HoverAnchor from "@/components/HoverAnchor";
+
+export const metadata: Metadata = {
+  title: "Resume",
+  description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops. Building scalable design systems and leading UX teams.",
+  openGraph: {
+    title: "Resume · Shane Maris",
+    description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops.",
+    url: "https://shanemaris.com/resume",
+  },
+  twitter: {
+    title: "Resume · Shane Maris",
+    description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops.",
+  },
+};
 
 export default function Resume() {
   return (

@@ -1,26 +1,26 @@
 ---
-tagline: "Systematically accelerating the retirement of the Vision design language — on track to complete the southwest.com transition in roughly 20% of the time its predecessor took."
-eyebrow: Design Systems Lead · Southwest Airlines · Ongoing
-role: Design Systems Lead
-timeline: Ongoing
+tagline: "Exploring AI-assisted design migration as part of Southwest's ongoing effort to retire the Vision design language in favor of Heart DS."
+eyebrow: Digital Product Manager, Design Ops · Southwest Airlines
+role: Digital Product Manager, Design Ops
+timeline: Late 2025
 platform: "Web · southwest.com"
-readTime: 5 minutes
+readTime: 4 minutes
 ---
 
-Southwest Airlines has been through multiple design language generations. Leapfrog — the generation before Vision — took over eleven years to roll out and was technically never fully completed when Vision superseded it. Vision itself is now being retired in favor of the Heart Design System. This project is the effort to make that transition fast, systematic, and actually finished.
+Southwest Airlines has operated through multiple design language generations. Vision — the design language that preceded Heart DS — is in active retirement as teams migrate surfaces to HDS. The Vision Decommission work is the ongoing effort to make that transition systematic rather than leaving it to accumulate indefinitely across the long tail of the site.
 
-## The problem with design language transitions
+## The broader problem
 
-Large-scale design language transitions at enterprises almost always stall. The initial push gets enough momentum to ship the marquee surfaces, but the long tail — the dozens or hundreds of pages and flows that aren't anyone's current priority — accumulates indefinitely. Leapfrog's 11+ year run, ending without full completion, is a familiar story. Vision is at risk of the same fate without deliberate intervention.
+Large-scale design language transitions at enterprise organizations almost always stall. The initial push ships the marquee surfaces, but dozens of lower-priority pages tend to linger in the previous generation — each one creating maintenance overhead for design and engineering. The goal here is to make finishing actually achievable, not just planned.
 
-## The approach
+## Exploring AI tooling
 
-The Vision Decommission work is an ongoing program rather than a single project. It combines a comprehensive audit of Vision component usage across southwest.com, a prioritized migration roadmap, and a set of tools and templates that make individual page migrations faster and more consistent. Rather than waiting for teams to migrate as part of their own roadmaps, we proactively identify and plan migrations, reducing the surface area of Vision on the site with each cycle.
+In late 2025, the team ran a limited experiment using Kiro — an AI-assisted development tool — to explore whether AI could accelerate design migration work. The experiment was scoped intentionally: a small set of surfaces to test the approach before committing to it at scale. The work was team-led, and the insights from the experiment are informing how we think about tooling for the next phase.
 
-## The pace
+## Scope and current state
 
-At the current rate of migration, the program is on track to fully transition southwest.com to HDS in approximately 20% of the time Leapfrog's transition took. That improvement comes from a combination of HDS's greater maturity at the point of adoption, a more systematic migration approach, and organizational alignment on the importance of finishing.
+The Vision Decommission effort is ongoing and deliberately scoped to stay manageable. Rather than trying to address everything at once, the approach is to identify and prioritize migrations systematically, work through them in focused cycles, and track the reduction in Vision coverage over time. Progress is incremental but directional.
 
-## What finishing means
+## What finishing looks like
 
-The goal isn't just to ship HDS on every page — it's to retire Vision's codebase entirely, eliminating the maintenance cost of running two design languages in parallel. Every dual-system page creates overhead for design, engineering, and QA. Completion means one language, one system, one source of truth.
+The end goal is retiring Vision's codebase entirely — eliminating the cost of running two design languages in parallel across design, engineering, and QA. One language, one system, one source of truth.

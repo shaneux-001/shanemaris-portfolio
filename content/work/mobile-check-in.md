@@ -1,22 +1,22 @@
 ---
-tagline: "Redesigning the end-to-end check-in experience as Southwest transitioned from its Leapfrog design language to Vision — a modernization that touched nearly every step of the pre-flight flow."
+tagline: "Redesigning the web and mobile web check-in experience — bringing a smoother, more responsive flow to one of southwest.com's highest-stakes customer interactions."
 eyebrow: UX Designer · Southwest Airlines
 role: UX Designer
-timeline: 2019–2020
-platform: "Web · southwest.com"
+timeline: "~2015"
+platform: "Web · Mobile Web · southwest.com"
 readTime: 3 minutes
 ---
 
-The check-in flow is one of the highest-stakes experiences on southwest.com — it's where millions of travelers complete a time-sensitive task, often on a mobile device, sometimes with spotty connectivity, always with a departure time looming. Redesigning it as part of the Leapfrog-to-Vision design language transition meant modernizing the visual layer without disrupting an experience that customers relied on to not fail them.
+The check-in flow is one of the most time-sensitive experiences on southwest.com. Customers arrive with a departure looming, often on a mobile device, and need to complete a multi-step task without friction or confusion. As part of the UX team, I contributed to a redesign of the check-in experience focused on improving the mobile web flow — a surface that had accumulated desktop-first assumptions over time.
 
 ## Context
 
-Southwest's Leapfrog design language had been the visual foundation of southwest.com for years. Vision was the next generation — a cleaner, more systemized approach that established stronger typographic hierarchy, more intentional use of color, and a component vocabulary that could scale more reliably across the site. The check-in flow was one of the more complex surfaces to migrate: multi-step, stateful, time-sensitive, and used by a broad cross-section of customers with varying levels of digital comfort.
+Southwest's check-in flow at the time handled a high volume of customers across a range of devices. Mobile web usage was growing, and the existing flow hadn't been designed with that context as a priority. The work was about bringing parity to the mobile experience — reducing the steps and friction that made check-in harder than it needed to be on a small screen.
 
-## The redesign
+## The design work
 
-The migration wasn't purely cosmetic. Moving from Leapfrog to Vision provided an opportunity to revisit information architecture within the flow, reduce cognitive load at steps where customers had historically dropped off, and bring mobile parity to a flow that had accumulated desktop-first assumptions. Each step was mapped, audited against the Vision component library, and redesigned with both the language transition and functional improvements in mind.
+Working on the UX team, I contributed to wireframing, flow mapping, and design iteration across the check-in steps. The focus was on reducing cognitive load at each step, improving how boarding information was surfaced, and making sure the experience held up on the device sizes and network conditions customers were actually using.
 
 ## Outcome
 
-The redesigned check-in experience applied Vision's design language consistently across the full flow for the first time and addressed several pain points that had accumulated over the Leapfrog era. It also became one of the cleaner examples of what a Leapfrog-to-Vision migration looked like in a complex, multi-step context — a reference for subsequent migration work.
+The redesigned check-in experience improved the mobile web flow and addressed several pain points that had built up on smaller screens. It was an early lesson in designing for the full range of customer contexts, not just the desktop-first assumptions baked into an older flow.

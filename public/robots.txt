@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Private areas
+Disallow: /labs
+Disallow: /api/
+
+Sitemap: https://shanemaris.com/sitemap.xml

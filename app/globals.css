@@ -90,7 +90,9 @@
 
 /* ============================================================
    DARK MODE — token mirror only
-   No toggle UI yet. Add `.theme-dark` to <html> to flip.
+   Toggled by ThemeToggle component in layout footer.
+   Add `.theme-dark` to <html> to flip (no-FOUC script handles
+   the initial load; ThemeToggle handles subsequent toggles).
    ============================================================ */
 
 :root.theme-dark {
@@ -121,6 +123,19 @@
   --shadow-underglow-soft:
     0 6px 20px rgba(168, 138, 208, 0.28),
     0 2px 6px  rgba(168, 138, 208, 0.14);
+}
+
+/* ============================================================
+   FOCUS VISIBILITY — WCAG 2.1 AA keyboard navigation
+   Uses outline (not box-shadow) so it respects forced-colors
+   mode. The `outline-offset` keeps it outside the element
+   border without the blur of box-shadow.
+   ============================================================ */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
 }
 
 /* ============================================================

@@ -136,9 +136,7 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
                         borderRadius: 'var(--radius-sm)',
                         padding: '0.25rem 0.5rem',
                         lineHeight: 1.2,
-                        color: isPrimary
-                          ? 'var(--color-accent)'
-                          : 'var(--color-accent-2)',
+                        color: 'var(--color-ink)',
                         background: isPrimary
                           ? 'var(--accent-tint-08)'
                           : 'var(--accent2-tint-08)',
