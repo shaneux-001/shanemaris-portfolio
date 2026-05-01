@@ -66,54 +66,64 @@ export const portfolioProjects: ProjectConfig[] = [
     slug: 'heart-design-system',
     title: 'Heart Design System',
     public: true, // Featured project
+    tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive', 'Native'],
   },
   // ----- HDS adoption stories -----
   {
     slug: 'homepage-v2',
     title: 'Responsive Homepage',
     public: true,
+    tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive'],
   },
   {
     slug: 'my-account-redesign',
     title: 'My Account Redesign',
     public: true,
+    tags: ['DesignOps', 'Design System', 'Responsive', 'UX'],
   },
   {
     slug: 'native-app-homepage',
     title: 'Native App Homepage',
     public: true,
+    tags: ['Native', 'iOS', 'Android'],
   },
   // ----- Design language transition -----
   {
     slug: 'vision-decommission',
     title: 'Vision Decommission',
     public: true,
+    tags: ['Leadership', 'DesignOps', 'Design System', 'Web', 'Responsive', 'Mobile', 'Native'],
   },
   {
     slug: 'ife-starling',
     title: 'IFE Starling — Dark Mode',
     public: true,
+    tags: ['Leadership', 'DesignOps', 'Design System'],
   },
   // ----- Earlier work -----
   {
     slug: 'mobile-check-in',
     title: 'Check-in Flow Redesign',
     public: true,
+    tags: ['Mobile', 'Web', 'UX'],
   },
   {
     slug: 'homepage-redesign',
     title: 'Homepage Redesign (2014)',
     public: true,
+    tags: ['Rebrand', 'Web', 'Mobile', 'UX'],
   },
   {
     slug: 'change-cancel-experience',
     title: 'Change & Cancel Experience',
     public: true,
+    tags: ['Web', 'UX'],
   },
   {
     slug: 'enhanced-reaccom',
     title: 'Enhanced Reaccom Program',
     public: true,
+    tags: ['Web', 'Mobile', 'UX'],
   },
 ];
 

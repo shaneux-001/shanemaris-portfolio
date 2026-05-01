@@ -1,4 +1,4 @@
-import { Sparkle, Stack, Gear, Devices, Compass, Users, DeviceMobile, Briefcase } from "@phosphor-icons/react/dist/ssr";
+import { Sparkle, Stack, Gear, Devices, Compass, Users, DeviceMobile, Briefcase, Robot, Code } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import HoverLink from "@/components/HoverLink";
 
@@ -6,12 +6,14 @@ type ExpertiseTone = "accent" | "muted";
 interface ExpertiseEntry { skill: string; Icon: Icon; tone: ExpertiseTone }
 
 const EXPERTISE: ExpertiseEntry[] = [
-  { skill: "Design Ops",         Icon: Gear,         tone: "muted"  },
-  { skill: "Design Systems",     Icon: Stack,        tone: "accent" },
-  { skill: "UI/UX Design",       Icon: Devices,      tone: "muted"  },
-  { skill: "UX Strategy",        Icon: Compass,      tone: "accent" },
-  { skill: "Design Leadership",  Icon: Users,        tone: "accent" },
-  { skill: "App Design",         Icon: DeviceMobile, tone: "muted"  },
+  { skill: "Design Ops",          Icon: Gear,         tone: "muted"  },
+  { skill: "Design Systems",      Icon: Stack,        tone: "accent" },
+  { skill: "UI/UX Design",        Icon: Devices,      tone: "muted"  },
+  { skill: "UX Strategy",         Icon: Compass,      tone: "accent" },
+  { skill: "Design Leadership",   Icon: Users,        tone: "accent" },
+  { skill: "App Design",          Icon: DeviceMobile, tone: "muted"  },
+  { skill: "Agentic Design",      Icon: Robot,        tone: "accent" },
+  { skill: "Prompt Engineering",  Icon: Code,         tone: "muted"  },
 ];
 
 export default function About() {
@@ -46,12 +48,13 @@ export default function About() {
           <Sparkle size={14} weight="duotone" />
           Design Principles
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem" }}>
           {[
-            { n: "1", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
-            { n: "2", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
-            { n: "3", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
-            { n: "4", title: "Principle Title", copy: "A short description of what this principle means in practice and why it matters." },
+            { n: "1", title: "Build tools not rules", copy: "Rigid processes create silos. When you build tools that invite collaboration, teams stop working around each other and start working together — with clarity, speed, and a shared point of truth." },
+            { n: "2", title: "One bite at a time", copy: "Complex problems rarely yield to brute force. Break the work into its smallest meaningful parts, solve each with intention, and the right solution tends to assemble itself." },
+            { n: "3", title: "Constraints force creativity", copy: "The best design rarely comes from unlimited resources. A tight constraint — a deadline, a budget, a platform limitation — is often the pressure that produces the most durable solution." },
+            { n: "4", title: "Less is more", copy: "Every element in a design earns its place or it doesn't belong. If something isn't improving the experience or solving a business objective, the right move is usually to remove it." },
+            { n: "5", title: "Good design works for everyone", copy: "Design that only works for some people isn't finished. Accessible, inclusive systems multiply impact — when more people can participate in the process, better work comes out the other side." },
           ].map(({ n, title, copy }) => (
             <div key={n}>
               <p style={{ fontFamily: "var(--font-playfair)", fontSize: "2.5rem", fontWeight: 700, color: "#D9D5CF", lineHeight: 1, marginBottom: "0.75rem" }}>{n}</p>
@@ -67,28 +70,49 @@ export default function About() {
           <Briefcase size={14} weight="duotone" />
           Experience
         </p>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>Southwest Airlines 2014 to present</p>
+        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>Southwest Airlines 2011 to present</p>
         <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
           <div>
             <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
               <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Digital Product Manager, Design Ops</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2022 to present</span>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Dec 2022 to present</span>
             </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers.</p>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers. Partner with teams across Marketing, Customer Experience, Technology, and Innovation to optimize design processes.</p>
+          </div>
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Lead UX Designer</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Mar 2022 to Dec 2022</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps.</p>
           </div>
           <div>
             <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
               <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Sr. UX Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2019 to 2022</span>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Feb 2019 to Mar 2022</span>
             </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020.</p>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Explored design systems and design ops as a formal role within Southwest. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020.</p>
           </div>
           <div>
             <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
               <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>UX Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>2014 to 2019</span>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Apr 2014 to Feb 2019</span>
             </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Primary designer on Vision, the complete redesign of Southwest Digital Channels.</p>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Primary designer on Vision, the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation.</p>
+          </div>
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Web Designer</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Feb 2012 to Apr 2014</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Transitioned from contractor to FTE, supporting content creation across Southwest's Digital Channels. Managed production timelines, ensuring consistency and delivery across marketing and digital properties.</p>
+          </div>
+          <div>
+            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>UX Designer (Contractor)</h3>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Aug 2011 to Feb 2012</span>
+            </div>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Integrated AirTran's digital presence into the Southwest ecosystem following acquisition. Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations.</p>
           </div>
         </div>
       </section>
