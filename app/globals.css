@@ -138,6 +138,14 @@
   border-radius: var(--radius-sm);
 }
 
+/* Project cards manage their own focus appearance (background tint + border
+   via JS onFocus/onBlur). Suppress the global ring — including Safari's native
+   focus ring — so it doesn't linger after a mouse click. */
+.project-card:focus,
+.project-card:focus-visible {
+  outline: none;
+}
+
 /* ============================================================
    ROOT STYLES
    ============================================================ */

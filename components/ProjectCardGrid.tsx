@@ -46,14 +46,15 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
         };
         const resetCard = (el: HTMLAnchorElement) => {
           el.style.transform = '';
-          el.style.background = '';
-          el.style.borderColor = '';
+          el.style.background = 'transparent';
+          el.style.borderColor = 'transparent';
         };
 
         return (
           <a
             key={project.slug}
             href={`/work/${project.slug}`}
+            className="project-card"
             style={{
               textDecoration: 'none',
               color: 'inherit',
@@ -64,7 +65,6 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
               border: '1px solid transparent',
               background: 'transparent',
               cursor: 'pointer',
-              outline: 'none', // suppress ring — focus state uses card highlight instead
               transition:
                 'transform var(--motion-default) var(--ease-default), background-color var(--motion-default) var(--ease-default), border-color var(--motion-default) var(--ease-default)',
             }}
