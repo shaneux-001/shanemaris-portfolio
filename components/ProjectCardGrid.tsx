@@ -16,6 +16,7 @@ interface ProjectCard {
   title: string;
   tagline: string;
   tags?: string[];
+  imageSrc?: string;
 }
 
 interface ProjectCardGridProps {
@@ -73,22 +74,35 @@ export default function ProjectCardGrid({ projects }: ProjectCardGridProps) {
             onFocus={(e) => activateCard(e.currentTarget)}
             onBlur={(e) => resetCard(e.currentTarget)}
           >
-            {/* Project Image placeholder */}
+            {/* Project image */}
             <div
               style={{
-                backgroundColor: 'var(--accent-tint-08)',
                 borderRadius: 'var(--radius-md)',
                 aspectRatio: '1 / 0.67',
                 marginBottom: '1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--color-muted)',
-                fontSize: '0.8125rem',
-                fontFamily: 'var(--font-inter)',
+                overflow: 'hidden',
+                ...(project.imageSrc
+                  ? {}
+                  : {
+                      backgroundColor: 'var(--accent-tint-08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--color-muted)',
+                      fontSize: '0.8125rem',
+                      fontFamily: 'var(--font-inter)',
+                    }),
               }}
             >
-              Image
+              {project.imageSrc ? (
+                <img
+                  src={project.imageSrc}
+                  alt={project.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : (
+                'Image'
+              )}
             </div>
 
             {/* Title */}

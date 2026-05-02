@@ -2,9 +2,14 @@
  * Case study detail page — SERVER COMPONENT.
  * Reads content from content/work/[slug].md via lib/parseProjectMd.ts.
  * Interactive hover links are delegated to components/HoverLink.tsx (client).
+ *
+ * Image wiring: fs.existsSync checks public/work/[slug]/ at request time.
+ * Drop hero.jpg or section-N.jpg into the folder and refresh — no restart needed.
  */
 
 import type { Metadata } from "next";
+import fs from 'fs';
+import path from 'path';
 import { Clock, CalendarBlank, Monitor, Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
@@ -61,6 +66,13 @@ export default async function ProjectPage({ params }: PageProps) {
   }
 
   const content = getProjectMd(slug);
+
+  // Image existence checks — evaluated at request time; no dev-server restart needed.
+  const workDir = path.join(process.cwd(), 'public', 'work', slug);
+  const hasHeroImg = fs.existsSync(path.join(workDir, 'hero.jpg'));
+  const sectionImgExists: boolean[] = content?.sections.map((_, i) =>
+    fs.existsSync(path.join(workDir, `section-${i + 1}.jpg`))
+  ) ?? [];
 
   return (
     <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
@@ -165,22 +177,35 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* ── Hero image placeholder ── */}
+        {/* ── Hero image ── */}
         <div
           style={{
-            backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-muted)',
-            fontSize: '0.875rem',
-            fontFamily: 'var(--font-inter)',
+            overflow: 'hidden',
+            ...(hasHeroImg
+              ? {}
+              : {
+                  backgroundColor: 'var(--accent-tint-08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-muted)',
+                  fontSize: '0.875rem',
+                  fontFamily: 'var(--font-inter)',
+                }),
           }}
         >
-          {project.title} — Hero Image
+          {hasHeroImg ? (
+            <img
+              src={`/work/${slug}/hero.jpg`}
+              alt={`${project.title} — Hero`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          ) : (
+            `${project.title} — Hero Image`
+          )}
         </div>
 
         {/* ── Case study body ── */}
@@ -224,23 +249,36 @@ export default async function ProjectPage({ params }: PageProps) {
                     {section.body}
                   </p>
 
-                  {/* Image placeholder between sections (not after the last) */}
+                  {/* Image between sections (not after the last) */}
                   {i < content.sections.length - 1 && (
                     <div
                       style={{
-                        backgroundColor: 'var(--accent-tint-08)',
                         borderRadius: '8px',
                         aspectRatio: '1.5 / 1',
                         margin: '3rem 0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--color-muted)',
-                        fontSize: '0.875rem',
-                        fontFamily: 'var(--font-inter)',
+                        overflow: 'hidden',
+                        ...(sectionImgExists[i]
+                          ? {}
+                          : {
+                              backgroundColor: 'var(--accent-tint-08)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: 'var(--color-muted)',
+                              fontSize: '0.875rem',
+                              fontFamily: 'var(--font-inter)',
+                            }),
                       }}
                     >
-                      Image — {section.heading}
+                      {sectionImgExists[i] ? (
+                        <img
+                          src={`/work/${slug}/section-${i + 1}.jpg`}
+                          alt={`${section.heading} — image`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        />
+                      ) : (
+                        `Image — ${section.heading}`
+                      )}
                     </div>
                   )}
                 </div>

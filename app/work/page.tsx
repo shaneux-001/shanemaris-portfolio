@@ -5,6 +5,8 @@
  */
 
 import type { Metadata } from "next";
+import fs from 'fs';
+import path from 'path';
 import { Briefcase } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectTaglines } from '@/lib/parseProjectMd';
@@ -31,11 +33,19 @@ export default function WorkPage() {
   // Read taglines from MD files (server-side — fs is available here)
   const taglines = getProjectTaglines(supportingProjects.map(p => p.slug));
 
+  // Featured image existence check
+  const hasFeaturedImg = fs.existsSync(
+    path.join(process.cwd(), 'public', 'work', 'heart-design-system', 'featured.jpg')
+  );
+
   const cardData = supportingProjects.map(p => ({
     slug: p.slug,
     title: p.title,
     tagline: taglines[p.slug] ?? '',
     tags: p.tags,
+    imageSrc: fs.existsSync(
+      path.join(process.cwd(), 'public', 'work', p.slug, 'thumbnail.jpg')
+    ) ? `/work/${p.slug}/thumbnail.jpg` : undefined,
   }));
 
   return (
@@ -60,21 +70,34 @@ export default function WorkPage() {
               alignItems: 'center',
             }}
           >
-            {/* Featured image placeholder */}
+            {/* Featured image */}
             <div
               style={{
-                backgroundColor: 'var(--accent-tint-10)',
                 borderRadius: '8px',
                 aspectRatio: '1 / 0.85',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--color-muted)',
-                fontSize: '0.875rem',
-                fontFamily: 'var(--font-inter)',
+                overflow: 'hidden',
+                ...(hasFeaturedImg
+                  ? {}
+                  : {
+                      backgroundColor: 'var(--accent-tint-10)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--color-muted)',
+                      fontSize: '0.875rem',
+                      fontFamily: 'var(--font-inter)',
+                    }),
               }}
             >
-              Placeholder: Heart DS Hero Image
+              {hasFeaturedImg ? (
+                <img
+                  src="/work/heart-design-system/featured.jpg"
+                  alt="Heart Design System — Featured"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : (
+                'Heart DS — Featured Image'
+              )}
             </div>
 
             {/* Featured content */}
