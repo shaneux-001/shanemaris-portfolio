@@ -124,13 +124,15 @@ export default function HeartDSLanding() {
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                {/* Chapter Image */}
+                {/* Chapter thumbnail */}
                 <div
                   style={{
+                    position: 'relative',
                     backgroundColor: 'var(--accent-tint-08)',
                     borderRadius: '8px',
                     aspectRatio: '1 / 0.67',
                     marginBottom: '1.5rem',
+                    overflow: 'hidden',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -139,7 +141,13 @@ export default function HeartDSLanding() {
                     fontFamily: 'var(--font-inter)',
                   }}
                 >
-                  Chapter {chapter.number} Image
+                  Chapter {chapter.number}
+                  <img
+                    src={`/work/heart-design-system/chapter-${chapter.number}-thumb.jpg`}
+                    alt={`Chapter ${chapter.number} — ${chapter.title}`}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
                 </div>
 
                 {/* Chapter Info */}

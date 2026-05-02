@@ -36,10 +36,46 @@ All images live under `public/work/[slug]/`. The `public/work/` directory does n
 
 ---
 
-## Page: `/work/heart-design-system`
-_No .md content file yet → no section images until content is written._
+## Page: `/work/heart-design-system` — Landing (chapter index)
+_4 chapter thumbnail cards (1:0.67) — no landing hero._
 
-- [ ] `public/work/heart-design-system/hero.jpg` — 1600 × 896 px (16:9)
+- [ ] `public/work/heart-design-system/chapter-1-thumb.jpg` — 640 × 429 px
+- [ ] `public/work/heart-design-system/chapter-2-thumb.jpg` — 640 × 429 px
+- [ ] `public/work/heart-design-system/chapter-3-thumb.jpg` — 640 × 429 px
+- [ ] `public/work/heart-design-system/chapter-4-thumb.jpg` — 640 × 429 px
+
+---
+
+## Page: `/work/heart-design-system/chapter-1` — The Long Game
+
+- [ ] `public/work/heart-design-system/chapter-1-hero.jpg` — 1600 × 896 px (16:9)
+- [ ] `public/work/heart-design-system/chapter-1-section-1.jpg` — 1568 × 1045 px _(Screenshot / Design artifact)_
+- [ ] `public/work/heart-design-system/chapter-1-section-2.jpg` — 1568 × 1045 px _(Process / Deck screenshot)_
+
+---
+
+## Page: `/work/heart-design-system/chapter-2` — Staying Alive
+
+- [ ] `public/work/heart-design-system/chapter-2-hero.jpg` — 1600 × 896 px (16:9)
+- [ ] `public/work/heart-design-system/chapter-2-section-1.jpg` — 1568 × 1045 px _(Lippincott Foundations / Color System)_
+- [ ] `public/work/heart-design-system/chapter-2-section-2.jpg` — 1568 × 1045 px _(Team Foundation / Early Partnership)_
+- [ ] `public/work/heart-design-system/chapter-2-section-3.jpg` — 1568 × 1045 px _(Multi-platform Expansion / iOS & Android)_
+
+---
+
+## Page: `/work/heart-design-system/chapter-3` — The Moment It Clicked
+
+- [ ] `public/work/heart-design-system/chapter-3-hero.jpg` — 1600 × 896 px (16:9)
+- [ ] `public/work/heart-design-system/chapter-3-section-1.jpg` — 1568 × 1045 px _(Before / After Gift Card Flow)_
+- [ ] `public/work/heart-design-system/chapter-3-section-2.jpg` — 1568 × 1045 px _(Component Library / Token Usage)_
+
+---
+
+## Page: `/work/heart-design-system/chapter-4` — No Straight Lines
+
+- [ ] `public/work/heart-design-system/chapter-4-hero.jpg` — 1600 × 896 px (16:9)
+- [ ] `public/work/heart-design-system/chapter-4-section-1.jpg` — 1568 × 1045 px _(Org Chart / Stakeholder Map)_
+- [ ] `public/work/heart-design-system/chapter-4-section-2.jpg` — 1568 × 1045 px _(Resilience / Navigation Through Crisis)_
 
 ---
 

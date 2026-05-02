@@ -81,10 +81,12 @@ export default function Chapter1() {
         {/* Hero Image */}
         <div
           style={{
+            position: 'relative',
             backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
+            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -94,6 +96,12 @@ export default function Chapter1() {
           }}
         >
           Chapter 1 Hero Image
+          <img
+            src="/work/heart-design-system/chapter-1-hero.jpg"
+            alt="Chapter 1 — The Long Game"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
         </div>
 
         {/* Chapter Content */}
@@ -132,13 +140,15 @@ export default function Chapter1() {
             Around 2017 I was at Delight Conference in Portland when I heard Dan Mall speak for the first time. If Style Tiles gave me the idea, Dan gave me the framework — and more importantly, the philosophy. That line reoriented how I thought about what a design system actually is. Not a governance document. Not a constraint. A gift to the people building alongside you.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 1 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -148,6 +158,12 @@ export default function Chapter1() {
             }}
           >
             Screenshot / Design artifact
+            <img
+              src="/work/heart-design-system/chapter-1-section-1.jpg"
+              alt="Screenshot — Design artifact"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
@@ -158,13 +174,15 @@ export default function Chapter1() {
             So I started with my manager. He&apos;d been a UX designer himself, which helped — he didn&apos;t need a long explanation. He got it. From there it was our director, then the brand director. Each conversation was a rung.
           </p>
 
-          {/* Another Image Break */}
+          {/* Image Break 2 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -174,6 +192,12 @@ export default function Chapter1() {
             }}
           >
             Process / Deck screenshot
+            <img
+              src="/work/heart-design-system/chapter-1-section-2.jpg"
+              alt="Process — Deck screenshot"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>

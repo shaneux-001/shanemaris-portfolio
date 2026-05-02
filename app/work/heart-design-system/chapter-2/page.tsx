@@ -89,10 +89,12 @@ export default function Chapter2() {
         {/* Hero Image */}
         <div
           style={{
+            position: 'relative',
             backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
+            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -102,6 +104,12 @@ export default function Chapter2() {
           }}
         >
           Chapter 2 Hero Image
+          <img
+            src="/work/heart-design-system/chapter-2-hero.jpg"
+            alt="Chapter 2 — Staying Alive"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
         </div>
 
         {/* Chapter Content */}
@@ -120,13 +128,15 @@ export default function Chapter2() {
             Then the pandemic hit. The engagement ended a week after the kickoff.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 1 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -136,6 +146,12 @@ export default function Chapter2() {
             }}
           >
             Lippincott Foundations / Color System
+            <img
+              src="/work/heart-design-system/chapter-2-section-1.jpg"
+              alt="Lippincott Foundations — Color System"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
@@ -154,13 +170,15 @@ export default function Chapter2() {
             Vince was a senior manager in technology with a small foundation team under him — engineers who understood reusable components in the context of React, since Vision had been built on it. But design systems as a discipline, as an organizational philosophy, was new territory for them. I was building the system and teaching the methodology at the same time, to people I was also depending on to help me build it.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 2 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -170,6 +188,12 @@ export default function Chapter2() {
             }}
           >
             Team Foundation / Early Partnership
+            <img
+              src="/work/heart-design-system/chapter-2-section-2.jpg"
+              alt="Team Foundation — Early Partnership"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
@@ -196,13 +220,15 @@ export default function Chapter2() {
             What had been a slow burn started moving. Shortly after, I was asked to take what we&apos;d built for responsive web and extend the system&apos;s thinking to iOS and Android. Both apps were heavily webview and hybrid at the time, which created its own challenges — but it also opened a door.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 3 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -212,6 +238,12 @@ export default function Chapter2() {
             }}
           >
             Multi-platform Expansion / iOS & Android
+            <img
+              src="/work/heart-design-system/chapter-2-section-3.jpg"
+              alt="Multi-platform Expansion — iOS & Android"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>

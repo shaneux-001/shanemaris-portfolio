@@ -81,10 +81,12 @@ export default function Chapter4() {
         {/* Hero Image */}
         <div
           style={{
+            position: 'relative',
             backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
+            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -94,6 +96,12 @@ export default function Chapter4() {
           }}
         >
           Chapter 4 Hero Image
+          <img
+            src="/work/heart-design-system/chapter-4-hero.jpg"
+            alt="Chapter 4 — No Straight Lines"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
         </div>
 
         {/* Chapter Content */}
@@ -112,13 +120,15 @@ export default function Chapter4() {
             That&apos;s where I&apos;ve been living for the past few years.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 1 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -128,6 +138,12 @@ export default function Chapter4() {
             }}
           >
             Org Chart / Stakeholder Map
+            <img
+              src="/work/heart-design-system/chapter-4-section-1.jpg"
+              alt="Org Chart — Stakeholder Map"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
@@ -142,13 +158,15 @@ export default function Chapter4() {
             Southwest faced serious headwinds — operational crises, investor pressure, business model shifts, and the first layoffs in company history. In that environment, securing resources for a program that lives between departments, without a clean org chart line, was consistently an uphill conversation.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 2 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -158,6 +176,12 @@ export default function Chapter4() {
             }}
           >
             Resilience / Navigation Through Crisis
+            <img
+              src="/work/heart-design-system/chapter-4-section-2.jpg"
+              alt="Resilience — Navigation Through Crisis"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <blockquote

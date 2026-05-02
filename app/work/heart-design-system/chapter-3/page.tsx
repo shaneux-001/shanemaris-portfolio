@@ -81,10 +81,12 @@ export default function Chapter3() {
         {/* Hero Image */}
         <div
           style={{
+            position: 'relative',
             backgroundColor: 'var(--accent-tint-08)',
             borderRadius: '8px',
             aspectRatio: '1 / 0.56',
             marginBottom: '4rem',
+            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -94,6 +96,12 @@ export default function Chapter3() {
           }}
         >
           Chapter 3 Hero Image
+          <img
+            src="/work/heart-design-system/chapter-3-hero.jpg"
+            alt="Chapter 3 — The Moment It Clicked"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
         </div>
 
         {/* Chapter Content */}
@@ -112,13 +120,15 @@ export default function Chapter3() {
             Which made the gift card flow a perfect candidate for something I&apos;d been wanting to prove.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 1 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -128,6 +138,12 @@ export default function Chapter3() {
             }}
           >
             Before / After Gift Card Flow
+            <img
+              src="/work/heart-design-system/chapter-3-section-1.jpg"
+              alt="Before / After — Gift Card Flow"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
@@ -153,13 +169,15 @@ export default function Chapter3() {
             He had documented components, defined tokens, and a system built to be used — so he used it. What would have previously taken a sprint or more of design-to-development back and forth was done before Monday morning. The delivered experience was visually consistent, the code was cleaner, and almost no interpretation was required.
           </p>
 
-          {/* Image Break */}
+          {/* Image Break 2 */}
           <div
             style={{
+              position: 'relative',
               backgroundColor: 'var(--accent-tint-08)',
               borderRadius: '8px',
               aspectRatio: '1.5 / 1',
               margin: '3rem 0',
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -169,6 +187,12 @@ export default function Chapter3() {
             }}
           >
             Component Library / Token Usage
+            <img
+              src="/work/heart-design-system/chapter-3-section-2.jpg"
+              alt="Component Library — Token Usage"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
           </div>
 
           <p>
