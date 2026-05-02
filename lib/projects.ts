@@ -22,6 +22,7 @@ interface ProjectConfig {
    * Leave undefined to render the card without pills.
    */
   tags?: string[];
+  hidden?: boolean; // If true, excluded from /work grid (route + MD still exist — flip to show anytime)
 }
 
 /**
@@ -30,30 +31,13 @@ interface ProjectConfig {
  */
 export const labsProjects: ProjectConfig[] = [
   {
-    slug: 'design-system-v2-explorations',
-    title: 'Design System v2 Explorations',
-    expiryDays: 30,
-    public: false,
-  },
-  {
-    slug: 'accessibility-roi-research',
-    title: 'Accessibility ROI Research',
-    expiryDays: 30,
-    public: false,
-  },
-  {
-    slug: 'design-ops-thinking-pieces',
-    title: 'Design Ops Thinking Pieces',
-    expiryDays: 30,
-    public: false,
-  },
-  {
-    // Unannounced — uses separate Oasis password set via NEXT_PUBLIC_OASIS_PASSWORD
+    // Hidden until ready — route lives at /labs/project-oasis, password-gated
     slug: 'project-oasis',
     title: 'Project Oasis',
     password: process.env.NEXT_PUBLIC_OASIS_PASSWORD,
     expiryDays: 30,
     public: false,
+    hidden: true,
   },
 ];
 
@@ -76,12 +60,6 @@ export const portfolioProjects: ProjectConfig[] = [
     tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive'],
   },
   {
-    slug: 'my-account-redesign',
-    title: 'My Account Redesign',
-    public: true,
-    tags: ['DesignOps', 'Design System', 'Responsive', 'UX'],
-  },
-  {
     slug: 'native-app-homepage',
     title: 'Native App Homepage',
     public: true,
@@ -100,29 +78,40 @@ export const portfolioProjects: ProjectConfig[] = [
     public: true,
     tags: ['Leadership', 'DesignOps', 'Design System'],
   },
-  // ----- Earlier work -----
+  // ----- Hidden until ready -----
+  {
+    slug: 'my-account-redesign',
+    title: 'My Account Redesign',
+    public: true,
+    hidden: true,
+    tags: ['DesignOps', 'Design System', 'Responsive', 'UX'],
+  },
   {
     slug: 'mobile-check-in',
     title: 'Check-in Flow Redesign',
     public: true,
+    hidden: true,
     tags: ['Mobile', 'Web', 'UX'],
   },
   {
     slug: 'homepage-redesign',
     title: 'Homepage Redesign (2014)',
     public: true,
+    hidden: true,
     tags: ['Rebrand', 'Web', 'Mobile', 'UX'],
   },
   {
     slug: 'change-cancel-experience',
     title: 'Change & Cancel Experience',
     public: true,
+    hidden: true,
     tags: ['Web', 'UX'],
   },
   {
     slug: 'enhanced-reaccom',
     title: 'Enhanced Reaccom Program',
     public: true,
+    hidden: true,
     tags: ['Web', 'Mobile', 'UX'],
   },
 ];

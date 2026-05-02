@@ -119,6 +119,8 @@ Three hover effects, all reading from CSS tokens:
 8. Don't edit `lib/projectContent.ts` — deprecated stub.
 9. Don't import `@phosphor-icons/react` (main) in a server component — uses `createContext`, will crash. Use `/dist/ssr` for inline rendering, or push to a client component.
 10. Don't pass a Phosphor forwardRef icon as a prop from server to client component. See gotcha #4 and `components/NavLink.tsx`.
+11. **Don't create `content/work/heart-design-system.md`** — HDS uses dedicated TSX routes at `app/work/heart-design-system/`. The `[slug]` catch-all never fires for it. Content lives directly in the chapter page components.
+12. **Image wiring pattern**: server components use `fs.existsSync` + conditional `<img>`; client components use `position: absolute` img with `onError` fallback. Never use `fs` in a client component.
 
 ---
 
@@ -134,6 +136,25 @@ Recent good SHAs:
 ---
 
 ## Session history
+
+### 2026-05-01 — Image wiring + HDS chapter route + asset spec
+
+**What changed:** Image infrastructure fully wired. All placeholder divs replaced with real `<img>` slots across every page. HDS chapter route identified and handled separately from the MD-based system.
+
+- **IMAGE-SPEC.md** (new): Complete image asset spec — 48 assets across all pages, per-page checklists with exact filenames and dimensions. Updated mid-session to include 17 HDS chapter assets (4 thumbs, 4 heroes, 9 section images).
+- **`public/work/`** directory structure: Scaffolded 11 slug subdirectories with `.gitkeep` files — all slugs match IMAGE-SPEC.md and Figma file structure.
+- **Image wiring — server components** (`app/work/page.tsx`, `app/work/[slug]/page.tsx`): `fs.existsSync` checks at request time. Placeholder divs replaced with conditional `<img>` tags — no dev-server restart needed when dropping images into folders.
+- **Image wiring — client components** (`components/ProjectCardGrid.tsx`): Added `imageSrc?: string` prop; server passes value down, client renders `<img>` or placeholder. `imageSrc` computed via `fs.existsSync` in parent server component.
+- **HDS chapter pages** (`app/work/heart-design-system/` + `chapter-{1-4}/`): Client components — used `position: absolute` + `onError` fallback pattern instead of `fs.existsSync`. Placeholder text always renders behind image; img hides itself on load error.
+- **HDS chapter image naming convention**: `chapter-N-thumb.jpg` (640×429), `chapter-N-hero.jpg` (1600×896), `chapter-N-section-M.jpg` (1568×1045). All in `public/work/heart-design-system/`.
+- **Figma Portfolio Assets** (`kQ2iOICG2spTgHEIvYm4ph`): 5 new sections added — HDS landing thumbs + chapters 1–4, each with correctly sized frames labeled with exact export filenames.
+- **SVG logo fix**: Illustrator stripped fills from 9 scale rects in logo-16/32/64 and apple-touch-icon. Restored graduated plum fills matching logo-128.svg reference.
+- **ife-starling → ife-starlink rename**: Full sweep across `content/work/`, `lib/projects.ts`, `lib/readTime.ts`. File renamed via git mv. IMAGE-SPEC.md updated.
+- **Bear trap added**: HDS case study does NOT use the MD system. Content lives in `app/work/heart-design-system/chapter-{1-4}/page.tsx`. The `[slug]` catch-all never fires for that route.
+
+**Commits**: Multiple — all pushed to `main` and live on Vercel.
+
+---
 
 ### 2026-04-30 — UI kit v0.2 pull-through (Opus) + QA + doc consolidation
 

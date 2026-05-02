@@ -98,12 +98,15 @@ function AnimatedParticles() {
 }
 
 
+const visibleLabsProjects = labsProjects.filter(p => !p.hidden);
+
 function LabsContent() {
   return (
     <>
       <LabsHeader />
       <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
+
           {/* Header */}
           <div style={{ marginBottom: '4rem' }}>
             <h1
@@ -118,7 +121,6 @@ function LabsContent() {
             >
               Labs
             </h1>
-
             <p
               style={{
                 fontFamily: 'var(--font-inter)',
@@ -132,81 +134,132 @@ function LabsContent() {
             </p>
           </div>
 
-        {/* Projects Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem',
-          }}
-        >
-          {labsProjects.map((project) => (
-            <Link
-              key={project.slug}
-              href={`/labs/${project.slug}`}
+          {visibleLabsProjects.length > 0 ? (
+            /* Projects Grid */
+            <div
               style={{
-                textDecoration: 'none',
-                color: 'inherit',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                gap: '2rem',
+                marginBottom: '4rem',
               }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  const parent = e.currentTarget as HTMLDivElement;
-                  parent.style.transform = 'translateY(-4px)';
-                  parent.style.boxShadow = '0 8px 24px rgba(123, 94, 167, 0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  const parent = e.currentTarget as HTMLDivElement;
-                  parent.style.transform = 'translateY(0)';
-                  parent.style.boxShadow = 'none';
-                }}
-              >
-                {/* Project Image */}
-                <div
-                  style={{
-                    backgroundColor: 'rgba(123, 94, 167, 0.08)',
-                    borderRadius: '8px',
-                    aspectRatio: '1 / 0.67',
-                    marginBottom: '1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--color-muted)',
-                    fontSize: '0.875rem',
-                    fontFamily: 'var(--font-inter)',
-                  }}
+              {visibleLabsProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/labs/${project.slug}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  {project.title} Preview
-                </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      height: '100%',
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s, box-shadow 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLDivElement;
+                      el.style.transform = 'translateY(-4px)';
+                      el.style.boxShadow = '0 8px 24px rgba(123, 94, 167, 0.12)';
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLDivElement;
+                      el.style.transform = 'translateY(0)';
+                      el.style.boxShadow = 'none';
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: 'rgba(123, 94, 167, 0.08)',
+                        borderRadius: '8px',
+                        aspectRatio: '1 / 0.67',
+                        marginBottom: '1rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--color-muted)',
+                        fontSize: '0.875rem',
+                        fontFamily: 'var(--font-inter)',
+                      }}
+                    >
+                      {project.title} Preview
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-playfair)',
+                        fontSize: '1.25rem',
+                        color: 'var(--color-ink)',
+                        marginBottom: '0.5rem',
+                        marginTop: 0,
+                      }}
+                    >
+                      {project.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            /* ── Empty state ── */
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '40vh',
+                textAlign: 'center',
+                gap: '1.5rem',
+              }}
+            >
+              {/* Flask icon — SVG inline so no import boundary issues */}
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 256 256"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ opacity: 0.35 }}
+              >
+                <path
+                  d="M221.9 197.2L153 85V40h4a12 12 0 0 0 0-24H99a12 12 0 0 0 0 24h4v45L34.1 197.2A20 20 0 0 0 51.1 228H204.9a20 20 0 0 0 17-30.8ZM111 91.6V40h34v51.6l36.1 60.4H74.9Z"
+                  fill="rgba(123,94,167,1)"
+                />
+              </svg>
 
-                {/* Project Info */}
-                <h3
+              <div>
+                <p
                   style={{
                     fontFamily: 'var(--font-playfair)',
-                    fontSize: '1.25rem',
+                    fontSize: '1.75rem',
                     color: 'var(--color-ink)',
                     marginBottom: '0.5rem',
                     marginTop: 0,
                   }}
                 >
-                  {project.title}
-                </h3>
-
+                  The lab is between experiments.
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '1rem',
+                    color: 'var(--color-muted)',
+                    margin: 0,
+                    maxWidth: '28rem',
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Nothing to see here — yet. Something is brewing.
+                  Check back when the smell gets interesting.
+                </p>
               </div>
-            </Link>
-          ))}
+            </div>
+          )}
+
         </div>
-      </div>
-    </main>
-    <AnimatedParticles />
+      </main>
+      <AnimatedParticles />
     </>
   );
 }

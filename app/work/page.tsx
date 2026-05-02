@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 import HoverLink from '@/components/HoverLink';
 
-const supportingProjects = portfolioProjects.filter(p => p.slug !== 'heart-design-system');
+const supportingProjects = portfolioProjects.filter(p => p.slug !== 'heart-design-system' && !p.hidden);
 
 export default function WorkPage() {
   // Read taglines from MD files (server-side — fs is available here)
