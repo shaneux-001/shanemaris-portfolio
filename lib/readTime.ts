@@ -27,7 +27,7 @@ export const readTimes = {
 
   // Design language transition
   visionDecommission: '5 minutes',
-  ifeStarling: '3 minutes',
+  ifeStarlink: '3 minutes',
 
   // Earlier work
   mobileCheckIn: '3 minutes',

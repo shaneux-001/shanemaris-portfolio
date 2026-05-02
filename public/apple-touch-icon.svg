@@ -1,20 +1,16 @@
-<svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <!-- Background for iOS home screen -->
-  <rect width="180" height="180" fill="#faf7fc" rx="40"/>
-
-  <!-- Logo centered (180px scale) -->
-  <g transform="translate(27, 27)">
-    <!-- 3x3 grid -->
-    <rect x="0" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.30)"/>
-    <rect x="54" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.45)"/>
-    <rect x="108" y="0" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
-
-    <rect x="0" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.45)"/>
-    <rect x="54" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
-    <rect x="108" y="54" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.75)"/>
-
-    <rect x="0" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.60)"/>
-    <rect x="54" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.75)"/>
-    <rect x="108" y="108" width="48" height="48" rx="18" fill="rgba(123, 94, 167, 0.90)"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- Background -->
+  <rect width="180" height="180" rx="40" ry="40" fill="#faf7fc"/>
+  <!-- Row 1 -->
+  <rect x="12"  y="12"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.30)"/>
+  <rect x="66"  y="12"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.45)"/>
+  <rect x="120" y="12"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.60)"/>
+  <!-- Row 2 -->
+  <rect x="12"  y="66"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.45)"/>
+  <rect x="66"  y="66"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.60)"/>
+  <rect x="120" y="66"  width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.75)"/>
+  <!-- Row 3 -->
+  <rect x="12"  y="120" width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.60)"/>
+  <rect x="66"  y="120" width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.75)"/>
+  <rect x="120" y="120" width="48" height="48" rx="18" ry="18" fill="rgba(123,94,167,0.90)"/>
 </svg>

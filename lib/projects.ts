@@ -95,7 +95,7 @@ export const portfolioProjects: ProjectConfig[] = [
     tags: ['Leadership', 'DesignOps', 'Design System', 'Web', 'Responsive', 'Mobile', 'Native'],
   },
   {
-    slug: 'ife-starling',
+    slug: 'ife-starlink',
     title: 'IFE Starlink Portal',
     public: true,
     tags: ['Leadership', 'DesignOps', 'Design System'],
