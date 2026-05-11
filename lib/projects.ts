@@ -57,12 +57,14 @@ export const portfolioProjects: ProjectConfig[] = [
     slug: 'homepage-v2',
     title: 'Responsive Homepage',
     public: true,
+    hidden: true,
     tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive'],
   },
   {
     slug: 'native-app-homepage',
     title: 'Native App Homepage',
     public: true,
+    hidden: true,
     tags: ['Native', 'iOS', 'Android'],
   },
   // ----- Design language transition -----
@@ -70,12 +72,14 @@ export const portfolioProjects: ProjectConfig[] = [
     slug: 'vision-decommission',
     title: 'Vision Decommission',
     public: true,
+    hidden: true,
     tags: ['Leadership', 'DesignOps', 'Design System', 'Web', 'Responsive', 'Mobile', 'Native'],
   },
   {
     slug: 'ife-starlink',
     title: 'IFE Starlink Portal',
     public: true,
+    hidden: true,
     tags: ['Leadership', 'DesignOps', 'Design System'],
   },
   // ----- Hidden until ready -----
