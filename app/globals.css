@@ -1,4 +1,5 @@
 @import "tailwindcss/preflight";
+@import "tailwindcss/theme";
 
 /* ============================================================
    TAILWIND v4 THEME — Press Room utility classes (2026-09-05)
@@ -43,6 +44,10 @@
 
   --color-pr-row-hover: var(--pr-row-hover);
   --color-pr-btn-hover: var(--pr-btn-hover);
+
+  --color-pr-grid-line: var(--pr-grid-line);
+  --color-pr-glow-a: var(--pr-glow-a);
+  --color-pr-glow-b: var(--pr-glow-b);
 
   --font-archivo: var(--font-archivo);
   --font-plex-mono: var(--font-plex-mono);

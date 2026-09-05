@@ -115,24 +115,14 @@ export default function RootLayout({
           <Link
             href="/"
             aria-label="Shane Maris — home"
-            className="pr-mark-btn"
-            style={{ display: "flex", alignItems: "center", gap: 12, padding: 4, margin: -4, color: "inherit" }}
+            className="pr-mark-btn flex items-center gap-3 p-1 -m-1 text-inherit"
           >
             <PressMark size={24} />
-            <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em", color: "var(--pr-fg-strong)" }}>
+            <span className="text-[15px] font-semibold tracking-[-0.01em] text-pr-fg-strong">
               Shane Maris
             </span>
           </Link>
-          <nav
-            style={{
-              display: "flex",
-              gap: 4,
-              alignItems: "center",
-              fontFamily: "var(--font-plex-mono), monospace",
-              fontSize: 12,
-              letterSpacing: "0.04em",
-            }}
-          >
+          <nav className="flex gap-1 items-center font-plex-mono text-xs tracking-[0.04em]">
             <PressNavLink href="/work">Work</PressNavLink>
             <PressNavLink href="/about">About</PressNavLink>
             <PressNavLink href="/contact">Contact</PressNavLink>
