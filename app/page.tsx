@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { initKonamiCode } from '@/lib/konami';
 import PressCta from '@/components/press/PressCta';
+import Ghost from '@/components/press/Ghost';
 
 export default function Home() {
   useEffect(() => {
@@ -120,7 +121,7 @@ export default function Home() {
                 textDecoration: 'none',
               }}
             >
-              READ FULL CASE STUDY <span className="pr-row-arrow" aria-hidden="true">→</span>
+              <Ghost>READ FULL CASE STUDY</Ghost> <span className="pr-row-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

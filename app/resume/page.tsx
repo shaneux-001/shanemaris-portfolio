@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
+import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -90,7 +91,7 @@ export default function Resume() {
             textDecoration: 'none',
           }}
         >
-          DOWNLOAD RESUME
+          <Ghost>DOWNLOAD RESUME</Ghost>
         </a>
 
         <div style={{ marginTop: 32, maxWidth: '62ch' }}>

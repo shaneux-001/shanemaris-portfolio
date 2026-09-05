@@ -1,5 +1,7 @@
 'use client';
 
+import HoverLink from '@/components/HoverLink';
+
 export default function HeartDSLanding() {
   const chapters = [
     {
@@ -33,6 +35,21 @@ export default function HeartDSLanding() {
       <section style={{ padding: '0 4rem' }}>
         {/* Header */}
         <div style={{ marginBottom: '4rem' }}>
+          <HoverLink
+            href="/work"
+            hoverEffect="highlight"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: '0.875rem',
+              color: 'var(--color-accent)',
+              textDecoration: 'none',
+              display: 'inline-block',
+              marginBottom: '1.5rem',
+            }}
+          >
+            ← Back to work
+          </HoverLink>
+
           <p
             style={{
               fontFamily: 'var(--font-inter)',

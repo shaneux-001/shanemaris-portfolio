@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Ghost from './Ghost';
 
 export default function PressThemeToggle() {
   // Default dark; synced from whatever the no-FOUC script in layout.tsx
@@ -29,7 +30,7 @@ export default function PressThemeToggle() {
       role="switch"
       aria-checked={light}
       aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}
-      className="pr-toggle-btn"
+      className="pr-toggle-btn pr-hoverable"
       style={{
         marginLeft: 12,
         display: 'flex',
@@ -42,7 +43,7 @@ export default function PressThemeToggle() {
         fontFamily: 'var(--font-plex-mono), monospace',
       }}
     >
-      <span className="pr-theme-word">{light ? 'LIGHT' : 'DARK'}</span>
+      <span className="pr-theme-word"><Ghost>{light ? 'LIGHT' : 'DARK'}</Ghost></span>
       <span className="pr-toggle-track">
         <span className="pr-toggle-mid" aria-hidden="true" />
         <span className="pr-toggle-knob" style={{ transform: light ? 'translateX(18px)' : 'translateX(0)' }} />

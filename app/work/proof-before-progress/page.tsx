@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "Proof Before Progress",
@@ -30,6 +31,10 @@ export default function ProofBeforeProgressLanding() {
   return (
     <main className="pr-page">
       <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
+        <Link href="/work" className="pr-arrow-link pr-hoverable" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, letterSpacing: '0.06em', color: 'var(--pr-accent-text)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>
+          <Ghost>← BACK TO WORK</Ghost>
+        </Link>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.1em', color: 'var(--pr-magenta)', marginBottom: 18 }}>
           <span style={{ width: 14, height: 1, background: 'var(--pr-magenta)' }} />
           <span>CASE STUDY</span>

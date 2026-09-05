@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
+import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "The Reset · Proof Before Progress",
@@ -17,7 +18,7 @@ export default function Chapter2() {
     <main className="pr-page">
       <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
         <Link href="/work/proof-before-progress" className="pr-arrow-link pr-hoverable" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, letterSpacing: '0.06em', color: 'var(--pr-accent-text)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>
-          ← BACK TO OVERVIEW
+          <Ghost>← BACK TO OVERVIEW</Ghost>
         </Link>
 
         <span style={{ display: 'block', fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.06em', color: 'var(--pr-magenta)', marginBottom: 14 }}>
