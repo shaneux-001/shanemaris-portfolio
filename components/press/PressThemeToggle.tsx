@@ -30,23 +30,12 @@ export default function PressThemeToggle() {
       role="switch"
       aria-checked={light}
       aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}
-      className="pr-toggle-btn pr-hoverable"
-      style={{
-        marginLeft: 12,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 9,
-        padding: '5px 4px',
-        color: 'var(--pr-muted)',
-        fontSize: '10.5px',
-        letterSpacing: '0.08em',
-        fontFamily: 'var(--font-plex-mono), monospace',
-      }}
+      className="pr-toggle-btn pr-hoverable ml-3 flex items-center gap-[9px] px-1 py-[5px] text-pr-muted text-[10.5px] tracking-[0.08em] font-plex-mono"
     >
       <span className="pr-theme-word"><Ghost>{light ? 'LIGHT' : 'DARK'}</Ghost></span>
       <span className="pr-toggle-track">
         <span className="pr-toggle-mid" aria-hidden="true" />
-        <span className="pr-toggle-knob" style={{ transform: light ? 'translateX(18px)' : 'translateX(0)' }} />
+        <span className={`pr-toggle-knob ${light ? 'translate-x-[18px]' : 'translate-x-0'}`} />
       </span>
     </button>
   );

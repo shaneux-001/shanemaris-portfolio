@@ -22,19 +22,11 @@ const EXPERTISE: ExpertiseEntry[] = [
 
 export default function Expertise() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10 }}>
+    <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
       {EXPERTISE.map(({ skill, Icon }) => (
         <div
           key={skill}
-          style={{
-            fontSize: '13.5px',
-            color: 'var(--pr-fg)',
-            padding: '10px 14px',
-            border: '1px solid var(--pr-rule)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-          }}
+          className="text-[13.5px] text-pr-fg px-3.5 py-2.5 border border-pr-rule inline-flex items-center gap-2"
         >
           <Icon size={16} weight="duotone" color="var(--pr-magenta)" />
           {skill}

@@ -6,13 +6,13 @@ interface PressCtaProps {
   href: string;
   children: ReactNode;
   variant?: 'primary' | 'secondary';
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-export default function PressCta({ href, children, variant = 'primary', style }: PressCtaProps) {
+export default function PressCta({ href, children, variant = 'primary', className }: PressCtaProps) {
   const cls = variant === 'primary' ? 'pr-cta' : 'pr-btn-secondary';
   return (
-    <Link href={href} className={`${cls} pr-hoverable`} style={style}>
+    <Link href={href} className={`${cls} pr-hoverable${className ? ` ${className}` : ''}`}>
       <Ghost>{children}</Ghost>
     </Link>
   );

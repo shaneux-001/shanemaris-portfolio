@@ -25,31 +25,17 @@ export default function SiteFooter() {
 
   if (isPressRoom) {
     return (
-      <footer style={{ borderTop: '1px solid var(--pr-rule)', background: 'var(--pr-bg)' }}>
-        <div
-          style={{
-            maxWidth: 1040,
-            margin: '0 auto',
-            padding: '24px 2rem 32px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            gap: 24,
-            flexWrap: 'wrap',
-          }}
-        >
+      <footer className="border-t border-pr-rule bg-pr-bg">
+        <div className="max-w-[1040px] mx-auto pt-6 px-8 pb-8 flex justify-between items-end gap-6 flex-wrap">
           <div>
-            <div
-              className="pr-footer-title"
-              style={{ fontWeight: 700, letterSpacing: '-0.025em', color: 'var(--pr-fg-strong)', maxWidth: '22ch', lineHeight: 1.05, marginBottom: 8 }}
-            >
+            <div className="pr-footer-title font-bold tracking-[-0.025em] text-pr-fg-strong max-w-[22ch] leading-[1.05] mb-2">
               Want to work together?
             </div>
-            <p style={{ margin: 0, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-muted)' }}>
+            <p className="m-0 font-plex-mono text-[11px] text-pr-muted">
               © 2026 Shane Maris
             </p>
           </div>
-          <PressCta href="/contact" style={{ whiteSpace: 'nowrap' }}>GET IN TOUCH</PressCta>
+          <PressCta href="/contact" className="whitespace-nowrap">GET IN TOUCH</PressCta>
         </div>
       </footer>
     );

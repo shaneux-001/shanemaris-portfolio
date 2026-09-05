@@ -1,4 +1,53 @@
 @import "tailwindcss/preflight";
+
+/* ============================================================
+   TAILWIND v4 THEME — Press Room utility classes (2026-09-05)
+   `@theme inline` maps each --pr-* custom property into Tailwind's
+   theme WITHOUT inlining its resolved value at build time — the
+   generated utilities (bg-pr-bg, text-pr-fg-strong, etc.) still
+   reference var(--pr-*) at runtime, so the existing :root vs
+   [data-pr-theme="light"] dark/light override keeps working exactly
+   as before. Do not flatten these to literal values.
+
+   The old --color-* tokens (pre-redesign system, still driving
+   /work/[slug] and Heart Design System) are intentionally NOT mapped
+   here — those pages are being converted to Press Room + Tailwind in
+   Phase 6, not before.
+   ============================================================ */
+@theme inline {
+  --color-pr-bg: var(--pr-bg);
+  --color-pr-band: var(--pr-band);
+  --color-pr-surface: var(--pr-surface);
+  --color-pr-surface-2: var(--pr-surface-2);
+  --color-pr-surface-disabled: var(--pr-surface-disabled);
+
+  --color-pr-fg-strong: var(--pr-fg-strong);
+  --color-pr-fg: var(--pr-fg);
+  --color-pr-lede: var(--pr-lede);
+  --color-pr-muted: var(--pr-muted);
+  --color-pr-disabled-fg: var(--pr-disabled-fg);
+
+  --color-pr-rule: var(--pr-rule);
+  --color-pr-rule-strong: var(--pr-rule-strong);
+  --color-pr-rule-faint: var(--pr-rule-faint);
+
+  --color-pr-cyan: var(--pr-cyan);
+  --color-pr-magenta: var(--pr-magenta);
+  --color-pr-accent-text: var(--pr-accent-text);
+  --color-pr-focus: var(--pr-focus);
+
+  --color-pr-cta-bg: var(--pr-cta-bg);
+  --color-pr-cta-fg: var(--pr-cta-fg);
+  --color-pr-cta-hover: var(--pr-cta-hover);
+  --color-pr-cta-active: var(--pr-cta-active);
+
+  --color-pr-row-hover: var(--pr-row-hover);
+  --color-pr-btn-hover: var(--pr-btn-hover);
+
+  --font-archivo: var(--font-archivo);
+  --font-plex-mono: var(--font-plex-mono);
+}
+
 @import "tailwindcss/utilities";
 
 /* ============================================================
