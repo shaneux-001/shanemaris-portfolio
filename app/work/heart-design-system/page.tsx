@@ -1,229 +1,94 @@
-'use client';
+import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
+import Link from "next/link";
+import Ghost from "@/components/press/Ghost";
 
-import HoverLink from '@/components/HoverLink';
+export const metadata: Metadata = {
+  title: "Heart Design System",
+  description: "From grassroots effort to enterprise-scale design infrastructure. The story of how I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.",
+  openGraph: {
+    title: "Heart Design System · Shane Maris",
+    description: "From grassroots effort to enterprise-scale design infrastructure. The story of how I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.",
+    url: "https://shanemaris.com/work/heart-design-system",
+  },
+  twitter: {
+    title: "Heart Design System · Shane Maris",
+    description: "From grassroots effort to enterprise-scale design infrastructure at Southwest Airlines.",
+  },
+};
+
+const CHAPTERS = [
+  { number: 1, title: "The Long Game", subtitle: "Origin Story", preview: "I've known design systems were the answer since before most people were calling them that." },
+  { number: 2, title: "Staying Alive", subtitle: "Pandemic", preview: "When the brand director signed off, things started moving. Then the pandemic hit." },
+  { number: 3, title: "The Moment It Clicked", subtitle: "Gift Card POC", preview: "Southwest's gift card experience worked. But underneath, it was still wearing Leapfrog." },
+  { number: 4, title: "No Straight Lines", subtitle: "Scaling", preview: "Scaling a design system is hard. Scaling one without a dedicated team is a different kind of hard." },
+];
 
 export default function HeartDSLanding() {
-  const chapters = [
-    {
-      number: 1,
-      title: 'The Long Game',
-      subtitle: 'Origin Story',
-      preview: 'I&apos;ve known design systems were the answer since before most people were calling them that.',
-    },
-    {
-      number: 2,
-      title: 'Staying Alive',
-      subtitle: 'Pandemic',
-      preview: 'When the brand director signed off, things started moving. Then the pandemic hit.',
-    },
-    {
-      number: 3,
-      title: 'The Moment It Clicked',
-      subtitle: 'Gift Card POC',
-      preview: 'Southwest&apos;s gift card experience worked. But underneath, it was still wearing Leapfrog.',
-    },
-    {
-      number: 4,
-      title: 'No Straight Lines',
-      subtitle: 'Scaling',
-      preview: 'Scaling a design system is hard. Scaling one without a dedicated team is a different kind of hard.',
-    },
-  ];
+  const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
 
   return (
-    <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
-      <section style={{ padding: '0 4rem' }}>
-        {/* Header */}
-        <div style={{ marginBottom: '4rem' }}>
-          <HoverLink
-            href="/work"
-            hoverEffect="highlight"
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
-              color: 'var(--color-accent)',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: '1.5rem',
-            }}
-          >
-            ← Back to work
-          </HoverLink>
+    <main className="pr-page">
+      <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+        <Link href="/work" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline inline-block mb-6">
+          <Ghost>← BACK TO WORK</Ghost>
+        </Link>
 
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.75rem',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: 'var(--color-accent)',
-              marginBottom: '1rem',
-              marginTop: 0,
-            }}
-          >
-            Case Study
-          </p>
-
-          <h1
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: 'var(--color-ink)',
-              lineHeight: 1.1,
-              marginBottom: '1.5rem',
-              marginTop: 0,
-            }}
-          >
-            Heart Design System
-          </h1>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '1.125rem',
-              color: 'var(--color-muted)',
-              lineHeight: 1.75,
-              maxWidth: '48rem',
-              marginBottom: '1rem',
-            }}
-          >
-            From grassroots effort to enterprise-scale design infrastructure. The story of how I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines—and what I learned along the way.
-          </p>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
-              color: 'var(--color-muted)',
-              marginBottom: 0,
-            }}
-          >
-            Read time: ~12 minutes
-          </p>
+        <div className="flex items-center gap-[10px] font-plex-mono text-[11px] tracking-[0.1em] text-pr-magenta mb-[18px]">
+          <span className="w-3.5 h-px bg-pr-magenta" />
+          <span>CASE STUDY</span>
         </div>
 
-        {/* Chapter Grid */}
-        <div style={{ marginTop: '4rem' }}>
-          <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '1.5rem',
-              color: 'var(--color-ink)',
-              marginBottom: '2rem',
-              marginTop: 0,
-            }}
-          >
-            Four chapters tell the story
-          </h2>
+        <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
+          Heart Design System
+        </h1>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '2rem',
-            }}
-          >
-            {chapters.map((chapter) => (
-              <a
-                key={chapter.number}
-                href={`/work/heart-design-system/chapter-${chapter.number}`}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  textDecoration: 'none',
-                  transition: 'transform 0.2s',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                {/* Chapter thumbnail */}
-                <div
-                  style={{
-                    position: 'relative',
-                    backgroundColor: 'var(--accent-tint-08)',
-                    borderRadius: '8px',
-                    aspectRatio: '1 / 0.67',
-                    marginBottom: '1.5rem',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--color-muted)',
-                    fontSize: '0.875rem',
-                    fontFamily: 'var(--font-inter)',
-                  }}
-                >
-                  Chapter {chapter.number}
-                  <img
-                    src={`/work/heart-design-system/chapter-${chapter.number}-thumb.jpg`}
-                    alt={`Chapter ${chapter.number} — ${chapter.title}`}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
+        <p className="pr-page-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[58ch]">
+          From grassroots effort to enterprise-scale design infrastructure. The story of how I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines — and what I learned along the way.
+        </p>
+
+        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
+          Read time: ~12 minutes
+        </p>
+
+        <h2 className="font-archivo text-xl font-bold text-pr-fg-strong mb-6 mt-0">
+          Four chapters tell the story
+        </h2>
+
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
+          {CHAPTERS.map((chapter) => {
+            const thumbPath = path.join(workDir, `chapter-${chapter.number}-thumb.jpg`);
+            const hasThumb = fs.existsSync(thumbPath);
+            return (
+              <Link key={chapter.number} href={`/work/heart-design-system/chapter-${chapter.number}`} className="pr-card">
+                <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+                  {hasThumb ? (
+                    <img
+                      src={`/work/heart-design-system/chapter-${chapter.number}-thumb.jpg`}
+                      alt={`Chapter ${chapter.number} — ${chapter.title}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-plex-mono text-[11px] text-pr-muted relative">
+                      chapter-{chapter.number}-thumb.jpg
+                    </span>
+                  )}
                 </div>
-
-                {/* Chapter Info */}
-                <span
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '0.75rem',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-accent)',
-                    fontWeight: 500,
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Chapter {chapter.number}
+                <span className="font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-2 block">
+                  CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
-
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontSize: '1.5rem',
-                    color: 'var(--color-ink)',
-                    marginBottom: '0.25rem',
-                    marginTop: 0,
-                    lineHeight: 1.2,
-                  }}
-                >
+                <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
                   {chapter.title}
                 </h3>
-
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '0.75rem',
-                    color: 'var(--color-muted)',
-                    marginBottom: '0.75rem',
-                    marginTop: 0,
-                  }}
-                >
-                  {chapter.subtitle}
-                </p>
-
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '0.9375rem',
-                    color: 'var(--color-muted)',
-                    lineHeight: 1.6,
-                    marginBottom: 0,
-                    marginTop: 'auto',
-                  }}
-                >
+                <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}
                 </p>
-              </a>
-            ))}
-          </div>
+              </Link>
+            );
+          })}
         </div>
-      </section>
+      </div>
     </main>
   );
 }
