@@ -31,40 +31,37 @@ const visibleProjects = portfolioProjects.filter(p => !p.hidden);
 export default function WorkPage() {
   return (
     <main className="pr-page">
-    <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
-      <h1 className="pr-page-title" style={{ margin: '0 0 14px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)' }}>
+    <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+      <h1 className="pr-page-title m-0 mb-[14px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
         Work
       </h1>
-      <p className="pr-page-lede" style={{ margin: '0 0 36px', lineHeight: 1.65, color: 'var(--pr-lede)', maxWidth: '52ch' }}>
+      <p className="pr-page-lede m-0 mb-9 leading-[1.65] text-pr-lede max-w-[52ch]">
         Systems and product work at Southwest Airlines.
       </p>
 
       {visibleProjects.length === 0 ? (
-        <p style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-muted)', borderTop: '1px solid var(--pr-rule)', paddingTop: 24 }}>
+        <p className="font-plex-mono text-[13px] text-pr-muted border-t border-pr-rule pt-6">
           More case studies in progress.
         </p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="flex flex-col">
           {visibleProjects.map((p) => {
             const meta = (p.tags ?? []).slice(0, 3).join(' · ').toUpperCase();
             return (
               <Link key={p.slug} href={`/work/${p.slug}`} className="pr-arrow-link pr-hoverable">
                 {/* Wide row */}
-                <span
-                  className="pr-row-link pr-row-wide"
-                  style={{ gridTemplateColumns: 'minmax(0,1fr) 220px 24px' }}
-                >
-                  <span style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--pr-fg-strong)' }}>{p.title}</span>
-                  <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-muted)', letterSpacing: '0.04em', textAlign: 'right' }}>{meta}</span>
-                  <span className="pr-row-arrow" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-accent-text)', textAlign: 'right' }} aria-hidden="true">→</span>
+                <span className="pr-row-link pr-row-wide grid-cols-[minmax(0,1fr)_220px_24px]">
+                  <span className="text-2xl font-semibold tracking-[-0.02em] text-pr-fg-strong">{p.title}</span>
+                  <span className="font-plex-mono text-[11px] text-pr-muted tracking-[0.04em] text-right">{meta}</span>
+                  <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text text-right" aria-hidden="true">→</span>
                 </span>
                 {/* Narrow row */}
-                <span className="pr-row-link pr-row-narrow" style={{ flexDirection: 'column', gap: 6, padding: '16px 10px 16px 0' }}>
-                  <span style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 14 }}>
-                    <span style={{ fontSize: 20, fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--pr-fg-strong)', minWidth: 0 }}>{p.title}</span>
-                    <span className="pr-row-arrow" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-accent-text)' }} aria-hidden="true">→</span>
+                <span className="pr-row-link pr-row-narrow flex-col gap-1.5 py-4 pr-2.5">
+                  <span className="flex items-baseline justify-between gap-3.5">
+                    <span className="text-xl font-semibold tracking-[-0.02em] text-pr-fg-strong min-w-0">{p.title}</span>
+                    <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text" aria-hidden="true">→</span>
                   </span>
-                  <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: '10.5px', color: 'var(--pr-muted)', letterSpacing: '0.04em', minWidth: 0 }}>{meta}</span>
+                  <span className="font-plex-mono text-[10.5px] text-pr-muted tracking-[0.04em] min-w-0">{meta}</span>
                 </span>
               </Link>
             );

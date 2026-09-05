@@ -1,4 +1,4 @@
-@import "tailwindcss/preflight";
+@import "tailwindcss/preflight" layer(base);
 @import "tailwindcss/theme";
 
 /* ============================================================
@@ -424,6 +424,21 @@ img {
 }
 
 /* ============================================================
+   Everything from here to the end of the file is wrapped in
+   @layer components. Tailwind v4 puts its generated utilities in
+   @layer utilities; CSS gives any UNLAYERED rule (which is what all
+   of this used to be) higher priority than ANY layered rule, no
+   matter its specificity or where it appears in the file — so a
+   Tailwind override class placed alongside one of these (e.g.
+   `pr-row-link py-4` trying to override .pr-row-link's own padding)
+   was silently losing every time. @layer components sits below
+   @layer utilities in Tailwind's default layer order, so utility
+   classes can now actually override these when composed together.
+   (2026-09-05 — found via a real layout bug on /work's narrow row.)
+   ============================================================ */
+@layer components {
+
+/* ============================================================
    PRESS ROOM — layout primitives
    Fluid type via clamp() replaces the mock's 3-tier JS breakpoints
    (that workaround existed because the design canvas can't use
@@ -639,3 +654,5 @@ img {
   transform: translateY(-3px);
   border-color: var(--pr-fg-strong);
 }
+
+} /* end @layer components */
