@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { initKonamiCode } from '@/lib/konami';
+import PressCta from '@/components/press/PressCta';
 
 export default function Home() {
   useEffect(() => {
@@ -12,65 +14,117 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 4rem" }}>
-      <div style={{ maxWidth: "48rem" }}>
-        <p style={{ fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-muted)", marginBottom: "1.5rem", fontFamily: "var(--font-inter)" }}>Design Ops and Systems Leader</p>
-        <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(3rem, 8vw, 5.5rem)", color: "var(--color-ink)", lineHeight: 1.1, marginBottom: "1.5rem" }}>Shane Maris</h1>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", maxWidth: "36rem", lineHeight: 1.75, marginBottom: "2.5rem" }}>I design systems that scale, building the foundations product teams rely on at Southwest Airlines.</p>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          <a
-            href="/resume"
-            style={{
-              backgroundColor: "var(--color-accent)",
-              color: "#fff",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              padding: "0.75rem 1.5rem",
-              borderRadius: "var(--radius-sm)",
-              textDecoration: "none",
-              display: "inline-block",
-              transition: "box-shadow var(--motion-slow) var(--ease-default), transform var(--motion-default) var(--ease-default)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.boxShadow = "var(--shadow-underglow-strong)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "";
-              e.currentTarget.style.boxShadow = "";
-            }}
-          >
-            View my resume
-          </a>
-          <a
-            href="/about"
-            style={{
-              color: "var(--color-accent)",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              padding: "0.75rem 1.5rem",
-              borderRadius: "var(--radius-sm)",
-              textDecoration: "none",
-              border: "1.5px solid var(--color-accent)",
-              display: "inline-block",
-              transition: "box-shadow var(--motion-slow) var(--ease-default), transform var(--motion-default) var(--ease-default), background-color var(--motion-default) var(--ease-default)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.backgroundColor = "var(--accent-tint-08)";
-              e.currentTarget.style.boxShadow = "var(--shadow-underglow-soft)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "";
-              e.currentTarget.style.backgroundColor = "";
-              e.currentTarget.style.boxShadow = "";
-            }}
-          >
-            About me
-          </a>
+    <main className="pr-page">
+      <div className="pr-main">
+      <div
+        style={{
+          position: 'relative',
+          padding: 'clamp(40px, 6vw, 68px) 0 clamp(40px, 5vw, 56px)',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(6, 1fr)',
+            pointerEvents: 'none',
+          }}
+        >
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} style={{ borderRight: '1px solid var(--pr-grid-line)' }} />
+          ))}
+          <div />
         </div>
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute', left: -70, top: 30, width: 470, height: 210,
+            background: 'radial-gradient(ellipse at 42% 50%, var(--pr-glow-a), transparent 66%)',
+            filter: 'blur(30px)', pointerEvents: 'none', willChange: 'transform',
+            animation: 'pr-drift-a 28s ease-in-out infinite',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute', left: 150, top: 130, width: 430, height: 195,
+            background: 'radial-gradient(ellipse at 55% 50%, var(--pr-glow-b), transparent 66%)',
+            filter: 'blur(30px)', pointerEvents: 'none', willChange: 'transform',
+            animation: 'pr-drift-b 34s ease-in-out infinite',
+          }}
+        />
+
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 22, maxWidth: 680 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.1em', color: 'var(--pr-muted)' }}>
+            <span style={{ width: 14, height: 1, background: 'var(--pr-cyan)' }} />
+            <span>DESIGN OPS &amp; SYSTEMS · SOUTHWEST AIRLINES</span>
+          </div>
+          <h1 className="pr-hero-title" style={{ margin: 0, fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 0.98, letterSpacing: '-0.035em', color: 'var(--pr-fg-strong)' }}>
+            I design systems that scale.
+          </h1>
+          <p className="pr-lede" style={{ margin: 0, lineHeight: 1.6, color: 'var(--pr-lede)', maxWidth: '44ch' }}>
+            Building the foundations product teams rely on at Southwest Airlines.
+          </p>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', paddingTop: 4 }}>
+            <PressCta href="/resume">VIEW RESUME</PressCta>
+            <PressCta href="/about" variant="secondary">ABOUT ME</PressCta>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ borderTop: '1px solid var(--pr-rule)', padding: 'clamp(32px, 4vw, 40px) 0 clamp(30px, 4vw, 36px)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.1em', color: 'var(--pr-magenta)', marginBottom: 18 }}>
+          <span style={{ width: 14, height: 1, background: 'var(--pr-magenta)' }} />
+          <span>LEAD CASE STUDY</span>
+        </div>
+        <div className="pr-lead-grid">
+          <div
+            style={{
+              aspectRatio: '4 / 3',
+              minWidth: 0,
+              background: 'repeating-linear-gradient(45deg, var(--pr-surface) 0 8px, var(--pr-surface-2) 8px 16px)',
+              display: 'flex',
+              alignItems: 'flex-end',
+              padding: 14,
+            }}
+          >
+            <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-muted)' }}>heart-ds-hero.jpg</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minWidth: 0 }}>
+            <h2 className="pr-lead-title" style={{ margin: 0, fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1.02, letterSpacing: '-0.025em', color: 'var(--pr-fg-strong)' }}>
+              Heart Design System
+            </h2>
+            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.7, color: 'var(--pr-lede)' }}>
+              From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.
+            </p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.04em' }}>
+              <span style={{ border: '1px solid var(--pr-cyan)', color: 'var(--pr-cyan)', padding: '4px 8px' }}>WEB</span>
+              <span style={{ border: '1px solid var(--pr-rule-strong)', color: 'var(--pr-muted)', padding: '4px 8px' }}>iOS</span>
+              <span style={{ border: '1px solid var(--pr-rule-strong)', color: 'var(--pr-muted)', padding: '4px 8px' }}>ANDROID</span>
+            </div>
+            <Link
+              href="/work/heart-design-system"
+              className="pr-arrow-link pr-hoverable"
+              style={{
+                fontFamily: 'var(--font-plex-mono), monospace',
+                fontSize: 12,
+                letterSpacing: '0.06em',
+                color: 'var(--pr-accent-text)',
+                borderBottom: '1px solid var(--pr-accent-text)',
+                padding: '0 0 3px',
+                alignSelf: 'flex-start',
+                marginTop: 4,
+                textDecoration: 'none',
+              }}
+            >
+              READ FULL CASE STUDY <span className="pr-row-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
       </div>
     </main>
   );

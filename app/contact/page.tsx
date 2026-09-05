@@ -1,129 +1,146 @@
-"use client";
-import { useState } from "react";
-import { Envelope, ShareNetwork, LinkedinLogo, ThreadsLogo } from "@phosphor-icons/react";
+'use client';
+
+import { useState } from 'react';
+import { LinkedinLogo, ThreadsLogo, Envelope } from '@phosphor-icons/react';
+import Ghost from '@/components/press/Ghost';
+
+type Status = 'idle' | 'sending' | 'sent' | 'error';
+
+function validate(name: string, email: string, message: string) {
+  const errors: { name?: boolean; email?: boolean; message?: boolean } = {};
+  if (!name.trim()) errors.name = true;
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) errors.email = true;
+  if (!message.trim()) errors.message = true;
+  return errors;
+}
 
 export default function Contact() {
-  const [status, setStatus] = useState("idle");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot — real users never see or fill this
+  const [touched, setTouched] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+
+  const errors = touched ? validate(name, email, message) : {};
+  const sending = status === 'sending';
+  const sent = status === 'sent';
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
-    const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    setStatus(res.ok ? "sent" : "error");
+    const e2 = validate(name, email, message);
+    setTouched(true);
+    if (Object.keys(e2).length) return;
+
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, website }),
+      });
+      setStatus(res.ok ? 'sent' : 'error');
+    } catch {
+      setStatus('error');
+    }
   }
 
+  const border = (hasError?: boolean) => (hasError ? 'var(--pr-magenta)' : 'var(--pr-muted)');
+  const submitLabel = sending ? 'SENDING…' : sent ? 'SEND AGAIN' : 'SEND MESSAGE';
+
   return (
-    <main style={{ paddingTop: "8rem", paddingBottom: "6rem", paddingLeft: "4rem", paddingRight: "4rem", maxWidth: "56rem", margin: "0 auto" }}>
-      <section style={{ marginBottom: "4rem", maxWidth: "36rem" }}>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.4rem", width: "fit-content" }}>
-          <Envelope size={14} weight="duotone" />
-          Contact
-        </p>
-        <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-ink)", lineHeight: 1.15, marginBottom: "1rem" }}>Get in touch</h1>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", lineHeight: 1.8 }}>Have a question or want to work together? Send me a message and I will get back to you.</p>
-      </section>
-      {status === "sent" ? (
-        <div style={{ maxWidth: "36rem" }}>
-          <p style={{ fontFamily: "var(--font-playfair)", fontSize: "1.5rem", color: "var(--color-ink)", marginBottom: "0.5rem" }}>Message sent.</p>
-          <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)" }}>Thanks for reaching out. I will be in touch soon.</p>
+    <main className="pr-page">
+    <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
+      <h1 className="pr-page-title" style={{ margin: '0 0 16px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)' }}>
+        Get in touch
+      </h1>
+      <p className="pr-page-lede" style={{ margin: '0 0 34px', lineHeight: 1.65, color: 'var(--pr-lede)', maxWidth: '48ch' }}>
+        Submit the form — it runs real validation, a sending state, and a success state.
+      </p>
+
+      <form onSubmit={handleSubmit} noValidate style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 20 }}>
+        {/* Honeypot — visually hidden, skipped by real users, off the tab order */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+          <label htmlFor="contact-website">Leave this field blank</label>
+          <input
+            id="contact-website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} style={{ maxWidth: "36rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="contact-name" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Name</label>
-            <input id="contact-name" name="name" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)" }} />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="contact-email" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Email</label>
-            <input id="contact-email" name="email" type="email" required style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)" }} />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="contact-message" style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-ink)" }}>Message</label>
-            <textarea id="contact-message" name="message" required rows={6} style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", padding: "0.75rem 1rem", border: "1px solid var(--color-hairline)", borderRadius: "6px", backgroundColor: "#fff", color: "var(--color-ink)", resize: "vertical" }} />
-          </div>
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            style={{
-              backgroundColor: "var(--color-accent)",
-              color: "#fff",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              padding: "0.75rem 1.5rem",
-              borderRadius: "var(--radius-sm)",
-              border: "none",
-              cursor: "pointer",
-              alignSelf: "flex-start",
-              transition: "box-shadow var(--motion-slow) var(--ease-default), transform var(--motion-default) var(--ease-default)",
-            }}
-            onMouseEnter={(e) => {
-              if (status === "sending") return;
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.boxShadow = "var(--shadow-underglow-strong)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "";
-              e.currentTarget.style.boxShadow = "";
-            }}
-          >
-            {status === "sending" ? "Sending..." : "Send message"}
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <label htmlFor="contact-name" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>NAME</label>
+          <input
+            type="text" id="contact-name" name="name" value={name}
+            onChange={(e) => setName(e.target.value)}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'contact-name-err' : undefined}
+            className="pr-input"
+            style={{ fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.name)}`, color: 'var(--pr-fg-strong)' }}
+          />
+          {errors.name && <div id="contact-name-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Required.</div>}
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <label htmlFor="contact-email" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>EMAIL</label>
+          <input
+            type="email" id="contact-email" name="email" value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'contact-email-err' : undefined}
+            className="pr-input"
+            style={{ fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.email)}`, color: 'var(--pr-fg-strong)' }}
+          />
+          {errors.email && <div id="contact-email-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Needs a valid email address.</div>}
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <label htmlFor="contact-message" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>MESSAGE</label>
+          <textarea
+            rows={4} id="contact-message" name="message" value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            aria-invalid={!!errors.message}
+            aria-describedby={errors.message ? 'contact-message-err' : undefined}
+            className="pr-input"
+            style={{ fontFamily: 'var(--font-archivo), sans-serif', fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.message)}`, color: 'var(--pr-fg-strong)', resize: 'vertical' }}
+          />
+          {errors.message && <div id="contact-message-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Required.</div>}
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <button type="submit" disabled={sending} className="pr-cta pr-hoverable">
+            <Ghost>{submitLabel}</Ghost>
           </button>
-          {status === "error" && <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-error)" }}>Something went wrong. Please try again or email me directly at contact@shanemaris.com</p>}
-        </form>
-      )}
-      <hr style={{ border: "none", borderTop: "1px solid var(--color-hairline)", margin: "4rem 0" }} />
-      <section>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "0.4rem", width: "fit-content" }}>
-          <ShareNetwork size={14} weight="duotone" />
-          Find me online
-        </p>
-        <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-          {[
-            { href: "https://linkedin.com/in/shanemaris",   external: true,  label: "LinkedIn",               leadingIcon: <LinkedinLogo size={14} /> },
-            { href: "https://www.threads.com/@_shaneux_",    external: true,  label: "Threads",                leadingIcon: <ThreadsLogo size={14} /> },
-            { href: "mailto:contact@shanemaris.com",        external: false, label: "contact@shanemaris.com", leadingIcon: <Envelope size={14} /> },
-          ].map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.875rem",
-                color: "var(--color-ink)",
-                textDecoration: "none",
-                fontWeight: 500,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                backgroundImage: "linear-gradient(var(--accent-tint-15), var(--accent-tint-15))",
-                backgroundSize: "100% 0%",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "left bottom",
-                borderRadius: "3px",
-                padding: "0.15rem 0.25rem",
-                margin: "-0.15rem -0.25rem",
-                transition: "background-size var(--motion-default) var(--ease-default)",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundSize = "100% 100%"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundSize = "100% 0%"; }}
-            >
-              {link.leadingIcon}{link.label}
-            </a>
-          ))}
+          <div role="status" aria-live="polite" style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, color: 'var(--pr-accent-text)' }}>
+            {sending && <span>Sending your message…</span>}
+            {sent && (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 8, height: 8, background: 'var(--pr-accent-text)', animation: 'pr-tick 240ms cubic-bezier(0.2,0.85,0.25,1) both' }} />
+                <span style={{ display: 'inline-block', animation: 'pr-wipe 380ms cubic-bezier(0.3,0.9,0.2,1) 120ms both' }}>SENT — I&apos;ll reply within a day.</span>
+              </span>
+            )}
+            {status === 'error' && <span style={{ color: 'var(--pr-magenta)' }}>Something went wrong — email me directly at contact@shanemaris.com</span>}
+          </div>
         </div>
-      </section>
+      </form>
+
+      <div style={{ marginTop: 44, borderTop: '1px solid var(--pr-rule)', paddingTop: 22, display: 'flex', gap: 28, flexWrap: 'wrap' }}>
+        <a href="https://linkedin.com/in/shanemaris" target="_blank" rel="noopener noreferrer" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <LinkedinLogo size={14} /> LinkedIn
+        </a>
+        <a href="https://www.threads.com/@_shaneux_" target="_blank" rel="noopener noreferrer" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <ThreadsLogo size={14} /> Threads
+        </a>
+        <a href="mailto:contact@shanemaris.com" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <Envelope size={14} /> contact@shanemaris.com
+        </a>
+      </div>
+    </div>
     </main>
   );
 }

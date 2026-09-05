@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Sparkle, Stack, Gear, Devices, Compass, Users, DeviceMobile, Briefcase, Robot, Code } from "@phosphor-icons/react/dist/ssr";
+import { Gear, Stack, Devices, Compass, Users, DeviceMobile, Robot, Code } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
-import HoverLink from "@/components/HoverLink";
+import PressCta from "@/components/press/PressCta";
 
 export const metadata: Metadata = {
   title: "About",
@@ -31,160 +31,100 @@ const EXPERTISE: ExpertiseEntry[] = [
   { skill: "Prompt Engineering",  Icon: Code,         tone: "muted"  },
 ];
 
+const PRINCIPLES = [
+  { term: "Build tools not rules", line: "Rigid processes create silos. When you build tools that invite collaboration, teams stop working around each other and start working together — with clarity, speed, and a shared point of truth." },
+  { term: "One bite at a time", line: "Complex problems rarely yield to brute force. Break the work into its smallest meaningful parts, solve each with intention, and the right solution tends to assemble itself." },
+  { term: "Constraints force creativity", line: "The best design rarely comes from unlimited resources. A tight constraint — a deadline, a budget, a platform limitation — is often the pressure that produces the most durable solution." },
+  { term: "Less is more", line: "Every element in a design earns its place or it doesn't belong. If something isn't improving the experience or solving a business objective, the right move is usually to remove it." },
+  { term: "Good design works for everyone", line: "Design that only works for some people isn't finished. Accessible, inclusive systems multiply impact — when more people can participate in the process, better work comes out the other side." },
+];
+
+const EXPERIENCE = [
+  { role: "Digital Product Manager, Design Ops", span: "Dec 2022 to present", copy: "Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers. Partner with teams across Marketing, Customer Experience, Technology, and Innovation to optimize design processes." },
+  { role: "Lead UX Designer", span: "Mar 2022 to Dec 2022", copy: "Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps." },
+  { role: "Sr. UX Designer", span: "Feb 2019 to Mar 2022", copy: "Explored design systems and design ops as a formal role within Southwest. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020." },
+  { role: "UX Designer", span: "Apr 2014 to Feb 2019", copy: "Primary designer on Vision, the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation." },
+  { role: "Web Designer", span: "Feb 2012 to Apr 2014", copy: "Transitioned from contractor to FTE, supporting content creation across Southwest's Digital Channels. Managed production timelines, ensuring consistency and delivery across marketing and digital properties." },
+  { role: "UX Designer (Contractor)", span: "Aug 2011 to Feb 2012", copy: "Integrated AirTran's digital presence into the Southwest ecosystem following acquisition. Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations." },
+];
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        fontFamily: 'var(--font-plex-mono), monospace',
+        fontSize: 11,
+        letterSpacing: '0.1em',
+        color: 'var(--pr-muted)',
+        marginBottom: 22,
+        borderTop: '1px solid var(--pr-rule)',
+        paddingTop: 22,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function About() {
   return (
-    <main style={{ paddingTop: "8rem", paddingBottom: "6rem", paddingLeft: "4rem", paddingRight: "4rem", maxWidth: "56rem", margin: "0 auto" }}>
-      <section style={{ marginBottom: "5rem" }}>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "1rem" }}>About</p>
-        <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-ink)", lineHeight: 1.15, marginBottom: "1.5rem" }}>I design the systems behind great design.</h1>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", lineHeight: 1.8, maxWidth: "42rem", marginBottom: "1rem" }}>I help designers do their best work by building scalable processes, enabling the right tools, and aligning teams around shared standards so design can move faster, with clarity and confidence.</p>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "1.125rem", color: "var(--color-muted)", lineHeight: 1.8, maxWidth: "42rem", marginBottom: "2rem" }}>I am a designer by trade who grew into systems thinking. I have spent the last several years at Southwest Airlines building and scaling the Heart Design System across web and native platforms.</p>
-        <HoverLink
-          href="/contact"
-          hoverEffect="underglow"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "#fff",
-            fontFamily: "var(--font-inter)",
-            fontSize: "0.875rem",
-            fontWeight: 500,
-            padding: "0.75rem 1.5rem",
-            borderRadius: "var(--radius-sm)",
-            textDecoration: "none",
-            display: "inline-block",
-          }}
-        >
-          Get in touch
-        </HoverLink>
-      </section>
-      <hr style={{ border: "none", borderTop: "1px solid var(--color-hairline)", marginBottom: "5rem" }} />
-      <section style={{ marginBottom: "5rem" }}>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2.5rem", display: "flex", alignItems: "center", gap: "0.4rem", width: "fit-content" }}>
-          <Sparkle size={14} weight="duotone" />
-          Design Principles
-        </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem" }}>
-          {[
-            { n: "1", title: "Build tools not rules", copy: "Rigid processes create silos. When you build tools that invite collaboration, teams stop working around each other and start working together — with clarity, speed, and a shared point of truth." },
-            { n: "2", title: "One bite at a time", copy: "Complex problems rarely yield to brute force. Break the work into its smallest meaningful parts, solve each with intention, and the right solution tends to assemble itself." },
-            { n: "3", title: "Constraints force creativity", copy: "The best design rarely comes from unlimited resources. A tight constraint — a deadline, a budget, a platform limitation — is often the pressure that produces the most durable solution." },
-            { n: "4", title: "Less is more", copy: "Every element in a design earns its place or it doesn't belong. If something isn't improving the experience or solving a business objective, the right move is usually to remove it." },
-            { n: "5", title: "Good design works for everyone", copy: "Design that only works for some people isn't finished. Accessible, inclusive systems multiply impact — when more people can participate in the process, better work comes out the other side." },
-          ].map(({ n, title, copy }) => (
-            <div key={n}>
-              <p style={{ fontFamily: "var(--font-playfair)", fontSize: "2.5rem", fontWeight: 700, color: "#D9D5CF", lineHeight: 1, marginBottom: "0.75rem" }}>{n}</p>
-              <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", fontWeight: 600, color: "var(--color-accent)", marginBottom: "0.5rem" }}>{title}</p>
-              <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", lineHeight: 1.7, margin: 0 }}>{copy}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <hr style={{ border: "none", borderTop: "1px solid var(--color-hairline)", marginBottom: "5rem" }} />
-      <section style={{ marginBottom: "5rem" }}>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2rem", display: "flex", alignItems: "center", gap: "0.4rem", width: "fit-content" }}>
-          <Briefcase size={14} weight="duotone" />
-          Experience
-        </p>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", color: "var(--color-muted)", marginBottom: "2rem" }}>Southwest Airlines 2011 to present</p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Digital Product Manager, Design Ops</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Dec 2022 to present</span>
-            </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers. Partner with teams across Marketing, Customer Experience, Technology, and Innovation to optimize design processes.</p>
+    <main className="pr-page">
+    <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)', paddingBottom: 24 }}>
+      <h1
+        className="pr-page-title"
+        style={{ margin: '0 0 18px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)', maxWidth: '22ch' }}
+      >
+        I design the systems behind great design.
+      </h1>
+      <p className="pr-lede" style={{ margin: '0 0 32px', lineHeight: 1.7, color: 'var(--pr-lede)', maxWidth: '54ch' }}>
+        I help designers do their best work by building scalable processes, enabling the right tools, and aligning teams around shared standards.
+      </p>
+      <PressCta href="/contact" style={{ marginBottom: 8 }}>GET IN TOUCH</PressCta>
+
+      <SectionLabel>HOW I WORK</SectionLabel>
+      <div className="pr-two-col" style={{ maxWidth: 860, marginBottom: 8 }}>
+        {PRINCIPLES.map((p) => (
+          <div key={p.term} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+            <div style={{ fontSize: 17, fontWeight: 600, color: 'var(--pr-fg-strong)' }}>{p.term}</div>
+            <div style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--pr-lede)' }}>{p.line}</div>
           </div>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Lead UX Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Mar 2022 to Dec 2022</span>
+        ))}
+      </div>
+
+      <SectionLabel>EXPERIENCE — SOUTHWEST AIRLINES, 2011 TO PRESENT</SectionLabel>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 28, marginBottom: 8 }}>
+        {EXPERIENCE.map((e) => (
+          <div key={e.role}>
+            <div style={{ display: 'flex', gap: 16, alignItems: 'baseline', marginBottom: 6, flexWrap: 'wrap' }}>
+              <h3 style={{ fontFamily: 'var(--font-archivo)', fontSize: 18, fontWeight: 600, color: 'var(--pr-fg-strong)', margin: 0 }}>{e.role}</h3>
+              <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: '10.5px', letterSpacing: '0.04em', color: 'var(--pr-muted)' }}>{e.span.toUpperCase()}</span>
             </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps.</p>
+            <p style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.7, margin: 0, maxWidth: '62ch' }}>{e.copy}</p>
           </div>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Sr. UX Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Feb 2019 to Mar 2022</span>
-            </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Explored design systems and design ops as a formal role within Southwest. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020.</p>
+        ))}
+      </div>
+
+      <SectionLabel>EXPERTISE</SectionLabel>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10, marginBottom: 40 }}>
+        {EXPERTISE.map(({ skill, Icon, tone }) => (
+          <div
+            key={skill}
+            style={{
+              fontSize: '13.5px',
+              color: 'var(--pr-fg)',
+              padding: '10px 14px',
+              border: '1px solid var(--pr-rule)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <Icon size={16} weight="duotone" color={tone === 'accent' ? 'var(--pr-magenta)' : 'var(--pr-muted)'} />
+            {skill}
           </div>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>UX Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Apr 2014 to Feb 2019</span>
-            </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Primary designer on Vision, the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation.</p>
-          </div>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>Web Designer</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Feb 2012 to Apr 2014</span>
-            </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Transitioned from contractor to FTE, supporting content creation across Southwest's Digital Channels. Managed production timelines, ensuring consistency and delivery across marketing and digital properties.</p>
-          </div>
-          <div>
-            <div style={{ display: "flex", gap: "1rem", alignItems: "baseline", marginBottom: "0.5rem", flexWrap: "wrap" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.25rem", color: "var(--color-ink)", margin: 0 }}>UX Designer (Contractor)</h3>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.8rem", color: "var(--color-muted)" }}>Aug 2011 to Feb 2012</span>
-            </div>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "1rem", color: "var(--color-muted)", lineHeight: 1.75, margin: 0, maxWidth: "42rem" }}>Integrated AirTran's digital presence into the Southwest ecosystem following acquisition. Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations.</p>
-          </div>
-        </div>
-      </section>
-      <hr style={{ border: "none", borderTop: "1px solid var(--color-hairline)", marginBottom: "5rem" }} />
-      <section style={{ marginBottom: "5rem" }}>
-        <p style={{ fontFamily: "var(--font-inter)", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-accent)", marginBottom: "2rem", display: "flex", alignItems: "center", gap: "0.4rem", width: "fit-content" }}>
-          <Stack size={14} weight="duotone" />
-          Expertise
-        </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "0.75rem" }}>
-          {EXPERTISE.map(({ skill, Icon, tone }) => (
-            <div
-              key={skill}
-              style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.9rem",
-                color: "var(--color-ink)",
-                padding: "0.625rem 1rem",
-                border: "1px solid var(--color-hairline)",
-                borderRadius: "var(--radius-sm)",
-                background: "var(--color-base)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <Icon
-                size={18}
-                weight="duotone"
-                color={tone === "accent" ? "var(--color-accent)" : "var(--color-muted)"}
-              />
-              {skill}
-            </div>
-          ))}
-        </div>
-      </section>
-      <hr style={{ border: "none", borderTop: "1px solid var(--color-hairline)", marginBottom: "5rem" }} />
-      <section>
-        <p style={{ fontFamily: "var(--font-playfair)", fontSize: "1.75rem", color: "var(--color-ink)", marginBottom: "1rem" }}>Want to work together?</p>
-        <HoverLink
-          href="/contact"
-          hoverEffect="underglow"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "#fff",
-            fontFamily: "var(--font-inter)",
-            fontSize: "0.875rem",
-            fontWeight: 500,
-            padding: "0.75rem 1.5rem",
-            borderRadius: "var(--radius-sm)",
-            textDecoration: "none",
-            display: "inline-block",
-          }}
-        >
-          Get in touch
-        </HoverLink>
-      </section>
+        ))}
+      </div>
+    </div>
     </main>
   );
 }
