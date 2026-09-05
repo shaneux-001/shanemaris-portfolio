@@ -1,27 +1,22 @@
 'use client';
 
 /**
- * The footer differs by design system: Press Room pages (Home, Work index,
- * About, Contact, Resume, Proof Before Progress + its chapters) get the new
- * "Want to work together?" CTA band. Every other route — /work/[slug], the
- * Heart DS chapter pages, /labs — keeps the original plain copyright +
- * dark-mode toggle footer, since their content still uses the pre-redesign
- * token system and already carries its own CTA where relevant. Stacking the
- * new CTA band under those would just duplicate it.
+ * The footer differs by design system. As of Phase 6 (2026-09-05), Press
+ * Room covers everything except the /labs experiments (Konami-gated, not
+ * aligned to the design kit, low priority) — so this is an EXCLUDE list now,
+ * not an include list. Anything not matched here gets the old plain
+ * copyright + dark-mode toggle footer.
  */
 
 import { usePathname } from 'next/navigation';
 import PressCta from './PressCta';
 import ThemeToggle from '@/components/ThemeToggle';
 
-const PRESS_ROOM_ROUTES = new Set(['/', '/work', '/about', '/contact', '/resume']);
-const PRESS_ROOM_PREFIXES = ['/work/proof-before-progress'];
+const OLD_SYSTEM_PREFIXES = ['/labs', '/particle-demo', '/particle-test'];
 
 export default function SiteFooter() {
   const pathname = usePathname();
-  const isPressRoom =
-    PRESS_ROOM_ROUTES.has(pathname ?? '') ||
-    PRESS_ROOM_PREFIXES.some((prefix) => pathname?.startsWith(prefix));
+  const isPressRoom = !OLD_SYSTEM_PREFIXES.some((prefix) => pathname?.startsWith(prefix));
 
   if (isPressRoom) {
     return (

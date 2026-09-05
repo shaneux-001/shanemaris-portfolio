@@ -1,7 +1,7 @@
 /**
- * Case study detail page — SERVER COMPONENT.
+ * Case study detail page — SERVER COMPONENT. Press Room theme (converted
+ * 2026-09-05 — was the pre-redesign plum/Playfair system before this).
  * Reads content from content/work/[slug].md via lib/parseProjectMd.ts.
- * Interactive hover links are delegated to components/HoverLink.tsx (client).
  *
  * Image wiring: fs.existsSync checks public/work/[slug]/ at request time.
  * Drop hero.jpg or section-N.jpg into the folder and refresh — no restart needed.
@@ -10,10 +10,12 @@
 import type { Metadata } from "next";
 import fs from 'fs';
 import path from 'path';
-import { Clock, CalendarBlank, Monitor, Briefcase } from '@phosphor-icons/react/dist/ssr';
+import Link from 'next/link';
+import { Clock, CalendarBlank, Monitor } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
-import HoverLink from '@/components/HoverLink';
+import PressCta from '@/components/press/PressCta';
+import Ghost from '@/components/press/Ghost';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -48,18 +50,12 @@ export default async function ProjectPage({ params }: PageProps) {
 
   if (!project) {
     return (
-      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
-        <div style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 4rem' }}>
-          <h1>Project not found</h1>
-          <p>
-            <HoverLink
-              href="/work"
-              hoverEffect="highlight"
-              style={{ color: 'var(--color-accent)', textDecoration: 'none' }}
-            >
-              Back to work
-            </HoverLink>
-          </p>
+      <main className="pr-page">
+        <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+          <h1 className="font-archivo text-3xl font-bold text-pr-fg-strong mb-4">Project not found</h1>
+          <Link href="/work" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline">
+            <Ghost>← BACK TO WORK</Ghost>
+          </Link>
         </div>
       </main>
     );
@@ -75,209 +71,102 @@ export default async function ProjectPage({ params }: PageProps) {
   ) ?? [];
 
   return (
-    <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
-      <article style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 4rem' }}>
+    <main className="pr-page">
+      <div className="pr-main pt-[clamp(36px,5vw,56px)]">
 
         {/* ── Header ── */}
-        <div style={{ marginBottom: '3rem' }}>
-          <HoverLink
-            href="/work"
-            hoverEffect="highlight"
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
-              color: 'var(--color-accent)',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: '1.5rem',
-            }}
-          >
-            ← Back to work
-          </HoverLink>
+        <Link href="/work" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline inline-block mb-6">
+          <Ghost>← BACK TO WORK</Ghost>
+        </Link>
 
-          {/* Eyebrow */}
-          {content?.eyebrow && (
-            <p
-              style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '0.75rem',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--color-accent)',
-                marginBottom: '0.75rem',
-                marginTop: 0,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                width: 'fit-content',
-              }}
-            >
-              <Briefcase size={14} weight="duotone" />
-              {content.eyebrow}
-            </p>
+        {content?.eyebrow && (
+          <p className="font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-3.5 mt-0 uppercase">
+            {content.eyebrow}
+          </p>
+        )}
+
+        <h1 className="pr-page-title font-archivo font-bold leading-[1.05] tracking-[-0.03em] text-pr-fg-strong mb-2 mt-0 max-w-[26ch]">
+          {project.title}
+        </h1>
+
+        {/* Meta row */}
+        <div className="font-plex-mono text-[12.5px] text-pr-muted mb-0 mt-3 flex flex-wrap gap-5 items-center">
+          {content ? (
+            <>
+              {content.readTime && (
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock size={14} color="var(--pr-muted)" />
+                  {content.readTime} read
+                </span>
+              )}
+              {content.timeline && (
+                <span className="inline-flex items-center gap-1.5">
+                  <CalendarBlank size={14} color="var(--pr-muted)" />
+                  {content.timeline}
+                </span>
+              )}
+              {content.platform && (
+                <span className="inline-flex items-center gap-1.5">
+                  <Monitor size={14} color="var(--pr-muted)" />
+                  {content.platform}
+                </span>
+              )}
+              {content.role && (
+                <span className="opacity-85">{content.role}</span>
+              )}
+            </>
+          ) : (
+            <span className="inline-flex items-center gap-1.5">
+              <Clock size={14} color="var(--pr-muted)" />
+              3 minutes read
+            </span>
           )}
-
-          <h1
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              color: 'var(--color-ink)',
-              lineHeight: 1.1,
-              marginBottom: '0.5rem',
-              marginTop: 0,
-            }}
-          >
-            {project.title}
-          </h1>
-
-          {/* Meta row */}
-          <div
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.8125rem',
-              color: 'var(--color-muted)',
-              marginBottom: 0,
-              marginTop: '0.75rem',
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1.25rem',
-              alignItems: 'center',
-            }}
-          >
-            {content ? (
-              <>
-                {content.readTime && (
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Clock size={14} />
-                    {content.readTime} read
-                  </span>
-                )}
-                {content.timeline && (
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <CalendarBlank size={14} />
-                    {content.timeline}
-                  </span>
-                )}
-                {content.platform && (
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Monitor size={14} />
-                    {content.platform}
-                  </span>
-                )}
-                {content.role && (
-                  <span style={{ opacity: 0.85 }}>{content.role}</span>
-                )}
-              </>
-            ) : (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                <Clock size={14} />
-                3 minutes read
-              </span>
-            )}
-          </div>
         </div>
 
         {/* ── Hero image ── */}
-        <div
-          style={{
-            borderRadius: '8px',
-            aspectRatio: '1 / 0.56',
-            marginBottom: '4rem',
-            overflow: 'hidden',
-            ...(hasHeroImg
-              ? {}
-              : {
-                  backgroundColor: 'var(--accent-tint-08)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--color-muted)',
-                  fontSize: '0.875rem',
-                  fontFamily: 'var(--font-inter)',
-                }),
-          }}
-        >
+        <div className="aspect-[1/0.56] mt-8 mb-14 overflow-hidden relative flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
           {hasHeroImg ? (
             <img
               src={`/work/${slug}/hero.jpg`}
               alt={`${project.title} — Hero`}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
-            `${project.title} — Hero Image`
+            <span className="font-plex-mono text-[11px] text-pr-muted">hero.jpg</span>
           )}
         </div>
 
         {/* ── Case study body ── */}
-        <div
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: '1.0625rem',
-            color: 'var(--color-ink)',
-          }}
-        >
+        <div className="max-w-[62ch]">
           {content ? (
             <>
               {/* Summary */}
-              <p
-                style={{
-                  lineHeight: 1.8,
-                  marginTop: 0,
-                  marginBottom: '3rem',
-                  fontSize: '1.125rem',
-                }}
-              >
+              <p className="leading-[1.8] mt-0 mb-10 text-[17px] text-pr-lede">
                 {content.summary}
               </p>
 
               {/* Sections */}
               {content.sections.map((section, i) => (
                 <div key={section.heading}>
-                  <h2
-                    style={{
-                      fontFamily: 'var(--font-playfair)',
-                      fontSize: '1.5rem',
-                      color: 'var(--color-ink)',
-                      marginBottom: '1rem',
-                      marginTop: 0,
-                    }}
-                  >
+                  <h2 className="font-archivo text-2xl font-bold text-pr-fg-strong mb-4 mt-0 tracking-[-0.02em]">
                     {section.heading}
                   </h2>
 
-                  <p style={{ lineHeight: 1.8, marginTop: 0, marginBottom: 0, overflowWrap: 'break-word' }}>
+                  <p className="leading-[1.8] mt-0 mb-0 text-[15.5px] text-pr-lede break-words">
                     {section.body}
                   </p>
 
                   {/* Image between sections (not after the last) */}
                   {i < content.sections.length - 1 && (
-                    <div
-                      style={{
-                        borderRadius: '8px',
-                        aspectRatio: '1.5 / 1',
-                        margin: '3rem 0',
-                        overflow: 'hidden',
-                        ...(sectionImgExists[i]
-                          ? {}
-                          : {
-                              backgroundColor: 'var(--accent-tint-08)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: 'var(--color-muted)',
-                              fontSize: '0.875rem',
-                              fontFamily: 'var(--font-inter)',
-                            }),
-                      }}
-                    >
+                    <div className="aspect-[1.5/1] my-12 overflow-hidden relative flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
                       {sectionImgExists[i] ? (
                         <img
                           src={`/work/${slug}/section-${i + 1}.jpg`}
                           alt={`${section.heading} — image`}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                          className="absolute inset-0 w-full h-full object-cover"
                         />
                       ) : (
-                        `Image — ${section.heading}`
+                        <span className="font-plex-mono text-[11px] text-pr-muted">section-{i + 1}.jpg</span>
                       )}
                     </div>
                   )}
@@ -286,38 +175,16 @@ export default async function ProjectPage({ params }: PageProps) {
             </>
           ) : (
             /* Fallback for slugs without a content file yet */
-            <p>Case study coming soon.</p>
+            <p className="text-pr-lede">Case study coming soon.</p>
           )}
         </div>
 
         {/* ── Footer link ── */}
-        <div
-          style={{
-            marginTop: '4rem',
-            paddingTop: '2rem',
-            borderTop: '1px solid var(--accent-tint-15)',
-          }}
-        >
-          <HoverLink
-            href="/work"
-            hoverEffect="underglow"
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              padding: '0.75rem 1.5rem',
-              backgroundColor: 'var(--color-accent)',
-              color: '#fff',
-              borderRadius: 'var(--radius-sm)',
-              textDecoration: 'none',
-              display: 'inline-block',
-            }}
-          >
-            Back to work
-          </HoverLink>
+        <div className="mt-16 pt-6 border-t border-pr-rule">
+          <PressCta href="/work">BACK TO WORK</PressCta>
         </div>
 
-      </article>
+      </div>
     </main>
   );
 }
