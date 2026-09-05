@@ -46,6 +46,12 @@ export const metadata: Metadata = {
   },
   description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
   icons: {
+    icon: [
+      { url: "/logo-16.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "/logo-32.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/logo-64.svg", sizes: "64x64", type: "image/svg+xml" },
+      { url: "/logo-128.svg", sizes: "128x128", type: "image/svg+xml" },
+    ],
     apple: "/apple-touch-icon.svg",
   },
   openGraph: {

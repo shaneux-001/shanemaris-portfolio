@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" ry="12" fill="#16161A"/>
   <!-- Row 1 -->
-  <rect x="4.5" y="4.5"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.30)"/>
-  <rect x="24"  y="4.5"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.45)"/>
-  <rect x="43.5" y="4.5" width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.60)"/>
-  <!-- Row 2 -->
-  <rect x="4.5" y="24"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.45)"/>
-  <rect x="24"  y="24"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.60)"/>
-  <rect x="43.5" y="24" width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.75)"/>
+  <rect x="4.5" y="4.5"  width="16" height="16" rx="6" ry="6" fill="#00AEEF"/>
+  <rect x="24"  y="4.5"  width="16" height="16" rx="6" ry="6" fill="#00AEEF"/>
+  <rect x="43.5" y="4.5" width="16" height="16" rx="6" ry="6" fill="#00AEEF"/>
+  <!-- Row 2 (centre knockout — transparent) -->
+  <rect x="4.5" y="24"  width="16" height="16" rx="6" ry="6" fill="#00AEEF"/>
+  <rect x="43.5" y="24" width="16" height="16" rx="6" ry="6" fill="#EC008C"/>
   <!-- Row 3 -->
-  <rect x="4.5" y="43.5"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.60)"/>
-  <rect x="24"  y="43.5"  width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.75)"/>
-  <rect x="43.5" y="43.5" width="16" height="16" rx="6" ry="6" fill="rgba(123,94,167,0.90)"/>
+  <rect x="4.5" y="43.5"  width="16" height="16" rx="6" ry="6" fill="#EC008C"/>
+  <rect x="24"  y="43.5"  width="16" height="16" rx="6" ry="6" fill="#EC008C"/>
+  <rect x="43.5" y="43.5" width="16" height="16" rx="6" ry="6" fill="#EC008C"/>
 </svg>
