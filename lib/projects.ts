@@ -52,6 +52,19 @@ export const portfolioProjects: ProjectConfig[] = [
     public: true, // Featured project
     tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive', 'Native'],
   },
+  // ----- Other work -----
+  {
+    slug: 'figma-enterprise-migration',
+    title: 'Figma Enterprise Migration',
+    public: true,
+    tags: ['DesignOps', 'Tooling', 'Enterprise'],
+  },
+  {
+    slug: 'proof-before-progress',
+    title: 'Proof Before Progress',
+    public: true,
+    tags: ['DesignOps', 'Design System', 'AI'],
+  },
   // ----- HDS adoption stories -----
   {
     slug: 'homepage-v2',

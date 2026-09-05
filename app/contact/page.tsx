@@ -55,7 +55,7 @@ export default function Contact() {
         Get in touch
       </h1>
       <p className="pr-page-lede" style={{ margin: '0 0 34px', lineHeight: 1.65, color: 'var(--pr-lede)', maxWidth: '48ch' }}>
-        Submit the form — it runs real validation, a sending state, and a success state.
+        Have a project, a question, or just want to talk shop about design systems? I&apos;d love to hear from you.
       </p>
 
       <form onSubmit={handleSubmit} noValidate style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 20 }}>

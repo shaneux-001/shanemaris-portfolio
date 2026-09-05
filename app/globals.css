@@ -571,3 +571,17 @@ img {
   background: var(--pr-fg-strong);
   transition: transform 220ms cubic-bezier(0.2, 0.85, 0.25, 1);
 }
+
+/* Chapter/case-study cards (proof-before-progress landing, etc.) */
+.pr-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border: 1px solid var(--pr-rule);
+  padding: 20px;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.pr-card:hover, .pr-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--pr-fg-strong);
+}

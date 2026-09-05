@@ -245,7 +245,7 @@ export default async function ProjectPage({ params }: PageProps) {
                     {section.heading}
                   </h2>
 
-                  <p style={{ lineHeight: 1.8, marginTop: 0, marginBottom: 0 }}>
+                  <p style={{ lineHeight: 1.8, marginTop: 0, marginBottom: 0, overflowWrap: 'break-word' }}>
                     {section.body}
                   </p>
 

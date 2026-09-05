@@ -15,8 +15,18 @@ export const metadata: Metadata = {
   },
 };
 
-const EXPERIENCE = [
-  { role: "Digital Product Manager, Design Ops", span: "Dec 2022 to present", copy: "Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Lead and mentor UX Designers and manage contract designers. Partner with teams across Marketing, Customer Experience, Technology, and Innovation to optimize design processes." },
+interface ExperienceEntry { role: string; span: string; copy: string; highlights?: string[] }
+
+const EXPERIENCE: ExperienceEntry[] = [
+  {
+    role: "Digital Product Manager, Design Ops",
+    span: "Dec 2022 to present",
+    copy: "Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership. Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use it.",
+    highlights: [
+      "Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional seats) across 55+ teams.",
+      "Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack). Currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2.",
+    ],
+  },
   { role: "Lead UX Designer", span: "Mar 2022 to Dec 2022", copy: "Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps." },
   { role: "Sr. UX Designer", span: "Feb 2019 to Mar 2022", copy: "Explored design systems and design ops as a formal role within Southwest. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020." },
   { role: "UX Designer", span: "Apr 2014 to Feb 2019", copy: "Primary designer on Vision, the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation." },
@@ -85,10 +95,10 @@ export default function Resume() {
 
         <div style={{ marginTop: 32, maxWidth: '62ch' }}>
           <p style={{ fontSize: 15, color: 'var(--pr-lede)', lineHeight: 1.75, margin: '0 0 14px' }}>
-            I help designers do their best work by building scalable processes, enabling the right tools, and aligning teams around shared standards so design can move faster, with clarity and confidence.
+            I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.
           </p>
           <p style={{ fontSize: 15, color: 'var(--pr-lede)', lineHeight: 1.75, margin: 0 }}>
-            I am a designer by trade who grew into systems thinking. I have spent the last several years at Southwest Airlines building and scaling the Heart Design System across web and native platforms.
+            I&apos;m a designer by trade who started fixing stuff on the side because I&apos;m the kind of person who can&apos;t leave a broken process alone. It worked well enough that I was able to turn it into my full-time focus.
           </p>
         </div>
 
@@ -101,6 +111,13 @@ export default function Resume() {
                 <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: '10.5px', letterSpacing: '0.04em', color: 'var(--pr-muted)' }}>{e.span.toUpperCase()}</span>
               </div>
               <p style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.7, margin: 0, maxWidth: '62ch' }}>{e.copy}</p>
+              {e.highlights && (
+                <ul style={{ margin: '10px 0 0', paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 8, maxWidth: '62ch' }}>
+                  {e.highlights.map((h) => (
+                    <li key={h} style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.7 }}>{h}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
