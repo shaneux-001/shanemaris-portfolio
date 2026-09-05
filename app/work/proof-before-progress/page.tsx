@@ -30,65 +30,54 @@ export default function ProofBeforeProgressLanding() {
 
   return (
     <main className="pr-page">
-      <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
-        <Link href="/work" className="pr-arrow-link pr-hoverable" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, letterSpacing: '0.06em', color: 'var(--pr-accent-text)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>
+      <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+        <Link href="/work" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline inline-block mb-6">
           <Ghost>← BACK TO WORK</Ghost>
         </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.1em', color: 'var(--pr-magenta)', marginBottom: 18 }}>
-          <span style={{ width: 14, height: 1, background: 'var(--pr-magenta)' }} />
+        <div className="flex items-center gap-[10px] font-plex-mono text-[11px] tracking-[0.1em] text-pr-magenta mb-[18px]">
+          <span className="w-3.5 h-px bg-pr-magenta" />
           <span>CASE STUDY</span>
         </div>
 
-        <h1 className="pr-page-title" style={{ margin: '0 0 18px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)', maxWidth: '26ch' }}>
+        <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[26ch]">
           Proof Before Progress
         </h1>
 
-        <p className="pr-page-lede" style={{ margin: '0 0 12px', lineHeight: 1.7, color: 'var(--pr-lede)', maxWidth: '58ch' }}>
+        <p className="pr-page-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[58ch]">
           Why HDS needed a real docsite, how a company-wide reorg finally created room to fix it, and how a single prototyped weekend built the case that closed out a $150K vendor decision.
         </p>
 
-        <p style={{ margin: '0 0 40px', fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, color: 'var(--pr-muted)' }}>
+        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
           Read time: ~9 minutes
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
           {CHAPTERS.map((chapter) => {
             const thumbPath = path.join(workDir, `chapter-${chapter.number}-thumb.jpg`);
             const hasThumb = fs.existsSync(thumbPath);
             return (
               <Link key={chapter.number} href={`/work/proof-before-progress/chapter-${chapter.number}`} className="pr-card">
-                <div
-                  style={{
-                    position: 'relative',
-                    aspectRatio: '4 / 3',
-                    marginBottom: 16,
-                    overflow: 'hidden',
-                    background: 'repeating-linear-gradient(45deg, var(--pr-surface) 0 8px, var(--pr-surface-2) 8px 16px)',
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    padding: 12,
-                  }}
-                >
+                <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
                   {hasThumb ? (
                     <img
                       src={`/work/proof-before-progress/chapter-${chapter.number}-thumb.jpg`}
                       alt={`Chapter ${chapter.number} — ${chapter.title}`}
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   ) : (
-                    <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-muted)', position: 'relative' }}>
+                    <span className="font-plex-mono text-[11px] text-pr-muted relative">
                       chapter-{chapter.number}-thumb.jpg
                     </span>
                   )}
                 </div>
-                <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.06em', color: 'var(--pr-magenta)', marginBottom: 8 }}>
+                <span className="font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-2 block">
                   CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
-                <h3 style={{ fontFamily: 'var(--font-archivo)', fontSize: 20, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--pr-fg-strong)', margin: '0 0 8px' }}>
+                <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
                   {chapter.title}
                 </h3>
-                <p style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.6, margin: 0 }}>
+                <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}
                 </p>
               </Link>

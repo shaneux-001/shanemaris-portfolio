@@ -45,22 +45,22 @@ export default function Contact() {
     }
   }
 
-  const border = (hasError?: boolean) => (hasError ? 'var(--pr-magenta)' : 'var(--pr-muted)');
+  const borderClass = (hasError?: boolean) => (hasError ? 'border-pr-magenta' : 'border-pr-muted');
   const submitLabel = sending ? 'SENDING…' : sent ? 'SEND AGAIN' : 'SEND MESSAGE';
 
   return (
     <main className="pr-page">
-    <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
-      <h1 className="pr-page-title" style={{ margin: '0 0 16px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)' }}>
+    <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+      <h1 className="pr-page-title m-0 mb-4 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
         Get in touch
       </h1>
-      <p className="pr-page-lede" style={{ margin: '0 0 34px', lineHeight: 1.65, color: 'var(--pr-lede)', maxWidth: '48ch' }}>
+      <p className="pr-page-lede m-0 mb-[34px] leading-[1.65] text-pr-lede max-w-[48ch]">
         Have a project, a question, or just want to talk shop about design systems? I&apos;d love to hear from you.
       </p>
 
-      <form onSubmit={handleSubmit} noValidate style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <form onSubmit={handleSubmit} noValidate className="max-w-[520px] flex flex-col gap-5">
         {/* Honeypot — visually hidden, skipped by real users, off the tab order */}
-        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+        <div aria-hidden="true" className="absolute left-[-9999px] w-px h-px overflow-hidden">
           <label htmlFor="contact-website">Leave this field blank</label>
           <input
             id="contact-website"
@@ -73,70 +73,67 @@ export default function Contact() {
           />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-          <label htmlFor="contact-name" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>NAME</label>
+        <div className="flex flex-col gap-[7px]">
+          <label htmlFor="contact-name" className="font-plex-mono text-[11px] tracking-[0.08em] text-pr-muted">NAME</label>
           <input
             type="text" id="contact-name" name="name" value={name}
             onChange={(e) => setName(e.target.value)}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? 'contact-name-err' : undefined}
-            className="pr-input"
-            style={{ fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.name)}`, color: 'var(--pr-fg-strong)' }}
+            className={`pr-input text-base px-3.5 py-3 bg-pr-surface border ${borderClass(errors.name)} text-pr-fg-strong`}
           />
-          {errors.name && <div id="contact-name-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Required.</div>}
+          {errors.name && <div id="contact-name-err" className="font-plex-mono text-[11px] text-pr-magenta">Required.</div>}
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-          <label htmlFor="contact-email" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>EMAIL</label>
+        <div className="flex flex-col gap-[7px]">
+          <label htmlFor="contact-email" className="font-plex-mono text-[11px] tracking-[0.08em] text-pr-muted">EMAIL</label>
           <input
             type="email" id="contact-email" name="email" value={email}
             onChange={(e) => setEmail(e.target.value)}
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? 'contact-email-err' : undefined}
-            className="pr-input"
-            style={{ fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.email)}`, color: 'var(--pr-fg-strong)' }}
+            className={`pr-input text-base px-3.5 py-3 bg-pr-surface border ${borderClass(errors.email)} text-pr-fg-strong`}
           />
-          {errors.email && <div id="contact-email-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Needs a valid email address.</div>}
+          {errors.email && <div id="contact-email-err" className="font-plex-mono text-[11px] text-pr-magenta">Needs a valid email address.</div>}
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-          <label htmlFor="contact-message" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, letterSpacing: '0.08em', color: 'var(--pr-muted)' }}>MESSAGE</label>
+        <div className="flex flex-col gap-[7px]">
+          <label htmlFor="contact-message" className="font-plex-mono text-[11px] tracking-[0.08em] text-pr-muted">MESSAGE</label>
           <textarea
             rows={4} id="contact-message" name="message" value={message}
             onChange={(e) => setMessage(e.target.value)}
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? 'contact-message-err' : undefined}
-            className="pr-input"
-            style={{ fontFamily: 'var(--font-archivo), sans-serif', fontSize: 16, padding: '12px 14px', background: 'var(--pr-surface)', border: `1px solid ${border(errors.message)}`, color: 'var(--pr-fg-strong)', resize: 'vertical' }}
+            className={`pr-input font-archivo text-base px-3.5 py-3 bg-pr-surface border ${borderClass(errors.message)} text-pr-fg-strong resize-y`}
           />
-          {errors.message && <div id="contact-message-err" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-magenta)' }}>Required.</div>}
+          {errors.message && <div id="contact-message-err" className="font-plex-mono text-[11px] text-pr-magenta">Required.</div>}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+        <div className="flex items-center gap-4 flex-wrap">
           <button type="submit" disabled={sending} className="pr-cta pr-hoverable">
             <Ghost>{submitLabel}</Ghost>
           </button>
-          <div role="status" aria-live="polite" style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, color: 'var(--pr-accent-text)' }}>
+          <div role="status" aria-live="polite" className="flex items-center gap-2 font-plex-mono text-xs text-pr-accent-text">
             {sending && <span>Sending your message…</span>}
             {sent && (
-              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 8, height: 8, background: 'var(--pr-accent-text)', animation: 'pr-tick 240ms cubic-bezier(0.2,0.85,0.25,1) both' }} />
-                <span style={{ display: 'inline-block', animation: 'pr-wipe 380ms cubic-bezier(0.3,0.9,0.2,1) 120ms both' }}>SENT — I&apos;ll reply within a day.</span>
+              <span className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-pr-accent-text [animation:pr-tick_240ms_cubic-bezier(0.2,0.85,0.25,1)_both]" />
+                <span className="inline-block [animation:pr-wipe_380ms_cubic-bezier(0.3,0.9,0.2,1)_120ms_both]">SENT — I&apos;ll reply within a day.</span>
               </span>
             )}
-            {status === 'error' && <span style={{ color: 'var(--pr-magenta)' }}>Something went wrong — email me directly at contact@shanemaris.com</span>}
+            {status === 'error' && <span className="text-pr-magenta">Something went wrong — email me directly at contact@shanemaris.com</span>}
           </div>
         </div>
       </form>
 
-      <div style={{ marginTop: 44, borderTop: '1px solid var(--pr-rule)', paddingTop: 22, display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-        <a href="https://linkedin.com/in/shanemaris" target="_blank" rel="noopener noreferrer" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+      <div className="mt-11 border-t border-pr-rule pt-[22px] flex gap-7 flex-wrap">
+        <a href="https://linkedin.com/in/shanemaris" target="_blank" rel="noopener noreferrer" className="pr-text-link inline-flex items-center gap-1.5">
           <LinkedinLogo size={14} /> LinkedIn
         </a>
-        <a href="https://www.threads.com/@_shaneux_" target="_blank" rel="noopener noreferrer" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        <a href="https://www.threads.com/@_shaneux_" target="_blank" rel="noopener noreferrer" className="pr-text-link inline-flex items-center gap-1.5">
           <ThreadsLogo size={14} /> Threads
         </a>
-        <a href="mailto:contact@shanemaris.com" className="pr-text-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        <a href="mailto:contact@shanemaris.com" className="pr-text-link inline-flex items-center gap-1.5">
           <Envelope size={14} /> contact@shanemaris.com
         </a>
       </div>

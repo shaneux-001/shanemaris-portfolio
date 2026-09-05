@@ -45,17 +45,7 @@ const EDUCATION = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        fontFamily: 'var(--font-plex-mono), monospace',
-        fontSize: 11,
-        letterSpacing: '0.1em',
-        color: 'var(--pr-muted)',
-        marginBottom: 22,
-        borderTop: '1px solid var(--pr-rule)',
-        paddingTop: 22,
-      }}
-    >
+    <div className="font-plex-mono text-[11px] tracking-[0.1em] text-pr-muted mb-[22px] border-t border-pr-rule pt-[22px]">
       {children}
     </div>
   );
@@ -64,57 +54,44 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function Resume() {
   return (
     <main className="pr-page">
-      <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)', paddingBottom: 24 }}>
-        <h1
-          className="pr-page-title"
-          style={{ margin: '0 0 10px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)' }}
-        >
+      <div className="pr-main pt-[clamp(36px,5vw,56px)] pb-6">
+        <h1 className="pr-page-title m-0 mb-2.5 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
           Shane Maris
         </h1>
-        <p style={{ margin: '0 0 6px', fontSize: 16, color: 'var(--pr-lede)' }}>Design Ops and Systems Leader</p>
-        <p style={{ margin: '0 0 18px', fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12.5, letterSpacing: '0.02em', color: 'var(--pr-muted)' }}>
+        <p className="m-0 mb-1.5 text-base text-pr-lede">Design Ops and Systems Leader</p>
+        <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
           contact@shanemaris.com · shanemaris.com · +1 (214) 546 3047
         </p>
         <a
           href="/Shane_Maris_Resume.docx"
           download
-          className="pr-arrow-link pr-hoverable"
-          style={{
-            fontFamily: 'var(--font-plex-mono), monospace',
-            fontSize: 12,
-            letterSpacing: '0.06em',
-            color: 'var(--pr-accent-text)',
-            borderBottom: '1px solid var(--pr-accent-text)',
-            padding: '0 0 3px',
-            display: 'inline-block',
-            textDecoration: 'none',
-          }}
+          className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text border-b border-pr-accent-text pb-[3px] inline-block no-underline"
         >
           <Ghost>DOWNLOAD RESUME</Ghost>
         </a>
 
-        <div style={{ marginTop: 32, maxWidth: '62ch' }}>
-          <p style={{ fontSize: 15, color: 'var(--pr-lede)', lineHeight: 1.75, margin: '0 0 14px' }}>
+        <div className="mt-8 max-w-[62ch]">
+          <p className="text-[15px] text-pr-lede leading-[1.75] m-0 mb-3.5">
             I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.
           </p>
-          <p style={{ fontSize: 15, color: 'var(--pr-lede)', lineHeight: 1.75, margin: 0 }}>
+          <p className="text-[15px] text-pr-lede leading-[1.75] m-0">
             I&apos;m a designer by trade who started fixing stuff on the side because I&apos;m the kind of person who can&apos;t leave a broken process alone. It worked well enough that I was able to turn it into my full-time focus.
           </p>
         </div>
 
         <SectionLabel>EXPERIENCE — SOUTHWEST AIRLINES, 2011 TO PRESENT</SectionLabel>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 28, marginBottom: 8 }}>
+        <div className="flex flex-col gap-7 mb-2">
           {EXPERIENCE.map((e) => (
             <div key={e.role}>
-              <div style={{ display: 'flex', gap: 16, alignItems: 'baseline', marginBottom: 6, flexWrap: 'wrap' }}>
-                <h3 style={{ fontFamily: 'var(--font-archivo)', fontSize: 18, fontWeight: 600, color: 'var(--pr-fg-strong)', margin: 0 }}>{e.role}</h3>
-                <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: '10.5px', letterSpacing: '0.04em', color: 'var(--pr-muted)' }}>{e.span.toUpperCase()}</span>
+              <div className="flex gap-4 items-baseline mb-1.5 flex-wrap">
+                <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0">{e.role}</h3>
+                <span className="font-plex-mono text-[10.5px] tracking-[0.04em] text-pr-muted">{e.span.toUpperCase()}</span>
               </div>
-              <p style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.7, margin: 0, maxWidth: '62ch' }}>{e.copy}</p>
+              <p className="text-sm text-pr-lede leading-[1.7] m-0 max-w-[62ch]">{e.copy}</p>
               {e.highlights && (
-                <ul style={{ margin: '10px 0 0', paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 8, maxWidth: '62ch' }}>
+                <ul className="mt-2.5 mb-0 pl-[18px] flex flex-col gap-2 max-w-[62ch]">
                   {e.highlights.map((h) => (
-                    <li key={h} style={{ fontSize: 14, color: 'var(--pr-lede)', lineHeight: 1.7 }}>{h}</li>
+                    <li key={h} className="text-sm text-pr-lede leading-[1.7]">{h}</li>
                   ))}
                 </ul>
               )}
@@ -123,22 +100,22 @@ export default function Resume() {
         </div>
 
         <SectionLabel>EXPERTISE</SectionLabel>
-        <div style={{ marginBottom: 8 }}>
+        <div className="mb-2">
           <Expertise />
         </div>
 
         <SectionLabel>EDUCATION AND CERTIFICATIONS</SectionLabel>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginBottom: 8 }}>
+        <div className="flex flex-col gap-[18px] mb-2">
           {EDUCATION.map((item) => (
             <div key={item.title}>
-              <p style={{ fontFamily: 'var(--font-archivo)', fontSize: 16, fontWeight: 600, color: 'var(--pr-fg-strong)', margin: '0 0 3px' }}>{item.title}</p>
-              <p style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 12, letterSpacing: '0.02em', color: 'var(--pr-muted)', margin: 0 }}>{item.meta}</p>
+              <p className="font-archivo text-base font-semibold text-pr-fg-strong m-0 mb-[3px]">{item.title}</p>
+              <p className="font-plex-mono text-xs tracking-[0.02em] text-pr-muted m-0">{item.meta}</p>
             </div>
           ))}
         </div>
 
-        <div style={{ borderTop: '1px solid var(--pr-rule)', paddingTop: 32, marginTop: 8 }}>
-          <p style={{ fontFamily: 'var(--font-archivo)', fontSize: 22, fontWeight: 700, color: 'var(--pr-fg-strong)', margin: '0 0 14px' }}>Want to work together?</p>
+        <div className="border-t border-pr-rule pt-8 mt-2">
+          <p className="font-archivo text-[22px] font-bold text-pr-fg-strong m-0 mb-3.5">Want to work together?</p>
           <PressCta href="/contact">GET IN TOUCH</PressCta>
         </div>
       </div>
