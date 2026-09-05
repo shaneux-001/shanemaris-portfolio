@@ -74,7 +74,7 @@ lib/
 
 public/
   logo-{16,32,64,128}.svg, apple-touch-icon.svg ← PressMark design (recolored Phase 4, 2026-09-05) — DO touch these via the Mark, not by hand; og-image.svg is still the old plum mark, not yet updated
-  Shane_Maris_Resume.docx ← NOT updated with the new bio/achievements — website-only pass, docx gets its own session (Phase 7 replaces this with PDF + .md anyway)
+  (Shane_Maris_Resume.docx deleted 2026-09-05 — wrong degree name, "UX design team" language violating the no-direct-reports rule, stale numbers. Recoverable via git history. The /resume "Download Resume" link is currently removed; Phase 7's generated PDF + .md replace it.)
 
 ui-kit.html            ← standalone visual kit; STALE since the Press Room redesign — reflects the old system only, open in browser, not a build target
 HANDOFF.md             ← this file
@@ -233,7 +233,15 @@ Password security fix, project registry overhaul, content system migrated to MD 
 
   **If Phase 6 or anything later adds new custom CSS classes for the Press Room system, they need to go inside the existing `@layer components { ... }` block in globals.css, not as bare top-level rules** — otherwise they'll be unlayered and this same bug reappears.
 - [x] **Phase 6 — Convert remaining old-system pages. DONE (2026-09-05).** `/work/[slug]` (Figma Enterprise Migration + the 9 hidden entries) and Heart Design System (landing + 4 chapters) all converted to Press Room, built directly with Tailwind. Commits `cdba030`, `4b461c5`. `SiteFooter`'s routing flipped from an include-list to an exclude-list (`OLD_SYSTEM_PREFIXES`: `/labs`, `/particle-demo`, `/particle-test`) since Press Room now covers everything else. **Every page on the site is Press Room now except the /labs experiments.**
-- [ ] **Phase 7 — Resume downloads.** New one-page PDF in the Press Room theme + a plain-text `.md` download; **the `.docx` gets fully retired**, not kept alongside (Shane's call, 2026-09-05). Done last on purpose — no point finalizing a PDF layout before the visual system stops changing under it.
+- [~] **Phase 7 — Resume downloads. IN PROGRESS (2026-09-05).** The old `.docx` is deleted (root + `public/` + `.bak`, commit `1ba46ac` — recoverable via git history, had real errors, see below) and the `/resume` "Download Resume" link is temporarily removed rather than left pointing at a dead file. Still to do: build the actual one-page PDF (condensed bullets, not the website's paragraph style — see content-plan discussion this session) + a plain-text `.md` download, both generated from `Shane_Maris_Resume.md` once it's saved into the repo (see below — not yet saved, pending Shane's confirmation).
+
+### Resume content — master source of truth, not yet applied (2026-09-05)
+
+Shane provided two files (`Resume_Audit_Rules.md`, `Shane_Maris_Resume.md`) establishing `Shane_Maris_Resume.md` as the locked, verified source of truth for resume/About content going forward. **Neither file has been saved into this repo yet** — only an audit was run (see chat transcript for the full report) comparing the rules against what's currently live. Open items before this content actually lands anywhere:
+- The MD file's own provenance note asks for a line-by-line read-through by Shane before it replaces anything live — confirm that's happened.
+- One real wording conflict flagged, not yet resolved: the governance-scope bullet. Live site says "Partner with Marketing and Technology... share... with Customer Experience and Innovation." The locked MD says "spanning UX, Marketing content design, Product, and Technology engineering pods, coordinating... under shared Digital Experience leadership." Different named functions, not obviously the same claim reworded — needs Shane's call, not an assumed overwrite.
+- The Press Room design system's tracked-out all-caps eyebrow labels (used site-wide: "CASE STUDY," "LEAD CASE STUDY," every chapter/section label) were flagged by the Audit Rules' own "AI-generated-design tells" checklist. Not acted on — that design came from Shane's own Claude Design work, not something to unilaterally change, but worth him knowing it was flagged.
+- Once confirmed, save `Shane_Maris_Resume.md` outside `public/` (a `/resume-source` or `/docs` folder was suggested) and copy its content verbatim into `/resume`, `/about`, and anywhere else referenced — no paraphrasing, per the file's own rule.
 
 ### Workflow question raised 2026-09-05, not yet resolved
 
