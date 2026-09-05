@@ -89,6 +89,71 @@
 }
 
 /* ============================================================
+   PRESS ROOM — new site-wide brand system (2026 redesign)
+   CMYK press-apparatus direction. Dark is the default; light is
+   the alternate, toggled via [data-pr-theme="light"] on <html>.
+   Deliberately namespaced (--pr-*) rather than reusing the tokens
+   above: the tokens above still drive /resume and the individual
+   work case-study pages, which are being reconciled in a later
+   pass and must not shift color/type out from under them.
+   Consumed by app/layout.tsx (header/footer chrome) and the Home,
+   Work index, About, and Contact pages.
+   ============================================================ */
+
+:root {
+  --pr-bg: #16161A; --pr-band: #101014; --pr-surface: #1E1E24; --pr-surface-2: #22222A; --pr-surface-disabled: #1A1A1F;
+  --pr-fg-strong: #F7F5F0; --pr-fg: #EDEBE4; --pr-lede: #A8A59D; --pr-muted: #8E8B84; --pr-disabled-fg: #6A675F;
+  --pr-rule: #2C2C33; --pr-rule-strong: #4A4A52; --pr-rule-faint: #3A3A42;
+  --pr-cyan: #00AEEF; --pr-magenta: #FF4FA3; --pr-accent-text: #F2E900; --pr-focus: #F2E900;
+  --pr-cta-bg: #F2E900; --pr-cta-fg: #16161A; --pr-cta-hover: #FFF84D; --pr-cta-active: #D9D200;
+  --pr-grid-line: rgba(0, 174, 239, 0.10);
+  --pr-glow-a: rgba(255, 79, 163, 0.22); --pr-glow-b: rgba(0, 174, 239, 0.20);
+  --pr-row-hover: #1C1C22; --pr-btn-hover: #24242B;
+}
+
+[data-pr-theme="light"] {
+  --pr-bg: #EFEDE6; --pr-band: #F5F3EC; --pr-surface: #FFFFFF; --pr-surface-2: #F3F1E9; --pr-surface-disabled: #E9E6DE;
+  --pr-fg-strong: #16161A; --pr-fg: #23231F; --pr-lede: #55524B; --pr-muted: #6B675F; --pr-disabled-fg: #9A968D;
+  --pr-rule: #D9D5CA; --pr-rule-strong: #A9A599; --pr-rule-faint: #C9C5B9;
+  --pr-cyan: #00647F; --pr-magenta: #C1006A; --pr-accent-text: #5A2A82; --pr-focus: #16161A;
+  --pr-cta-bg: #16161A; --pr-cta-fg: #F7F5F0; --pr-cta-hover: #33323A; --pr-cta-active: #000000;
+  --pr-grid-line: rgba(0, 100, 127, 0.12);
+  --pr-glow-a: rgba(193, 0, 106, 0.20); --pr-glow-b: rgba(0, 100, 127, 0.18);
+  --pr-row-hover: #F7F5EF; --pr-btn-hover: #E2DFD5;
+}
+
+@keyframes pr-drift-a {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  32%  { transform: translate3d(52px,-22px,0) scale(1.14); }
+  64%  { transform: translate3d(16px,26px,0) scale(0.93); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes pr-drift-b {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  28%  { transform: translate3d(-44px,22px,0) scale(1.1); }
+  61%  { transform: translate3d(30px,-16px,0) scale(0.95); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes pr-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes pr-tick { from { transform: scale(0.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.pr-nav-link:focus-visible,
+.pr-cta:focus-visible,
+.pr-btn-secondary:focus-visible,
+.pr-row-link:focus-visible,
+.pr-text-link:focus-visible,
+.pr-toggle-btn:focus-visible,
+.pr-input:focus-visible,
+.pr-mark-btn:focus-visible {
+  outline: 2px solid var(--pr-focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-root * { animation: none !important; }
+}
+
+/* ============================================================
    DARK MODE — token mirror only
    Toggled by ThemeToggle component in layout footer.
    Add `.theme-dark` to <html> to flip (no-FOUC script handles
@@ -302,4 +367,207 @@ img {
   .site-nav {
     gap: 1.5rem;
   }
+}
+
+/* ============================================================
+   PRESS ROOM — layout primitives
+   Fluid type via clamp() replaces the mock's 3-tier JS breakpoints
+   (that workaround existed because the design canvas can't use
+   media queries — real CSS can). Structural reflows (grid → stack)
+   still need an explicit breakpoint, so those stay as media queries.
+   ============================================================ */
+
+.pr-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 20px 4rem;
+  border-bottom: 1px solid var(--pr-rule);
+  background: var(--pr-bg);
+}
+
+.pr-theme-word { display: inline; }
+
+@media (max-width: 640px) {
+  .pr-header { padding: 14px 1.5rem; }
+  .pr-theme-word { display: none; }
+}
+
+/* Full-bleed dark ground for the Press Room pages. Body itself stays on
+   the old --color-base/--color-ink pair (see layout.tsx) so /resume and
+   the work case-study pages — which assume a light body — aren't left
+   with dark-on-dark text. */
+.pr-page {
+  background: var(--pr-bg);
+  color: var(--pr-fg);
+  min-height: 100vh;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+}
+
+.pr-main { max-width: 1040px; margin: 0 auto; padding: 0 2rem 64px; }
+
+.pr-hero-title { font-size: clamp(2.25rem, 2.2vw + 1.9rem, 4.125rem); }
+.pr-page-title { font-size: clamp(2.125rem, 1.6vw + 1.7rem, 3.25rem); }
+.pr-lead-title { font-size: clamp(1.5625rem, 0.9vw + 1.3rem, 2.125rem); }
+.pr-footer-title { font-size: clamp(1.5rem, 0.5vw + 1.35rem, 1.875rem); }
+.pr-lede { font-size: clamp(1rem, 0.2vw + 0.95rem, 1.125rem); }
+.pr-page-lede { font-size: clamp(0.96875rem, 0.15vw + 0.93rem, 1.0625rem); }
+
+.pr-lead-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+.pr-two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 26px 44px;
+}
+/* Compound selectors (not bare .pr-row-narrow) so this reliably beats
+   .pr-row-link's own `display: grid`, regardless of source order. */
+.pr-row-link.pr-row-narrow { display: none; }
+
+@media (max-width: 759px) {
+  .pr-lead-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .pr-lead-grid > :first-child { aspect-ratio: 16 / 9; }
+  .pr-two-col { grid-template-columns: minmax(0, 1fr); }
+  .pr-row-link.pr-row-wide { display: none; }
+  .pr-row-link.pr-row-narrow { display: flex; }
+}
+
+@media (max-width: 519px) {
+  .pr-main { padding: 0 1.25rem 64px; }
+}
+
+/* ============================================================
+   PRESS ROOM — interaction system
+   Ghost misregistration: on hover/focus, cyan+magenta duplicates of
+   the label flash offset from the real text, then settle back into
+   register over 320ms. Pure CSS (:hover/:focus-visible-triggered
+   keyframes) rather than JS state — the trigger class goes on the
+   whole clickable element so the flash fires from anywhere in its
+   hit area, not just when the cursor is exactly over the glyphs.
+   ============================================================ */
+
+@keyframes pr-ghost-c { from { transform: translate(-2.5px, -1.5px); } to { transform: translate(0, 0); } }
+@keyframes pr-ghost-m { from { transform: translate(2.5px, 1.5px); } to { transform: translate(0, 0); } }
+
+.pr-ghost { position: relative; display: inline-block; }
+.pr-ghost-c, .pr-ghost-m { position: absolute; left: 0; top: 0; pointer-events: none; transform: translate(0, 0); }
+.pr-ghost-c { color: var(--pr-cyan); }
+.pr-ghost-m { color: var(--pr-magenta); }
+.pr-ghost-real { position: relative; }
+
+.pr-hoverable:hover .pr-ghost-c, .pr-hoverable:focus-visible .pr-ghost-c {
+  animation: pr-ghost-c 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+}
+.pr-hoverable:hover .pr-ghost-m, .pr-hoverable:focus-visible .pr-ghost-m {
+  animation: pr-ghost-m 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+}
+
+.pr-nav-link {
+  position: relative;
+  padding: 7px 12px;
+  color: var(--pr-muted);
+  border-bottom: 2px solid transparent;
+  transition: color 0.14s;
+}
+.pr-nav-link:hover, .pr-nav-link:focus-visible { color: var(--pr-fg-strong); }
+.pr-nav-link[data-active="true"] { color: var(--pr-fg-strong); border-bottom-color: var(--pr-accent-text); }
+
+.pr-cta {
+  display: inline-block;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  background: var(--pr-cta-bg);
+  color: var(--pr-cta-fg);
+  padding: 12px 20px;
+  border: none;
+  transition: background-color 0.12s, transform 0.06s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.pr-cta:hover { background: var(--pr-cta-hover); }
+.pr-cta:active { transform: translateY(1px); background: var(--pr-cta-active); }
+.pr-cta:disabled { cursor: not-allowed; opacity: 0.7; background: var(--pr-rule-strong); color: var(--pr-surface); }
+
+.pr-btn-secondary {
+  display: inline-block;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  background: none;
+  border: 1px solid var(--pr-muted);
+  color: var(--pr-fg);
+  padding: 12px 20px;
+  transition: background-color 0.12s, border-color 0.12s, transform 0.06s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.pr-btn-secondary:hover, .pr-btn-secondary:focus-visible { background: var(--pr-btn-hover); border-color: var(--pr-fg-strong); }
+.pr-btn-secondary:active { transform: translateY(1px); }
+
+.pr-row-arrow { display: inline-block; transition: transform 140ms cubic-bezier(0.2, 0.85, 0.25, 1); }
+.pr-arrow-link:hover .pr-row-arrow, .pr-arrow-link:focus-visible .pr-row-arrow { transform: translateX(5px); }
+
+.pr-row-link {
+  display: grid;
+  gap: 20px;
+  align-items: baseline;
+  padding: 20px 12px 20px 0;
+  border-bottom: 1px solid var(--pr-rule);
+  transition: background-color 0.12s, padding-left 0.12s;
+  text-decoration: none;
+  color: inherit;
+}
+.pr-row-link:hover, .pr-row-link:focus-visible { background: var(--pr-row-hover); padding-left: 12px; }
+
+.pr-text-link {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--pr-fg);
+  border-bottom: 1px solid var(--pr-rule-strong);
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: border-color 0.12s, color 0.12s;
+}
+.pr-text-link:hover, .pr-text-link:focus-visible { color: var(--pr-accent-text); border-color: var(--pr-accent-text); }
+
+.pr-toggle-track {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  border: 1px solid var(--pr-rule-strong);
+  border-radius: 2px;
+  background: var(--pr-surface-2);
+  transition: background-color 0.18s, border-color 0.18s;
+  flex-shrink: 0;
+}
+.pr-toggle-mid {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  width: 1px;
+  background: var(--pr-rule-strong);
+  transform: translateX(18.5px);
+}
+.pr-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--pr-fg-strong);
+  transition: transform 220ms cubic-bezier(0.2, 0.85, 0.25, 1);
 }

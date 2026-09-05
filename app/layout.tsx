@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Archivo, IBM_Plex_Mono } from "next/font/google";
 import Link from "next/link";
-import Mark from "@/components/Mark";
-import NavLink from "@/components/NavLink";
-import ThemeToggle from "@/components/ThemeToggle";
+import PressMark from "@/components/press/PressMark";
+import PressNavLink from "@/components/press/PressNavLink";
+import PressThemeToggle from "@/components/press/PressThemeToggle";
+import SiteFooter from "@/components/press/SiteFooter";
 import "./globals.css";
 
+// Inter + Playfair remain loaded for /resume and the work case-study
+// pages, which keep the pre-redesign token system (see globals.css) and
+// are being reconciled to Press Room in a later pass.
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -15,6 +19,22 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+// Press Room typeface pair — Archivo (display/UI) + IBM Plex Mono (press
+// apparatus: eyebrows, nav, buttons, metadata).
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -62,48 +82,59 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${archivo.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        {/* No-FOUC: apply saved theme before React hydrates to prevent flash */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('theme-dark');}catch(e){}})();` }} />
+        {/* No-FOUC: apply saved Press Room theme before React hydrates.
+            Dark is the default — only a stored 'light' choice flips it. */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(localStorage.getItem('pr-theme')==='light')document.documentElement.setAttribute('data-pr-theme','light');}catch(e){}})();` }} />
       </head>
-      <body style={{ backgroundColor: "var(--color-base)", color: "var(--color-ink)", margin: 0 }}>
-        <header className="site-header">
+      {/* backgroundColor/color stay on the OLD tokens here — /resume and the
+          work case-study pages still use --color-ink on the assumption of a
+          light --color-base body. The Press Room pages (Home/Work/About/
+          Contact) paint their own full-bleed dark background via .pr-page;
+          see globals.css. */}
+      <body
+        className="pr-root"
+        style={{
+          backgroundColor: "var(--color-base)",
+          color: "var(--color-ink)",
+          margin: 0,
+        }}
+      >
+        <header className="pr-header">
           <Link
             href="/"
             aria-label="Shane Maris — home"
-            className="site-logo"
+            className="pr-mark-btn"
+            style={{ display: "flex", alignItems: "center", gap: 12, padding: 4, margin: -4, color: "inherit" }}
           >
-            <Mark size={22} />
-            <div className="site-logo-text">
-              <span style={{ fontFamily: "var(--font-playfair)", fontSize: "1.125rem", color: "var(--color-ink)", fontWeight: 500 }}>Shane Maris</span>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.6875rem", color: "var(--color-muted)" }}>Design Ops &amp; Systems Leader</span>
-            </div>
+            <PressMark size={24} />
+            <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em", color: "var(--pr-fg-strong)" }}>
+              Shane Maris
+            </span>
           </Link>
-          <nav className="site-nav">
-            <NavLink href="/work" icon="briefcase">Work</NavLink>
-            <NavLink href="/about" icon="user">About</NavLink>
-            <NavLink href="/contact" icon="envelope">Contact</NavLink>
+          <nav
+            style={{
+              display: "flex",
+              gap: 4,
+              alignItems: "center",
+              fontFamily: "var(--font-plex-mono), monospace",
+              fontSize: 12,
+              letterSpacing: "0.04em",
+            }}
+          >
+            <PressNavLink href="/work">Work</PressNavLink>
+            <PressNavLink href="/about">About</PressNavLink>
+            <PressNavLink href="/contact">Contact</PressNavLink>
+            <PressThemeToggle />
           </nav>
         </header>
         {children}
-        <footer style={{
-          padding: "1.5rem 4rem",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderTop: "1px solid var(--color-hairline)",
-        }}>
-          <p style={{
-            fontFamily: "var(--font-inter)",
-            fontSize: "0.75rem",
-            color: "var(--color-muted)",
-            margin: 0,
-          }}>
-            © 2026 Shane Maris
-          </p>
-          <ThemeToggle />
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );

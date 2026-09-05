@@ -1,16 +1,16 @@
 /**
- * Work index page — SERVER COMPONENT.
- * Reads taglines from content/work/*.md files via lib/parseProjectMd.ts.
- * Interactive card grid is delegated to components/ProjectCardGrid.tsx (client).
+ * Work index — SERVER COMPONENT. Typographic index, not a card grid:
+ * every project (including the featured Heart DS) is a row with title,
+ * tag metadata, and an arrow. The "editorial lead treatment" for Heart
+ * DS lives on the home page's Lead Case Study section instead — see
+ * app/page.tsx. Do NOT add 'use client' here (fs is used at request time
+ * elsewhere in this file's siblings); this page itself only reads from
+ * lib/projects.ts, but keep the server-component convention per HANDOFF.
  */
 
 import type { Metadata } from "next";
-import fs from 'fs';
-import path from 'path';
-import { Briefcase } from '@phosphor-icons/react/dist/ssr';
+import Link from 'next/link';
 import { portfolioProjects } from '@/lib/projects';
-import { getProjectTaglines } from '@/lib/parseProjectMd';
-import ProjectCardGrid from '@/components/ProjectCardGrid';
 
 export const metadata: Metadata = {
   title: "Work",
@@ -25,166 +25,53 @@ export const metadata: Metadata = {
     description: "Case studies — design systems, design ops, and product UX at Southwest Airlines.",
   },
 };
-import HoverLink from '@/components/HoverLink';
 
-const supportingProjects = portfolioProjects.filter(p => p.slug !== 'heart-design-system' && !p.hidden);
+const visibleProjects = portfolioProjects.filter(p => !p.hidden);
 
 export default function WorkPage() {
-  // Read taglines from MD files (server-side — fs is available here)
-  const taglines = getProjectTaglines(supportingProjects.map(p => p.slug));
-
-  // Featured image existence check
-  const hasFeaturedImg = fs.existsSync(
-    path.join(process.cwd(), 'public', 'work', 'heart-design-system', 'featured.jpg')
-  );
-
-  const cardData = supportingProjects.map(p => ({
-    slug: p.slug,
-    title: p.title,
-    tagline: taglines[p.slug] ?? '',
-    tags: p.tags,
-    imageSrc: fs.existsSync(
-      path.join(process.cwd(), 'public', 'work', p.slug, 'thumbnail.jpg')
-    ) ? `/work/${p.slug}/thumbnail.jpg` : undefined,
-  }));
-
   return (
-    <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
+    <main className="pr-page">
+    <div className="pr-main" style={{ paddingTop: 'clamp(36px, 5vw, 56px)' }}>
+      <h1 className="pr-page-title" style={{ margin: '0 0 14px', fontFamily: 'var(--font-archivo)', fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--pr-fg-strong)' }}>
+        Work
+      </h1>
+      <p className="pr-page-lede" style={{ margin: '0 0 36px', lineHeight: 1.65, color: 'var(--pr-lede)', maxWidth: '52ch' }}>
+        Systems and product work at Southwest Airlines.
+      </p>
 
-      {/* Featured Project: Heart DS */}
-      <section style={{ padding: '0 4rem' }}>
-        <div
-          style={{
-            marginBottom: '6rem',
-            padding: '4rem',
-            backgroundColor: 'var(--accent-tint-08)',
-            borderRadius: '12px',
-            border: '1px solid var(--accent-tint-15)',
-          }}
-        >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '3rem',
-              alignItems: 'center',
-            }}
-          >
-            {/* Featured image */}
-            <div
-              style={{
-                borderRadius: '8px',
-                aspectRatio: '1 / 0.85',
-                overflow: 'hidden',
-                ...(hasFeaturedImg
-                  ? {}
-                  : {
-                      backgroundColor: 'var(--accent-tint-10)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--color-muted)',
-                      fontSize: '0.875rem',
-                      fontFamily: 'var(--font-inter)',
-                    }),
-              }}
-            >
-              {hasFeaturedImg ? (
-                <img
-                  src="/work/heart-design-system/featured.jpg"
-                  alt="Heart Design System — Featured"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-              ) : (
-                'Heart DS — Featured Image'
-              )}
-            </div>
-
-            {/* Featured content */}
-            <div>
-              <p
-                style={{
-                  fontFamily: 'var(--font-inter)',
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-accent)',
-                  marginBottom: '1rem',
-                  marginTop: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  width: 'fit-content',
-                }}
-              >
-                <Briefcase size={14} weight="duotone" />
-                Featured Case Study
-              </p>
-
-              <h2
-                style={{
-                  fontFamily: 'var(--font-playfair)',
-                  fontSize: '3rem',
-                  color: 'var(--color-ink)',
-                  lineHeight: 1.1,
-                  marginBottom: '1.5rem',
-                  marginTop: 0,
-                }}
-              >
-                Heart Design System
-              </h2>
-
-              <p
-                style={{
-                  fontFamily: 'var(--font-inter)',
-                  fontSize: '1.125rem',
-                  color: 'var(--color-muted)',
-                  lineHeight: 1.75,
-                  marginBottom: '2rem',
-                  maxWidth: '28rem',
-                }}
-              >
-                From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.
-              </p>
-
-              <HoverLink
-                href="/work/heart-design-system"
-                hoverEffect="underglow"
-                style={{
-                  fontFamily: 'var(--font-inter)',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: 'var(--color-accent)',
-                  color: '#fff',
-                  borderRadius: 'var(--radius-sm)',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                }}
-              >
-                Read Full Case Study
-              </HoverLink>
-            </div>
-          </div>
+      {visibleProjects.length === 0 ? (
+        <p style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-muted)', borderTop: '1px solid var(--pr-rule)', paddingTop: 24 }}>
+          More case studies in progress.
+        </p>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {visibleProjects.map((p) => {
+            const meta = (p.tags ?? []).slice(0, 3).join(' · ').toUpperCase();
+            return (
+              <Link key={p.slug} href={`/work/${p.slug}`} className="pr-arrow-link pr-hoverable">
+                {/* Wide row */}
+                <span
+                  className="pr-row-link pr-row-wide"
+                  style={{ gridTemplateColumns: 'minmax(0,1fr) 220px 24px' }}
+                >
+                  <span style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--pr-fg-strong)' }}>{p.title}</span>
+                  <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 11, color: 'var(--pr-muted)', letterSpacing: '0.04em', textAlign: 'right' }}>{meta}</span>
+                  <span className="pr-row-arrow" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-accent-text)', textAlign: 'right' }} aria-hidden="true">→</span>
+                </span>
+                {/* Narrow row */}
+                <span className="pr-row-link pr-row-narrow" style={{ flexDirection: 'column', gap: 6, padding: '16px 10px 16px 0' }}>
+                  <span style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 14 }}>
+                    <span style={{ fontSize: 20, fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--pr-fg-strong)', minWidth: 0 }}>{p.title}</span>
+                    <span className="pr-row-arrow" style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: 13, color: 'var(--pr-accent-text)' }} aria-hidden="true">→</span>
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-plex-mono), monospace', fontSize: '10.5px', color: 'var(--pr-muted)', letterSpacing: '0.04em', minWidth: 0 }}>{meta}</span>
+                </span>
+              </Link>
+            );
+          })}
         </div>
-      </section>
-
-      {/* Supporting projects grid */}
-      <section style={{ padding: '0 4rem' }}>
-        <h3
-          style={{
-            fontFamily: 'var(--font-playfair)',
-            fontSize: '1.5rem',
-            color: 'var(--color-ink)',
-            marginBottom: '3rem',
-            marginTop: 0,
-          }}
-        >
-          Other Work
-        </h3>
-
-        <ProjectCardGrid projects={cardData} />
-      </section>
+      )}
+    </div>
     </main>
   );
 }

@@ -4,7 +4,7 @@ Read this before touching anything. **To-do list lives in the Cowork roadmap art
 
 The roadmap artifact is a Cowork artifact stored at `~/Documents/Claude/Artifacts/shane-portfolio-roadmap/index.html` — it is **not** in the portfolio folder. Open it via the Cowork artifacts panel, not the filesystem.
 
-Last updated: 2026-05-01.
+Last updated: 2026-05-11.
 
 ---
 
@@ -111,7 +111,7 @@ Three hover effects, all reading from CSS tokens:
 
 1. Don't refactor inline styles to Tailwind — Tailwind v4 theme isn't wired. Classes silently produce nothing.
 2. Don't use `text-base` as a color utility — it's a built-in font-size. Use `var(--color-base)`.
-3. **Never commit or push on Shane's behalf.** Suggest commands; he runs them.
+3. **Claude may commit and push directly** in a consolidated Claude Code session, gated by a clean `npm run build`. (Previously this was commands-only, suggested not run — that restriction traced back to a bad commit made through disconnected, non-build-gated chat sessions. Superseded 2026-09-05.)
 4. Don't introduce tokens without updating `app/globals.css` first and verifying in `npm run dev`.
 5. Don't touch SVGs in `/public/`. Use `components/Mark.tsx` for in-app brand surfaces.
 6. Don't assume Next.js conventions from pretrained knowledge — see AGENTS.md.
@@ -136,6 +136,16 @@ Recent good SHAs:
 ---
 
 ## Session history
+
+### 2026-05-11 — Hide non-HDS work items
+
+**What changed:** Four portfolio projects hidden from the `/work` grid pending content accuracy review.
+
+- **`lib/projects.ts`**: Added `hidden: true` to `homepage-v2`, `native-app-homepage`, `vision-decommission`, and `ife-starlink`. Heart Design System and its chapters are untouched and remain visible. All routes, MD files, and content are intact — flip `hidden: true` off any entry to restore it.
+
+**Commits**: Pending — Shane to run `git add lib/projects.ts && git commit -m "Hide non-HDS work items until content is polished" && git push` from `~/Documents/Personal/_Portfolio/shanemaris-portfolio`.
+
+---
 
 ### 2026-05-01 — Image wiring + HDS chapter route + asset spec
 
