@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import Expertise from "@/components/press/Expertise";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -34,8 +35,6 @@ const EXPERIENCE: ExperienceEntry[] = [
   { role: "Web Designer", span: "Feb 2012 to Apr 2014", copy: "Transitioned from contractor to FTE, supporting content creation across Southwest's Digital Channels. Managed production timelines, ensuring consistency and delivery across marketing and digital properties." },
   { role: "UX Designer (Contractor)", span: "Aug 2011 to Feb 2012", copy: "Integrated AirTran's digital presence into the Southwest ecosystem following acquisition. Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations." },
 ];
-
-const EXPERTISE = ["Design Ops", "Design Systems", "UI/UX Design", "UX Strategy", "Design Leadership", "App Design", "Agentic Design", "Prompt Engineering"];
 
 const EDUCATION = [
   { title: "B.A. Interactive Media Design", meta: "Art Institute of Dallas 2008 to 2011" },
@@ -124,15 +123,8 @@ export default function Resume() {
         </div>
 
         <SectionLabel>EXPERTISE</SectionLabel>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 10, marginBottom: 8 }}>
-          {EXPERTISE.map((skill) => (
-            <div
-              key={skill}
-              style={{ fontSize: '13.5px', color: 'var(--pr-fg)', padding: '10px 14px', border: '1px solid var(--pr-rule)' }}
-            >
-              {skill}
-            </div>
-          ))}
+        <div style={{ marginBottom: 8 }}>
+          <Expertise />
         </div>
 
         <SectionLabel>EDUCATION AND CERTIFICATIONS</SectionLabel>
