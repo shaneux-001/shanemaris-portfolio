@@ -216,12 +216,28 @@ Password security fix, project registry overhaul, content system migrated to MD 
 
 ## To-do
 
-**See the Cowork roadmap artifact** ("Shane Portfolio Roadmap") — it's the authoritative, prioritized list. Summary of open P1 items as of 2026-04-30:
+**This section is now the authoritative tracked list** (superseding the Cowork roadmap artifact reference above, which is stale). Updated 2026-09-05.
+
+### Design/build backlog — sequenced, phases below build on each other
+
+- [x] **Phase 1 — Quick fixes.** SiteFooter route list fixed (`/resume`, `/work/proof-before-progress` + chapters now get the new footer); "back to work" links added to both case-study landing pages; ghost misregistration hover effect made consistent across every button/link-as-button (theme toggle, all `pr-arrow-link` uses). Commit `a248ddb`.
+- [ ] **Phase 2 — About page restructure.** Remove Experience from `/about` (stays only on `/resume`); reorder to bio → Outside of Work → How I Work → Expertise; add "View Resume" link next to "Get in touch"; extract one shared `<Expertise>` component (icon-based) used identically by `/about` and `/resume`; make all its icons magenta (drop the accent/muted split).
+- [ ] **Phase 3 — Visual QA against the Claude Design source.** Two open items: (1) PressMark reads correctly in light mode but "broken" in dark mode per Shane — not yet diagnosed from screenshots alone, needs either a clearer description or direct file access (see workflow note below); (2) confirmed via code audit and already fixed as part of Phase 1: ghost-hover was missing from several buttons — if more interaction mismatches turn up, they land here too.
+- [ ] **Phase 4 — Favicon update.** Regenerate `logo-{16,32,64,128}.svg` / `apple-touch-icon.svg` from the (post-Phase-3-fixed) PressMark design. Blocked on Phase 3.
+- [ ] **Phase 5 — Tailwind v4 wiring.** Define a real `@theme` block mapping `--pr-*` tokens into Tailwind's theme; convert every Press Room page/component from inline `style={{}}` to utility classes. This is the one everyone's asked about twice now — see gotcha #1. Highest blast radius on this list; goes after Phases 2–4 so structure is final before the styling-syntax conversion.
+- [ ] **Phase 6 — Convert remaining old-system pages.** Heart Design System (landing + 4 chapters) and `/work/[slug]` (Figma Enterprise Migration + others) → Press Room theme, built directly in Tailwind classes from Phase 5. This is what resolves "still seeing the original theme" on those pages.
+- [ ] **Phase 7 — Resume downloads.** New one-page PDF in the Press Room theme + a plain-text `.md` download; **the `.docx` gets fully retired**, not kept alongside (Shane's call, 2026-09-05). Done last on purpose — no point finalizing a PDF layout before the visual system stops changing under it.
+
+### Workflow question raised 2026-09-05, not yet resolved
+
+Shane asked what the best long-term setup is for iterative small design-detail comparisons (vs. the full "Claude Design → Claude Code Web → patch file → apply locally" round-trip used for the big Press Room import). Recommended: run `/design-login` once from an interactive Claude Code session on this machine, which lets **this local session** read the Claude Design file directly (read-only) for pixel-level comparisons — no separate cloud session, no patch export, no GitHub push access needed. Reserve a full Claude Code Web session for large bulk builds only (like the original redesign import), not small tweaks. Still needs Shane to actually run `/design-login` for this to become available.
+
+### Older backlog (pre-2026-09-05, not yet revisited — carried forward, not dropped)
 
 - Confirm env vars in Vercel + `.env.local`
-- Resume date correction: SWA 2011 → 2012 (web + DOCX)
-- Contact form end-to-end test
+- Resume date correction: SWA 2011 → 2012 (web + DOCX) — unclear if still wanted; current site and this HANDOFF both say 2011 (Aug 2011 contractor start). Do not confuse with the *Lead UX Designer* Mar–Dec 2022 range, which Shane has separately confirmed is correct and should not be "fixed" back to Apr–Nov 2022.
+- Contact form end-to-end test with a real (non-placeholder) Resend API key — the honeypot/validation/error-handling code has been reviewed and built, not confirmed against a live send.
 - SEO + Open Graph (metadataBase warning is pre-existing)
-- Responsive / mobile QA
+- Responsive / mobile QA (spot-checked during the redesign, not a full audit)
 - Accessibility audit (WCAG 2.1 AA)
 - Stakeholder feedback pass before launch
