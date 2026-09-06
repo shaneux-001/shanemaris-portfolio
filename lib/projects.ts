@@ -23,6 +23,16 @@ interface ProjectConfig {
    */
   tags?: string[];
   hidden?: boolean; // If true, excluded from /work grid (route + MD still exist — flip to show anytime)
+
+  /**
+   * One-sentence description shown on the /work index row, since there
+   * are no thumbnail images there. Only needed for entries WITHOUT a
+   * content/work/[slug].md file (heart-design-system, proof-before-progress —
+   * both use dedicated TSX routes instead) — every MD-backed entry already
+   * has this exact content in its frontmatter `tagline` field, which
+   * app/work/page.tsx reads directly instead of duplicating it here.
+   */
+  description?: string;
 }
 
 /**
@@ -51,6 +61,7 @@ export const portfolioProjects: ProjectConfig[] = [
     title: 'Heart Design System',
     public: true, // Featured project
     tags: ['Leadership', 'DesignOps', 'Design System', 'Responsive', 'Native'],
+    description: 'How I built and scaled Heart Design System from a grassroots effort to enterprise-scale infrastructure across web, iOS, and Android at Southwest Airlines.',
   },
   // ----- Other work -----
   {
@@ -64,6 +75,7 @@ export const portfolioProjects: ProjectConfig[] = [
     title: 'Proof Before Progress',
     public: true,
     tags: ['DesignOps', 'Design System', 'AI'],
+    description: 'Why HDS needed a real docsite, how a company-wide reorg created room to fix it, and how one prototyped weekend closed out a $150K vendor decision.',
   },
   // ----- HDS adoption stories -----
   {
