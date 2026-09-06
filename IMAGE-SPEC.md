@@ -1,6 +1,8 @@
 # Image Asset Spec Sheet
 **shanemaris.com · Generated 2026-05-01**
 
+> ⚠️ **Partially stale as of 2026-09-06 — see [`ROADMAP.md`](ROADMAP.md) for current status.** The `fs.existsSync`-based wiring pattern and file-naming convention below are still how images work today. But: the `/work` index no longer has a card grid (it's a flat typographic list now — those image slots don't apply), and Heart Design System's + Proof Before Progress's chapter thumbnails changed from 4:3 to 16:9 (`aspect-video`) since this spec was written. The actual content-gathering task (real photos still needed) is still open — just don't trust the exact dimensions below without double-checking against the current layout first.
+
 All images live under `public/work/[slug]/`. The `public/work/` directory does not exist yet — create it before adding any files.
 
 ---

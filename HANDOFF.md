@@ -1,10 +1,8 @@
 # Handoff
 
-Read this before touching anything. **To-do list lives in the Cowork roadmap artifact** ("Shane Portfolio Roadmap") — this file is project brief + session history only.
+Read this before touching anything. **The task list lives in [`ROADMAP.md`](ROADMAP.md), not here** — this file is project brief, architecture reference, and session history only.
 
-The roadmap artifact is a Cowork artifact stored at `~/Documents/Claude/Artifacts/shane-portfolio-roadmap/index.html` — it is **not** in the portfolio folder. Open it via the Cowork artifacts panel, not the filesystem.
-
-Last updated: 2026-09-05.
+Last updated: 2026-09-06.
 
 ---
 
@@ -257,64 +255,13 @@ Added Design Principles section to `/about`, full lint pass, build verified. Com
 
 Password security fix, project registry overhaul, content system migrated to MD files, server component conversion of `/work` pages.
 
+
 ---
 
 ## To-do
 
-**This section is now the authoritative tracked list** (superseding the Cowork roadmap artifact reference above, which is stale). Updated 2026-09-05.
+**STOP — this section is stale. See [`ROADMAP.md`](ROADMAP.md) for the current, consolidated task list.**
 
-### Design/build backlog — sequenced, phases below build on each other
+That file supersedes everything that used to live here (the phase checklist, the older backlog, the Cowork roadmap artifact) — it merges all of it with the May-2026 spring roadmap and flags anything where an old doc's "done" claim conflicts with current reality. Don't plan off this section; it's frozen as of 2026-09-06.
 
-- [x] **Phase 1 — Quick fixes.** SiteFooter route list fixed (`/resume`, `/work/proof-before-progress` + chapters now get the new footer); "back to work" links added to both case-study landing pages; ghost misregistration hover effect made consistent across every button/link-as-button (theme toggle, all `pr-arrow-link` uses). Commit `a248ddb`.
-- [x] **Phase 2 — About page restructure.** Done — Experience removed from `/about` (stays only on `/resume`); reordered to bio → Outside of Work → How I Work → Expertise; "View Resume" secondary CTA added next to "Get in touch"; `components/press/Expertise.tsx` extracted as one shared icon-based component used identically by both pages, all icons magenta. Commit `3761a35`.
-- [x] **Phase 3 — Visual QA against the Claude Design source.** The PressMark "broken in dark mode" report — Shane rechecked (2026-09-05) and it either self-resolved or was a visual misread; his screenshots read 1:1 to both of us. Not treated as fixed-and-verified, just not currently reproducing — **if it shows up again during Shane's full QA pass once Phases 2–7 are done, reopen this.** Ghost-hover gaps were the other Phase 3 item and are confirmed fixed in Phase 1.
-- [x] **Phase 4 — Favicon update.** Done — `logo-{16,32,64,128}.svg` and `apple-touch-icon.svg` recolored to match PressMark exactly, each with a `#16161A` background so the transparent knockout centre reads correctly regardless of browser chrome. Also found and fixed a real pre-existing gap: the `logo-*.svg` files were never wired up anywhere (only `apple-touch-icon.svg` was referenced) — added `metadata.icons.icon` in `layout.tsx` so the site now has a working browser-tab favicon for the first time. Commit `7aedf7c`.
-- [x] **Phase 5 — Tailwind v4 wiring. DONE (2026-09-05).** Every Press Room page (Home, About, Work index, Contact, Resume, Proof Before Progress landing + 4 chapters) and shared component (PressCta, PressNavLink, PressThemeToggle, SiteFooter, Expertise) converted from inline `style={{}}` to Tailwind utility classes, plus the `layout.tsx` header. Commits `33337ec`, `f0fffef`, `9a80b82`. Old-system pages (`/work/[slug]`, Heart Design System) untouched — that's Phase 6.
-
-  **Two real architectural bugs found and fixed along the way — both worth understanding before touching this file again:**
-  1. `globals.css` imported `tailwindcss/preflight` + `tailwindcss/theme` + `tailwindcss/utilities` separately instead of the single `@import "tailwindcss"`. This skipped the default theme (`--spacing`, etc.) entirely, so scale-based utilities like `gap-2`/`mb-2` silently produced no CSS while token-backed ones (`border-pr-cyan`) worked fine. Fixed: added `@import "tailwindcss/theme"`.
-  2. Same modular-import issue, worse: `tailwindcss/preflight.css` isn't self-wrapped in `@layer base` the way the combined entry point wraps it — imported directly, it's **unlayered**, which in CSS means it beats *any* layered rule regardless of specificity, including Tailwind's own `@layer utilities`. Fixed: `@import "tailwindcss/preflight" layer(base);`. Separately, all the existing Press Room custom CSS (`.pr-page`, `.pr-cta`, `.pr-row-link`, etc. — was also unlayered) got wrapped in `@layer components` so utility classes can now actually override them when composed on the same element (that's the whole point of using Tailwind at all). Without this, a utility like `py-4` added next to `.pr-row-link` to override its padding would silently do nothing.
-
-  **If Phase 6 or anything later adds new custom CSS classes for the Press Room system, they need to go inside the existing `@layer components { ... }` block in globals.css, not as bare top-level rules** — otherwise they'll be unlayered and this same bug reappears.
-- [x] **Phase 6 — Convert remaining old-system pages. DONE (2026-09-05).** `/work/[slug]` (Figma Enterprise Migration + the 9 hidden entries) and Heart Design System (landing + 4 chapters) all converted to Press Room, built directly with Tailwind. Commits `cdba030`, `4b461c5`. `SiteFooter`'s routing flipped from an include-list to an exclude-list (`OLD_SYSTEM_PREFIXES`: `/labs`, `/particle-demo`, `/particle-test`) since Press Room now covers everything else. **Every page on the site is Press Room now except the /labs experiments.**
-- [x] **Phase 7 — Resume downloads. DONE (2026-09-05).** Old `.docx` deleted (recoverable via git history), replaced with a generated one-page PDF + plain-text `.md`, both wired up on `/resume`. See the new session-history entry below for the full build; `scripts/` in the file map above documents the pipeline.
-
-### Resume content — master source of truth LOCKED AND APPLIED (2026-09-05)
-
-After Shane's full line-by-line read-through and a joint fact-check sweep against `Resume_Audit_Rules.md`, `resume-source/Shane_Maris_Resume.md` is now locked and its content is live on `/resume` verbatim (commit `b0cb5b8`). Summary of what changed and why, for anyone auditing this later:
-- **Governance-scope bullet, UX Community of Practice attribution/wording, Certifications structure, and the "Figma-based" qualifier** were all corrected during the audit (each involved Shane's direct input, not an assumed fix) before being applied. Full reasoning for each is in the git log around this date if needed — not repeated here now that it's resolved.
-- **Vince Bratton** (named colleague, HDS Chapter 2) anonymized; **Dan Mall** (HDS Chapter 1, public figure) confirmed fine to keep named.
-- **`ife-starlink`** confirmed a separate, more recent project from the resume's "original WiFi/IFE Portal" — no conflict.
-- **Expertise/Skills** component now carries the master's full 15-skill list (Option B — nothing compressed away), no icons.
-- **The personal-voice bio stays unchanged on purpose** — Shane confirmed it and the master's resume-style Summary serve different purposes. The Summary is reserved for Phase 7's PDF/.md exports, not this page.
-- Full HDS-chapters + hidden-case-study sweep came back clean otherwise.
-- **Still open, not acted on:** the Press Room design system's tracked-out all-caps eyebrow labels were flagged by the Audit Rules' own "AI-generated-design tells" checklist. That design came from Shane's own Claude Design work, not something to unilaterally change, but worth knowing it was flagged.
-- **Rule going forward:** if `resume-source/Shane_Maris_Resume.md` and any live page ever disagree, the file wins — update the page to match it, don't edit the page and call it done.
-
-### Workflow question raised 2026-09-05 — RESOLVED 2026-09-06
-
-Shane asked what the best long-term setup is for iterative small design-detail comparisons. Recommended running `/design-login` once from an interactive terminal session — he's now done that (needed installing the standalone CLI via `npm install -g @anthropic-ai/claude-code` first, since the desktop app's Code tab doesn't expose it). Available for future pixel-level comparisons against the Claude Design source.
-
-### Open items — check/fix tomorrow (consolidated 2026-09-06, night session ended here)
-
-**Decisions only Shane can make:**
-- Dark-mode **hover** ghost effect (nav links, secondary button) still reads as almost unnoticeable — same magnitude issue the on-load heading effect had (2.5px/320ms, never bumped). Asked whether to apply the same kind of bump used for on-load; no answer yet as of this write-up.
-- Resume date question: SWA 2011 → 2012 (web + docx-era content) — unclear if still wanted; current site says 2011 (Aug 2011 contractor start). Don't confuse with the *Lead UX Designer* Mar–Dec 2022 range, which Shane separately confirmed is correct and should NOT be "fixed" back to Apr–Nov 2022.
-- Whether the master `.md`'s fuller contact/summary/experience should get its own spacing pass — only the PDF got one tonight, per Shane's explicit scoping ("these edits apply to the pdf only").
-- Custom brand fonts (Archivo/IBM Plex Mono) in the generated PDF — currently falls back to Helvetica/Courier after a fontkit crash on the downloaded TTFs (documented trade-off in `scripts/generate-resume-pdf.tsx`). Revisit only if exact brand-font fidelity in the PDF actually matters to Shane.
-
-**Needs Shane's own action (can't be checked from in here):**
-- Confirm `RESEND_API_KEY`, `NEXT_PUBLIC_PORTFOLIO_PASSWORD`, `NEXT_PUBLIC_OASIS_PASSWORD` are actually set in the Vercel dashboard (Settings → Environment Variables) — local `.env.local` doesn't carry over to prod.
-- Contact form end-to-end test with a real Resend send — code's reviewed and built, never confirmed against an actual delivered email.
-- His own proofread/AI-slop-detection pass (Shane's doing this with his own tools) before this goes in front of anyone.
-
-**Still just placeholder content, not a bug:**
-- Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards — still rendering the diagonal-stripe placeholder pattern with a filename label (e.g. `chapter-1-thumb.jpg`), same `fs.existsSync` pattern as everywhere else on the site — drop real files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` and they'll pick up automatically, no code change needed.
-
-**Not yet done at all:**
-- Change the contact form success message from "SENT — I'll reply within a day." to 48 hours (`app/contact/page.tsx:141`) — Shane's current bandwidth doesn't support a same-day-ish turnaround promise.
-- The 3 remaining `npm audit` high-severity vulnerabilities — fixing them requires `--force`, which would bump Next.js `16.2.4` outside the stated version range. Flagged only, no action taken.
-- Full responsive/mobile QA pass — tonight's changes were spot-checked at specific widths as each shipped, not a systematic pass across the whole site.
-- Accessibility audit (WCAG 2.1 AA) — not started.
-- The Press Room design system's tracked-out all-caps eyebrow labels were flagged by `Resume_Audit_Rules.md`'s own "AI-generated-design tells" checklist (2026-09-05 audit). That design came from Shane's own Claude Design work, not something to unilaterally change — just worth knowing it was flagged, in case it comes up during his slop-detection pass.
-- The PressMark "broken in dark mode" report from Phase 3 — self-resolved or was a visual misread, not reproducing as of 2026-09-05. If it shows up again during a full QA pass, reopen it.
+Everything above this line (stack, gotchas, file map, style approach, server/client boundaries, interaction patterns, bear traps, safety net, session history) is still accurate and still the right place to look for how the codebase actually works.
