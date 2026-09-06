@@ -5,8 +5,8 @@
  * master list gets its own chip rather than compressing multi-part skills
  * into shorter phrasing, so nothing gets lost).
  *
- * Icons dropped in this pass — with 15 skills including several abstract
- * ones ("Federated Contribution Models," "Executive Communication"),
+ * Icons dropped in this pass — with 14 skills including several abstract
+ * ones ("Design System Governance," "Executive Communication"),
  * finding an icon that actually fits each concept stopped being
  * meaningful, and Shane's stated intent was closer to a plain, scannable
  * LinkedIn-style skill list anyway. Simple text chips instead.
@@ -19,7 +19,6 @@ const EXPERTISE = [
   "Figma Governance",
   "Cross-Functional Leadership",
   "Design System Governance",
-  "Federated Contribution Models",
   "AI Tooling Strategy",
   "AI Adoption",
   "UX Research & Strategy",
@@ -27,7 +26,7 @@ const EXPERTISE = [
   "Executive Communication",
   "Mentoring",
   "Accessibility (WCAG)",
-  "Design Token Systems",
+  "Prompt Engineering",
 ];
 
 export default function Expertise() {
