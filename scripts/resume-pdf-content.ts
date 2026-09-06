@@ -87,7 +87,7 @@ export const CERTIFICATIONS = [
 
 export const SKILLS = [
   "Design Ops", "Design Systems", "Figma Enterprise Administration", "Figma Governance",
-  "Cross-Functional Leadership", "Design System Governance", "Federated Contribution Models",
+  "Cross-Functional Leadership", "Design System Governance",
   "AI Tooling Strategy", "AI Adoption", "UX Research & Strategy", "Stakeholder Management",
-  "Executive Communication", "Mentoring", "Accessibility (WCAG)", "Design Token Systems",
+  "Executive Communication", "Mentoring", "Accessibility (WCAG)", "Prompt Engineering",
 ];
