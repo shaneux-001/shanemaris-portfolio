@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
 import Expertise from "@/components/press/Expertise";
+import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -111,10 +112,14 @@ export default function Resume() {
           Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com ·{" "}
           <a href="https://www.linkedin.com/in/shanemaris/" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">linkedin.com/in/shanemaris</a>
         </p>
-        {/* Download link removed 2026-09-05 — the .docx it pointed to was retired
-            (wrong degree name, "UX design team" language, stale numbers). Phase 7
-            replaces it with a PDF + .md generated from the locked master content;
-            this link comes back once that exists. */}
+        <div className="flex flex-wrap items-center gap-3 mb-1">
+          <a href="/Shane_Maris_Resume.pdf" download className="pr-cta pr-hoverable">
+            <Ghost>Download Resume (PDF)</Ghost>
+          </a>
+          <a href="/Shane_Maris_Resume.md" download className="pr-btn-secondary pr-hoverable">
+            <Ghost>Plain text (.md)</Ghost>
+          </a>
+        </div>
 
         <div className="mt-8 max-w-[62ch]">
           <p className="text-[15px] text-pr-lede leading-[1.75] m-0 mb-3.5">
