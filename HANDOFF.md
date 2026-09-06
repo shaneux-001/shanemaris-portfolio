@@ -291,16 +291,29 @@ After Shane's full line-by-line read-through and a joint fact-check sweep agains
 - **Still open, not acted on:** the Press Room design system's tracked-out all-caps eyebrow labels were flagged by the Audit Rules' own "AI-generated-design tells" checklist. That design came from Shane's own Claude Design work, not something to unilaterally change, but worth knowing it was flagged.
 - **Rule going forward:** if `resume-source/Shane_Maris_Resume.md` and any live page ever disagree, the file wins — update the page to match it, don't edit the page and call it done.
 
-### Workflow question raised 2026-09-05, not yet resolved
+### Workflow question raised 2026-09-05 — RESOLVED 2026-09-06
 
-Shane asked what the best long-term setup is for iterative small design-detail comparisons (vs. the full "Claude Design → Claude Code Web → patch file → apply locally" round-trip used for the big Press Room import). Recommended: run `/design-login` once from an interactive Claude Code session on this machine, which lets **this local session** read the Claude Design file directly (read-only) for pixel-level comparisons — no separate cloud session, no patch export, no GitHub push access needed. Reserve a full Claude Code Web session for large bulk builds only (like the original redesign import), not small tweaks. Still needs Shane to actually run `/design-login` for this to become available.
+Shane asked what the best long-term setup is for iterative small design-detail comparisons. Recommended running `/design-login` once from an interactive terminal session — he's now done that (needed installing the standalone CLI via `npm install -g @anthropic-ai/claude-code` first, since the desktop app's Code tab doesn't expose it). Available for future pixel-level comparisons against the Claude Design source.
 
-### Older backlog (pre-2026-09-05, not yet revisited — carried forward, not dropped)
+### Open items — check/fix tomorrow (consolidated 2026-09-06, night session ended here)
 
-- Confirm env vars in Vercel + `.env.local`
-- Resume date correction: SWA 2011 → 2012 (web + DOCX) — unclear if still wanted; current site and this HANDOFF both say 2011 (Aug 2011 contractor start). Do not confuse with the *Lead UX Designer* Mar–Dec 2022 range, which Shane has separately confirmed is correct and should not be "fixed" back to Apr–Nov 2022.
-- Contact form end-to-end test with a real (non-placeholder) Resend API key — the honeypot/validation/error-handling code has been reviewed and built, not confirmed against a live send.
-- SEO + Open Graph (metadataBase warning is pre-existing)
-- Responsive / mobile QA (spot-checked during the redesign, not a full audit)
-- Accessibility audit (WCAG 2.1 AA)
-- Stakeholder feedback pass before launch
+**Decisions only Shane can make:**
+- Dark-mode **hover** ghost effect (nav links, secondary button) still reads as almost unnoticeable — same magnitude issue the on-load heading effect had (2.5px/320ms, never bumped). Asked whether to apply the same kind of bump used for on-load; no answer yet as of this write-up.
+- Resume date question: SWA 2011 → 2012 (web + docx-era content) — unclear if still wanted; current site says 2011 (Aug 2011 contractor start). Don't confuse with the *Lead UX Designer* Mar–Dec 2022 range, which Shane separately confirmed is correct and should NOT be "fixed" back to Apr–Nov 2022.
+- Whether the master `.md`'s fuller contact/summary/experience should get its own spacing pass — only the PDF got one tonight, per Shane's explicit scoping ("these edits apply to the pdf only").
+- Custom brand fonts (Archivo/IBM Plex Mono) in the generated PDF — currently falls back to Helvetica/Courier after a fontkit crash on the downloaded TTFs (documented trade-off in `scripts/generate-resume-pdf.tsx`). Revisit only if exact brand-font fidelity in the PDF actually matters to Shane.
+
+**Needs Shane's own action (can't be checked from in here):**
+- Confirm `RESEND_API_KEY`, `NEXT_PUBLIC_PORTFOLIO_PASSWORD`, `NEXT_PUBLIC_OASIS_PASSWORD` are actually set in the Vercel dashboard (Settings → Environment Variables) — local `.env.local` doesn't carry over to prod.
+- Contact form end-to-end test with a real Resend send — code's reviewed and built, never confirmed against an actual delivered email.
+- His own proofread/AI-slop-detection pass (Shane's doing this with his own tools) before this goes in front of anyone.
+
+**Still just placeholder content, not a bug:**
+- Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards — still rendering the diagonal-stripe placeholder pattern with a filename label (e.g. `chapter-1-thumb.jpg`), same `fs.existsSync` pattern as everywhere else on the site — drop real files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` and they'll pick up automatically, no code change needed.
+
+**Not yet done at all:**
+- The 3 remaining `npm audit` high-severity vulnerabilities — fixing them requires `--force`, which would bump Next.js `16.2.4` outside the stated version range. Flagged only, no action taken.
+- Full responsive/mobile QA pass — tonight's changes were spot-checked at specific widths as each shipped, not a systematic pass across the whole site.
+- Accessibility audit (WCAG 2.1 AA) — not started.
+- The Press Room design system's tracked-out all-caps eyebrow labels were flagged by `Resume_Audit_Rules.md`'s own "AI-generated-design tells" checklist (2026-09-05 audit). That design came from Shane's own Claude Design work, not something to unilaterally change — just worth knowing it was flagged, in case it comes up during his slop-detection pass.
+- The PressMark "broken in dark mode" report from Phase 3 — self-resolved or was a visual misread, not reproducing as of 2026-09-05. If it shows up again during a full QA pass, reopen it.
