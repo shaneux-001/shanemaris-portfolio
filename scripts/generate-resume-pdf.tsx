@@ -26,9 +26,20 @@ import React from "react";
 import path from "path";
 import { fileURLToPath } from "url";
 import { Document, Page, Text, View, StyleSheet, Font, Link, renderToFile } from "@react-pdf/renderer";
-import { NAME, TITLE, CONTACT, SUMMARY, EXPERIENCE, EDUCATION, CERTIFICATIONS, SKILLS } from "./resume-pdf-content";
+import { NAME, TITLE, EXPERIENCE, EDUCATION, CERTIFICATIONS, SKILLS } from "./resume-pdf-content";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// PDF-only overrides (2026-09-05, per Shane's review of the first draft) —
+// the .md keeps the fuller CONTACT/SUMMARY from resume-pdf-content.ts.
+// Not shared with generate-resume-md.ts on purpose.
+const CONTACT_PDF = "Dallas, TX · 214.546.3047 · contact@shanemaris.com";
+const SUMMARY_PDF = "Design systems and design ops leader with over a decade at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system across web and native platforms.";
+// Dropped for space, per Shane's rule: cut oldest roles first, absolute
+// cutoff is 10 years back. "UX Designer (Contractor)" (Aug 2011–Feb 2012)
+// is the only role entirely outside that window — cut here, kept in the
+// .md's full EXPERIENCE list.
+const EXPERIENCE_PDF = EXPERIENCE.filter((e) => e.role !== "UX Designer (Contractor)");
 
 // NOTE (2026-09-05): tried registering the actual Archivo/IBM Plex Mono TTFs
 // (downloaded to resume-source/fonts/ from Google Fonts) to match the site's
@@ -61,8 +72,8 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     fontSize: 9.5,
     color: color.lede,
-    paddingTop: 26,
-    paddingBottom: 26,
+    paddingTop: 28,
+    paddingBottom: 24,
     paddingHorizontal: 40,
   },
   name: {
@@ -87,8 +98,8 @@ const styles = StyleSheet.create({
     fontSize: 9.5,
     lineHeight: 1.5,
     color: color.lede,
-    marginBottom: 9,
-    paddingBottom: 8,
+    marginBottom: 11,
+    paddingBottom: 10,
     borderBottom: `1pt solid ${color.rule}`,
   },
   sectionLabel: {
@@ -119,7 +130,7 @@ const styles = StyleSheet.create({
   },
   bulletRow: {
     flexDirection: "row",
-    marginBottom: 2,
+    marginBottom: 5,
     paddingRight: 4,
   },
   bulletDot: {
@@ -130,14 +141,14 @@ const styles = StyleSheet.create({
   bulletText: {
     flex: 1,
     fontSize: 9,
-    lineHeight: 1.32,
+    lineHeight: 1.48,
     color: color.lede,
   },
   experienceBlock: {
-    marginBottom: 6,
+    marginBottom: 9,
   },
   eduRow: {
-    marginBottom: 4,
+    marginBottom: 6,
   },
   eduTitle: {
     fontFamily: "Helvetica",
@@ -177,14 +188,14 @@ function ResumeDocument() {
         <Text style={styles.name}>{NAME}</Text>
         <Text style={styles.title}>{TITLE}</Text>
         <Text style={styles.contact}>
-          Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com ·{" "}
+          {CONTACT_PDF} ·{" "}
           <Link src="https://www.linkedin.com/in/shanemaris/" style={styles.link}>linkedin.com/in/shanemaris</Link>
         </Text>
 
-        <Text style={styles.summary}>{SUMMARY}</Text>
+        <Text style={styles.summary}>{SUMMARY_PDF}</Text>
 
         <Text style={styles.sectionLabel}>EXPERIENCE — SOUTHWEST AIRLINES, 2011 TO PRESENT</Text>
-        {EXPERIENCE.map((e) => (
+        {EXPERIENCE_PDF.map((e) => (
           <View key={e.role} style={styles.experienceBlock} wrap={false}>
             <View style={styles.roleRow}>
               <Text style={styles.roleTitle}>{e.role}</Text>
