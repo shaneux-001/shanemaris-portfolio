@@ -56,13 +56,13 @@ export default function HeartDSLanding() {
           Four chapters tell the story
         </h2>
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
           {CHAPTERS.map((chapter) => {
             const thumbPath = path.join(workDir, `chapter-${chapter.number}-thumb.jpg`);
             const hasThumb = fs.existsSync(thumbPath);
             return (
               <Link key={chapter.number} href={`/work/heart-design-system/chapter-${chapter.number}`} className="pr-card">
-                <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+                <div className="relative aspect-video mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
                   {hasThumb ? (
                     <img
                       src={`/work/heart-design-system/chapter-${chapter.number}-thumb.jpg`}
