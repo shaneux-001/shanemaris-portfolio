@@ -51,12 +51,31 @@ export default function Contact() {
   return (
     <main className="pr-page">
     <div className="pr-main pt-[clamp(36px,5vw,56px)]">
-      <h1 className="pr-page-title m-0 mb-4 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
-        Get in touch
-      </h1>
-      <p className="pr-page-lede m-0 mb-[34px] leading-[1.65] text-pr-lede max-w-[48ch]">
-        Have a project, a question, or just want to talk shop about design systems? I&apos;d love to hear from you.
-      </p>
+      <div className="relative overflow-hidden pb-2">
+        <div aria-hidden="true" className="absolute inset-0 grid grid-cols-6 pointer-events-none">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="border-r border-pr-grid-line" />
+          ))}
+          <div />
+        </div>
+        {/* Full-bleed wrapper — see app/page.tsx for why these can't just sit
+            inside .pr-main's padded box (hard-clipped fade otherwise). */}
+        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 w-screen h-full pointer-events-none">
+          <div
+            className="absolute left-[60px] top-[10px] w-[470px] h-[210px] blur-[30px] will-change-transform [animation:pr-drift-a_14s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
+          />
+          <div
+            className="absolute left-[280px] top-[90px] w-[430px] h-[195px] blur-[30px] will-change-transform [animation:pr-drift-b_18s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
+          />
+        </div>
+
+        <h1 className="relative pr-page-title m-0 mb-4 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
+          <Ghost trigger="load">Get in touch</Ghost>
+        </h1>
+        <p className="relative pr-page-lede m-0 mb-[34px] leading-[1.65] text-pr-lede max-w-[48ch]">
+          Have a project, a question, or just want to talk shop about design systems? I&apos;d love to hear from you.
+        </p>
+      </div>
 
       <form onSubmit={handleSubmit} noValidate className="max-w-[520px] flex flex-col gap-5">
         {/* Honeypot — visually hidden, skipped by real users, off the tab order */}
