@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:resume": "esbuild scripts/generate-resume-pdf.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=scripts/.generated-pdf-bundle.mjs && node scripts/.generated-pdf-bundle.mjs && tsx scripts/generate-resume-md.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
@@ -16,13 +17,16 @@
     "resend": "^6.12.2"
   },
   "devDependencies": {
+    "@react-pdf/renderer": "^4.9.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "^0.25.12",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }
