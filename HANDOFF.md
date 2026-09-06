@@ -28,7 +28,7 @@ Last updated: 2026-09-05.
 1. **Tailwind v4 IS now wired** (Phase 5, 2026-09-05) — this was previously a known gap, now resolved. Every Press Room page/component uses Tailwind utility classes via a `@theme inline` block in `app/globals.css` mapping `--pr-*` tokens into Tailwind's theme. Two non-obvious things that made this work, both still load-bearing:
    - `app/globals.css` uses modular imports (`tailwindcss/preflight`, `tailwindcss/theme`, `tailwindcss/utilities`) instead of the single `@import "tailwindcss"`. The theme import is required or scale-based utilities (`gap-2`, `mb-2`) silently no-op. Preflight must be imported as `layer(base)` explicitly, or its reset becomes unlayered and beats everything, including Tailwind's own utilities.
    - All Press Room custom CSS (`.pr-page`, `.pr-cta`, `.pr-row-link`, etc.) lives inside `@layer components` in `globals.css`. **Any new custom CSS class for this system must go inside that block**, not as a bare top-level rule — otherwise it becomes unlayered and Tailwind utility classes can never override it when composed on the same element.
-   - The old `--color-*` token set + old CSS (blockquotes, vertical rhythm, etc.) still exists in `globals.css` for `/labs`, `/particle-demo`, `/particle-test` (and their shared components `LabsHeader.tsx`, `PasswordGate.tsx`, `ThemeToggle.tsx`) — that's the only surviving old-system corner as of Phase 6 (2026-09-05). Everything else on the site is Press Room now.
+   - The old `--color-*` token set + old CSS (blockquotes, vertical rhythm, etc.) still exists in `globals.css` for `/particle-demo` and `/particle-test` only (as of 2026-09-06 — `/labs` was converted to Press Room, see below). `PasswordGate.tsx` and `ThemeToggle.tsx` remain old-system components used by what's left.
 
 2. **`text-base` is Tailwind's font-size utility** (`font-size: 1rem`) as well as a Tailwind color-scale name collision risk. Never use it as a color. Use `var(--pr-fg)` / `text-pr-fg` for the Press Room base color, or `var(--color-base)` for the old `/labs`-only system.
 
@@ -43,7 +43,7 @@ Last updated: 2026-09-05.
 ```
 app/
   globals.css          ← BOTH token sets live here: old --color-* (v0.2, now /labs-only) and new --pr-* (Press Room). Press Room custom CSS wrapped in @layer components; see gotcha #1.
-  layout.tsx           ← root layout + shared dark header/footer (PressMark, PressNavLink, PressThemeToggle, SiteFooter) — site-wide, all pages
+  layout.tsx           ← root layout + shared footer (SiteFooter) + shared header (SiteHeader, NEW 2026-09-06 — extracted from inline markup so it can opt out per-route the same way SiteFooter already does)
   page.tsx             ← home (use client — Konami code) — Press Room theme, Tailwind utilities
   about/page.tsx       ← server component; Press Room theme, Tailwind utilities. Order: bio → Outside of Work → How I Work → Expertise (no Experience — that's resume-only)
   contact/page.tsx     ← client component (form state); Press Room theme, Tailwind utilities; posts to /api/contact
@@ -53,14 +53,14 @@ app/
     [slug]/page.tsx    ← SERVER COMPONENT — reads case study MD, Press Room theme (converted Phase 6, 2026-09-05). Do NOT add 'use client'.
     heart-design-system/ ← multi-chapter case study, Press Room theme (converted Phase 6, 2026-09-05)
     proof-before-progress/ ← multi-chapter case study, dedicated TSX routes mirroring HDS's structure, Press Room theme (server components, fs.existsSync image pattern)
-  labs/page.tsx        ← Konami-gated; NOT aligned to design kit (low priority) — the one surviving old-system page
+  labs/page.tsx        ← Konami-gated; converted to Press Room (2026-09-06) — its own LabsHeader (mark links to /labs, not /), zero-state + project grid restyled to match /work's template
   api/contact/route.ts ← contact form API handler — honeypot + validation + Resend {error} check
 
 components/
-  press/               ← PressMark, PressNavLink, PressCta (primary/secondary variant), Ghost (misregistration hover effect), PressThemeToggle, SiteFooter, Expertise (shared by about + resume)
-  PasswordGate.tsx     ← /labs only, old system
-  LabsHeader.tsx       ← /labs only, old system
-  ThemeToggle.tsx      ← /labs's old dark-mode toggle (distinct from PressThemeToggle)
+  press/               ← PressMark, PressNavLink, PressCta (primary/secondary variant), Ghost (misregistration hover effect — supports trigger="hover" (default) or trigger="load", NEW 2026-09-06, for the H1-H3 page-load glitch), PressThemeToggle, SiteHeader (NEW 2026-09-06, see layout.tsx above), SiteFooter, Expertise (shared by about + resume)
+  PasswordGate.tsx     ← /labs only, old system (still imported in labs/page.tsx but not actually rendered — pre-existing, not touched)
+  LabsHeader.tsx       ← /labs's own header, converted to Press Room (2026-09-06) — same visual system as SiteHeader but the mark/wordmark link to /labs with a "(labs)" tag, plus a "Main Site" nav link back to /
+  ThemeToggle.tsx      ← /particle-demo /particle-test's old dark-mode toggle (distinct from PressThemeToggle) — /labs no longer uses this, it's Press Room now
   ParticleBackground*.tsx ← canvas variants for /labs; use literal rgba() (canvas can't read CSS vars)
 
   (Mark.tsx, NavLink.tsx, ProjectCardGrid.tsx, HoverLink.tsx, HoverAnchor.tsx all deleted 2026-09-05 — confirmed unused once their last call sites were converted to Press Room)
@@ -114,7 +114,7 @@ CLAUDE.md              ← imports AGENTS.md
 
 ## Bear traps
 
-1. Tailwind v4 IS wired for Press Room (everywhere except /labs) — see gotcha #1. New custom CSS for this system must go inside `@layer components` in `globals.css`, or overrides silently stop working.
+1. Tailwind v4 IS wired for Press Room (everywhere now — `/labs` included as of 2026-09-06) — see gotcha #1. New custom CSS for this system must go inside `@layer components` in `globals.css`, or overrides silently stop working.
 2. Don't use `text-base` as a color utility — it's a built-in font-size. Use `text-pr-fg` (Press Room) or `var(--color-base)` (/labs only).
 3. **Claude may commit and push directly** in a consolidated Claude Code session, gated by a clean `npm run build`. (Previously this was commands-only, suggested not run — that restriction traced back to a bad commit made through disconnected, non-build-gated chat sessions. Superseded 2026-09-05.)
 4. Don't introduce tokens without updating `app/globals.css` first and verifying in `npm run dev`.
@@ -127,6 +127,7 @@ CLAUDE.md              ← imports AGENTS.md
 11. **Don't create `content/work/heart-design-system.md` or `content/work/proof-before-progress.md`** — both use dedicated TSX routes with chapter-N subfolders. The `[slug]` catch-all never fires for either. Content lives directly in the chapter page components.
 12. **Image wiring pattern**: `fs.existsSync` + conditional `<img>` (Press Room's own placeholder style: `repeating-linear-gradient` background + filename label when missing). Used consistently everywhere now, including Heart Design System's chapters (converted from the old client-side `onError` fallback pattern in Phase 6). Never use `fs` in a client component.
 13. **`lib/parseProjectMd.ts` does not parse markdown links.** `[text](url)` in a `content/work/*.md` file renders as literal bracket-and-paren text, not a clickable link. Write plain URLs instead, or extend the parser first if real hyperlinks are needed.
+14. **The Browser-pane preview tool reports `window.innerWidth` as `0` (and screenshots return stale/blank frames) whenever the pane is hidden from the user's view** — not a site bug, an artifact of the pane not being rendered. If a screenshot looks blank or a responsive check gives nonsensical results, call `resize_window` with an explicit `width`/`height` (not just the `desktop` preset) to force real layout dimensions regardless of visibility, and prefer DOM-based checks (`getBoundingClientRect`, `getComputedStyle` via `javascript_tool`) over screenshots when you can't confirm the pane is actually in view.
 
 ---
 
@@ -137,7 +138,8 @@ git stash --include-untracked && git reset --hard <sha>
 ```
 
 Recent good SHAs:
-- `391a8ba` — Resume download buttons wired up on /resume ← **last known good main**
+- `9bf4e18` — Design polish punch list: /labs footer parity fix (final commit of the round) ← **last known good main**
+- `391a8ba` — Resume download buttons wired up on /resume
 - `5e97389` — Content pass: bio, resume achievements, Design Principles reorder, two new case studies
 - `9b736e0` — Merge press-room-redesign: site-wide dark/light theme + resume restyle
 - `61cb569` — QA pass: fix lint errors, add Design Principles section to About
@@ -145,6 +147,27 @@ Recent good SHAs:
 ---
 
 ## Session history
+
+### 2026-09-06 — Design polish punch list (post-launch feedback pass)
+
+**What changed:** Shane's list of visual/content edits gathered from living with the Press Room redesign, ahead of his own proofread/QA pass. 12 commits on `main`, `d74837b` through `9bf4e18`.
+
+- **General, site-wide**: `Ghost.tsx` gained a `trigger="load"` mode (default stays `"hover"`, every existing call site unchanged) — flashes the misregistration effect once on page paint via a new `.pr-ghost-onload` CSS class, no client component needed. Wrapped every H1/H2/H3 site-wide in it. Also tightened the home/contact cloud-drift animation cycle (28s/34s → 14s/18s) so the motion actually reads as movement. And fixed a real contrast bug: the primary CTA button's bright yellow surface in dark theme didn't have enough contrast against the ghost effect's default bright cyan/magenta — added `--pr-cta-ghost-cyan`/`-magenta` tokens scoped to `.pr-cta` only, using darker/muted values in both themes (matches what already worked in light theme).
+- **Home**: the left-edge "hard cutoff" on the background glow was `overflow-hidden` clipping the gradient before it reached full transparency — moved the two glow blobs into their own full-bleed (`100vw`) wrapper so they have room to fade out. Hero text/layout untouched.
+- **About**: "Outside of Work" had 3 em dashes and an outdoors clause sitting mid-paragraph ahead of the childhood/career-connection paragraph it was meant to follow — split into 3 short paragraphs, zero em dashes left. Reordered `PRINCIPLES` so "Build tools not rules" (shortest sub-copy) is last — confirmed via the actual `.pr-two-col` grid math that position 5, not 3, is the one that renders alone on its own row (Shane's original ask said "spot 3"; clarified with him before implementing).
+- **Resume**: deleted a page-body "Want to work together? / GET IN TOUCH" block that exactly duplicated the shared `SiteFooter` CTA every Press Room page already gets.
+- **Work index**: tag metadata (up to 3 tags joined by `·`) had no `whitespace-nowrap` and overflowed its fixed 220px column for longer combinations — widened to 260px + added nowrap (narrow-row variant gets `overflow-x-auto` as a safety net rather than silently wrapping).
+- **Proof Before Progress**: chapter grid rendered 3-across-then-1-alone, not 2×2 — raised the `minmax` floor (260px → 400px) so only 2 columns fit, and swapped thumbnails from 4:3 to 16:9 (`aspect-video`) so cards don't grow much taller as they widen. Scoped to this page only — Heart Design System's landing page has an identical class string in a separate file, untouched.
+- **Heart Design System + `/work/[slug]`**: confirmed via source read AND a local dev-server render that both are already fully on Press Room (Shane's note that they weren't was stale, predating when those got resolved in an earlier phase) — no theme work needed, just the heading-glitch wrap like everywhere else.
+- **Contact**: had zero decorative background treatment unlike every other Press Room page (no grid-line overlay, no glow blobs), which is why it read as "empty." Added Home's exact treatment (full-bleed glow blobs, same drift tokens) behind the title/lede.
+- **`/labs`**: was rendering **two headers at once** — the shared root-layout header (`position: sticky`) plus its own old-system `LabsHeader` (`position: fixed`, `z-index: 10000`), which visually won and covered the shared one. Extracted the shared header into `components/press/SiteHeader.tsx` (opts out per-route the same way `SiteFooter.tsx` already does via an exclude list); rebuilt `LabsHeader.tsx` on the same Press Room system but with the mark linking to `/labs`, a regular-weight "(labs)" tag, and a "Main Site" link back to `/`. Also restyled the page's zero-state + project grid to Press Room Tailwind (matching `/work`'s template) and dropped `/labs` from `SiteFooter`'s old-system exclude list so its footer matches too — **`/labs` is now fully Press Room, only `/particle-demo` and `/particle-test` remain on the old system.**
+- **`og-image.svg`**: was still the old plum-gradient mark on a light lavender background — rebuilt with the actual `PressMark` (cyan/magenta 3×3 grid, transparent knockout centre) on the Press Room dark surface, matching the Phase 4 favicon work.
+
+**Verification**: `rm -rf .next && npm run build` clean throughout. Visual/structural checks done via a local dev server — DOM geometry checks (bounding rects, computed styles) rather than screenshots for most of it, since the Browser pane was hidden for this session and screenshots of a hidden pane return stale/blank frames (confirmed `window.innerWidth` reports `0` while hidden — a real gotcha, noted below). Dark-mode CTA ghost contrast fix is a hypothesis from contrast math, not screenshot-verified — flagged to Shane to eyeball live during tonight's pass.
+
+**Still open**: whether the dark-mode CTA ghost fix actually reads right live (pending Shane's visual check); the 3 remaining `npm audit` vulnerabilities (unrelated, still just flagged); everything in the "Older backlog" list below.
+
+---
 
 ### 2026-09-05 (cont.) — Phase 7: resume PDF/MD generation pipeline + download wiring
 
