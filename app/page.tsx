@@ -24,14 +24,18 @@ export default function Home() {
           ))}
           <div />
         </div>
-        <div
-          aria-hidden="true"
-          className="absolute left-[-70px] top-[30px] w-[470px] h-[210px] blur-[30px] pointer-events-none will-change-transform [animation:pr-drift-a_28s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute left-[150px] top-[130px] w-[430px] h-[195px] blur-[30px] pointer-events-none will-change-transform [animation:pr-drift-b_34s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
-        />
+        {/* Full-bleed wrapper: these two blobs need the full viewport width to
+            fade out in, not .pr-main's padded content box — otherwise the
+            gradient gets clipped by overflow-hidden before it reaches full
+            transparency, producing a hard-edged seam instead of a soft bleed. */}
+        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 w-screen h-full pointer-events-none">
+          <div
+            className="absolute left-[60px] top-[30px] w-[470px] h-[210px] blur-[30px] will-change-transform [animation:pr-drift-a_14s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
+          />
+          <div
+            className="absolute left-[280px] top-[130px] w-[430px] h-[195px] blur-[30px] will-change-transform [animation:pr-drift-b_18s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
+          />
+        </div>
 
         <div className="relative flex flex-col gap-[22px] max-w-[680px]">
           <div className="flex items-center gap-[10px] font-plex-mono text-[11px] tracking-[0.1em] text-pr-muted">
@@ -39,7 +43,7 @@ export default function Home() {
             <span>DESIGN OPS &amp; SYSTEMS · SOUTHWEST AIRLINES</span>
           </div>
           <h1 className="pr-hero-title m-0 font-archivo font-bold leading-[0.98] tracking-[-0.035em] text-pr-fg-strong">
-            I design systems that scale.
+            <Ghost trigger="load">I design systems that scale.</Ghost>
           </h1>
           <p className="pr-lede m-0 leading-[1.6] text-pr-lede max-w-[44ch]">
             Building the foundations product teams rely on at Southwest Airlines.
@@ -62,7 +66,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-3.5 min-w-0">
             <h2 className="pr-lead-title m-0 font-archivo font-bold leading-[1.02] tracking-[-0.025em] text-pr-fg-strong">
-              Heart Design System
+              <Ghost trigger="load">Heart Design System</Ghost>
             </h2>
             <p className="m-0 text-[15px] leading-[1.7] text-pr-lede">
               From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.
