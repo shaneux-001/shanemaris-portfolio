@@ -1,18 +1,20 @@
 'use client';
 
 /**
- * The footer differs by design system. As of Phase 6 (2026-09-05), Press
- * Room covers everything except the /labs experiments (Konami-gated, not
- * aligned to the design kit, low priority) — so this is an EXCLUDE list now,
- * not an include list. Anything not matched here gets the old plain
- * copyright + dark-mode toggle footer.
+ * The footer differs by design system. As of 2026-09-06, Press Room covers
+ * everything except /particle-demo and /particle-test (old canvas
+ * experiments, not aligned to the design kit, low priority) — so this is an
+ * EXCLUDE list now, not an include list. /labs was converted to Press Room
+ * on 2026-09-06 (see LabsHeader.tsx) and dropped from this list to match —
+ * anything still matched here gets the old plain copyright + dark-mode
+ * toggle footer.
  */
 
 import { usePathname } from 'next/navigation';
 import PressCta from './PressCta';
 import ThemeToggle from '@/components/ThemeToggle';
 
-const OLD_SYSTEM_PREFIXES = ['/labs', '/particle-demo', '/particle-test'];
+const OLD_SYSTEM_PREFIXES = ['/particle-demo', '/particle-test'];
 
 export default function SiteFooter() {
   const pathname = usePathname();
