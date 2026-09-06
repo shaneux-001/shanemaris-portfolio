@@ -312,6 +312,7 @@ Shane asked what the best long-term setup is for iterative small design-detail c
 - Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards — still rendering the diagonal-stripe placeholder pattern with a filename label (e.g. `chapter-1-thumb.jpg`), same `fs.existsSync` pattern as everywhere else on the site — drop real files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` and they'll pick up automatically, no code change needed.
 
 **Not yet done at all:**
+- Change the contact form success message from "SENT — I'll reply within a day." to 48 hours (`app/contact/page.tsx:141`) — Shane's current bandwidth doesn't support a same-day-ish turnaround promise.
 - The 3 remaining `npm audit` high-severity vulnerabilities — fixing them requires `--force`, which would bump Next.js `16.2.4` outside the stated version range. Flagged only, no action taken.
 - Full responsive/mobile QA pass — tonight's changes were spot-checked at specific widths as each shipped, not a systematic pass across the whole site.
 - Accessibility audit (WCAG 2.1 AA) — not started.
