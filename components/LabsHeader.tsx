@@ -1,103 +1,34 @@
 'use client';
 
+/**
+ * /labs' own header — same Press Room visual system as SiteHeader.tsx
+ * (which opts out for /labs, see OLD_SYSTEM_PREFIXES there), but the
+ * mark/wordmark link home to /labs instead of /, with a "(labs)" tag so
+ * it's clear you've left the main site, plus an explicit way back.
+ */
+
 import Link from 'next/link';
+import PressMark from '@/components/press/PressMark';
+import PressNavLink from '@/components/press/PressNavLink';
 
 export default function LabsHeader() {
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '4rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
-        backgroundColor: 'var(--color-base)',
-        borderBottom: '1px solid var(--accent-tint-10)',
-        zIndex: 10000,
-      }}
-    >
+    <header className="pr-header">
       <Link
-        href="/"
-        style={{
-          fontFamily: 'var(--font-inter)',
-          fontSize: '0.9375rem',
-          fontWeight: 600,
-          color: 'var(--color-ink)',
-          textDecoration: 'none',
-          letterSpacing: '0.05em',
-          textTransform: 'uppercase',
-        }}
+        href="/labs"
+        aria-label="Shane Maris Labs — home"
+        className="pr-mark-btn flex items-center gap-3 p-1 -m-1 text-inherit"
       >
-        ShaneUX Labs
+        <PressMark size={24} />
+        <span className="text-[15px] font-semibold tracking-[-0.01em] text-pr-fg-strong">
+          Shane Maris <span className="font-normal text-pr-muted">(labs)</span>
+        </span>
       </Link>
-
-      <div
-        style={{
-          display: 'flex',
-          gap: '2rem',
-          alignItems: 'center',
-        }}
-      >
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: '0.875rem',
-            color: 'var(--color-ink)',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--color-accent)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--color-ink)';
-          }}
-        >
-          Home
-        </Link>
-        <Link
-          href="/work"
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: '0.875rem',
-            color: 'var(--color-ink)',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--color-accent)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--color-ink)';
-          }}
-        >
-          Work
-        </Link>
-        <Link
-          href="/contact"
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: '0.875rem',
-            color: 'var(--color-ink)',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--color-accent)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--color-ink)';
-          }}
-        >
-          Contact
-        </Link>
-      </div>
-    </nav>
+      <nav className="flex gap-1 items-center font-plex-mono text-xs tracking-[0.04em]">
+        <PressNavLink href="/">Main Site</PressNavLink>
+        <PressNavLink href="/work">Work</PressNavLink>
+        <PressNavLink href="/contact">Contact</PressNavLink>
+      </nav>
+    </header>
   );
 }

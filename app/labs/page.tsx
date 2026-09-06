@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { labsProjects } from '@/lib/projects';
 import PasswordGate from '@/components/PasswordGate';
 import LabsHeader from '@/components/LabsHeader';
+import Ghost from '@/components/press/Ghost';
 import { useEffect, useRef } from 'react';
 
 interface Particle {
@@ -104,159 +105,49 @@ function LabsContent() {
   return (
     <>
       <LabsHeader />
-      <main style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '4rem' }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 4rem' }}>
-
-          {/* Header */}
-          <div style={{ marginBottom: '4rem' }}>
-            <h1
-              style={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: 'clamp(2rem, 5vw, 3rem)',
-                color: 'var(--color-ink)',
-                lineHeight: 1.1,
-                marginBottom: '0.5rem',
-                marginTop: 0,
-              }}
-            >
-              Labs
-            </h1>
-            <p
-              style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '1rem',
-                color: 'var(--color-muted)',
-                marginBottom: 0,
-                marginTop: 0,
-              }}
-            >
-              Experimental work and side projects
-            </p>
-          </div>
+      <main className="pr-page">
+        <div className="pr-main pt-[clamp(36px,5vw,56px)]">
+          <h1 className="pr-page-title m-0 mb-[14px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
+            <Ghost trigger="load">Labs</Ghost>
+          </h1>
+          <p className="pr-page-lede m-0 mb-9 leading-[1.65] text-pr-lede max-w-[52ch]">
+            Experimental work and side projects.
+          </p>
 
           {visibleLabsProjects.length > 0 ? (
-            /* Projects Grid */
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                gap: '2rem',
-                marginBottom: '4rem',
-              }}
-            >
+            <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] mb-4">
               {visibleLabsProjects.map((project) => (
-                <Link
-                  key={project.slug}
-                  href={`/labs/${project.slug}`}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: '100%',
-                      cursor: 'pointer',
-                      transition: 'transform 0.2s, box-shadow 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLDivElement;
-                      el.style.transform = 'translateY(-4px)';
-                      el.style.boxShadow = '0 8px 24px rgba(123, 94, 167, 0.12)';
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLDivElement;
-                      el.style.transform = 'translateY(0)';
-                      el.style.boxShadow = 'none';
-                    }}
-                  >
-                    <div
-                      style={{
-                        backgroundColor: 'rgba(123, 94, 167, 0.08)',
-                        borderRadius: '8px',
-                        aspectRatio: '1 / 0.67',
-                        marginBottom: '1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--color-muted)',
-                        fontSize: '0.875rem',
-                        fontFamily: 'var(--font-inter)',
-                      }}
-                    >
-                      {project.title} Preview
-                    </div>
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-playfair)',
-                        fontSize: '1.25rem',
-                        color: 'var(--color-ink)',
-                        marginBottom: '0.5rem',
-                        marginTop: 0,
-                      }}
-                    >
-                      {project.title}
-                    </h3>
+                <Link key={project.slug} href={`/labs/${project.slug}`} className="pr-card">
+                  <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+                    <span className="font-plex-mono text-[11px] text-pr-muted relative">
+                      {project.title} preview
+                    </span>
                   </div>
+                  <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0">
+                    <Ghost trigger="load">{project.title}</Ghost>
+                  </h3>
                 </Link>
               ))}
             </div>
           ) : (
             /* ── Empty state ── */
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '40vh',
-                textAlign: 'center',
-                gap: '1.5rem',
-              }}
-            >
-              {/* Flask icon — SVG inline so no import boundary issues */}
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 256 256"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ opacity: 0.35 }}
-              >
+            <div className="flex flex-col items-center justify-center text-center gap-6 min-h-[40vh] border-t border-pr-rule pt-16">
+              <svg width="56" height="56" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-40" aria-hidden="true">
                 <path
                   d="M221.9 197.2L153 85V40h4a12 12 0 0 0 0-24H99a12 12 0 0 0 0 24h4v45L34.1 197.2A20 20 0 0 0 51.1 228H204.9a20 20 0 0 0 17-30.8ZM111 91.6V40h34v51.6l36.1 60.4H74.9Z"
-                  fill="rgba(123,94,167,1)"
+                  className="fill-pr-muted"
                 />
               </svg>
-
               <div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontSize: '1.75rem',
-                    color: 'var(--color-ink)',
-                    marginBottom: '0.5rem',
-                    marginTop: 0,
-                  }}
-                >
+                <p className="font-archivo text-2xl font-bold text-pr-fg-strong m-0 mb-2">
                   The lab is between experiments.
                 </p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '1rem',
-                    color: 'var(--color-muted)',
-                    margin: 0,
-                    maxWidth: '28rem',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  Nothing to see here — yet. Something is brewing.
-                  Check back when the smell gets interesting.
+                <p className="text-[15px] leading-[1.7] text-pr-lede m-0 max-w-[36ch]">
+                  Nothing to see here — yet. Something is brewing. Check back when the smell gets interesting.
                 </p>
               </div>
             </div>
           )}
-
         </div>
       </main>
       <AnimatedParticles />

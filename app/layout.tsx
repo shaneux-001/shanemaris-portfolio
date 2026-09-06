@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Archivo, IBM_Plex_Mono } from "next/font/google";
-import Link from "next/link";
-import PressMark from "@/components/press/PressMark";
-import PressNavLink from "@/components/press/PressNavLink";
-import PressThemeToggle from "@/components/press/PressThemeToggle";
+import SiteHeader from "@/components/press/SiteHeader";
 import SiteFooter from "@/components/press/SiteFooter";
 import "./globals.css";
 
@@ -111,24 +108,7 @@ export default function RootLayout({
           margin: 0,
         }}
       >
-        <header className="pr-header">
-          <Link
-            href="/"
-            aria-label="Shane Maris — home"
-            className="pr-mark-btn flex items-center gap-3 p-1 -m-1 text-inherit"
-          >
-            <PressMark size={24} />
-            <span className="text-[15px] font-semibold tracking-[-0.01em] text-pr-fg-strong">
-              Shane Maris
-            </span>
-          </Link>
-          <nav className="flex gap-1 items-center font-plex-mono text-xs tracking-[0.04em]">
-            <PressNavLink href="/work">Work</PressNavLink>
-            <PressNavLink href="/about">About</PressNavLink>
-            <PressNavLink href="/contact">Contact</PressNavLink>
-            <PressThemeToggle />
-          </nav>
-        </header>
+        <SiteHeader />
         {children}
         <SiteFooter />
       </body>
