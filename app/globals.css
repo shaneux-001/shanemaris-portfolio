@@ -528,6 +528,23 @@ img {
 @keyframes pr-ghost-c { from { transform: translate(-2.5px, -1.5px); } to { transform: translate(0, 0); } }
 @keyframes pr-ghost-m { from { transform: translate(2.5px, 1.5px); } to { transform: translate(0, 0); } }
 
+/* trigger="load" variant needs a much bigger, slower version than the hover
+   one — a hover flash catches your eye because you're already looking right
+   at the thing you're hovering, but a page-load flash has to catch your eye
+   cold. A 2.5px/320ms nudge (fine for hover) is nearly invisible here, so
+   this holds a much larger offset for a beat before settling, instead of
+   easing out from frame 1. */
+@keyframes pr-ghost-c-onload {
+  0%   { transform: translate(-9px, -5px); }
+  55%  { transform: translate(-9px, -5px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes pr-ghost-m-onload {
+  0%   { transform: translate(9px, 5px); }
+  55%  { transform: translate(9px, 5px); }
+  100% { transform: translate(0, 0); }
+}
+
 .pr-ghost { position: relative; display: inline-block; }
 .pr-ghost-c, .pr-ghost-m { position: absolute; left: 0; top: 0; pointer-events: none; transform: translate(0, 0); }
 .pr-ghost-c { color: var(--pr-cyan); }
@@ -544,10 +561,10 @@ img {
 /* trigger="load" variant (Ghost.tsx) — plays once on paint, no hover/focus
    gate needed. Used on H1-H3 headings. */
 .pr-ghost-onload .pr-ghost-c {
-  animation: pr-ghost-c 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+  animation: pr-ghost-c-onload 900ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
 }
 .pr-ghost-onload .pr-ghost-m {
-  animation: pr-ghost-m 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+  animation: pr-ghost-m-onload 900ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
 }
 
 /* Dark-mode-only override: the primary CTA button flips to a bright yellow
