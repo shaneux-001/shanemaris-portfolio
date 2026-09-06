@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
 import Expertise from "@/components/press/Expertise";
+import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "About",
@@ -17,11 +18,11 @@ export const metadata: Metadata = {
 };
 
 const PRINCIPLES = [
-  { term: "Build tools not rules", line: "Rigid processes create silos. Tools that invite collaboration get teams working together instead of around each other." },
   { term: "One bite at a time", line: "Complex problems rarely yield to brute force. Break the work into its smallest meaningful parts and the right solution tends to assemble itself." },
   { term: "Constraints force creativity", line: "The best design rarely comes from unlimited resources. A tight deadline, budget, or platform limit is often the pressure that produces the most durable solution." },
   { term: "Less is more", line: "Every element in a design earns its place, or it doesn't belong. If it's not improving the experience or solving a real objective, the right move is usually to remove it." },
   { term: "Design works for everyone", line: "Design that only works for some people isn't finished. Accessible, inclusive systems multiply impact — better work comes out when more people can participate." },
+  { term: "Build tools not rules", line: "Rigid processes create silos. Tools that invite collaboration get teams working together instead of around each other." },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -37,7 +38,7 @@ export default function About() {
     <main className="pr-page">
     <div className="pr-main pt-[clamp(36px,5vw,56px)] pb-6">
       <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
-        I design the systems behind great design.
+        <Ghost trigger="load">I design the systems behind great design.</Ghost>
       </h1>
       <p className="pr-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[54ch]">
         I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.
@@ -53,10 +54,13 @@ export default function About() {
       <SectionLabel>OUTSIDE OF WORK</SectionLabel>
       <div className="max-w-[62ch] mb-2 flex flex-col gap-3.5">
         <p className="text-sm text-pr-lede leading-[1.7] m-0">
-          Outside of work, most of my time goes to my family, cooking, and video games I&apos;m probably too invested in. I&apos;m a genuine film and TV nerd — less about the story on screen and more about how it got there, since the craft decisions behind the scenes interest me as much as the finished product. I&apos;m also trying to get back outdoors more — hiking, walking, easing back into biking — for the roughly five months a year Texas isn&apos;t doing its best impression of a convection oven.
+          Outside of work, most of my time goes to my family, cooking, and video games I&apos;m probably too invested in. I&apos;m a genuine film and TV nerd, less about the story on screen and more about how it got there, since the craft decisions behind the scenes interest me as much as the finished product.
         </p>
         <p className="text-sm text-pr-lede leading-[1.7] m-0">
           That behind-the-scenes curiosity isn&apos;t new. I got my hands on Flash in ninth grade and started making my own cel animations, and later took photography and videography classes in college. Long before &quot;systems thinker&quot; was a job title, I was already the kid who wanted to understand how something got made, not just watch it happen. That&apos;s still basically what I do for a living.
+        </p>
+        <p className="text-sm text-pr-lede leading-[1.7] m-0">
+          Also trying to get back outdoors more: hiking, walking, easing back into biking, for the roughly five months a year Texas isn&apos;t doing its best impression of a convection oven.
         </p>
       </div>
 
