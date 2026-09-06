@@ -41,7 +41,7 @@ export default function HeartDSLanding() {
         </div>
 
         <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
-          Heart Design System
+          <Ghost trigger="load">Heart Design System</Ghost>
         </h1>
 
         <p className="pr-page-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[58ch]">
@@ -53,7 +53,7 @@ export default function HeartDSLanding() {
         </p>
 
         <h2 className="font-archivo text-xl font-bold text-pr-fg-strong mb-6 mt-0">
-          Four chapters tell the story
+          <Ghost trigger="load">Four chapters tell the story</Ghost>
         </h2>
 
         <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
@@ -79,7 +79,7 @@ export default function HeartDSLanding() {
                   CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
                 <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
-                  {chapter.title}
+                  <Ghost trigger="load">{chapter.title}</Ghost>
                 </h3>
                 <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}

@@ -29,7 +29,7 @@ export default function Chapter3() {
         </span>
 
         <h1 className="pr-page-title m-0 mb-2 font-archivo font-bold leading-[1.05] tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
-          The Moment It Clicked
+          <Ghost trigger="load">The Moment It Clicked</Ghost>
         </h1>
 
         <p className="m-0 mb-3 text-base text-pr-lede">Gift Card POC</p>
