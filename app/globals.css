@@ -559,12 +559,22 @@ img {
 }
 
 /* trigger="load" variant (Ghost.tsx) — plays once on paint, no hover/focus
-   gate needed. Used on H1-H3 headings. */
+   gate needed. Used on H1-H3 headings. Dark theme keeps the bigger
+   pr-ghost-*-onload keyframes (confirmed legible there per Shane), trimmed
+   to a quick 100ms snap. Light theme reverts to the original small
+   hover-style keyframes/timing — the bigger version read as "too solid"
+   against the light surface. */
 .pr-ghost-onload .pr-ghost-c {
-  animation: pr-ghost-c-onload 900ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
+  animation: pr-ghost-c-onload 100ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
 }
 .pr-ghost-onload .pr-ghost-m {
-  animation: pr-ghost-m-onload 900ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
+  animation: pr-ghost-m-onload 100ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
+}
+[data-pr-theme="light"] .pr-ghost-onload .pr-ghost-c {
+  animation: pr-ghost-c 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+}
+[data-pr-theme="light"] .pr-ghost-onload .pr-ghost-m {
+  animation: pr-ghost-m 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
 }
 
 /* Dark-mode-only override: the primary CTA button flips to a bright yellow
