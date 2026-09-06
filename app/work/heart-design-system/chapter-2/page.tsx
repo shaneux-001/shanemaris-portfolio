@@ -70,11 +70,11 @@ export default function Chapter2() {
           </p>
 
           <p className="m-0">
-            That&apos;s when I was connected to Vince Bratton.
+            That&apos;s when I was connected to a senior technology manager.
           </p>
 
           <p className="m-0">
-            Vince was a senior manager in technology with a small foundation team under him — engineers who understood reusable components in the context of React, since Vision had been built on it. But design systems as a discipline, as an organizational philosophy, was new territory for them. I was building the system and teaching the methodology at the same time, to people I was also depending on to help me build it.
+            That manager led a small foundation team — engineers who understood reusable components in the context of React, since Vision had been built on it. But design systems as a discipline, as an organizational philosophy, was new territory for them. I was building the system and teaching the methodology at the same time, to people I was also depending on to help me build it.
           </p>
 
           <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
