@@ -160,6 +160,7 @@
   --pr-rule: #2C2C33; --pr-rule-strong: #4A4A52; --pr-rule-faint: #3A3A42;
   --pr-cyan: #00AEEF; --pr-magenta: #FF4FA3; --pr-accent-text: #F2E900; --pr-focus: #F2E900;
   --pr-cta-bg: #F2E900; --pr-cta-fg: #16161A; --pr-cta-hover: #FFF84D; --pr-cta-active: #D9D200;
+  --pr-cta-ghost-cyan: #00647F; --pr-cta-ghost-magenta: #C1006A;
   --pr-grid-line: rgba(0, 174, 239, 0.10);
   --pr-glow-a: rgba(255, 79, 163, 0.22); --pr-glow-b: rgba(0, 174, 239, 0.20);
   --pr-row-hover: #1C1C22; --pr-btn-hover: #24242B;
@@ -539,6 +540,23 @@ img {
 .pr-hoverable:hover .pr-ghost-m, .pr-hoverable:focus-visible .pr-ghost-m {
   animation: pr-ghost-m 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
 }
+
+/* trigger="load" variant (Ghost.tsx) — plays once on paint, no hover/focus
+   gate needed. Used on H1-H3 headings. */
+.pr-ghost-onload .pr-ghost-c {
+  animation: pr-ghost-c 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+}
+.pr-ghost-onload .pr-ghost-m {
+  animation: pr-ghost-m 380ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+}
+
+/* Dark-mode-only override: the primary CTA button flips to a bright yellow
+   surface in dark theme (--pr-cta-bg), and the default bright ghost colors
+   don't have enough contrast against it (unlike light theme, where the CTA
+   surface is near-black and the muted ghost colors already read clearly).
+   Falls back to the standard tokens in light theme — no change there. */
+.pr-cta .pr-ghost-c { color: var(--pr-cta-ghost-cyan, var(--pr-cyan)); }
+.pr-cta .pr-ghost-m { color: var(--pr-cta-ghost-magenta, var(--pr-magenta)); }
 
 .pr-nav-link {
   position: relative;
