@@ -22,9 +22,9 @@ An external audit skill scored the live site **2026-09-05**: full report stored 
 | Text & Copy | 79 (pass) | P0 |
 | Leadership / Candidate Positioning | 67 (conditional pass) | P0 |
 
-**⚠️ Two direct conflicts with recent work — flagging rather than resolving:**
-- The audit's P0 "Sharpen Leadership Positioning" item explicitly recommends removing **"Prompt Engineering"** from top-level expertise unless strategically justified — but it was *added* to the Expertise/Skills list two nights ago (2026-09-05) at Shane's explicit request, replacing two other skills. Don't silently revert that; it's Shane's call whether the audit's positioning argument outweighs his original reason for adding it.
-- The audit's P0 "Replace Generic Principles" item flags the exact five `/about` principles (including "Build tools not rules," "One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone") as generic/interchangeable and recommends replacing them with 3–4 specific, evidence-backed beliefs — a content rewrite, not the reordering done on 2026-09-06. That reorder work would likely get superseded entirely if this item is tackled.
+**⚠️ Decide during QA mode — two direct conflicts with recent work, not resolved yet:**
+- [ ] **Keep or drop "Prompt Engineering" from top-level Expertise?** The audit's P0 "Sharpen Leadership Positioning" item recommends removing it unless strategically justified — but it was *added* to the Expertise/Skills list two nights ago (2026-09-05) at Shane's explicit request, replacing two other skills. Don't silently revert; needs a decision on whether the audit's positioning argument outweighs the original reason for adding it.
+- [ ] **Reorder or rewrite the `/about` principles?** The audit's P0 "Replace Generic Principles" item flags the exact five current principles (including "Build tools not rules," "One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone") as generic/interchangeable and recommends replacing them with 3–4 specific, evidence-backed beliefs — a content rewrite, not the reordering done on 2026-09-06. That reorder work would likely get superseded entirely if this item is tackled.
 
 **P0 (do first, if/when this gets tackled):**
 - [ ] Executive Evidence Layer — compact mandate/scale/constraint/role/decisions/outcome/unresolved summary above the long-form narrative on Heart Design System, Figma Enterprise Migration, and Proof Before Progress.
