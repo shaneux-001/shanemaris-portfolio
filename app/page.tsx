@@ -24,22 +24,23 @@ export default function Home() {
           ))}
           <div />
         </div>
-        {/* Full-bleed wrapper: these two blobs need the full viewport width to
-            fade out in, not .pr-main's padded content box. overflow-hidden
-            used to live on this section itself, which defeated the breakout
-            (an ancestor's overflow:hidden clips a descendant regardless of
-            how far that descendant tries to extend past it) — it's now on
-            .pr-page instead, the actual full-width ancestor, so the bleed
-            can really reach the viewport edge. Static (no motion) and back
-            to the original position/size, per Shane's call. */}
-        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 w-screen h-full pointer-events-none">
-          <div
-            className="absolute left-[-70px] top-[30px] w-[470px] h-[210px] blur-[30px] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
-          />
-          <div
-            className="absolute left-[150px] top-[130px] w-[430px] h-[195px] blur-[30px] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
-          />
-        </div>
+        {/* Positioned relative to THIS content column, not the full viewport
+            — so the blob stays anchored behind the hero copy at any screen
+            width instead of floating off in the empty margin on wide
+            monitors. It's still not clipped: overflow-hidden used to live on
+            this section itself (which clipped the gradient's blur before it
+            faded out), it's on .pr-page now instead — the actual full-width
+            ancestor — so there's plenty of room for it to fade out on its
+            own past this column's edge before anything clips it. Static (no
+            motion), original position/size. */}
+        <div
+          aria-hidden="true"
+          className="absolute left-[-70px] top-[30px] w-[470px] h-[210px] blur-[30px] pointer-events-none bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute left-[150px] top-[130px] w-[430px] h-[195px] blur-[30px] pointer-events-none bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
+        />
 
         <div className="relative flex flex-col gap-[22px] max-w-[680px]">
           <div className="flex items-center gap-[10px] font-plex-mono text-[11px] tracking-[0.1em] text-pr-muted">

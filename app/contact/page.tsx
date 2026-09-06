@@ -58,18 +58,17 @@ export default function Contact() {
           ))}
           <div />
         </div>
-        {/* Full-bleed wrapper — see app/page.tsx for why overflow-hidden lives
-            on .pr-page now, not here (an ancestor's overflow:hidden clips a
-            w-screen breakout regardless of how far it tries to extend past
-            it). Static (no motion), same position/size as Home's original. */}
-        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 w-screen h-full pointer-events-none">
-          <div
-            className="absolute left-[-70px] top-[10px] w-[470px] h-[210px] blur-[30px] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
-          />
-          <div
-            className="absolute left-[150px] top-[90px] w-[430px] h-[195px] blur-[30px] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
-          />
-        </div>
+        {/* Positioned relative to this content column, not the full
+            viewport — see app/page.tsx for the full reasoning. Static (no
+            motion), same position/size as Home's original. */}
+        <div
+          aria-hidden="true"
+          className="absolute left-[-70px] top-[10px] w-[470px] h-[210px] blur-[30px] pointer-events-none bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute left-[150px] top-[90px] w-[430px] h-[195px] blur-[30px] pointer-events-none bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
+        />
 
         <h1 className="relative pr-page-title m-0 mb-4 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
           <Ghost trigger="load">Get in touch</Ghost>
