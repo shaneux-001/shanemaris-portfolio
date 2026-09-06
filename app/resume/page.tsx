@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PressCta from "@/components/press/PressCta";
 import Expertise from "@/components/press/Expertise";
 import Ghost from "@/components/press/Ghost";
 
@@ -105,7 +104,7 @@ export default function Resume() {
     <main className="pr-page">
       <div className="pr-main pt-[clamp(36px,5vw,56px)] pb-6">
         <h1 className="pr-page-title m-0 mb-2.5 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
-          Shane Maris
+          <Ghost trigger="load">Shane Maris</Ghost>
         </h1>
         <p className="m-0 mb-1.5 text-base text-pr-lede">Design Systems Leader | Design Operations Strategy</p>
         <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
@@ -135,7 +134,7 @@ export default function Resume() {
           {EXPERIENCE.map((e) => (
             <div key={e.role}>
               <div className="flex gap-4 items-baseline mb-1.5 flex-wrap">
-                <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0">{e.role}</h3>
+                <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0"><Ghost trigger="load">{e.role}</Ghost></h3>
                 <span className="font-plex-mono text-[10.5px] tracking-[0.04em] text-pr-muted">{e.span.toUpperCase()}</span>
               </div>
               <ul className="m-0 pl-[18px] flex flex-col gap-2 max-w-[62ch]">
@@ -160,11 +159,6 @@ export default function Resume() {
               <p className="font-plex-mono text-xs tracking-[0.02em] text-pr-muted m-0">{item.meta}</p>
             </div>
           ))}
-        </div>
-
-        <div className="border-t border-pr-rule pt-8 mt-2">
-          <p className="font-archivo text-[22px] font-bold text-pr-fg-strong m-0 mb-3.5">Want to work together?</p>
-          <PressCta href="/contact">GET IN TOUCH</PressCta>
         </div>
       </div>
     </main>
