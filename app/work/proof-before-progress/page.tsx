@@ -41,7 +41,7 @@ export default function ProofBeforeProgressLanding() {
         </div>
 
         <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[26ch]">
-          Proof Before Progress
+          <Ghost trigger="load">Proof Before Progress</Ghost>
         </h1>
 
         <p className="pr-page-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[58ch]">
@@ -52,13 +52,13 @@ export default function ProofBeforeProgressLanding() {
           Read time: ~9 minutes
         </p>
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
           {CHAPTERS.map((chapter) => {
             const thumbPath = path.join(workDir, `chapter-${chapter.number}-thumb.jpg`);
             const hasThumb = fs.existsSync(thumbPath);
             return (
               <Link key={chapter.number} href={`/work/proof-before-progress/chapter-${chapter.number}`} className="pr-card">
-                <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+                <div className="relative aspect-video mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
                   {hasThumb ? (
                     <img
                       src={`/work/proof-before-progress/chapter-${chapter.number}-thumb.jpg`}
@@ -75,7 +75,7 @@ export default function ProofBeforeProgressLanding() {
                   CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
                 <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
-                  {chapter.title}
+                  <Ghost trigger="load">{chapter.title}</Ghost>
                 </h3>
                 <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}

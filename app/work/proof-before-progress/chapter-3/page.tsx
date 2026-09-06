@@ -26,7 +26,7 @@ export default function Chapter3() {
         </span>
 
         <h1 className="pr-page-title m-0 mb-7 font-archivo font-bold leading-[1.05] tracking-[-0.03em] text-pr-fg-strong max-w-[24ch]">
-          The Vendor Path Not Taken
+          <Ghost trigger="load">The Vendor Path Not Taken</Ghost>
         </h1>
 
         <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
