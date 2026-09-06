@@ -9,6 +9,45 @@
 
 ---
 
+## Quality gate (AI-slop / positioning audit)
+
+An external audit skill scored the live site **2026-09-05**: full report stored verbatim at [`qa/quality-gate-2026-09-05.md`](qa/quality-gate-2026-09-05.md) — read it in full before acting on anything below, this is just the condensed version.
+
+**Score: 73/100 — Conditional Pass. Target: 85+/100.** This is meant to be re-run after changes to check for improvement — when that happens, save the new report as `qa/quality-gate-<date>.md` (don't overwrite this one) and update this section with the new score.
+
+| Area | Score | Priority |
+|---|---|---|
+| AI Slop Fingerprint / Aesthetic Intent | 76 (pass, visual verification pending) | P1 |
+| PM Hat / Information Architecture | 82 (pass) | P0 |
+| Text & Copy | 79 (pass) | P0 |
+| Leadership / Candidate Positioning | 67 (conditional pass) | P0 |
+
+**⚠️ Two direct conflicts with recent work — flagging rather than resolving:**
+- The audit's P0 "Sharpen Leadership Positioning" item explicitly recommends removing **"Prompt Engineering"** from top-level expertise unless strategically justified — but it was *added* to the Expertise/Skills list two nights ago (2026-09-05) at Shane's explicit request, replacing two other skills. Don't silently revert that; it's Shane's call whether the audit's positioning argument outweighs his original reason for adding it.
+- The audit's P0 "Replace Generic Principles" item flags the exact five `/about` principles (including "Build tools not rules," "One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone") as generic/interchangeable and recommends replacing them with 3–4 specific, evidence-backed beliefs — a content rewrite, not the reordering done on 2026-09-06. That reorder work would likely get superseded entirely if this item is tackled.
+
+**P0 (do first, if/when this gets tackled):**
+- [ ] Executive Evidence Layer — compact mandate/scale/constraint/role/decisions/outcome/unresolved summary above the long-form narrative on Heart Design System, Figma Enterprise Migration, and Proof Before Progress.
+- [ ] Sharpen Leadership Positioning — one primary leadership proposition instead of several competing identities; see the Prompt Engineering conflict above.
+- [ ] Fix the Conversion Funnel — "Want to work together?" reads as freelancer/consultant framing rather than Director/VP hiring intent; audit suggests contextual CTAs instead (e.g. "Discuss a leadership role").
+- [ ] Replace Generic Principles With Defensible Beliefs — see the conflict above.
+
+**P1:**
+- [ ] Copy/AI-writing lint pass (em dashes, "not just X but Y," "delve," "seamless," etc. — reduce dramatic short-sentence constructions ~30%).
+- [ ] Preserve specificity — make sure existing hard metrics (2,706 seats, $150K vendor decision, NPS 21.43→52, etc.) stay visible and near the decisions they support; don't let a copy pass water them down.
+- [ ] Make the portfolio demonstrate the systems thesis (e.g. expose some real system logic — token docs, component anatomy — somewhere on the site itself).
+- [ ] Visual AI-slop audit — **MANUAL**, needs a real browser at ~1440/1280/768/390px in both themes (gradients, glow, glassmorphism, bento grids, card-in-card, uniform spacing, etc.).
+- [ ] Typography audit — **MANUAL**.
+- [ ] Spacing/rhythm audit — **MANUAL**.
+
+**P2:**
+- [ ] About page cleanup — reframe expertise as strategic capabilities, not a flat keyword list.
+- [ ] Case-study navigation polish (orientation, prev/next, return-to-overview).
+
+**Explicitly NOT requested yet:** the audit's own instructions say fix P0 before P1 before P2, prefer small intentional changes over redesign-by-template, never invent metrics/quotes/history to close evidence gaps, and mark anything needing Shane's subjective input as `NEEDS_OWNER_INPUT` rather than generating plausible filler. Nothing in this section should be implemented until Shane asks for it — stored here for the next QA pass.
+
+---
+
 ## Needs manual verification
 
 These are cases where an old doc claims something is DONE, but either the underlying code has since changed, or a current doc says otherwise. Don't trust either claim blind — check the live site/dashboard directly.
