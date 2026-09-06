@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
-import Ghost from "@/components/press/Ghost";
 import Expertise from "@/components/press/Expertise";
 
 export const metadata: Metadata = {
@@ -38,9 +37,8 @@ const EXPERIENCE: ExperienceEntry[] = [
 
 const EDUCATION = [
   { title: "B.A. Interactive Media Design", meta: "Art Institute of Dallas 2008 to 2011" },
-  { title: "UX Management Certified", meta: "Nielsen Norman Group Dec 2025" },
-  { title: "UX Certified", meta: "Nielsen Norman Group Feb 2022" },
-  { title: "Agile Team Facilitation", meta: "Jan 2022" },
+  { title: "NN/g Certificate in User Experience, with Specialty Recognition in UX Management", meta: "Nielsen Norman Group 2022 to 2025" },
+  { title: "ICAgile Certified Professional, Agile Team Facilitation (ICP-ATF)", meta: "Jan 2022" },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -62,13 +60,10 @@ export default function Resume() {
         <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
           contact@shanemaris.com · shanemaris.com · +1 (214) 546 3047
         </p>
-        <a
-          href="/Shane_Maris_Resume.docx"
-          download
-          className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text border-b border-pr-accent-text pb-[3px] inline-block no-underline"
-        >
-          <Ghost>DOWNLOAD RESUME</Ghost>
-        </a>
+        {/* Download link removed 2026-09-05 — the .docx it pointed to was retired
+            (wrong degree name, "UX design team" language, stale numbers). Phase 7
+            replaces it with a PDF + .md generated from the locked master content;
+            this link comes back once that exists. */}
 
         <div className="mt-8 max-w-[62ch]">
           <p className="text-[15px] text-pr-lede leading-[1.75] m-0 mb-3.5">
