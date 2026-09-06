@@ -134,7 +134,7 @@ export default function Resume() {
           {EXPERIENCE.map((e) => (
             <div key={e.role}>
               <div className="flex gap-4 items-baseline mb-1.5 flex-wrap">
-                <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0"><Ghost trigger="load">{e.role}</Ghost></h3>
+                <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0">{e.role}</h3>
                 <span className="font-plex-mono text-[10.5px] tracking-[0.04em] text-pr-muted">{e.span.toUpperCase()}</span>
               </div>
               <ul className="m-0 pl-[18px] flex flex-col gap-2 max-w-[62ch]">

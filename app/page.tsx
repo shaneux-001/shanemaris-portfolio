@@ -66,7 +66,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-3.5 min-w-0">
             <h2 className="pr-lead-title m-0 font-archivo font-bold leading-[1.02] tracking-[-0.025em] text-pr-fg-strong">
-              <Ghost trigger="load">Heart Design System</Ghost>
+              Heart Design System
             </h2>
             <p className="m-0 text-[15px] leading-[1.7] text-pr-lede">
               From grassroots effort to enterprise-scale design infrastructure. How I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines.

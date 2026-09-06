@@ -124,7 +124,7 @@ function LabsContent() {
                     </span>
                   </div>
                   <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0">
-                    <Ghost trigger="load">{project.title}</Ghost>
+                    {project.title}
                   </h3>
                 </Link>
               ))}

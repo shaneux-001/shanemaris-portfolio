@@ -75,7 +75,7 @@ export default function ProofBeforeProgressLanding() {
                   CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
                 <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
-                  <Ghost trigger="load">{chapter.title}</Ghost>
+                  {chapter.title}
                 </h3>
                 <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}

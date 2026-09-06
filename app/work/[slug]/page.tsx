@@ -149,7 +149,7 @@ export default async function ProjectPage({ params }: PageProps) {
               {content.sections.map((section, i) => (
                 <div key={section.heading}>
                   <h2 className="font-archivo text-2xl font-bold text-pr-fg-strong mb-4 mt-0 tracking-[-0.02em]">
-                    <Ghost trigger="load">{section.heading}</Ghost>
+                    {section.heading}
                   </h2>
 
                   <p className="leading-[1.8] mt-0 mb-0 text-[15.5px] text-pr-lede break-words">
