@@ -51,21 +51,23 @@ export default function Contact() {
   return (
     <main className="pr-page">
     <div className="pr-main pt-[clamp(36px,5vw,56px)]">
-      <div className="relative overflow-hidden pb-2">
+      <div className="relative pb-2">
         <div aria-hidden="true" className="absolute inset-0 grid grid-cols-6 pointer-events-none">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="border-r border-pr-grid-line" />
           ))}
           <div />
         </div>
-        {/* Full-bleed wrapper — see app/page.tsx for why these can't just sit
-            inside .pr-main's padded box (hard-clipped fade otherwise). */}
+        {/* Full-bleed wrapper — see app/page.tsx for why overflow-hidden lives
+            on .pr-page now, not here (an ancestor's overflow:hidden clips a
+            w-screen breakout regardless of how far it tries to extend past
+            it). Static (no motion), same position/size as Home's original. */}
         <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 w-screen h-full pointer-events-none">
           <div
-            className="absolute left-[60px] top-[10px] w-[470px] h-[210px] blur-[30px] will-change-transform [animation:pr-drift-a_14s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
+            className="absolute left-[-70px] top-[10px] w-[470px] h-[210px] blur-[30px] bg-[radial-gradient(ellipse_at_42%_50%,var(--pr-glow-a),transparent_66%)]"
           />
           <div
-            className="absolute left-[280px] top-[90px] w-[430px] h-[195px] blur-[30px] will-change-transform [animation:pr-drift-b_18s_ease-in-out_infinite] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
+            className="absolute left-[150px] top-[90px] w-[430px] h-[195px] blur-[30px] bg-[radial-gradient(ellipse_at_55%_50%,var(--pr-glow-b),transparent_66%)]"
           />
         </div>
 
