@@ -72,11 +72,14 @@ lib/
   password.ts          ← reads from env vars
   projectContent.ts    ← DEPRECATED — safe to delete after build verified
 
-resume-source/          ← NEW (2026-09-05). Shane_Maris_Resume.md (locked master resume content) + Resume_Audit_Rules.md (the fact-check rules governing it). Outside public/ on purpose — never served as a download. app/resume/page.tsx's content is now copied verbatim from this file; if the two ever drift, this file wins — update the page, not the other way around. Phase 7's PDF/.md exports will also generate from this file.
+resume-source/          ← NEW (2026-09-05). Shane_Maris_Resume.md (locked master resume content) + Resume_Audit_Rules.md (the fact-check rules governing it) + fonts/ (Archivo + IBM Plex Mono TTFs, downloaded but currently UNUSED — see scripts/ note below). Outside public/ on purpose — never served as a download. app/resume/page.tsx's content is now copied verbatim from Shane_Maris_Resume.md; if the two ever drift, this file wins — update the page, not the other way around.
+
+scripts/                ← NEW (2026-09-05, Phase 7). resume-pdf-content.ts is the shared, CONDENSED (one-page-sized) content source for both generated downloads — a trimmed subset of resume-source/Shane_Maris_Resume.md, never paraphrased, whole bullets cut for space only. generate-resume-pdf.tsx and generate-resume-md.ts each import it and write to public/. Run both via `npm run generate:resume` — NOT part of `npm run build`, must be re-run by hand whenever resume-pdf-content.ts changes. See the big comment block at the top of generate-resume-pdf.tsx for why this can't be run directly with `tsx` (must go through esbuild + plain `node` instead) and why the brand TTFs in resume-source/fonts/ aren't wired in (fontkit crash — falls back to built-in Helvetica/Courier).
 
 public/
   logo-{16,32,64,128}.svg, apple-touch-icon.svg ← PressMark design (recolored Phase 4, 2026-09-05) — DO touch these via the Mark, not by hand; og-image.svg is still the old plum mark, not yet updated
-  (Shane_Maris_Resume.docx deleted 2026-09-05 — wrong degree name, "UX design team" language violating the no-direct-reports rule, stale numbers. Recoverable via git history. The /resume "Download Resume" link is currently removed; Phase 7's generated PDF + .md replace it.)
+  Shane_Maris_Resume.pdf, Shane_Maris_Resume.md ← NEW (2026-09-05, Phase 7). Generated build artifacts — see scripts/ above. Don't hand-edit; re-run `npm run generate:resume` after changing scripts/resume-pdf-content.ts.
+  (Shane_Maris_Resume.docx deleted 2026-09-05 — wrong degree name, "UX design team" language violating the no-direct-reports rule, stale numbers. Recoverable via git history. Replaced by the generated PDF/.md above, now wired up on /resume.)
 
 ui-kit.html            ← standalone visual kit; STALE since the Press Room redesign — reflects the old system only, open in browser, not a build target
 HANDOFF.md             ← this file
@@ -134,13 +137,29 @@ git stash --include-untracked && git reset --hard <sha>
 ```
 
 Recent good SHAs:
-- `5e97389` — Content pass: bio, resume achievements, Design Principles reorder, two new case studies ← **last known good main**
+- `391a8ba` — Resume download buttons wired up on /resume ← **last known good main**
+- `5e97389` — Content pass: bio, resume achievements, Design Principles reorder, two new case studies
 - `9b736e0` — Merge press-room-redesign: site-wide dark/light theme + resume restyle
 - `61cb569` — QA pass: fix lint errors, add Design Principles section to About
 
 ---
 
 ## Session history
+
+### 2026-09-05 (cont.) — Phase 7: resume PDF/MD generation pipeline + download wiring
+
+**What changed:** Built the generated one-page resume downloads from scratch and wired them up live. Several commits on `main`; most relevant are `024f29f`, `109a2f3`, `06dbae0`, `391a8ba`.
+
+- **Pipeline built**: `scripts/resume-pdf-content.ts` (condensed, one-page content — real bullets only, cut for space, never paraphrased) feeds both `scripts/generate-resume-pdf.tsx` (`@react-pdf/renderer`) and `scripts/generate-resume-md.ts`. Run together via `npm run generate:resume`, which bundles the `.tsx` with esbuild (`--packages=external`, required — see script header) before running it with plain `node`, since `tsx` chokes on `@react-pdf/renderer`'s dependency tree. Not part of `npm run build`; must be re-run by hand after content changes.
+- **Custom brand fonts (Archivo/IBM Plex Mono) do NOT work in the PDF** — `fontkit` (a transitive dep) crashes on a composite-glyph parsing error on at least one downloaded TTF. Fell back to `@react-pdf/renderer`'s built-in Helvetica/Courier for v1. Fonts kept in `resume-source/fonts/` if this gets revisited.
+- **Spacing/content revision round**, per Shane's direct feedback on the first draft: looser bullet line-height and section spacing (the first pass read as "a wall of text... slightly claustrophobic"), summary trimmed to cut what's redundant with the DPM role's first bullet, "(open to relocating; prefers Remote or Hybrid)" dropped from the PDF's contact line (PDF-only — the `.md` keeps it), and the "UX Designer (Contractor)" role (Aug 2011–Feb 2012) cut from the PDF only, being the one role entirely outside Shane's stated 10-year absolute cutoff. Still fits one page.
+- **Expertise/Skills list updated everywhere at once**: swapped "Federated Contribution Models" and "Design Token Systems" for "Prompt Engineering" in `scripts/resume-pdf-content.ts` (drives both generated downloads) and in `components/press/Expertise.tsx` (drives the live `/about` + `/resume` chips), so all three surfaces show the same 14-skill list. Verified in-browser after the component change.
+- **Download buttons wired up** on `/resume` (`app/resume/page.tsx`): primary CTA → PDF, secondary → `.md`, using the site's existing `pr-cta`/`pr-btn-secondary` + `Ghost` hover styling, both plain `<a download>` tags pointing at static files in `public/` (not Next `Link` — these aren't app routes). Verified both actually trigger a native file-download prompt rather than an in-browser preview or dead link.
+- **Mobile-checked**: `/resume` at 375×812 — both buttons stack full-width and remain tappable, no text overflow anywhere on the page, PDF download prompt fires the same as desktop.
+
+**Still open:** custom brand-font fidelity in the PDF (documented trade-off above); whether the master `.md`'s fuller contact/summary/experience should ever get its own spacing pass (only the PDF got one, per Shane's explicit scoping "these edits apply to the pdf only").
+
+---
 
 ### 2026-09-05 — Press Room redesign + content pass
 
@@ -235,7 +254,7 @@ Password security fix, project registry overhaul, content system migrated to MD 
 
   **If Phase 6 or anything later adds new custom CSS classes for the Press Room system, they need to go inside the existing `@layer components { ... }` block in globals.css, not as bare top-level rules** — otherwise they'll be unlayered and this same bug reappears.
 - [x] **Phase 6 — Convert remaining old-system pages. DONE (2026-09-05).** `/work/[slug]` (Figma Enterprise Migration + the 9 hidden entries) and Heart Design System (landing + 4 chapters) all converted to Press Room, built directly with Tailwind. Commits `cdba030`, `4b461c5`. `SiteFooter`'s routing flipped from an include-list to an exclude-list (`OLD_SYSTEM_PREFIXES`: `/labs`, `/particle-demo`, `/particle-test`) since Press Room now covers everything else. **Every page on the site is Press Room now except the /labs experiments.**
-- [~] **Phase 7 — Resume downloads. IN PROGRESS (2026-09-05).** The old `.docx` is deleted (recoverable via git history) and replaced site-wide with the locked master content (see below). Still to do: the actual one-page PDF (condensed bullets, not the website's paragraph style — see content-plan discussion this session) + a plain-text `.md` download, both generated from `resume-source/Shane_Maris_Resume.md`.
+- [x] **Phase 7 — Resume downloads. DONE (2026-09-05).** Old `.docx` deleted (recoverable via git history), replaced with a generated one-page PDF + plain-text `.md`, both wired up on `/resume`. See the new session-history entry below for the full build; `scripts/` in the file map above documents the pipeline.
 
 ### Resume content — master source of truth LOCKED AND APPLIED (2026-09-05)
 
