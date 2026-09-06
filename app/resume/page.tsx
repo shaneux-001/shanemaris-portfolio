@@ -16,23 +16,73 @@ export const metadata: Metadata = {
   },
 };
 
-interface ExperienceEntry { role: string; span: string; copy: string; highlights?: string[] }
+interface ExperienceEntry { role: string; span: string; bullets: React.ReactNode[] }
 
 const EXPERIENCE: ExperienceEntry[] = [
   {
-    role: "Digital Product Manager, Design Ops",
+    role: "Digital Product Manager, Design Operations",
     span: "Dec 2022 to present",
-    copy: "Manage and maintain the commercial design system. Co-lead the UX Community of Practice. Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership. Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use it.",
-    highlights: [
-      "Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional seats) across 55+ teams.",
-      "Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack). Currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2.",
+    bullets: [
+      "Expanded design system leadership buy-in across the organization; scaled Heart Design System from web to iOS native and Android platforms",
+      "Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership",
+      "Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional) across 55+ teams; led onboarding company-wide and have set up 20 workspaces for groups across the organization",
+      "Established design systems governance and adoption standards spanning UX Design, Creative Design, Product, and front-end engineering pods, coordinating across departments in Digital Experience, Technology, and Marketing",
+      "Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2",
+      <>
+        Industry recognition: invited by Figma to co-present on its &quot;In The File&quot; content series, covering Southwest&apos;s design system journey and real-world use of the Design Token Playbook, variables, and Dev Mode (
+        <a href="https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">slides</a>
+        {" · "}
+        <a href="https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">webinar page</a>
+        )
+      </>,
+      "Co-lead the UX Community of Practice; manage design operations and optimization of enterprise design processes",
+      "Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use it",
     ],
   },
-  { role: "Lead UX Designer", span: "Mar 2022 to Dec 2022", copy: "Co-led the UX Community of Practice. Led design effort for the first Southwest commercial digital design system. Worked with engineers to implement design systems for responsive web and native apps." },
-  { role: "Sr. UX Designer", span: "Feb 2019 to Mar 2022", copy: "Explored design systems and design ops as a formal role within Southwest. Design Leader for system implementation across responsive web, native iOS and Android. Created UX Community of Practice in 2020." },
-  { role: "UX Designer", span: "Apr 2014 to Feb 2019", copy: "Primary designer on Vision, the complete redesign of Southwest Digital Channels. Designer for Check-in, Homepage, Select Flights, Manage Reservation, and Enhanced Reaccommodation." },
-  { role: "Web Designer", span: "Feb 2012 to Apr 2014", copy: "Transitioned from contractor to FTE, supporting content creation across Southwest's Digital Channels. Managed production timelines, ensuring consistency and delivery across marketing and digital properties." },
-  { role: "UX Designer (Contractor)", span: "Aug 2011 to Feb 2012", copy: "Integrated AirTran's digital presence into the Southwest ecosystem following acquisition. Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations." },
+  {
+    role: "Lead UX Designer",
+    span: "Mar 2022 to Dec 2022",
+    bullets: [
+      "Defined and documented Heart Design System vision, establishing the strategic foundation for enterprise-scale governance",
+      "Secured executive leadership buy-in on the design systems investment and organizational approach",
+      "Bridged individual contributor and leadership roles while building the case for a dedicated design operations function",
+    ],
+  },
+  {
+    role: "Senior UX Designer",
+    span: "Feb 2019 to Mar 2022",
+    bullets: [
+      "Led design updates and enhancements to My Account and Homepage, key customer touchpoints",
+      "Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS",
+      "Co-founded and co-led the UX Community of Practice (with another UX Designer), establishing shared design standards across teams",
+    ],
+  },
+  {
+    role: "UX Designer",
+    span: "Apr 2014 to Feb 2019",
+    bullets: [
+      "A core team member on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience",
+      "Designed and shipped a hybrid Select Flights page as a short-lived hedge between the existing experience and the full Vision redesign — leadership was wary of the conversion dip from changing that much at once, so this stopgap ran for about a month while we confirmed conversion rate and average order value held before fully committing to Vision",
+      "Partnered with Southwest's Innovation Group on two internal tools: one giving station leadership real-time employee context during in-person visits, another giving gate agents real-time tools to personally engage top-tier loyalty customers",
+      "Used A/B testing and established UX research (Baymard, NN/g) to validate design decisions when they conflicted with stakeholder preference, grounding product direction in data rather than opinion",
+    ],
+  },
+  {
+    role: "Web Designer",
+    span: "Feb 2012 to Apr 2014",
+    bullets: [
+      "Transitioned from contractor to FTE; designed and built Southwest's first mobile-optimized sale landing page, driving a 200% increase in mobile shopping immediately post-launch",
+      "Supported content creation across Southwest's Digital Channels and managed production timelines, ensuring consistency and delivery across marketing and digital properties",
+    ],
+  },
+  {
+    role: "UX Designer (Contractor)",
+    span: "Aug 2011 to Feb 2012",
+    bullets: [
+      "Integrated AirTran's digital presence into the Southwest ecosystem following the airlines' merger",
+      "Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations",
+    ],
+  },
 ];
 
 const EDUCATION = [
@@ -56,9 +106,10 @@ export default function Resume() {
         <h1 className="pr-page-title m-0 mb-2.5 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
           Shane Maris
         </h1>
-        <p className="m-0 mb-1.5 text-base text-pr-lede">Design Ops and Systems Leader</p>
+        <p className="m-0 mb-1.5 text-base text-pr-lede">Design Systems Leader | Design Operations Strategy</p>
         <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
-          contact@shanemaris.com · shanemaris.com · +1 (214) 546 3047
+          Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com ·{" "}
+          <a href="https://www.linkedin.com/in/shanemaris/" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">linkedin.com/in/shanemaris</a>
         </p>
         {/* Download link removed 2026-09-05 — the .docx it pointed to was retired
             (wrong degree name, "UX design team" language, stale numbers). Phase 7
@@ -82,14 +133,11 @@ export default function Resume() {
                 <h3 className="font-archivo text-lg font-semibold text-pr-fg-strong m-0">{e.role}</h3>
                 <span className="font-plex-mono text-[10.5px] tracking-[0.04em] text-pr-muted">{e.span.toUpperCase()}</span>
               </div>
-              <p className="text-sm text-pr-lede leading-[1.7] m-0 max-w-[62ch]">{e.copy}</p>
-              {e.highlights && (
-                <ul className="mt-2.5 mb-0 pl-[18px] flex flex-col gap-2 max-w-[62ch]">
-                  {e.highlights.map((h) => (
-                    <li key={h} className="text-sm text-pr-lede leading-[1.7]">{h}</li>
-                  ))}
-                </ul>
-              )}
+              <ul className="m-0 pl-[18px] flex flex-col gap-2 max-w-[62ch]">
+                {e.bullets.map((b, i) => (
+                  <li key={i} className="text-sm text-pr-lede leading-[1.7]">{b}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
