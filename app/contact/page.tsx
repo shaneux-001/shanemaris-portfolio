@@ -138,7 +138,7 @@ export default function Contact() {
             {sent && (
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-pr-accent-text [animation:pr-tick_240ms_cubic-bezier(0.2,0.85,0.25,1)_both]" />
-                <span className="inline-block [animation:pr-wipe_380ms_cubic-bezier(0.3,0.9,0.2,1)_120ms_both]">SENT — I&apos;ll reply within a day.</span>
+                <span className="inline-block [animation:pr-wipe_380ms_cubic-bezier(0.3,0.9,0.2,1)_120ms_both]">SENT — I&apos;ll reply within 48 hours.</span>
               </span>
             )}
             {status === 'error' && <span className="text-pr-magenta">Something went wrong — email me directly at contact@shanemaris.com</span>}
