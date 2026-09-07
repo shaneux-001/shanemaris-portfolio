@@ -23,7 +23,7 @@ An external audit skill scored the live site **2026-09-05**: full report stored 
 | Leadership / Candidate Positioning | 67 (conditional pass) | P0 |
 
 **⚠️ Decide during QA mode — two direct conflicts with recent work, not resolved yet:**
-- [ ] **Keep or drop "Prompt Engineering" from top-level Expertise?** The audit's P0 "Sharpen Leadership Positioning" item recommends removing it unless strategically justified — but it was *added* to the Expertise/Skills list two nights ago (2026-09-05) at Shane's explicit request, replacing two other skills. Don't silently revert; needs a decision on whether the audit's positioning argument outweighs the original reason for adding it.
+- [x] ~~Keep or drop "Prompt Engineering" from top-level Expertise?~~ — decided 2026-09-07: dropped, commit `ac788d2`. Removed from Expertise chips and the resume PDF/.md downloads (both regenerated, still one page).
 - [ ] **Reorder or rewrite the `/about` principles?** The audit's P0 "Replace Generic Principles" item flags the exact five current principles (including "Build tools not rules," "One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone") as generic/interchangeable and recommends replacing them with 3–4 specific, evidence-backed beliefs — a content rewrite, not the reordering done on 2026-09-06. That reorder work would likely get superseded entirely if this item is tackled.
 
 **P0 (do first, if/when this gets tackled):**
@@ -60,10 +60,11 @@ These are cases where an old doc claims something is DONE, but either the underl
 ## Still open (no conflicting claim, just not done)
 
 **From tonight's session (2026-09-06), Shane's own calls to make:**
-- [ ] Dark-mode **hover** ghost effect (nav links, secondary button) still reads as nearly invisible — same 2.5px/320ms magnitude issue the on-load heading effect had before it got bumped. Apply the same kind of fix, or leave it?
+- [x] ~~Dark-mode **hover** ghost effect (nav links, secondary button)~~ — fixed 2026-09-07, commit `75a2cb1`. Applied the same bigger held-then-settles magnitude used for the on-load fix, scoped to exclude the primary CTA (already tuned separately). Verified via real `:hover` state in the browser.
 - [ ] Whether the downloadable `.md` resume should get the same spacing/breathing-room pass the PDF got (it was explicitly scoped PDF-only at the time).
 - [ ] Custom brand fonts (Archivo / IBM Plex Mono) in the generated PDF resume — currently falls back to Helvetica/Courier after a `fontkit` crash on the downloaded TTFs. Only worth revisiting if exact typography match actually matters.
 - [x] ~~Change the contact form success message from "I'll reply within a day" to something more realistic~~ — done 2026-09-07 (`180b49c`, revised to "2-3 business days" in `ca8a517` after "48 hours" felt too robotic).
+- [ ] **Review 3 Expertise icon picks by hand.** Icons came back to the Expertise chips 2026-09-07 (`ac788d2`), all confirmed to actually exist in the installed Phosphor package — but 3 of the 13 are a best-guess fit, not a confident obvious match, since "governance" and "adoption" don't have one universally-obvious glyph: **Figma Governance** → `ShieldCheck`, **Design System Governance** → `Blueprint`, **AI Adoption** → `TrendUp`. Worth a manual look through the Phosphor library (`node_modules/@phosphor-icons/react/dist/csr/` has the full list, 1512 icons) to see if something fits better — swap in `components/press/Expertise.tsx`.
 
 **Content/assets — infrastructure is done, files just aren't there yet:**
 - [ ] Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards (both now 2×2 grids, 16:9 slots) — still showing the diagonal-stripe placeholder. Drop files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` with the existing `chapter-N-thumb.jpg` naming and they pick up automatically.
