@@ -601,7 +601,7 @@ img {
 
 .pr-nav-link {
   position: relative;
-  padding: 7px 12px;
+  padding: 13px 12px;
   color: var(--pr-muted);
   border-bottom: 2px solid transparent;
   transition: color 0.14s;
@@ -617,7 +617,7 @@ img {
   font-weight: 500;
   background: var(--pr-cta-bg);
   color: var(--pr-cta-fg);
-  padding: 12px 20px;
+  padding: 13px 20px;
   border: none;
   transition: background-color 0.12s, transform 0.06s;
   cursor: pointer;
@@ -635,7 +635,7 @@ img {
   background: none;
   border: 1px solid var(--pr-muted);
   color: var(--pr-fg);
-  padding: 12px 20px;
+  padding: 13px 20px;
   transition: background-color 0.12s, border-color 0.12s, transform 0.06s;
   cursor: pointer;
   text-decoration: none;
