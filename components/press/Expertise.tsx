@@ -1,43 +1,60 @@
 /**
  * Shared expertise grid — used identically by /about and /resume so the
- * two pages can't drift out of sync. Source list matches the locked master
- * resume content verbatim (Option B, 2026-09-05: every skill from the
- * master list gets its own chip rather than compressing multi-part skills
- * into shorter phrasing, so nothing gets lost).
+ * two pages can't drift out of sync.
  *
- * Icons dropped in this pass — with 14 skills including several abstract
- * ones ("Design System Governance," "Executive Communication"),
- * finding an icon that actually fits each concept stopped being
- * meaningful, and Shane's stated intent was closer to a plain, scannable
- * LinkedIn-style skill list anyway. Simple text chips instead.
+ * Icons brought back 2026-09-07 (were dropped 2026-09-05, then Shane asked
+ * for them again once "Prompt Engineering" got cut per the quality-gate
+ * audit — see ROADMAP.md). Every icon below was confirmed to actually exist
+ * in the installed @phosphor-icons/react package (not guessed from memory)
+ * before being wired in. Three of these are the icon that best fits, not a
+ * confident single "obvious" match — flagged in the commit message so Shane
+ * can swap them by hand if a better one turns up: Figma Governance
+ * (ShieldCheck), Design System Governance (Blueprint), and AI Adoption
+ * (TrendUp) are all abstract concepts without one universally-obvious glyph.
  */
 
+import {
+  Gear,
+  Stack,
+  FigmaLogo,
+  ShieldCheck,
+  UsersThree,
+  Blueprint,
+  Robot,
+  TrendUp,
+  MagnifyingGlass,
+  Handshake,
+  Presentation,
+  GraduationCap,
+  Wheelchair,
+} from '@phosphor-icons/react/dist/ssr';
+
 const EXPERTISE = [
-  "Design Ops",
-  "Design Systems",
-  "Figma Enterprise Administration",
-  "Figma Governance",
-  "Cross-Functional Leadership",
-  "Design System Governance",
-  "AI Tooling Strategy",
-  "AI Adoption",
-  "UX Research & Strategy",
-  "Stakeholder Management",
-  "Executive Communication",
-  "Mentoring",
-  "Accessibility (WCAG)",
-  "Prompt Engineering",
+  { label: "Design Ops", Icon: Gear },
+  { label: "Design Systems", Icon: Stack },
+  { label: "Figma Enterprise Administration", Icon: FigmaLogo },
+  { label: "Figma Governance", Icon: ShieldCheck },
+  { label: "Cross-Functional Leadership", Icon: UsersThree },
+  { label: "Design System Governance", Icon: Blueprint },
+  { label: "AI Tooling Strategy", Icon: Robot },
+  { label: "AI Adoption", Icon: TrendUp },
+  { label: "UX Research & Strategy", Icon: MagnifyingGlass },
+  { label: "Stakeholder Management", Icon: Handshake },
+  { label: "Executive Communication", Icon: Presentation },
+  { label: "Mentoring", Icon: GraduationCap },
+  { label: "Accessibility (WCAG)", Icon: Wheelchair },
 ];
 
 export default function Expertise() {
   return (
     <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
-      {EXPERTISE.map((skill) => (
+      {EXPERTISE.map(({ label, Icon }) => (
         <div
-          key={skill}
-          className="text-[13.5px] text-pr-fg px-3.5 py-2.5 border border-pr-rule inline-flex items-center"
+          key={label}
+          className="text-[13.5px] text-pr-fg px-3.5 py-2.5 border border-pr-rule inline-flex items-start gap-2.5"
         >
-          {skill}
+          <Icon size={16} color="var(--pr-magenta)" className="shrink-0 mt-[1px]" />
+          {label}
         </div>
       ))}
     </div>

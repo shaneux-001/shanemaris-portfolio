@@ -89,5 +89,5 @@ export const SKILLS = [
   "Design Ops", "Design Systems", "Figma Enterprise Administration", "Figma Governance",
   "Cross-Functional Leadership", "Design System Governance",
   "AI Tooling Strategy", "AI Adoption", "UX Research & Strategy", "Stakeholder Management",
-  "Executive Communication", "Mentoring", "Accessibility (WCAG)", "Prompt Engineering",
+  "Executive Communication", "Mentoring", "Accessibility (WCAG)",
 ];
