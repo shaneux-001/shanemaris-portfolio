@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import PressCta from "@/components/press/PressCta";
 import Expertise from "@/components/press/Expertise";
@@ -34,21 +36,39 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function About() {
+  const portraitPath = path.join(process.cwd(), "public", "about-portrait.jpg");
+  const hasPortrait = fs.existsSync(portraitPath);
+
   return (
     <main className="pr-page">
     <div className="pr-main pt-[clamp(36px,5vw,56px)] pb-6">
-      <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
-        <Ghost trigger="load">I design the systems behind great design.</Ghost>
-      </h1>
-      <p className="pr-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[54ch]">
-        I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.
-      </p>
-      <p className="pr-lede m-0 mb-8 leading-[1.7] text-pr-lede max-w-[54ch]">
-        I&apos;m a designer by trade who started fixing stuff on the side because I&apos;m the kind of person who can&apos;t leave a broken process alone. It worked well enough that I was able to turn it into my full-time focus.
-      </p>
-      <div className="flex gap-[10px] items-center flex-wrap mb-2">
-        <PressCta href="/contact">SAY HELLO</PressCta>
-        <PressCta href="/resume" variant="secondary">VIEW RESUME</PressCta>
+      <div className="pr-about-intro-grid mb-2">
+        <div>
+          <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
+            <Ghost trigger="load">I design the systems behind great design.</Ghost>
+          </h1>
+          <p className="pr-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[54ch]">
+            I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.
+          </p>
+          <p className="pr-lede m-0 mb-8 leading-[1.7] text-pr-lede max-w-[54ch]">
+            I&apos;m a designer by trade who started fixing stuff on the side because I&apos;m the kind of person who can&apos;t leave a broken process alone. It worked well enough that I was able to turn it into my full-time focus.
+          </p>
+          <div className="flex gap-[10px] items-center flex-wrap">
+            <PressCta href="/contact">SAY HELLO</PressCta>
+            <PressCta href="/resume" variant="secondary">VIEW RESUME</PressCta>
+          </div>
+        </div>
+        <div className="relative aspect-[4/5] overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+          {hasPortrait ? (
+            <img
+              src="/about-portrait.jpg"
+              alt="Shane Maris"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <span className="font-plex-mono text-[11px] text-pr-muted">about-portrait.jpg</span>
+          )}
+        </div>
       </div>
 
       <SectionLabel>OUTSIDE OF WORK</SectionLabel>

@@ -509,6 +509,17 @@ img {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 26px 44px;
 }
+/* About page intro: bio text (flexible) + portrait (fixed narrow column).
+   Not reusing .pr-lead-grid — its mobile override forces 16:9 on
+   `:first-child`, which is right for Home's image-first layout but would
+   wrongly target the text block here, since the portrait is the second
+   child. */
+.pr-about-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 240px);
+  gap: 32px;
+  align-items: start;
+}
 /* Compound selectors (not bare .pr-row-narrow) so this reliably beats
    .pr-row-link's own `display: grid`, regardless of source order. */
 .pr-row-link.pr-row-narrow { display: none; }
@@ -517,6 +528,7 @@ img {
   .pr-lead-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .pr-lead-grid > :first-child { aspect-ratio: 16 / 9; }
   .pr-two-col { grid-template-columns: minmax(0, 1fr); }
+  .pr-about-intro-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .pr-row-link.pr-row-wide { display: none; }
   .pr-row-link.pr-row-narrow { display: flex; }
 }
