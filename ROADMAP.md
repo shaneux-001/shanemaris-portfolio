@@ -63,7 +63,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 - [ ] Dark-mode **hover** ghost effect (nav links, secondary button) still reads as nearly invisible — same 2.5px/320ms magnitude issue the on-load heading effect had before it got bumped. Apply the same kind of fix, or leave it?
 - [ ] Whether the downloadable `.md` resume should get the same spacing/breathing-room pass the PDF got (it was explicitly scoped PDF-only at the time).
 - [ ] Custom brand fonts (Archivo / IBM Plex Mono) in the generated PDF resume — currently falls back to Helvetica/Courier after a `fontkit` crash on the downloaded TTFs. Only worth revisiting if exact typography match actually matters.
-- [x] ~~Change the contact form success message from "I'll reply within a day" to 48 hours~~ — done 2026-09-07, commit `180b49c`.
+- [x] ~~Change the contact form success message from "I'll reply within a day" to something more realistic~~ — done 2026-09-07 (`180b49c`, revised to "2-3 business days" in `ca8a517` after "48 hours" felt too robotic).
 
 **Content/assets — infrastructure is done, files just aren't there yet:**
 - [ ] Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards (both now 2×2 grids, 16:9 slots) — still showing the diagonal-stripe placeholder. Drop files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` with the existing `chapter-N-thumb.jpg` naming and they pick up automatically.
