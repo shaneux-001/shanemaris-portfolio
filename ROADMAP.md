@@ -15,6 +15,8 @@ An external audit skill scored the live site **2026-09-05**: full report stored 
 
 **Score: 73/100 — Conditional Pass. Target: 85+/100.** This is meant to be re-run after changes to check for improvement — when that happens, save the new report as `qa/quality-gate-<date>.md` (don't overwrite this one) and update this section with the new score.
 
+**⚠️ This audit assumed the wrong job-target level.** Its "Sharpen Leadership Positioning" and "Fix the Conversion Funnel" items are both framed around Director/VP hiring intent — but Shane is primarily targeting **Manager-level** roles (Director/VP only as an opportunistic upside at a smaller org, or via in-house recruiting), and has said directly he has no solid direct-management experience beyond one contractor relationship. Shane is re-running the audit with that clarification (2026-09-07) — **once the new report lands, replace the P0/P1/P2 breakdown below with it rather than layering on top.** Don't implement the current P0 items' Director/VP framing as-is.
+
 | Area | Score | Priority |
 |---|---|---|
 | AI Slop Fingerprint / Aesthetic Intent | 76 (pass, visual verification pending) | P1 |
@@ -29,7 +31,7 @@ An external audit skill scored the live site **2026-09-05**: full report stored 
 **P0 (do first, if/when this gets tackled):**
 - [ ] Executive Evidence Layer — compact mandate/scale/constraint/role/decisions/outcome/unresolved summary above the long-form narrative on Heart Design System, Figma Enterprise Migration, and Proof Before Progress.
 - [ ] Sharpen Leadership Positioning — one primary leadership proposition instead of several competing identities; see the Prompt Engineering conflict above.
-- [ ] Fix the Conversion Funnel — "Want to work together?" reads as freelancer/consultant framing rather than Director/VP hiring intent; audit suggests contextual CTAs instead (e.g. "Discuss a leadership role").
+- [~] Fix the Conversion Funnel — **partially done 2026-09-07, commit `34bb2a7`.** The button copy "GET IN TOUCH" → "SAY HELLO" (Shane's call, over "Let's talk" and "Talk shop" — see session for the reasoning, recalibrated once the Manager-level correction above landed). The heading next to it ("Want to work together?") and the Contact page's own H1 ("Get in touch") are still unchanged — separate copy decisions not made yet, and probably worth waiting for the re-run audit before touching further.
 - [ ] Replace Generic Principles With Defensible Beliefs — see the conflict above.
 
 **P1:**
