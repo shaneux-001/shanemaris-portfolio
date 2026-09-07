@@ -47,7 +47,7 @@ export default function About() {
         I&apos;m a designer by trade who started fixing stuff on the side because I&apos;m the kind of person who can&apos;t leave a broken process alone. It worked well enough that I was able to turn it into my full-time focus.
       </p>
       <div className="flex gap-[10px] items-center flex-wrap mb-2">
-        <PressCta href="/contact">GET IN TOUCH</PressCta>
+        <PressCta href="/contact">SAY HELLO</PressCta>
         <PressCta href="/resume" variant="secondary">VIEW RESUME</PressCta>
       </div>
 
