@@ -85,9 +85,11 @@ export const CERTIFICATIONS = [
   { title: "ICAgile Certified Professional, Agile Team Facilitation (ICP-ATF)", meta: "January 2022" },
 ];
 
+// Order matches components/press/Expertise.tsx (1-line labels first, then
+// 2-line labels, grouped for the /about + /resume chip grid) — kept in sync
+// even though line-wrapping doesn't apply to this plain-text join.
 export const SKILLS = [
-  "Design Ops", "Design Systems", "Figma Enterprise Administration", "Figma Governance",
-  "Cross-Functional Leadership", "Design System Governance",
-  "AI Tooling Strategy", "AI Adoption", "UX Research & Strategy", "Stakeholder Management",
-  "Executive Communication", "Mentoring", "Accessibility (WCAG)",
+  "Design Ops", "Design Systems", "Figma Governance", "AI Tooling Strategy", "AI Adoption", "Mentoring",
+  "Figma Enterprise Administration", "Cross-Functional Leadership", "Design System Governance",
+  "UX Research & Strategy", "Stakeholder Management", "Executive Communication", "Accessibility (WCAG)",
 ];

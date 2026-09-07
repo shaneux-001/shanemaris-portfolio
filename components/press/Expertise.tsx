@@ -11,37 +11,50 @@
  * can swap them by hand if a better one turns up: Figma Governance
  * (ShieldCheck), Design System Governance (Blueprint), and AI Adoption
  * (TrendUp) are all abstract concepts without one universally-obvious glyph.
+ *
+ * Order (2026-09-07): grouped by rendered line count at the standard
+ * 5-column desktop width (measured directly, not guessed) so 1-line labels
+ * share a row with other 1-line labels and 2-line labels share a row with
+ * other 2-line labels, avoiding the uneven look of mixed rows even with the
+ * fixed chip height below. 6 one-liners and 7 two-liners don't split evenly
+ * across rows of 5, so row 2 unavoidably mixes one straggler in with the
+ * two-liners — rows 1 and 3 come out fully clean, which is the best "where
+ * possible" gets at this column count. Re-verify this grouping in the
+ * browser (measure actual rendered line count, don't eyeball it) if any
+ * label text changes.
  */
 
 import {
   Gear,
   Stack,
-  FigmaLogo,
   ShieldCheck,
-  UsersThree,
-  Blueprint,
   Robot,
   TrendUp,
+  GraduationCap,
+  FigmaLogo,
+  UsersThree,
+  Blueprint,
   MagnifyingGlass,
   Handshake,
   Presentation,
-  GraduationCap,
   Wheelchair,
 } from '@phosphor-icons/react/dist/ssr';
 
 const EXPERTISE = [
+  // 1-line labels at the standard desktop width
   { label: "Design Ops", Icon: Gear },
   { label: "Design Systems", Icon: Stack },
-  { label: "Figma Enterprise Administration", Icon: FigmaLogo },
   { label: "Figma Governance", Icon: ShieldCheck },
-  { label: "Cross-Functional Leadership", Icon: UsersThree },
-  { label: "Design System Governance", Icon: Blueprint },
   { label: "AI Tooling Strategy", Icon: Robot },
   { label: "AI Adoption", Icon: TrendUp },
+  { label: "Mentoring", Icon: GraduationCap },
+  // 2-line labels at the standard desktop width
+  { label: "Figma Enterprise Administration", Icon: FigmaLogo },
+  { label: "Cross-Functional Leadership", Icon: UsersThree },
+  { label: "Design System Governance", Icon: Blueprint },
   { label: "UX Research & Strategy", Icon: MagnifyingGlass },
   { label: "Stakeholder Management", Icon: Handshake },
   { label: "Executive Communication", Icon: Presentation },
-  { label: "Mentoring", Icon: GraduationCap },
   { label: "Accessibility (WCAG)", Icon: Wheelchair },
 ];
 
