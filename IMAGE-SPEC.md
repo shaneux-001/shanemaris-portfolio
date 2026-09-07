@@ -1,202 +1,119 @@
-# Image Asset Spec Sheet
-**shanemaris.com · Generated 2026-05-01**
+# Image Asset Punch List
+**shanemaris.com · Refreshed 2026-09-07** (previous version generated 2026-05-01, now stale — rebuilt from a fresh audit of the actual current code, not carried forward)
 
-> ⚠️ **Partially stale as of 2026-09-06 — see [`ROADMAP.md`](ROADMAP.md) for current status.** The `fs.existsSync`-based wiring pattern and file-naming convention below are still how images work today. But: the `/work` index no longer has a card grid (it's a flat typographic list now — those image slots don't apply), and Heart Design System's + Proof Before Progress's chapter thumbnails changed from 4:3 to 16:9 (`aspect-video`) since this spec was written. The actual content-gathering task (real photos still needed) is still open — just don't trust the exact dimensions below without double-checking against the current layout first.
+Every dimension/aspect ratio below was read directly out of the component code (`aspect-[...]` classes), not estimated. Alt text shown for each slot is either already hardcoded in the code or generated dynamically from the case study's real content — use it as a content brief for what that image should actually show.
 
-All images live under `public/work/[slug]/`. The `public/work/` directory does not exist yet — create it before adding any files.
+## How the wiring works
+
+Every slot below (except the two flagged in **Not yet wired**) uses the same pattern: the page checks `fs.existsSync()` for the exact filename at request time. Drop a correctly-named file into the folder, refresh the page — no dev-server restart, no code change, no deploy needed to see it locally. Filenames must match **exactly** (case-sensitive, `.jpg` extension expected by the code as written).
+
+Export at 2× the listed pixel size for retina displays. JPG at 80–85% quality or WebP at 80% — code currently expects `.jpg`, so convert before dropping in.
 
 ---
 
-## Dimension Reference
+## Priority 1 — Live pages (visible on the site right now)
 
-| Use | Aspect Ratio | Recommended size (deliver at 2×) | Format |
+### Heart Design System — `public/work/heart-design-system/`
+
+Landing page (`/work/heart-design-system`) — 4 chapter thumbnails, aspect **16:9**, ~1280×720px (`aspect-video`):
+- [ ] `chapter-1-thumb.jpg` — "Chapter 1 — The Long Game"
+- [ ] `chapter-2-thumb.jpg` — "Chapter 2 — Staying Alive"
+- [ ] `chapter-3-thumb.jpg` — "Chapter 3 — The Moment It Clicked"
+- [ ] `chapter-4-thumb.jpg` — "Chapter 4 — No Straight Lines"
+
+Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px:
+- [ ] `chapter-1-hero.jpg`
+- [ ] `chapter-2-hero.jpg`
+- [ ] `chapter-3-hero.jpg`
+- [ ] `chapter-4-hero.jpg`
+
+Chapter section images, aspect **3:2** (`aspect-[1.5/1]`), ~1600×1067px — count varies per chapter:
+- [ ] `chapter-1-section-1.jpg` — "Screenshot — Design artifact"
+- [ ] `chapter-1-section-2.jpg` — "Process — Deck screenshot"
+- [ ] `chapter-2-section-1.jpg` — "Lippincott Foundations — Color System"
+- [ ] `chapter-2-section-2.jpg` — "Team Foundation — Early Partnership"
+- [ ] `chapter-2-section-3.jpg` — "Multi-platform Expansion — iOS & Android"
+- [ ] `chapter-3-section-1.jpg` — "Before / After — Gift Card Flow"
+- [ ] `chapter-3-section-2.jpg` — "Component Library — Token Usage"
+- [ ] `chapter-4-section-1.jpg` — "Org Chart — Stakeholder Map"
+- [ ] `chapter-4-section-2.jpg` — "Resilience — Navigation Through Crisis"
+
+**17 images total.**
+
+### Proof Before Progress — `public/work/proof-before-progress/`
+
+Landing page — 4 chapter thumbnails, aspect **16:9**, ~1280×720px:
+- [ ] `chapter-1-thumb.jpg` — "The Belief"
+- [ ] `chapter-2-thumb.jpg` — "The Reset"
+- [ ] `chapter-3-thumb.jpg` — "The Vendor Path Not Taken"
+- [ ] `chapter-4-thumb.jpg` — "The Weekend and the Proof"
+
+Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px (no section images — these 4 chapters don't have any section-image slots in the code):
+- [ ] `chapter-1-hero.jpg`
+- [ ] `chapter-2-hero.jpg`
+- [ ] `chapter-3-hero.jpg`
+- [ ] `chapter-4-hero.jpg`
+
+**8 images total.**
+
+### Figma Enterprise Migration — `public/work/figma-enterprise-migration/`
+
+1 hero, aspect **16:9** (`aspect-[1/0.56]`), ~1600×900px:
+- [ ] `hero.jpg` — "Figma Enterprise Migration — Hero"
+
+7 section images (the MD has 8 `##` sections; the code renders an image *between* sections, not after the last one, so it's always section-count minus 1), aspect **3:2** (`aspect-[1.5/1]`), ~1600×1067px:
+- [ ] `section-1.jpg` — appears after "The Axure detour"
+- [ ] `section-2.jpg` — after "Forced into real versioning"
+- [ ] `section-3.jpg` — after "Building the case"
+- [ ] `section-4.jpg` — after "Procurement"
+- [ ] `section-5.jpg` — after "Confirmation at Config"
+- [ ] `section-6.jpg` — after "From 20 seats to an enterprise tool"
+- [ ] `section-7.jpg` — after "Onboarding across the company"
+
+**8 images total.**
+
+---
+
+## Priority 2 — Hidden case studies (`public/work/[slug]/`)
+
+These 9 have real content (`content/work/[slug].md`) and a registry entry already, just marked `hidden: true` in `lib/projects.ts` pending content polish + images. Same pattern as Figma Enterprise Migration above — 1 `hero.jpg` (16:9) + (section count − 1) `section-N.jpg` files (3:2) each.
+
+| Slug | Sections | Section images needed |
+|---|---|---|
+| `homepage-v2` | 4 | 3 |
+| `native-app-homepage` | 4 | 3 |
+| `vision-decommission` | 4 | 3 |
+| `ife-starlink` | 4 | 3 |
+| `my-account-redesign` | 4 | 3 |
+| `mobile-check-in` | 3 | 2 |
+| `homepage-redesign` | 3 | 2 |
+| `change-cancel-experience` | 4 | 3 |
+| `enhanced-reaccom` | 4 | 3 |
+
+**9 heroes + 27 section images = 36 images**, once these are ready to un-hide. Lower priority than Priority 1 — don't start here unless Priority 1 is done and there's appetite to also unhide new case studies.
+
+---
+
+## Not yet wired — needs a small code change first, not just a file drop
+
+- **Home page lead-case-study card** (`app/page.tsx`, the "heart-ds-hero.jpg" placeholder under "LEAD CASE STUDY"). This one is **not** actually connected to `fs.existsSync` like everywhere else — it's a static placeholder div that will keep showing the filename text even if a file is dropped in. Flag this to Claude before dropping an image here; it needs the same wiring pattern applied first (~5 minute fix).
+- **About page portrait/illustration**. No image slot exists in the code at all yet — this was flagged back in the May roadmap as a "start early, external dependency" item but a slot was never built. Needs a real component addition, not just a file.
+
+---
+
+## Total scope
+
+- **Priority 1 (do this first):** 33 images across 3 live case studies.
+- **Priority 2 (later, optional):** 36 images across 9 currently-hidden case studies.
+- **Needs code first:** 2 slots (Home hero, About portrait).
+
+---
+
+## Dimension reference
+
+| Use | Aspect ratio | Recommended export size (2×) | Tailwind class (source of truth) |
 |---|---|---|---|
-| **Featured card** (Work page hero card) | 1 : 0.85 | 1600 × 1360 px | JPG or WebP |
-| **Grid thumbnail** (Work page 3-col grid) | 1 : 0.67 | 640 × 429 px | JPG or WebP |
-| **Case study hero** | 16 : 9 (1 : 0.56) | 1600 × 896 px | JPG or WebP |
-| **Between-section image** | 3 : 2 (1.5 : 1) | 1568 × 1045 px | JPG or WebP |
-
-> **Delivery tip:** Export JPG at 80–85% quality, or WebP at 80%. Name files exactly as listed below — the app resolves them from the slug with no dynamic config needed.
-
----
-
-## Page: `/work` — Work Index
-
-### Featured Card (Heart Design System)
-- [ ] `public/work/heart-design-system/featured.jpg` — 1600 × 1360 px (ratio 1:0.85)
-
-### Grid Thumbnails (9 projects)
-- [ ] `public/work/homepage-v2/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/my-account-redesign/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/native-app-homepage/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/vision-decommission/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/ife-starlink/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/mobile-check-in/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/homepage-redesign/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/change-cancel-experience/thumbnail.jpg` — 640 × 429 px
-- [ ] `public/work/enhanced-reaccom/thumbnail.jpg` — 640 × 429 px
-
----
-
-## Page: `/work/heart-design-system` — Landing (chapter index)
-_4 chapter thumbnail cards (1:0.67) — no landing hero._
-
-- [ ] `public/work/heart-design-system/chapter-1-thumb.jpg` — 640 × 429 px
-- [ ] `public/work/heart-design-system/chapter-2-thumb.jpg` — 640 × 429 px
-- [ ] `public/work/heart-design-system/chapter-3-thumb.jpg` — 640 × 429 px
-- [ ] `public/work/heart-design-system/chapter-4-thumb.jpg` — 640 × 429 px
-
----
-
-## Page: `/work/heart-design-system/chapter-1` — The Long Game
-
-- [ ] `public/work/heart-design-system/chapter-1-hero.jpg` — 1600 × 896 px (16:9)
-- [ ] `public/work/heart-design-system/chapter-1-section-1.jpg` — 1568 × 1045 px _(Screenshot / Design artifact)_
-- [ ] `public/work/heart-design-system/chapter-1-section-2.jpg` — 1568 × 1045 px _(Process / Deck screenshot)_
-
----
-
-## Page: `/work/heart-design-system/chapter-2` — Staying Alive
-
-- [ ] `public/work/heart-design-system/chapter-2-hero.jpg` — 1600 × 896 px (16:9)
-- [ ] `public/work/heart-design-system/chapter-2-section-1.jpg` — 1568 × 1045 px _(Lippincott Foundations / Color System)_
-- [ ] `public/work/heart-design-system/chapter-2-section-2.jpg` — 1568 × 1045 px _(Team Foundation / Early Partnership)_
-- [ ] `public/work/heart-design-system/chapter-2-section-3.jpg` — 1568 × 1045 px _(Multi-platform Expansion / iOS & Android)_
-
----
-
-## Page: `/work/heart-design-system/chapter-3` — The Moment It Clicked
-
-- [ ] `public/work/heart-design-system/chapter-3-hero.jpg` — 1600 × 896 px (16:9)
-- [ ] `public/work/heart-design-system/chapter-3-section-1.jpg` — 1568 × 1045 px _(Before / After Gift Card Flow)_
-- [ ] `public/work/heart-design-system/chapter-3-section-2.jpg` — 1568 × 1045 px _(Component Library / Token Usage)_
-
----
-
-## Page: `/work/heart-design-system/chapter-4` — No Straight Lines
-
-- [ ] `public/work/heart-design-system/chapter-4-hero.jpg` — 1600 × 896 px (16:9)
-- [ ] `public/work/heart-design-system/chapter-4-section-1.jpg` — 1568 × 1045 px _(Org Chart / Stakeholder Map)_
-- [ ] `public/work/heart-design-system/chapter-4-section-2.jpg` — 1568 × 1045 px _(Resilience / Navigation Through Crisis)_
-
----
-
-## Page: `/work/homepage-v2`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/homepage-v2/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/homepage-v2/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/homepage-v2/section-2.jpg` — 1568 × 1045 px _(after "What the team built")_
-- [ ] `public/work/homepage-v2/section-3.jpg` — 1568 × 1045 px _(after "The token timing")_
-
----
-
-## Page: `/work/my-account-redesign`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/my-account-redesign/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/my-account-redesign/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/my-account-redesign/section-2.jpg` — 1568 × 1045 px _(after "Evolving role mid-project")_
-- [ ] `public/work/my-account-redesign/section-3.jpg` — 1568 × 1045 px _(after "First major HDS consumer")_
-
----
-
-## Page: `/work/native-app-homepage`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/native-app-homepage/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/native-app-homepage/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/native-app-homepage/section-2.jpg` — 1568 × 1045 px _(after "Translating HDS to native")_
-- [ ] `public/work/native-app-homepage/section-3.jpg` — 1568 × 1045 px _(after "What this unlocked")_
-
----
-
-## Page: `/work/vision-decommission`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/vision-decommission/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/vision-decommission/section-1.jpg` — 1568 × 1045 px _(after "The broader problem")_
-- [ ] `public/work/vision-decommission/section-2.jpg` — 1568 × 1045 px _(after "Exploring AI tooling")_
-- [ ] `public/work/vision-decommission/section-3.jpg` — 1568 × 1045 px _(after "Scope and current state")_
-
----
-
-## Page: `/work/ife-starlink`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/ife-starlink/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/ife-starlink/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/ife-starlink/section-2.jpg` — 1568 × 1045 px _(after "The Design Ops lens")_
-- [ ] `public/work/ife-starlink/section-3.jpg` — 1568 × 1045 px _(after "Heart DS in a new environment")_
-
----
-
-## Page: `/work/mobile-check-in`
-_3 sections → 2 between-section images_
-
-- [ ] `public/work/mobile-check-in/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/mobile-check-in/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/mobile-check-in/section-2.jpg` — 1568 × 1045 px _(after "The design work")_
-
----
-
-## Page: `/work/homepage-redesign`
-_3 sections → 2 between-section images_
-
-- [ ] `public/work/homepage-redesign/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/homepage-redesign/section-1.jpg` — 1568 × 1045 px _(after "The 2014 rebrand")_
-- [ ] `public/work/homepage-redesign/section-2.jpg` — 1568 × 1045 px _(after "My contribution")_
-
----
-
-## Page: `/work/change-cancel-experience`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/change-cancel-experience/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/change-cancel-experience/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/change-cancel-experience/section-2.jpg` — 1568 × 1045 px _(after "The Vision context")_
-- [ ] `public/work/change-cancel-experience/section-3.jpg` — 1568 × 1045 px _(after "The design work")_
-
----
-
-## Page: `/work/enhanced-reaccom`
-_4 sections → 3 between-section images_
-
-- [ ] `public/work/enhanced-reaccom/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/enhanced-reaccom/section-1.jpg` — 1568 × 1045 px _(after "Context")_
-- [ ] `public/work/enhanced-reaccom/section-2.jpg` — 1568 × 1045 px _(after "The design work")_
-- [ ] `public/work/enhanced-reaccom/section-3.jpg` — 1568 × 1045 px _(after "The Vision context")_
-
----
-
-## Page: `/labs` (Project Oasis — password protected)
-_3 sections → 2 between-section images. No grid thumbnail needed (not in public work listing)._
-
-- [ ] `public/work/project-oasis/hero.jpg` — 1600 × 896 px
-- [ ] `public/work/project-oasis/section-1.jpg` — 1568 × 1045 px _(after "The challenge")_
-- [ ] `public/work/project-oasis/section-2.jpg` — 1568 × 1045 px _(after "My role")_
-
----
-
-## Pages with no images needed
-
-| Page | Notes |
-|---|---|
-| `/` Home | Text only |
-| `/about` | Text only — no portrait placeholder currently in the component |
-| `/contact` | Text only |
-| `/resume` | Document download only |
-
----
-
-## Summary
-
-| Type | Count |
-|---|---|
-| Featured card thumbnail | 1 |
-| Grid thumbnails | 9 |
-| Case study heroes | 11 (10 public + Oasis) |
-| Between-section images | 27 |
-| **Total** | **48** |
-
-**For a placeholder pass:** hero + featured thumbnail only = 11 files. Drop them into their folders and the layout will render immediately — section images fall back to the styled placeholder block if the file is missing.
+| Chapter/case-study thumbnail (landing grids) | 16:9 | 1280×720px | `aspect-video` |
+| Chapter/case-study hero | 1.6:1 | 1600×1000px | `aspect-[1.6/1]` (HDS/PBP chapters) or `aspect-[1/0.56]` (≈16:9, `[slug]` hero) |
+| Between-section image | 3:2 | 1600×1067px | `aspect-[1.5/1]` |
+| Home lead-case-study card | 4:3 | 1600×1200px | `aspect-[4/3]` — **not yet wired, see above** |

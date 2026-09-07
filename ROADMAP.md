@@ -3,7 +3,7 @@
 **Last updated: 2026-09-06.** This file is now the ONE place tracking what's left to do on this project. It supersedes:
 - `HANDOFF.md`'s old `## To-do` section (now just points here — the rest of HANDOFF.md, the architecture/gotchas/file-map reference material, is still accurate and stays where it is)
 - The Cowork artifact **"Shane Portfolio Roadmap"** (`~/Documents/Claude/Artifacts/shane-portfolio-roadmap/`) — last touched May 1, targeted a June 22 launch that's long past, and several of its own "DONE" claims turned out to be stale once the September redesign rebuilt large parts of the site. A stale banner has been added to it.
-- Parts of `IMAGE-SPEC.md` — the asset infrastructure it describes is still accurate, but its exact dimensions are wrong in places now (see the Images section below). A stale banner has been added there too, pointing back here.
+- `IMAGE-SPEC.md` was refreshed 2026-09-07 and is now the accurate, current image punch list (was previously flagged stale here — that's resolved now).
 
 **Why this exists:** work happened in two bursts — April 19 through May 11 (foundation, then a big content/QA push), then a ~4-month gap, picking back up 2026-09-05. During the restart, some stale context from the spring got pulled in and briefly overwrote edits from the day before; that's been caught and fixed, but it's why this consolidation exists — one place, one history, so it doesn't happen again.
 
@@ -87,8 +87,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 - [ ] **Review 3 Expertise icon picks by hand.** Icons came back to the Expertise chips 2026-09-07 (`ac788d2`), all confirmed to actually exist in the installed Phosphor package — but 3 of the 13 are a best-guess fit, not a confident obvious match, since "governance" and "adoption" don't have one universally-obvious glyph: **Figma Governance** → `ShieldCheck`, **Design System Governance** → `Blueprint`, **AI Adoption** → `TrendUp`. Worth a manual look through the Phosphor library (`node_modules/@phosphor-icons/react/dist/csr/` has the full list, 1512 icons) to see if something fits better — swap in `components/press/Expertise.tsx`.
 
 **Content/assets — infrastructure is done, files just aren't there yet:**
-- [ ] Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards (both now 2×2 grids, 16:9 slots) — still showing the diagonal-stripe placeholder. Drop files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` with the existing `chapter-N-thumb.jpg` naming and they pick up automatically.
-- [ ] Hero + section images for the other case studies under `content/work/*.md` (Figma Enterprise Migration has content live; the 9 hidden "HDS adoption stories" — homepage-v2, native-app-homepage, vision-decommission, ife-starlink, my-account-redesign, mobile-check-in, homepage-redesign, change-cancel-experience, enhanced-reaccom — have content + registry entries but are hidden until this is done and content's been polished).
+- [ ] **Full image punch list** — see [`IMAGE-SPEC.md`](IMAGE-SPEC.md) (refreshed 2026-09-07 with exact filenames/dimensions read straight from the code, not estimated). Priority 1 (live pages: Heart Design System, Proof Before Progress, Figma Enterprise Migration): 33 images. Priority 2 (the 9 hidden case studies, once ready to unhide): 36 images. Two slots need a small code change before they'll work at all — Home's lead-case-study card isn't actually wired to `fs.existsSync` yet, and About has no portrait/photo slot built. Shane's planning to pull these directly from Figma this evening; ask about the pipeline/workflow before assuming a particular export process.
 - [ ] A commissioned/illustrated portrait for the About page — external dependency, was flagged back in May as something to start early since it's the longest lead time; never started.
 
 **Site-wide QA/hardening — never done or only spot-checked:**
@@ -132,7 +131,7 @@ The May roadmap targeted **launch June 22, 2026** with a week-by-week schedule t
 | `ROADMAP.md` (this file) | **Live** | The only place task status is tracked. Add new items here. |
 | `HANDOFF.md` | **Live**, but its old `## To-do` section is stale — replaced with a pointer to this file | Stack info, critical gotchas, file map, style approach, bear traps, safety-net SHAs, and the phase-by-phase session history changelog. Still accurate technical/architectural reference. |
 | Cowork artifact "Shane Portfolio Roadmap" | **Stale, banner added** | Historical snapshot of the May plan only. Do not use for current status. |
-| `IMAGE-SPEC.md` | **Partially stale, banner added** | The `fs.existsSync`-based image-wiring pattern and file-naming convention it documents are still accurate. Its exact dimensions are wrong for: (1) the `/work` index — no longer has a card grid, so those image slots don't apply anymore; (2) Heart Design System's and Proof Before Progress's chapter thumbnails — spec says 4:3, actual current layout is 16:9. Needs a refresh pass once image-gathering actually starts. |
+| `IMAGE-SPEC.md` | **Live, refreshed 2026-09-07** | The current, accurate image punch list — every dimension read from the actual component code. Update this (not a new doc) as image needs change. |
 
 ---
 
