@@ -51,9 +51,9 @@ export default function Expertise() {
       {EXPERTISE.map(({ label, Icon }) => (
         <div
           key={label}
-          className="text-[13.5px] text-pr-fg px-3.5 py-2.5 border border-pr-rule inline-flex items-start gap-2.5"
+          className="text-[13.5px] text-pr-fg px-3.5 py-2.5 border border-pr-rule inline-flex items-center gap-2.5 min-h-16"
         >
-          <Icon size={16} color="var(--pr-magenta)" className="shrink-0 mt-[1px]" />
+          <Icon size={16} color="var(--pr-magenta)" className="shrink-0" />
           {label}
         </div>
       ))}
