@@ -11,42 +11,50 @@
 
 ## Quality gate (AI-slop / positioning audit)
 
-An external audit skill scored the live site **2026-09-05**: full report stored verbatim at [`qa/quality-gate-2026-09-05.md`](qa/quality-gate-2026-09-05.md) — read it in full before acting on anything below, this is just the condensed version.
+**Active report (2026-09-07):** recalibrated to the correct target (Design Manager / Senior Design Manager, not Director/VP) — full text at [`qa/quality-gate-2026-09-07-manager-recalibration.md`](qa/quality-gate-2026-09-07-manager-recalibration.md), read it in full before acting on anything below, this is just the condensed version. Supersedes the original 2026-09-05 report ([`qa/quality-gate-2026-09-05.md`](qa/quality-gate-2026-09-05.md), kept only for historical record — it was scored against the wrong job-target level).
 
-**Score: 73/100 — Conditional Pass. Target: 85+/100.** This is meant to be re-run after changes to check for improvement — when that happens, save the new report as `qa/quality-gate-<date>.md` (don't overwrite this one) and update this section with the new score.
+**Score: 84/100 — STRONG PASS for primary target. Target after remediation: 90+/100.** Re-run after changes and save future reports as `qa/quality-gate-<date>-<label>.md` (don't overwrite this one), updating this section with the new score.
 
-**⚠️ This audit assumed the wrong job-target level.** Its "Sharpen Leadership Positioning" and "Fix the Conversion Funnel" items are both framed around Director/VP hiring intent — but Shane is primarily targeting **Manager-level** roles (Director/VP only as an opportunistic upside at a smaller org, or via in-house recruiting), and has said directly he has no solid direct-management experience beyond one contractor relationship. Shane is re-running the audit with that clarification (2026-09-07) — **once the new report lands, replace the P0/P1/P2 breakdown below with it rather than layering on top.** Don't implement the current P0 items' Director/VP framing as-is.
+**Strategic rule, stated explicitly in the report:** do not optimize this site to look like large-enterprise VP experience. Position as *"an experienced design leader who understands the systems, teams, and infrastructure behind high-performing product design organizations."* Design Systems/Ops should stay the **edge**, not become the **cage**. Role-fit verdicts range from "exceptional fit" (Design Systems/Ops Manager) down to "portfolio does not currently establish required scope" (VP Product Design, large enterprise) — the site already reads as a strong Manager/Sr Manager candidate as-is.
 
-| Area | Score | Priority |
+| Dimension | Score | Status |
 |---|---|---|
-| AI Slop Fingerprint / Aesthetic Intent | 76 (pass, visual verification pending) | P1 |
-| PM Hat / Information Architecture | 82 (pass) | P0 |
-| Text & Copy | 79 (pass) | P0 |
-| Leadership / Candidate Positioning | 67 (conditional pass) | P0 |
+| Specificity / Evidence | 94 | Exceptional — preserve |
+| Design Systems / Ops Leadership | 93 | Exceptional — preserve |
+| Organizational Thinking | 91 | Strong — preserve |
+| IA / User Journey | 87 | Strong pass |
+| Product Judgment | 85 | Strong — preserve |
+| Leadership Signal | 85 | Strong pass for target |
+| Copy / Sincerity | 84 | Strong pass |
+| AI Slop / Aesthetic Intent | 80 | Pass |
+| Executive Scanability | 73 | Needs work |
+| Positioning Clarity | 72 | Needs work |
+| **People-Leadership Evidence** | **64** | **Primary gap** |
 
-**⚠️ Decide during QA mode — two direct conflicts with recent work, not resolved yet:**
-- [x] ~~Keep or drop "Prompt Engineering" from top-level Expertise?~~ — decided 2026-09-07: dropped, commit `ac788d2`. Removed from Expertise chips and the resume PDF/.md downloads (both regenerated, still one page).
-- [ ] **Reorder or rewrite the `/about` principles?** The audit's P0 "Replace Generic Principles" item flags the exact five current principles (including "Build tools not rules," "One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone") as generic/interchangeable and recommends replacing them with 3–4 specific, evidence-backed beliefs — a content rewrite, not the reordering done on 2026-09-06. That reorder work would likely get superseded entirely if this item is tackled.
+**⚠️ The P0 item that needs Shane, not just code — read before touching anything else here:** People-Leadership Evidence is the headline gap (proves systems/tooling/governance leadership far more than leadership of *people* — coaching, delegating, developing others, handling conflict/underperformance). The report is explicit: **do not fabricate a management case study or invent people-leadership moments — mark anything missing `NEEDS_OWNER_INPUT` instead of generating plausible filler.** This lines up exactly with what Shane said directly in this session (no solid direct-management experience beyond one contractor relationship) — so real examples may genuinely be thin. Before touching this item, ask Shane what real coaching/delegation/conflict moments exist to surface, rather than assuming or writing around the gap.
 
-**P0 (do first, if/when this gets tackled):**
-- [ ] Executive Evidence Layer — compact mandate/scale/constraint/role/decisions/outcome/unresolved summary above the long-form narrative on Heart Design System, Figma Enterprise Migration, and Proof Before Progress.
-- [ ] Sharpen Leadership Positioning — one primary leadership proposition instead of several competing identities; see the Prompt Engineering conflict above.
-- [~] Fix the Conversion Funnel — **partially done 2026-09-07, commit `34bb2a7`.** The button copy "GET IN TOUCH" → "SAY HELLO" (Shane's call, over "Let's talk" and "Talk shop" — see session for the reasoning, recalibrated once the Manager-level correction above landed). The heading next to it ("Want to work together?") and the Contact page's own H1 ("Get in touch") are still unchanged — separate copy decisions not made yet, and probably worth waiting for the re-run audit before touching further.
-- [ ] Replace Generic Principles With Defensible Beliefs — see the conflict above.
+**P0:**
+- [ ] **Add People-Leadership Evidence** — see the callout above. Needs ≥3 real examples (coaching, delegation, conflict/prioritization) surfaced across About/case studies/Resume/beliefs — `NEEDS_OWNER_INPUT` if the material isn't there.
+- [ ] **Reframe the Leadership Proposition** — homepage's "I design systems that scale" reads as Design Systems architect before Design Manager. Report's directional (not mandatory) example: *"I build the teams and systems behind better product design."* Needs to connect people + systems + product quality without overclaiming VP/Director scope.
+- [ ] **Rebalance "Systems Leader" vs. "Design Leader"** — across Home/About/Work/Resume/Expertise, "Design Leader who happens to be unusually strong at systems" should read as the primary identity, not "the Figma/Systems/Ops person." Confirms the "Prompt Engineering" drop was directionally correct (report's own acceptance criteria: "not presented as a top-level leadership competency" — already resolved further, since it's now removed entirely, commit `ac788d2`).
+- [ ] **Replace Generic Principles With Leadership Beliefs** — same underlying item as before (the 5 current `/about` principles are still flagged as generic), refined direction: 3–4 beliefs revealing how Shane thinks about teams, systems, quality, autonomy, adoption, constraints, and management specifically — not just design philosophy. Supersedes the reorder-only work done 2026-09-06.
 
 **P1:**
-- [ ] Copy/AI-writing lint pass (em dashes, "not just X but Y," "delve," "seamless," etc. — reduce dramatic short-sentence constructions ~30%).
-- [ ] Preserve specificity — make sure existing hard metrics (2,706 seats, $150K vendor decision, NPS 21.43→52, etc.) stay visible and near the decisions they support; don't let a copy pass water them down.
-- [ ] Make the portfolio demonstrate the systems thesis (e.g. expose some real system logic — token docs, component anatomy — somewhere on the site itself).
-- [ ] Visual AI-slop audit — **MANUAL**, needs a real browser at ~1440/1280/768/390px in both themes (gradients, glow, glassmorphism, bento grids, card-in-card, uniform spacing, etc.).
+- [ ] Case-study scanability — compact ROLE/PROBLEM/SCALE/WHAT CHANGED orientation block above the long-form narrative on Heart Design System, Figma Enterprise Migration, Proof Before Progress (readable in ~45–60s), without becoming a "seven-card executive dashboard." Same intent as the old "Executive Evidence Layer" item, lighter-weight framing.
+- [ ] Preserve the human narrative — the candid admissions/failures/unresolved-outcomes voice is the site's strongest trust signal; explicit anti-AI test in the report: *"could this sentence have been written by any designer about any project?"* — if yes, cut or sharpen it.
+- [ ] Reduce repetitive cinematic copy ~25–30% (short dramatic one-line conclusions, "It wasn't X. It was Y." pattern) — don't remove all personality, just the repetition.
+- [ ] Preserve specificity — same as before (2,706 seats, $150K vendor decision, NPS 21.43→52, etc. stay visible near their decisions).
+- [x] ~~Fix the funnel~~ — mostly done 2026-09-07, commit `34bb2a7` (button "GET IN TOUCH" → "SAY HELLO"). Report calls this "a smaller issue than originally assessed" for this target level and lists "Let's talk" among its own directional examples too — either is fine per the report. "Want to work together?" (the heading) and the Contact page's own H1 ("Get in touch") still unchanged.
+- [ ] About page rebuild — should answer "what kind of leader," "how do they lead people," "what orgs problems are they unusually good at," "what do they believe," structured perhaps as Build the team / Build the practice / Build the system (report's own suggestion, not mandatory) — only if it matches Shane's real experience.
+- [ ] Make the portfolio demonstrate systems thinking on the site itself (token docs, component anatomy, etc.) — unchanged from before.
+- [ ] Visual AI-slop audit — **MANUAL**, 1440/1280/768/390px, both themes.
 - [ ] Typography audit — **MANUAL**.
 - [ ] Spacing/rhythm audit — **MANUAL**.
 
 **P2:**
-- [ ] About page cleanup — reframe expertise as strategic capabilities, not a flat keyword list.
-- [ ] Case-study navigation polish (orientation, prev/next, return-to-overview).
+- [ ] Case-study navigation polish (orientation, prev/next, return-to-overview) — unchanged from before.
 
-**Explicitly NOT requested yet:** the audit's own instructions say fix P0 before P1 before P2, prefer small intentional changes over redesign-by-template, never invent metrics/quotes/history to close evidence gaps, and mark anything needing Shane's subjective input as `NEEDS_OWNER_INPUT` rather than generating plausible filler. Nothing in this section should be implemented until Shane asks for it — stored here for the next QA pass.
+**Explicit guardrails from the report, worth repeating:** never invent metrics/quotes/stories/people-management examples or executive scope to close a gap; never pretend Manager/Sr Manager experience is VP scope; mark anything needing Shane's real input `NEEDS_OWNER_INPUT` and anything needing a real browser look `MANUAL_VERIFY` rather than generating plausible filler either way. Fix P0 before P1 before P2. Nothing in this section should be implemented until Shane asks for it — stored here for the next QA pass.
 
 ---
 
