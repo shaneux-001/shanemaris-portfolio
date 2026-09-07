@@ -63,7 +63,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 - [ ] Dark-mode **hover** ghost effect (nav links, secondary button) still reads as nearly invisible — same 2.5px/320ms magnitude issue the on-load heading effect had before it got bumped. Apply the same kind of fix, or leave it?
 - [ ] Whether the downloadable `.md` resume should get the same spacing/breathing-room pass the PDF got (it was explicitly scoped PDF-only at the time).
 - [ ] Custom brand fonts (Archivo / IBM Plex Mono) in the generated PDF resume — currently falls back to Helvetica/Courier after a `fontkit` crash on the downloaded TTFs. Only worth revisiting if exact typography match actually matters.
-- [ ] Change the contact form success message from "I'll reply within a day" to 48 hours (`app/contact/page.tsx:141`) — Shane's current bandwidth doesn't support the same-day-ish promise.
+- [x] ~~Change the contact form success message from "I'll reply within a day" to 48 hours~~ — done 2026-09-07, commit `180b49c`.
 
 **Content/assets — infrastructure is done, files just aren't there yet:**
 - [ ] Real thumbnail *images* for Heart Design System's and Proof Before Progress's chapter cards (both now 2×2 grids, 16:9 slots) — still showing the diagonal-stripe placeholder. Drop files into `public/work/heart-design-system/` / `public/work/proof-before-progress/` with the existing `chapter-N-thumb.jpg` naming and they pick up automatically.
@@ -72,7 +72,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 
 **Site-wide QA/hardening — never done or only spot-checked:**
 - [ ] Full responsive/mobile QA pass across the *entire* site at 375px/768px/1280px+ (tonight's changes were spot-checked individually as they shipped, not a systematic full-site pass).
-- [ ] The 3 remaining `npm audit` high-severity vulnerabilities — fixing requires `--force`, which would bump Next.js `16.2.4` outside the stated version range. Flagged only, no action taken.
+- [x] ~~The 3 `npm audit` high-severity vulnerabilities~~ — patched 2026-09-07, commit `1e3ad41`. Turned out to be a minor patch bump (Next.js `16.2.4` → `16.3.4`, package.json was just pinned exact instead of a caret range), not the risky major jump it looked like. 0 vulnerabilities remaining, clean build + smoke test.
 - [ ] Performance / Lighthouse pass — site still uses plain `<img>` tags everywhere, never migrated to `next/image`. Target Lighthouse 90+, check Core Web Vitals once real images are in place.
 - [ ] Privacy policy — needed since the contact form collects name + email and none exists today. Cookie consent only becomes relevant if analytics gets added (see below).
 - [ ] Stakeholder feedback review — external reads (a hiring-manager perspective, HR, a peer), distinct from Shane's own proofread/slop-detection pass which he's doing separately.
