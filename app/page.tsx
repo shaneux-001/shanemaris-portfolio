@@ -1,21 +1,17 @@
-'use client';
-
-import { useEffect } from 'react';
+import fs from 'fs';
+import path from 'path';
 import Link from 'next/link';
-import { initKonamiCode } from '@/lib/konami';
 import PressCta from '@/components/press/PressCta';
 import Ghost from '@/components/press/Ghost';
+import KonamiListener from '@/components/KonamiListener';
 
 export default function Home() {
-  useEffect(() => {
-    const cleanup = initKonamiCode(() => {
-      window.location.href = '/labs';
-    });
-    return cleanup;
-  }, []);
+  const heroImgPath = path.join(process.cwd(), 'public', 'work', 'heart-design-system', 'heart-ds-hero.jpg');
+  const hasHeroImg = fs.existsSync(heroImgPath);
 
   return (
     <main className="pr-page">
+      <KonamiListener />
       <div className="pr-main">
       <div className="relative pt-[clamp(40px,6vw,68px)] pb-[clamp(40px,5vw,56px)]">
         <div aria-hidden="true" className="absolute inset-0 grid grid-cols-6 pointer-events-none">
@@ -66,8 +62,16 @@ export default function Home() {
           <span>LEAD CASE STUDY</span>
         </div>
         <div className="pr-lead-grid">
-          <div className="aspect-[4/3] min-w-0 flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            <span className="font-plex-mono text-[11px] text-pr-muted">heart-ds-hero.jpg</span>
+          <div className="relative aspect-[4/3] min-w-0 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+            {hasHeroImg ? (
+              <img
+                src="/work/heart-design-system/heart-ds-hero.jpg"
+                alt="Heart Design System — Hero"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <span className="font-plex-mono text-[11px] text-pr-muted">heart-ds-hero.jpg</span>
+            )}
           </div>
           <div className="flex flex-col gap-3.5 min-w-0">
             <h2 className="pr-lead-title m-0 font-archivo font-bold leading-[1.02] tracking-[-0.025em] text-pr-fg-strong">
