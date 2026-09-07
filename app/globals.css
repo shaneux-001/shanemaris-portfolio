@@ -192,6 +192,22 @@
   outline-offset: 3px;
 }
 
+/* Catch-all for Press Room focusable elements not covered by the named list
+   above (inline body-copy links like the LinkedIn/slides/webinar links on
+   /resume — plain <a> tags with ad hoc Tailwind classes, not a shared
+   component class). Without this they fell through to the old system's
+   *:focus-visible rule below, which uses the OLD static plum --color-accent
+   token — never theme-aware, since it only flips via a .theme-dark class
+   the Press Room toggle doesn't use. Found 2026-09-07 via real keyboard
+   focus, not just computed-style inspection (which shows stale values even
+   when the outline isn't actually rendered). */
+.pr-page :focus-visible,
+.pr-header :focus-visible,
+footer.bg-pr-bg :focus-visible {
+  outline: 2px solid var(--pr-focus);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pr-root * { animation: none !important; }
 }
