@@ -5,7 +5,7 @@ Every dimension/aspect ratio below was read directly out of the component code (
 
 ## How the wiring works
 
-Every slot below (except the two flagged in **Not yet wired**) uses the same pattern: the page checks `fs.existsSync()` for the exact filename at request time. Drop a correctly-named file into the folder, refresh the page — no dev-server restart, no code change, no deploy needed to see it locally. Filenames must match **exactly** (case-sensitive, `.jpg` extension expected by the code as written).
+Every slot below uses the same pattern: the page checks `fs.existsSync()` for the exact filename at request time. Drop a correctly-named file into the folder, refresh the page — no dev-server restart, no code change, no deploy needed to see it locally. Filenames must match **exactly** (case-sensitive, `.jpg` extension expected by the code as written). (Home's lead-case-study card and About's portrait weren't wired to this pattern as of the first version of this refresh — both fixed 2026-09-07, commits `51f2ee3` and `f62bf1d`.)
 
 Export at 2× the listed pixel size for retina displays. JPG at 80–85% quality or WebP at 80% — code currently expects `.jpg`, so convert before dropping in.
 
@@ -72,6 +72,16 @@ Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px (no section images
 
 **8 images total.**
 
+### Home page — `public/`
+
+1 image, aspect **4:3**, ~1600×1200px:
+- [ ] `work/heart-design-system/heart-ds-hero.jpg` — lead-case-study card, links through to Heart Design System
+
+### About page — `public/`
+
+1 portrait, aspect **4:5**, ~1600×2000px:
+- [ ] `about-portrait.jpg` — sits beside the intro copy, collapses above/below it on mobile
+
 ---
 
 ## Priority 2 — Hidden case studies (`public/work/[slug]/`)
@@ -94,18 +104,10 @@ These 9 have real content (`content/work/[slug].md`) and a registry entry alread
 
 ---
 
-## Not yet wired — needs a small code change first, not just a file drop
-
-- **Home page lead-case-study card** (`app/page.tsx`, the "heart-ds-hero.jpg" placeholder under "LEAD CASE STUDY"). This one is **not** actually connected to `fs.existsSync` like everywhere else — it's a static placeholder div that will keep showing the filename text even if a file is dropped in. Flag this to Claude before dropping an image here; it needs the same wiring pattern applied first (~5 minute fix).
-- **About page portrait/illustration**. No image slot exists in the code at all yet — this was flagged back in the May roadmap as a "start early, external dependency" item but a slot was never built. Needs a real component addition, not just a file.
-
----
-
 ## Total scope
 
-- **Priority 1 (do this first):** 33 images across 3 live case studies.
+- **Priority 1 (do this first):** 35 images across Heart Design System, Proof Before Progress, Figma Enterprise Migration, Home, and About.
 - **Priority 2 (later, optional):** 36 images across 9 currently-hidden case studies.
-- **Needs code first:** 2 slots (Home hero, About portrait).
 
 ---
 
@@ -116,4 +118,5 @@ These 9 have real content (`content/work/[slug].md`) and a registry entry alread
 | Chapter/case-study thumbnail (landing grids) | 16:9 | 1280×720px | `aspect-video` |
 | Chapter/case-study hero | 1.6:1 | 1600×1000px | `aspect-[1.6/1]` (HDS/PBP chapters) or `aspect-[1/0.56]` (≈16:9, `[slug]` hero) |
 | Between-section image | 3:2 | 1600×1067px | `aspect-[1.5/1]` |
-| Home lead-case-study card | 4:3 | 1600×1200px | `aspect-[4/3]` — **not yet wired, see above** |
+| Home lead-case-study card | 4:3 | 1600×1200px | `aspect-[4/3]` |
+| About portrait | 4:5 | 1600×2000px | `aspect-[4/5]` |
