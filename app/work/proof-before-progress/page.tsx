@@ -74,9 +74,9 @@ export default function ProofBeforeProgressLanding() {
                 <span className="font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-2 block">
                   CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
                 </span>
-                <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
+                <h2 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
                   {chapter.title}
-                </h3>
+                </h2>
                 <p className="text-sm text-pr-lede leading-[1.6] m-0">
                   {chapter.preview}
                 </p>

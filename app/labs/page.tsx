@@ -123,9 +123,9 @@ function LabsContent() {
                       {project.title} preview
                     </span>
                   </div>
-                  <h3 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0">
+                  <h2 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0">
                     {project.title}
-                  </h3>
+                  </h2>
                 </Link>
               ))}
             </div>

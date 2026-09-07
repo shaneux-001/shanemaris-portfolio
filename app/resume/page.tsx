@@ -93,9 +93,9 @@ const EDUCATION = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="font-plex-mono text-[11px] tracking-[0.1em] text-pr-muted mb-[22px] border-t border-pr-rule pt-[22px]">
+    <h2 className="m-0 font-plex-mono text-[11px] font-normal tracking-[0.1em] text-pr-muted mb-[22px] border-t border-pr-rule pt-[22px]">
       {children}
-    </div>
+    </h2>
   );
 }
 
