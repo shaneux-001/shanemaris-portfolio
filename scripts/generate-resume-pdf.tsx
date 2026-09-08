@@ -20,6 +20,13 @@
  * page is always "light"), not the dark-default values used elsewhere on
  * the site — see app/globals.css's [data-pr-theme="light"] block for the
  * source of truth if these ever need to be re-synced.
+ *
+ * Fonts are the real Archivo (headings/UI) + IBM Plex Mono (labels/mono
+ * metadata) static TTFs in resume-source/fonts/ — the same pair the site
+ * uses via next/font/google (see app/layout.tsx). Body copy stays on
+ * @react-pdf/renderer's built-in Helvetica: the site's body font is Inter,
+ * but no static Inter TTF is vendored here, and body copy carries far less
+ * of the site's visual identity than the Archivo/Plex Mono pairing does.
  */
 
 import React from "react";
@@ -41,27 +48,47 @@ const SUMMARY_PDF = "Design systems and design ops leader with over a decade at 
 // .md's full EXPERIENCE list.
 const EXPERIENCE_PDF = EXPERIENCE.filter((e) => e.role !== "UX Designer (Contractor)");
 
-// NOTE (2026-09-05): tried registering the actual Archivo/IBM Plex Mono TTFs
-// (downloaded to resume-source/fonts/ from Google Fonts) to match the site's
-// brand typography exactly. Hit a hard crash deep in fontkit's composite-glyph
-// metrics parsing (RangeError, offset outside DataView bounds) — looked like a
-// specific-glyph issue (likely the em dash) in at least one of those font
-// files, not something worth burning more time on for a v1. Falling back to
-// @react-pdf/renderer's built-in Helvetica/Helvetica-Bold and Courier, which
-// need no font registration and are guaranteed to work. If exact brand-font
-// fidelity in the PDF matters later, revisit resume-source/fonts/ — try
-// re-sourcing static (non-variable) TTF instances, or a different subset.
+// Static (non-variable) TTF instances, subsetted 2026-09-08 with fontTools
+// (basic Latin + em/en dash, middle dot, curly quotes, ellipsis) — the
+// 2026-09-05 crash was real, but it wasn't about any glyph this resume
+// actually renders: a handful of unrelated, corrupted composite glyphs sat
+// at the tail end of the original Google Fonts TTF exports (Archivo-Regular
+// glyphs 771-773, IBM Plex Mono Regular/Medium glyphs 991-994), and
+// react-pdf's font embedding walks the whole glyph table, not just the
+// glyphs actually used, so it crashed regardless of what text was on the
+// page. Subsetting to the character set below drops those dead glyphs
+// entirely. If the resume ever needs a character outside this set, re-run
+// the subset command (see resume-source/fonts/) with an expanded --unicodes.
+const fontsDir = path.join(dirname, "..", "resume-source", "fonts");
+Font.register({
+  family: "Archivo",
+  fonts: [
+    { src: path.join(fontsDir, "Archivo-Regular.ttf"), fontWeight: 400 },
+    { src: path.join(fontsDir, "Archivo-SemiBold.ttf"), fontWeight: 600 },
+    { src: path.join(fontsDir, "Archivo-Bold.ttf"), fontWeight: 700 },
+  ],
+});
+Font.register({
+  family: "IBM Plex Mono",
+  fonts: [
+    { src: path.join(fontsDir, "IBMPlexMono-Regular.ttf"), fontWeight: 400 },
+    { src: path.join(fontsDir, "IBMPlexMono-Medium.ttf"), fontWeight: 500 },
+  ],
+});
 
 // Avoids a tsx/ESM-exports resolution error when @react-pdf/renderer tries
 // to dynamically load its English hyphenation dictionary. We don't need
 // automatic hyphenation for a resume — disable it outright.
 Font.registerHyphenationCallback((word) => [word]);
 
-// Light-theme Press Room tokens (see app/globals.css [data-pr-theme="light"])
+// Light-theme Press Room tokens (see app/globals.css [data-pr-theme="light"]).
+// Re-synced 2026-09-08 — lede/muted had drifted from the live site (the site
+// retuned both values at some point after this file's first pass and this
+// snapshot was never updated).
 const color = {
   fgStrong: "#16161A",
-  lede: "#3A3833",
-  muted: "#55524B",
+  lede: "#55524B",
+  muted: "#6B675F",
   rule: "#D9D5CA",
   magenta: "#C1006A",
   accentText: "#5A2A82",
@@ -77,7 +104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   name: {
-    fontFamily: "Helvetica",
+    fontFamily: "Archivo",
     fontWeight: 700,
     fontSize: 22,
     color: color.fgStrong,
@@ -89,7 +116,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   contact: {
-    fontFamily: "Courier",
+    fontFamily: "IBM Plex Mono",
     fontSize: 8,
     color: color.muted,
     marginBottom: 10,
@@ -103,7 +130,7 @@ const styles = StyleSheet.create({
     borderBottom: `1pt solid ${color.rule}`,
   },
   sectionLabel: {
-    fontFamily: "Courier",
+    fontFamily: "IBM Plex Mono",
     fontWeight: 500,
     fontSize: 8,
     letterSpacing: 1,
@@ -118,13 +145,13 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   roleTitle: {
-    fontFamily: "Helvetica",
+    fontFamily: "Archivo",
     fontWeight: 600,
     fontSize: 10.5,
     color: color.fgStrong,
   },
   roleSpan: {
-    fontFamily: "Courier",
+    fontFamily: "IBM Plex Mono",
     fontSize: 7.5,
     color: color.muted,
   },
@@ -151,13 +178,13 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   eduTitle: {
-    fontFamily: "Helvetica",
+    fontFamily: "Archivo",
     fontWeight: 600,
     fontSize: 9.5,
     color: color.fgStrong,
   },
   eduMeta: {
-    fontFamily: "Courier",
+    fontFamily: "IBM Plex Mono",
     fontSize: 7.5,
     color: color.muted,
   },
