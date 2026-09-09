@@ -37,6 +37,8 @@
 
 **⚠️ The P0 item that needs Shane, not just code — read before touching anything else here:** People-Leadership Evidence is the headline gap (proves systems/tooling/governance leadership far more than leadership of *people* — coaching, delegating, developing others, handling conflict/underperformance). The report is explicit: **do not fabricate a management case study or invent people-leadership moments — mark anything missing `NEEDS_OWNER_INPUT` instead of generating plausible filler.** This lines up exactly with what Shane said directly in this session (no solid direct-management experience beyond one contractor relationship) — so real examples may genuinely be thin. Before touching this item, ask Shane what real coaching/delegation/conflict moments exist to surface, rather than assuming or writing around the gap.
 
+**Mechanism for gathering that input, started 2026-09-09:** [`CASE-STUDY-QUESTIONS.md`](CASE-STUDY-QUESTIONS.md) — a 44-question punch list across all 3 live case studies (Heart Design System, Proof Before Progress, Figma Enterprise Migration) plus a dedicated cross-cutting "people-leadership hunt" section, written to prod for real specifics without inventing anything. Shane's answering it in his own time, not tonight. Once real answers come back, fold the strong ones into the actual case-study copy (fact-checked against `Resume_Audit_Rules.md` same as everything else) and mark anything that comes back thin `NEEDS_OWNER_INPUT` rather than working around it.
+
 **P0:**
 - [ ] **Add People-Leadership Evidence** — see the callout above. Needs ≥3 real examples (coaching, delegation, conflict/prioritization) surfaced across About/case studies/Resume/beliefs — `NEEDS_OWNER_INPUT` if the material isn't there.
 - [ ] **Reframe the Leadership Proposition** — homepage's "I design systems that scale" reads as Design Systems architect before Design Manager. Report's directional (not mandatory) example: *"I build the teams and systems behind better product design."* Needs to connect people + systems + product quality without overclaiming VP/Director scope.
@@ -143,6 +145,7 @@ The May roadmap targeted **launch June 22, 2026** with a week-by-week schedule t
 | Cowork artifact "Shane Portfolio Roadmap" | **Stale, banner added** | Historical snapshot of the May plan only. Do not use for current status. |
 | `IMAGE-SPEC.md` | **Live, refreshed 2026-09-07** | The current, accurate image punch list — every dimension read from the actual component code. Update this (not a new doc) as image needs change. |
 | `resume-source/MASTER_RESUME.md` | **Live** — renamed from `Shane_Maris_Resume.md` 2026-09-08 to signal it's canonical | Single source of truth for resume wording. `scripts/resume-pdf-content.ts` (PDF + .md downloads) and `app/resume/page.tsx` (live page, hand-duplicated content) are both manual, one-way copies of this file — re-sync by hand after any edit here, nothing auto-propagates. |
+| `CASE-STUDY-QUESTIONS.md` | **Live, added 2026-09-09** | Punch list of prodding questions for Shane to answer, aimed at deepening the 3 live case studies and specifically surfacing real people-leadership evidence. Not started as of creation — check back for answers before assuming it's still empty. |
 
 ---
 
