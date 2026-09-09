@@ -48,7 +48,7 @@
 - [ ] About page rebuild — should answer "what kind of leader," "how do they lead people," "what orgs problems are they unusually good at," "what do they believe," structured perhaps as Build the team / Build the practice / Build the system (report's own suggestion, not mandatory) — only if it matches Shane's real experience.
 - [ ] Make the portfolio demonstrate systems thinking on the site itself (token docs, component anatomy, etc.) — unchanged from before.
 - [ ] Visual AI-slop audit — **MANUAL**, 1440/1280/768/390px, both themes.
-- [ ] Typography audit — **MANUAL**.
+- [x] ~~Typography audit~~ — done 2026-09-09, commit `2f4808b`. Font stack changed from Inter + Archivo + IBM Plex Mono + Playfair Display to just Archivo + IBM Plex Mono — Inter and Playfair are both individually common "looks AI-generated" tells, and the safe-body+serif-accent combo was its own recognizable template formula. Compared options in a live Artifact against real site content before deciding. Also found and fixed a real bug live on production since 2026-09-05: a circular CSS custom-property alias silently collapsed every heading/eyebrow to Inter sitewide — see the commit for the full story.
 - [ ] Spacing/rhythm audit — **MANUAL**.
 
 **P2:**
