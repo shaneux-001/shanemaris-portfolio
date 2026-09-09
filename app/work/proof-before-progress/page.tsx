@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import Ghost from "@/components/press/Ghost";
 
@@ -26,8 +24,6 @@ const CHAPTERS = [
 ];
 
 export default function ProofBeforeProgressLanding() {
-  const workDir = path.join(process.cwd(), "public", "work", "proof-before-progress");
-
   return (
     <main className="pr-page">
       <div className="pr-main pt-[clamp(36px,5vw,56px)]">
@@ -52,34 +48,29 @@ export default function ProofBeforeProgressLanding() {
           Read time: ~9 minutes
         </p>
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
+        <div className="flex flex-col">
           {CHAPTERS.map((chapter) => {
-            const thumbPath = path.join(workDir, `chapter-${chapter.number}-thumb.jpg`);
-            const hasThumb = fs.existsSync(thumbPath);
+            const meta = `CHAPTER ${chapter.number} · ${chapter.subtitle.toUpperCase()}`;
             return (
-              <Link key={chapter.number} href={`/work/proof-before-progress/chapter-${chapter.number}`} className="pr-card">
-                <div className="relative aspect-video mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-                  {hasThumb ? (
-                    <img
-                      src={`/work/proof-before-progress/chapter-${chapter.number}-thumb.jpg`}
-                      alt={`Chapter ${chapter.number} — ${chapter.title}`}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="font-plex-mono text-[11px] text-pr-muted relative">
-                      chapter-{chapter.number}-thumb.jpg
-                    </span>
-                  )}
-                </div>
-                <span className="font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-2 block">
-                  CHAPTER {chapter.number} — {chapter.subtitle.toUpperCase()}
+              <Link key={chapter.number} href={`/work/proof-before-progress/chapter-${chapter.number}`} className="pr-arrow-link pr-hoverable">
+                {/* Wide row */}
+                <span className="pr-row-link pr-row-wide items-start grid-cols-[minmax(0,1fr)_260px_24px]">
+                  <span className="flex flex-col gap-1.5 min-w-0">
+                    <span className="text-2xl font-semibold tracking-[-0.02em] text-pr-fg-strong">{chapter.title}</span>
+                    <span className="text-sm leading-[1.6] text-pr-lede max-w-[62ch]">{chapter.preview}</span>
+                  </span>
+                  <span className="font-plex-mono text-[11px] text-pr-muted tracking-[0.04em] text-right whitespace-nowrap">{meta}</span>
+                  <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text text-right" aria-hidden="true">→</span>
                 </span>
-                <h2 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0 mb-2">
-                  {chapter.title}
-                </h2>
-                <p className="text-sm text-pr-lede leading-[1.6] m-0">
-                  {chapter.preview}
-                </p>
+                {/* Narrow row */}
+                <span className="pr-row-link pr-row-narrow flex-col gap-1.5 py-4 pr-2.5">
+                  <span className="flex items-baseline justify-between gap-3.5">
+                    <span className="text-xl font-semibold tracking-[-0.02em] text-pr-fg-strong min-w-0">{chapter.title}</span>
+                    <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text" aria-hidden="true">→</span>
+                  </span>
+                  <span className="text-sm leading-[1.55] text-pr-lede">{chapter.preview}</span>
+                  <span className="font-plex-mono text-[10.5px] text-pr-muted tracking-[0.04em] min-w-0 whitespace-nowrap overflow-x-auto">{meta}</span>
+                </span>
               </Link>
             );
           })}

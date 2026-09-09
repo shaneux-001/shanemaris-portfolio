@@ -1,5 +1,5 @@
 # Image Asset Punch List
-**shanemaris.com · Refreshed 2026-09-07** (previous version generated 2026-05-01, now stale — rebuilt from a fresh audit of the actual current code, not carried forward)
+**shanemaris.com · Refreshed 2026-09-09** (previous version generated 2026-05-01, now stale — rebuilt from a fresh audit of the actual current code, not carried forward)
 
 Every dimension/aspect ratio below was read directly out of the component code (`aspect-[...]` classes), not estimated. Alt text shown for each slot is either already hardcoded in the code or generated dynamically from the case study's real content — use it as a content brief for what that image should actually show.
 
@@ -15,11 +15,7 @@ Export at 2× the listed pixel size for retina displays. JPG at 80–85% quality
 
 ### Heart Design System — `public/work/heart-design-system/`
 
-Landing page (`/work/heart-design-system`) — 4 chapter thumbnails, aspect **16:9**, ~1280×720px (`aspect-video`):
-- [ ] `chapter-1-thumb.jpg` — "Chapter 1 — The Long Game"
-- [ ] `chapter-2-thumb.jpg` — "Chapter 2 — Staying Alive"
-- [ ] `chapter-3-thumb.jpg` — "Chapter 3 — The Moment It Clicked"
-- [ ] `chapter-4-thumb.jpg` — "Chapter 4 — No Straight Lines"
+Landing page (`/work/heart-design-system`) — **no images needed as of 2026-09-09.** Converted from a 4-thumbnail card grid to a text row list matching `/work`'s own pattern (chapter title + preview + "CHAPTER N · SUBTITLE" meta, no thumbnail) — partly to cut asset burden, partly because image-card-grid-with-hover-lift is a flagged AI-slop pattern. The 4 `chapter-N-thumb.jpg` slots below no longer exist in the code.
 
 Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px:
 - [ ] `chapter-1-hero.jpg`
@@ -38,15 +34,11 @@ Chapter section images, aspect **3:2** (`aspect-[1.5/1]`), ~1600×1067px — cou
 - [ ] `chapter-4-section-1.jpg` — "Org Chart — Stakeholder Map"
 - [ ] `chapter-4-section-2.jpg` — "Resilience — Navigation Through Crisis"
 
-**17 images total.**
+**13 images total.**
 
 ### Proof Before Progress — `public/work/proof-before-progress/`
 
-Landing page — 4 chapter thumbnails, aspect **16:9**, ~1280×720px:
-- [ ] `chapter-1-thumb.jpg` — "The Belief"
-- [ ] `chapter-2-thumb.jpg` — "The Reset"
-- [ ] `chapter-3-thumb.jpg` — "The Vendor Path Not Taken"
-- [ ] `chapter-4-thumb.jpg` — "The Weekend and the Proof"
+Landing page — **no images needed as of 2026-09-09**, same conversion as Heart Design System above. The 4 `chapter-N-thumb.jpg` slots below no longer exist in the code.
 
 Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px (no section images — these 4 chapters don't have any section-image slots in the code):
 - [ ] `chapter-1-hero.jpg`
@@ -54,7 +46,7 @@ Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px (no section images
 - [ ] `chapter-3-hero.jpg`
 - [ ] `chapter-4-hero.jpg`
 
-**8 images total.**
+**4 images total.**
 
 ### Figma Enterprise Migration — `public/work/figma-enterprise-migration/`
 
@@ -75,12 +67,12 @@ Each chapter page — 1 hero, aspect **1.6:1**, ~1600×1000px (no section images
 ### Home page — `public/`
 
 1 image, aspect **4:3**, ~1600×1200px:
-- [ ] `work/heart-design-system/heart-ds-hero.jpg` — lead-case-study card, links through to Heart Design System
+- [x] `work/heart-design-system/heart-ds-hero.jpg` — lead-case-study card, links through to Heart Design System. Done 2026-09-08 (`28fcceb`) — placeholder logo/wordmark treatment, not a real showcase yet; swap when one exists.
 
 ### About page — `public/`
 
 1 portrait, aspect **4:5**, ~1600×2000px:
-- [ ] `about-portrait.jpg` — sits beside the intro copy, collapses above/below it on mobile
+- [x] `about-portrait.jpg` — sits beside the intro copy, collapses above/below it on mobile. Done 2026-09-08 (`65ad322`).
 
 ---
 
@@ -106,7 +98,7 @@ These 9 have real content (`content/work/[slug].md`) and a registry entry alread
 
 ## Total scope
 
-- **Priority 1 (do this first):** 35 images across Heart Design System, Proof Before Progress, Figma Enterprise Migration, Home, and About.
+- **Priority 1 (do this first):** 27 images across Heart Design System, Proof Before Progress, Figma Enterprise Migration, Home, and About — down from 35 after the two landing pages dropped their thumbnail grids (2026-09-09) for a text row list instead. **2 of 27 done** (Home, About) — 25 remaining, all heroes and section images.
 - **Priority 2 (later, optional):** 36 images across 9 currently-hidden case studies.
 
 ---
@@ -115,7 +107,6 @@ These 9 have real content (`content/work/[slug].md`) and a registry entry alread
 
 | Use | Aspect ratio | Recommended export size (2×) | Tailwind class (source of truth) |
 |---|---|---|---|
-| Chapter/case-study thumbnail (landing grids) | 16:9 | 1280×720px | `aspect-video` |
 | Chapter/case-study hero | 1.6:1 | 1600×1000px | `aspect-[1.6/1]` (HDS/PBP chapters) or `aspect-[1/0.56]` (≈16:9, `[slug]` hero) |
 | Between-section image | 3:2 | 1600×1067px | `aspect-[1.5/1]` |
 | Home lead-case-study card | 4:3 | 1600×1200px | `aspect-[4/3]` |
