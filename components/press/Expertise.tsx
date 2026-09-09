@@ -17,21 +17,18 @@
  * columns at ≤759px (same breakpoint as .pr-two-col etc.) — see that class
  * for the mobile override.
  *
- * Order (2026-09-08, re-verified after both dropping Executive
- * Communication AND the 4-column change above): grouped by rendered line
- * count at a real 1280px viewport (measured directly, not guessed — the
- * resize_window "desktop" preset reflects the pane's own narrower size and
- * gives a false reading, don't use it for this). The wider fixed columns
- * mean most labels that wrapped to 2 lines under the old 5-column auto-fit
- * now fit on 1 — only "Figma Enterprise Administration" and
- * "Cross-Functional Leadership" still wrap, out of 12 total. 10 one-liners
- * and 2 two-liners don't split evenly across rows of 4, so row 2
- * unavoidably mixes 2 one-liners in with the 2 two-liners — rows 1 and 3
- * come out fully clean, which is the best "where possible" gets at this
- * column count. The array order below already lands in exactly that
- * arrangement without needing to be touched. Re-verify in the browser
- * (measure actual rendered line count at a real viewport width, not the
- * "desktop" preset — don't eyeball it) if any label text changes.
+ * Order (2026-09-08): grouped by rendered line count at a real 1280px
+ * viewport (measured directly, not guessed — the resize_window "desktop"
+ * preset reflects the pane's own narrower size and gives a false reading,
+ * don't use it for this). At the 4-column width, "Figma Enterprise
+ * Administration" and "Cross-Functional Leadership" were the last two
+ * labels still wrapping to 2 lines — trimmed to "Figma Enterprise Admin"
+ * and "Cross-Team Leadership" so every chip is now a single line, all 3
+ * rows clean (no more line-count grouping needed; keep this in mind if a
+ * label is ever lengthened again, since it could reintroduce wrapping).
+ * Re-verify in the browser (measure actual rendered line count at a real
+ * viewport width, not the "desktop" preset — don't eyeball it) if any
+ * label text changes.
  */
 
 import {
@@ -58,8 +55,8 @@ const EXPERTISE = [
   { label: "AI Adoption", Icon: TrendUp },
   { label: "Mentoring", Icon: GraduationCap },
   // 2-line labels at the standard desktop width
-  { label: "Figma Enterprise Administration", Icon: FigmaLogo },
-  { label: "Cross-Functional Leadership", Icon: UsersThree },
+  { label: "Figma Enterprise Admin", Icon: FigmaLogo },
+  { label: "Cross-Team Leadership", Icon: UsersThree },
   { label: "Design System Governance", Icon: Blueprint },
   { label: "UX Research & Strategy", Icon: MagnifyingGlass },
   { label: "Stakeholder Management", Icon: Handshake },
