@@ -90,6 +90,6 @@ export const CERTIFICATIONS = [
 // even though line-wrapping doesn't apply to this plain-text join.
 export const SKILLS = [
   "Design Ops", "Design Systems", "Figma Governance", "AI Tooling Strategy", "AI Adoption", "Mentoring",
-  "Figma Enterprise Administration", "Cross-Functional Leadership", "Design System Governance",
+  "Figma Enterprise Admin", "Cross-Team Leadership", "Design System Governance",
   "UX Research & Strategy", "Stakeholder Management", "Accessibility (WCAG)",
 ];

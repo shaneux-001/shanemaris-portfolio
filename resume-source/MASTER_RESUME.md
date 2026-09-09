@@ -94,4 +94,4 @@ Art Institute of Dallas, 2008–2011
 
 ## Skills
 
-Design Ops · Design Systems · Figma Governance · AI Tooling Strategy · AI Adoption · Mentoring · Figma Enterprise Administration · Cross-Functional Leadership · Design System Governance · UX Research & Strategy · Stakeholder Management · Accessibility (WCAG)
+Design Ops · Design Systems · Figma Governance · AI Tooling Strategy · AI Adoption · Mentoring · Figma Enterprise Admin · Cross-Team Leadership · Design System Governance · UX Research & Strategy · Stakeholder Management · Accessibility (WCAG)
