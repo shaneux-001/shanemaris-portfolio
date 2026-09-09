@@ -1,37 +1,41 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import SiteHeader from "@/components/press/SiteHeader";
 import SiteFooter from "@/components/press/SiteFooter";
 import "./globals.css";
 
-// Inter + Playfair remain loaded for /resume and the work case-study
-// pages, which keep the pre-redesign token system (see globals.css) and
-// are being reconciled to Press Room in a later pass.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-// Press Room typeface pair — Archivo (display/UI) + IBM Plex Mono (press
-// apparatus: eyebrows, nav, buttons, metadata).
+// Press Room typeface pair — Archivo carries display, body, AND the italic
+// accent/quote role (2026-09-09, replacing the Inter + Playfair Display
+// pair — both are among the most commonly flagged "this looks
+// AI-generated" fonts, and stacking them together compounded that. One
+// characterful face across every role reads as an authored choice rather
+// than the "safe body + fancy display + fancy accent" template formula).
+// IBM Plex Mono still carries eyebrows/nav/buttons/metadata, unchanged.
+// Italic weights added for the quote/accent role (case-study blockquotes
+// use font-archivo italic directly, e.g. Heart Design System's chapter
+// pages) — normal weights unchanged from before.
 const archivo = Archivo({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-archivo",
+  style: ["normal", "italic"],
+  // Named --font-archivo-face, NOT --font-archivo: globals.css's Tailwind
+  // v4 @theme inline block aliases --font-archivo to this (see that file)
+  // to expose the `font-archivo` utility class. A same-name variable here
+  // would collide with that alias and create a circular reference —
+  // exactly what happened before this fix (2026-09-09): the alias resolved
+  // to guaranteed-invalid, `.font-archivo` and every hand-written
+  // var(--font-archivo) rule silently fell through to inherited Inter,
+  // sitewide, since the 2026-09-05 commit that added the alias. Confirmed
+  // live on production, not just local dev.
+  variable: "--font-archivo-face",
   display: "swap",
 });
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  // Same collision, same fix — see the Archivo comment above.
+  variable: "--font-plex-mono-face",
   display: "swap",
 });
 
@@ -87,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${archivo.variable} ${plexMono.variable}`}
+      className={`${archivo.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>

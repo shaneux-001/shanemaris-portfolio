@@ -49,8 +49,14 @@
   --color-pr-glow-a: var(--pr-glow-a);
   --color-pr-glow-b: var(--pr-glow-b);
 
-  --font-archivo: var(--font-archivo);
-  --font-plex-mono: var(--font-plex-mono);
+  /* Aliased from *-face (see app/layout.tsx) — NOT the same name on both
+     sides. A same-name alias here is a circular reference: it resolves to
+     guaranteed-invalid and every consumer (the font-archivo/font-plex-mono
+     utilities, and any hand-written var(--font-archivo) rule) silently
+     falls through to inherited Inter. That was live in production from
+     2026-09-05 to 2026-09-09 — fixed here, see layout.tsx for the story. */
+  --font-archivo: var(--font-archivo-face);
+  --font-plex-mono: var(--font-plex-mono-face);
 }
 
 @import "tailwindcss/utilities";
@@ -92,13 +98,6 @@
   --accent2-tint-08: rgba(184, 68, 43, 0.08);
   --accent2-tint-10: rgba(184, 68, 43, 0.10);
   --accent2-tint-15: rgba(184, 68, 43, 0.15);
-
-  /* --- Type stack aliases ---
-     Next.js next/font/google populates --font-inter and --font-playfair.
-     We expose --font-sans/--font-serif as semantic aliases so component
-     code can reference role rather than face. */
-  --font-sans:  var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
 
   /* Display scale (single h1) */
   --display-h1: clamp(2.5rem, 7vw, 4.5rem);
@@ -276,10 +275,10 @@ footer.bg-pr-bg :focus-visible {
 
 html {
   background-color: var(--color-base);
-  /* Lock the sans stack at the root so EVERY element inherits Inter
+  /* Lock the sans stack at the root so EVERY element inherits Archivo
      regardless of theme. Without this, anything missing an explicit
      fontFamily falls through to the browser default (Times). */
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-archivo), system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -290,9 +289,12 @@ body {
   min-height: 100vh;
 }
 
-/* Headings default to the serif display face. Inline overrides still win. */
+/* Headings default to the display face too. Every live heading already
+   sets this explicitly (font-archivo, or font-plex-mono for the small
+   mono-label eyebrows) — this is just a sane fallback so an untouched
+   heading doesn't fall through to Georgia/serif. Inline overrides still win. */
 :where(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-archivo), system-ui, sans-serif;
 }
 
 /* Browsers reset form controls to system fonts — opt back in */
