@@ -31,7 +31,7 @@ Weeks later, our sales rep invited me to Config, hinting at big announcements. D
 
 ## From 20 seats to an enterprise tool
 
-It started around 20 seats between design and dev, against a Digital UX team of only 11 designers at the time, and grew from there, month over month. By 2024–25, dev seats outnumbered design seats, and it had become an enterprise tool spanning four separate design teams company-wide, now totaling 2,706 seats (320 of those paid: 14 collaboration, 129 dev, 177 full/design, with the remainder on free view access). Seat budget ownership eventually transferred to Technology per company policy, though I stayed on as account admin. We recently renegotiated the contract for unlimited seats and early feature access.
+It started around 100 total seats (20 design seats), against a Digital UX team of only 11 designers at the time, and grew from there, month over month. By 2024–25, dev seats outnumbered design seats, and it had become an enterprise tool spanning four separate design teams company-wide, now totaling 2,706 seats (320 of those paid: 14 collaboration, 129 dev, 177 full/design, with the remainder on free view access). Seat budget ownership eventually transferred to Technology per company policy, though I stayed on as account admin. We recently renegotiated the contract for unlimited seats and early feature access.
 
 ## Onboarding across the company
 

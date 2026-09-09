@@ -4,10 +4,10 @@ This repo has verified, locked content living alongside older, sometimes-wrong f
 
 ## How to use this file
 
-1. **`Shane_Maris_Resume.md` is locked content.** Copy it verbatim wherever it's used — same words, same punctuation. Do not paraphrase, summarize, or "improve" it, even if a different phrasing seems better. If you think something in it is actually wrong, say so and ask; don't fix it unilaterally.
+1. **`MASTER_RESUME.md` is locked content.** Copy it verbatim wherever it's used — same words, same punctuation. Do not paraphrase, summarize, or "improve" it, even if a different phrasing seems better. If you think something in it is actually wrong, say so and ask; don't fix it unilaterally.
 2. **Run every checklist item below against anything you touch** — content you're generating fresh, and content you find already sitting in the repo. An existing file being wrong is not evidence that it's right.
 3. **If you find a conflict — two different claims about the same fact, anywhere** — stop and flag it. Do not pick whichever seems more recent by file timestamp, more detailed, more complete, or already live on the site. Live-on-the-site is the *lowest*-trust source here, not the highest — it's what's least likely to have been reviewed recently. Show both versions and ask which is accurate.
-4. **Priority order when sources conflict:** (1) anything Shane confirms directly to you beats everything else, (2) `Shane_Maris_Resume.md` and this file beat any other file in the repo, (3) anything currently live on the site is the least trustworthy.
+4. **Priority order when sources conflict:** (1) anything Shane confirms directly to you beats everything else, (2) `MASTER_RESUME.md` and this file beat any other file in the repo, (3) anything currently live on the site is the least trustworthy.
 
 ---
 
@@ -15,7 +15,7 @@ This repo has verified, locked content living alongside older, sometimes-wrong f
 
 - [ ] **HDS is strictly customer-facing** (responsive web, native iOS, native Android). Never call it "internal," never imply it serves internal/employee-facing use.
 - [ ] **Jetstream never appears anywhere.** It's Southwest's separate internal crew-facing system — not something Shane worked on, not to be confused with HDS.
-- [ ] **No formal direct reports, ever.** One quasi-formal headcount (a contractor, kept generic, not named) with skip-level visibility from leadership. A separate, more formal contractor engagement existed earlier during a native-app proof-of-concept (also kept generic, not named). Never write "lead and mentor UX Designers," "UX design team," or anything implying formal people management.
+- [ ] **No formal direct reports, ever.** One quasi-formal headcount (a contractor, kept generic, not named) with skip-level visibility from leadership. A separate, more formal contractor engagement existed earlier during a native-app proof-of-concept (also kept generic, not named). Never write or imply that Shane directly led, managed, or was the formal manager of a UX Designer/design team — e.g. "lead and mentor UX Designers" is banned. **Clarified 2026-09-08:** this is about not claiming to *be the manager*, not about avoiding the discipline/team's existence entirely — referencing the UX Designer team's headcount, growth, or formalization as an outcome Shane's work *influenced/contributed to* (without claiming he ran it) is fine, e.g. "helped build the case that later expanded and formalized the UX Designer role within Marketing."
 - [ ] **The AI design system tool is a paused weekend prototype**, not something "being built" or "in progress." Never use present-progressive language implying active ongoing development.
 - [ ] **$5M and $150K are two separate, unrelated figures.** $5M = the broader efficiency business case (1hr/day saved × 250 engineers + 11 designers, per an NN/g course estimate). $150K = an early, rough, generic estimate for a specific avoided vendor purchase (Knapsack), never a final number.
 

@@ -7,7 +7,7 @@ Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · con
 
 ## Summary
 
-Design systems and design ops leader with over a decade at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android. Built and scaled a design system from the ground up, from the initial org-wide tool migration to a governance model that now reaches over 2,700 users, and turned that work into outcomes senior leadership could act on.
+Design systems and design ops leader with a decade-plus career at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android. Built and scaled Southwest's digital design system from the ground up, led the org-wide tool migration that now reaches over 2,700 users (320 paid seats), and turned that work into outcomes senior leadership could act on.
 
 ---
 
@@ -16,27 +16,27 @@ Design systems and design ops leader with over a decade at Southwest Airlines, c
 ### Digital Product Manager, Design Operations
 *Dec 2022 to present*
 
-- Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional) across 55+ teams; led onboarding company-wide and have set up 20 workspaces for groups across the organization
-- Established design systems governance and adoption standards spanning UX Design, Creative Design, Product, and front-end engineering pods, coordinating across departments in Digital Experience, Technology, and Marketing
-- Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2
-- Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership
+- Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 100 total seats (20 design seats) to 2,706 total today (320 of those paid/functional) across the company; led onboarding company-wide and have set up workspaces for groups across the organization
+- Established design systems governance and adoption standards spanning UX, Content Design, Product, and Engineering pods, coordinating across Digital, Marketing and Technology departments
+- Prototyped an AI-powered component inventory tool in a weekend — including a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2
+- Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a new long-term contractor relationship I continue to manage today, including skip-level visibility with leadership
 - Industry recognition: invited by Figma to co-present on its "In The File" content series, covering Southwest's design system journey and real-world use of the Design Token Playbook, variables, and Dev Mode
 
 ### Lead UX Designer
 *Mar 2022 to Dec 2022*
 
-- Defined and documented Heart Design System vision, establishing the strategic foundation for enterprise-scale governance
+- Defined and documented Heart Design System vision, establishing the strategic foundation for governance of HDS across Digital, Technology, and Marketing
 
 ### Senior UX Designer
 *Feb 2019 to Mar 2022*
 
-- Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS
+- Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS, approved by the Director of Brand and the Managing Director of Digital
 - Co-founded and co-led the UX Community of Practice (with another UX Designer), establishing shared design standards across teams
 
 ### UX Designer
 *Apr 2014 to Feb 2019*
 
-- A core team member on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
+- A core UX Designer on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
 
 ### Web Designer
 *Feb 2012 to Apr 2014*
@@ -62,4 +62,4 @@ Art Institute of Dallas, 2008 to 2011
 
 ## Skills
 
-Design Ops · Design Systems · Figma Governance · AI Tooling Strategy · AI Adoption · Mentoring · Figma Enterprise Administration · Cross-Functional Leadership · Design System Governance · UX Research & Strategy · Stakeholder Management · Executive Communication · Accessibility (WCAG)
+Design Ops · Design Systems · Figma Governance · AI Tooling Strategy · AI Adoption · Mentoring · Figma Enterprise Administration · Cross-Functional Leadership · Design System Governance · UX Research & Strategy · Stakeholder Management · Accessibility (WCAG)

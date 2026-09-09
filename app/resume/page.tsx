@@ -4,7 +4,7 @@ import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops. Building scalable design systems and leading UX teams.",
+  description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops.",
   openGraph: {
     title: "Resume · Shane Maris",
     description: "14+ years at Southwest Airlines — from Web Designer to Digital Product Manager, Design Ops.",
@@ -23,11 +23,13 @@ const EXPERIENCE: ExperienceEntry[] = [
     role: "Digital Product Manager, Design Operations",
     span: "Dec 2022 to present",
     bullets: [
-      "Expanded design system leadership buy-in across the organization; scaled Heart Design System from web to iOS native and Android platforms",
-      "Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership",
-      "Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional) across 55+ teams; led onboarding company-wide and have set up 20 workspaces for groups across the organization",
-      "Established design systems governance and adoption standards spanning UX Design, Creative Design, Product, and front-end engineering pods, coordinating across departments in Digital Experience, Technology, and Marketing",
-      "Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2",
+      "Expanded design system leadership buy-in across Digital Experience, Marketing and Technology departments; scaled Heart Design System from web to iOS native and Android platforms",
+      "Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a new long-term contractor relationship I continue to manage today, including skip-level visibility with leadership",
+      "Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 100 total seats (20 design seats) to 2,706 total today (320 of those paid/functional) across the company; led onboarding company-wide and have set up workspaces for groups across the organization",
+      "Established design systems governance and adoption standards spanning UX, Content Design, Product, and Engineering pods, coordinating across Digital, Marketing and Technology departments",
+      <>
+        Prototyped an AI-powered component inventory tool in a weekend — including a component health dashboard, real-time Q&amp;A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that&apos;s actually AI-ready, informing the roadmap toward v2
+      </>,
       <>
         Industry recognition: invited by Figma to co-present on its &quot;In The File&quot; content series, covering Southwest&apos;s design system journey and real-world use of the Design Token Playbook, variables, and Dev Mode (
         <a href="https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">slides</a>
@@ -35,17 +37,17 @@ const EXPERIENCE: ExperienceEntry[] = [
         <a href="https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">webinar page</a>
         )
       </>,
-      "Co-lead the UX Community of Practice; manage design operations and optimization of enterprise design processes",
-      "Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use it",
+      "Co-lead the UX Community of Practice; manage design operations and optimization of digital design processes",
+      "Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use Heart DS",
     ],
   },
   {
     role: "Lead UX Designer",
     span: "Mar 2022 to Dec 2022",
     bullets: [
-      "Defined and documented Heart Design System vision, establishing the strategic foundation for enterprise-scale governance",
-      "Secured executive leadership buy-in on the design systems investment and organizational approach",
-      "Bridged individual contributor and leadership roles while building the case for a dedicated design operations function",
+      "Defined and documented Heart Design System vision, establishing the strategic foundation for governance of HDS across Digital, Technology, and Marketing",
+      "Secured leadership buy-in on the design systems investment and organizational approach",
+      "Bridged individual contributor and leadership roles while building the case for a dedicated design operations function, creating the Digital Product Manager, Design Ops role",
     ],
   },
   {
@@ -53,7 +55,7 @@ const EXPERIENCE: ExperienceEntry[] = [
     span: "Feb 2019 to Mar 2022",
     bullets: [
       "Led design updates and enhancements to My Account and Homepage, key customer touchpoints",
-      "Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS",
+      "Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS, approved by the Director of Brand and the Managing Director of Digital",
       "Co-founded and co-led the UX Community of Practice (with another UX Designer), establishing shared design standards across teams",
     ],
   },
@@ -61,7 +63,7 @@ const EXPERIENCE: ExperienceEntry[] = [
     role: "UX Designer",
     span: "Apr 2014 to Feb 2019",
     bullets: [
-      "A core team member on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience",
+      "A core UX Designer on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience",
       "Designed and shipped a hybrid Select Flights page as a short-lived hedge between the existing experience and the full Vision redesign — leadership was wary of the conversion dip from changing that much at once, so this stopgap ran for about a month while we confirmed conversion rate and average order value held before fully committing to Vision",
       "Partnered with Southwest's Innovation Group on two internal tools: one giving station leadership real-time employee context during in-person visits, another giving gate agents real-time tools to personally engage top-tier loyalty customers",
       "Used A/B testing and established UX research (Baymard, NN/g) to validate design decisions when they conflicted with stakeholder preference, grounding product direction in data rather than opinion",
@@ -80,7 +82,7 @@ const EXPERIENCE: ExperienceEntry[] = [
     span: "Aug 2011 to Feb 2012",
     bullets: [
       "Integrated AirTran's digital presence into the Southwest ecosystem following the airlines' merger",
-      "Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations",
+      "Collaborated with SMEs to establish UX and digital best practices — work that helped build the case for later expanding and formalizing the UX Designer role within Marketing",
     ],
   },
 ];

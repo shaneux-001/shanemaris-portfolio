@@ -12,16 +12,19 @@
  * (ShieldCheck), Design System Governance (Blueprint), and AI Adoption
  * (TrendUp) are all abstract concepts without one universally-obvious glyph.
  *
- * Order (2026-09-07): grouped by rendered line count at the standard
- * 5-column desktop width (measured directly, not guessed) so 1-line labels
- * share a row with other 1-line labels and 2-line labels share a row with
- * other 2-line labels, avoiding the uneven look of mixed rows even with the
- * fixed chip height below. 6 one-liners and 7 two-liners don't split evenly
- * across rows of 5, so row 2 unavoidably mixes one straggler in with the
- * two-liners — rows 1 and 3 come out fully clean, which is the best "where
- * possible" gets at this column count. Re-verify this grouping in the
- * browser (measure actual rendered line count, don't eyeball it) if any
- * label text changes.
+ * Order (2026-09-08, re-verified after dropping Executive Communication):
+ * grouped by rendered line count at the standard 5-column desktop width
+ * (measured directly at a real 1280px viewport, not guessed) so 1-line
+ * labels share a row with other 1-line labels and 2-line labels share a row
+ * with other 2-line labels, avoiding the uneven look of mixed rows even with
+ * the fixed chip height below. 6 one-liners and 6 two-liners still don't
+ * split evenly across rows of 5 (6 mod 5 = 1 either way), so row 2
+ * unavoidably mixes one straggler in with the two-liners regardless of which
+ * group goes first — rows 1 and 3 come out fully clean, which is the best
+ * "where possible" gets at this column count. Re-verify this grouping in the
+ * browser (measure actual rendered line count at a real viewport width, not
+ * the resize_window "desktop" preset which reflects the pane's own narrower
+ * size — don't eyeball it) if any label text changes.
  */
 
 import {
@@ -36,7 +39,6 @@ import {
   Blueprint,
   MagnifyingGlass,
   Handshake,
-  Presentation,
   Wheelchair,
 } from '@phosphor-icons/react/dist/ssr';
 
@@ -54,7 +56,6 @@ const EXPERTISE = [
   { label: "Design System Governance", Icon: Blueprint },
   { label: "UX Research & Strategy", Icon: MagnifyingGlass },
   { label: "Stakeholder Management", Icon: Handshake },
-  { label: "Executive Communication", Icon: Presentation },
   { label: "Accessibility (WCAG)", Icon: Wheelchair },
 ];
 

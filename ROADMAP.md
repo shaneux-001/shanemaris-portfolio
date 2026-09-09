@@ -133,9 +133,78 @@ The May roadmap targeted **launch June 22, 2026** with a week-by-week schedule t
 | `HANDOFF.md` | **Live**, but its old `## To-do` section is stale — replaced with a pointer to this file | Stack info, critical gotchas, file map, style approach, bear traps, safety-net SHAs, and the phase-by-phase session history changelog. Still accurate technical/architectural reference. |
 | Cowork artifact "Shane Portfolio Roadmap" | **Stale, banner added** | Historical snapshot of the May plan only. Do not use for current status. |
 | `IMAGE-SPEC.md` | **Live, refreshed 2026-09-07** | The current, accurate image punch list — every dimension read from the actual component code. Update this (not a new doc) as image needs change. |
+| `resume-source/MASTER_RESUME.md` | **Live** — renamed from `Shane_Maris_Resume.md` 2026-09-08 to signal it's canonical | Single source of truth for resume wording. `scripts/resume-pdf-content.ts` (PDF + .md downloads) and `app/resume/page.tsx` (live page, hand-duplicated content) are both manual, one-way copies of this file — re-sync by hand after any edit here, nothing auto-propagates. |
 
 ---
 
 ## Shane's additions
 
 _(Add new items here as they come up — this section is yours.)_
+
+---
+
+## Future project (on hold) — "The Recipe Box" → Labs
+
+**Not for tonight, and not until the core portfolio pass is finished.** Stored here per Shane's explicit instruction (2026-09-08) — do not start this until he asks, even if it looks like quick/easy work.
+
+**What it is:** a personal recipe archive + meal-planning tool Shane built for his family — started as digitizing old recipe cards (including a handwritten one from his mom) and meal-kit recipes, and grew into a real tool. Built as a single self-contained HTML file (no backend, no build step, offline-capable) through an extended conversation with Claude in another session. Shane wants to showcase it in `/labs` specifically to demonstrate he builds and experiments on his own time, outside of work.
+
+**Source file:** `/Users/e103138/Downloads/folio-work-sept5/recipe-box/recipe_box.html` — the standalone app referenced in the prompt below. Confirm it's still at that path (or ask Shane for the current copy) before starting; it may have been iterated on since 2026-09-08.
+
+**Related, already tracked elsewhere in this roadmap:** `/labs` currently shows an empty-state message — `project-oasis` has content and a registry entry but no route built yet (see "Still open → Post-launch / lower priority" above). Worth deciding, when this is picked up, whether The Recipe Box becomes the first real Labs entry or sits alongside Project Oasis once that's also built.
+
+**The prompt Shane generated in another session (kept verbatim for whoever picks this up):**
+
+> I want to add a project to the "Labs" section of my portfolio. This is a
+> side project I built — a personal recipe manager and meal-planning tool
+> called "The Recipe Box" — and I want to showcase it there to show that I
+> build and experiment on my own time, outside of work.
+>
+> First, look at how my portfolio is structured and how existing Labs (or
+> Projects) entries are built — the framework, styling conventions, content
+> format, and whether entries link out, embed an iframe, show screenshots,
+> or something else. Match whatever pattern is already established. If
+> there's no Labs section yet, look at how other sections are built and
+> follow the same conventions to create one.
+>
+> About the project (use this to write the description/copy — rewrite it in
+> whatever voice/length fits my site, this is just the raw material):
+>
+> "The Recipe Box" is a personal recipe archive and meal-planning tool I
+> built for my family. It started as a way to digitize old recipe cards
+> (including a handwritten one from my mom) and meal-kit recipes we'd
+> collected, and grew into something more useful:
+>
+> - A searchable, filterable recipe library (currently ~90 recipes) with
+>   inline add/edit — built as a single self-contained HTML file, no
+>   backend, no build step, works offline in any browser
+> - A meal-planning flow that generates a week of dinner suggestions,
+>   pairing mains with sides that actually make sense together
+> - A calendar view for scheduling meals across multiple weeks at once
+> - A lightweight pantry tracker that cross-references upcoming meals
+>   against what's on hand, to cut down on food waste and duplicate
+>   grocery trips
+> - A "share as markdown" export so I can send a single recipe to family
+>   or friends who trade recipes with me
+>
+> The interesting part, worth highlighting: the app itself is a fast, fully
+> client-side tool for the hands-on parts (searching, browsing, editing
+> while cooking), but the actual planning intelligence lives in conversation
+> with Claude directly — I describe what's in the fridge, what we're in the
+> mood for, and get a plan reasoned through in real time, rather than a
+> fixed algorithm. The whole thing (data modeling, the UI, the meal-planning
+> logic) was built iteratively through conversation with Claude, going from
+> "digitize some recipe cards" to a real working tool over a single
+> extended session.
+>
+> I'm attaching the current recipe_box.html file (the standalone app) for
+> you to work with — figure out the best way to host/embed/link it given
+> how the rest of my site handles similar content.
+>
+> Please:
+> 1. Review the existing site structure and conventions
+> 2. Add a new Labs entry for this project, written in a tone that matches
+>    the rest of my site
+> 3. Make the app itself accessible from that entry (embedded, linked, or
+>    downloadable — whichever fits the site's existing patterns)
+> 4. Update any navigation/index needed so the entry is actually reachable

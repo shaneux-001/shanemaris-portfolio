@@ -1,17 +1,22 @@
 <!--
-PROVENANCE NOTE: This file was rebuilt from scratch on Sept 5, 2026. The previously-referenced
-"master" Shane_Maris_Resume.md does not exist anywhere (repo, Downloads, or elsewhere) —
-it was confirmed lost. This version was reconstructed from the most complete surviving artifact
-(Shane_Maris_Resume.docx, dated May 1, 2026) plus every correction verified directly with Shane
-across this session. Treat THIS file as the new single source of truth going forward.
+SOURCE OF TRUTH — resume content only. This is the one place resume wording
+gets edited. Everything else downstream is a manual copy, not auto-generated
+or wired together:
+  - scripts/resume-pdf-content.ts → feeds public/Shane_Maris_Resume.pdf and .md
+  - app/resume/page.tsx           → the live /resume page (hand-duplicated content, not imported)
+When this file changes, re-sync all three by hand — nothing here propagates
+automatically. Same "one canonical doc" convention as ROADMAP.md and
+IMAGE-SPEC.md elsewhere in this repo; see ROADMAP.md's "Doc map" table.
 
-Known open item: none currently outstanding. Note: an earlier version of this rebuild briefly
-reintroduced a serious scope error in the Summary (calling HDS an "internal platform," which
-directly contradicts the permanent Jetstream/HDS boundary rule from the Career Reference doc —
-HDS is strictly customer-facing). That's now corrected, and the rest of the file has been
-re-scanned for the same issue with none found. Given that this file was rebuilt from fragmented
-chat history rather than one clean source, a full line-by-line read-through by Shane before this
-replaces anything live is still warranted rather than assumed clean.
+PROVENANCE: rebuilt from scratch on Sept 5, 2026, after the prior master was
+confirmed lost — reconstructed from the most complete surviving artifact
+(a .docx dated May 1, 2026) plus every correction verified directly with
+Shane across that session. An earlier pass of this rebuild briefly
+reintroduced a scope error in the Summary (calling HDS an "internal
+platform," violating the permanent Jetstream/HDS boundary — HDS is strictly
+customer-facing); caught and corrected, file re-scanned for the same issue
+with none found. Second review pass started 2026-09-08 to catch anything
+the fragmented reconstruction still missed.
 -->
 
 # Shane Maris
@@ -23,7 +28,7 @@ Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · con
 
 ## Summary
 
-Design systems and design ops leader with over a decade at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android. Built and scaled a design system from the ground up, from the initial org-wide tool migration to a governance model that now reaches over 2,700 users, and turned that work into outcomes senior leadership could act on.
+Design systems and design ops leader with a decade-plus career at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android. Built and scaled Southwest's digital design system from the ground up, led the org-wide tool migration that now reaches over 2,700 users (320 paid seats), and turned that work into outcomes senior leadership could act on.
 
 ---
 
@@ -32,33 +37,33 @@ Design systems and design ops leader with over a decade at Southwest Airlines, c
 ### Digital Product Manager, Design Operations
 *Dec 2022 – Present*
 
-- Expanded design system leadership buy-in across the organization; scaled Heart Design System from web to iOS native and Android platforms
-- Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a long-term contractor relationship I continue to manage today, including skip-level visibility with leadership
-- Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 20 seats to 2,706 total today (320 of those paid/functional) across 55+ teams; led onboarding company-wide and have set up 20 workspaces for groups across the organization
-- Established design systems governance and adoption standards spanning UX, Marketing content design, Product, and Technology engineering pods, coordinating across teams under shared Digital Experience leadership
-- Prototyped an AI-powered design system tool in a weekend — a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2
+- Expanded design system leadership buy-in across Digital Experience, Marketing and Technology departments; scaled Heart Design System from web to iOS native and Android platforms
+- Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a new long-term contractor relationship I continue to manage today, including skip-level visibility with leadership
+- Led Southwest's migration off Sketch and Abstract onto Figma as the single org-wide design tool, growing adoption from roughly 100 total seats (20 design seats) to 2,706 total today (320 of those paid/functional) across the company; led onboarding company-wide and have set up workspaces for groups across the organization
+- Established design systems governance and adoption standards spanning UX, Content Design, Product, and Engineering pods, coordinating across Digital, Marketing and Technology departments
+- Prototyped an AI-powered component inventory tool in a weekend — including a component health dashboard, real-time Q&A agent, and governance intake system — avoiding a planned $150K/year vendor purchase (Knapsack); currently paused while foundational v1 work brings HDS to a state that's actually AI-ready, informing the roadmap toward v2
 - Industry recognition: invited by Figma to co-present on its "In The File" content series, covering Southwest's design system journey and real-world use of the Design Token Playbook, variables, and Dev Mode ([slides](https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey) · [webinar page](https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113))
-- Co-lead the UX Community of Practice; manage design operations and optimization of enterprise design processes
-- Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use it
+- Co-lead the UX Community of Practice; manage design operations and optimization of digital design processes
+- Partner with Marketing and Technology to optimize design processes, and share design systems guidance with Customer Experience and Innovation as teams choose to use Heart DS
 
 ### Lead UX Designer
 *Mar 2022 – Dec 2022*
 
-- Defined and documented Heart Design System vision, establishing the strategic foundation for enterprise-scale governance
-- Secured executive leadership buy-in on the design systems investment and organizational approach
-- Bridged individual contributor and leadership roles while building the case for a dedicated design operations function
+- Defined and documented Heart Design System vision, establishing the strategic foundation for governance of HDS across Digital, Technology, and Marketing
+- Secured leadership buy-in on the design systems investment and organizational approach
+- Bridged individual contributor and leadership roles while building the case for a dedicated design operations function, creating the Digital Product Manager, Design Ops role
 
 ### Senior UX Designer
 *Feb 2019 – Mar 2022*
 
 - Led design updates and enhancements to My Account and Homepage, key customer touchpoints
-- Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS
+- Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS, approved by the Director of Brand and the Managing Director of Digital
 - Co-founded and co-led the UX Community of Practice (with another UX Designer), establishing shared design standards across teams
 
 ### UX Designer
 *Apr 2014 – Feb 2019*
 
-- A core team member on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
+- A core UX Designer on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
 - Designed and shipped a hybrid Select Flights page as a short-lived hedge between the existing experience and the full Vision redesign — leadership was wary of the conversion dip from changing that much at once, so this stopgap ran for about a month while we confirmed conversion rate and average order value held before fully committing to Vision
 - Partnered with Southwest's Innovation Group on two internal tools: one giving station leadership real-time employee context during in-person visits, another giving gate agents real-time tools to personally engage top-tier loyalty customers
 - Used A/B testing and established UX research (Baymard, NN/g) to validate design decisions when they conflicted with stakeholder preference, grounding product direction in data rather than opinion
@@ -73,7 +78,7 @@ Design systems and design ops leader with over a decade at Southwest Airlines, c
 *Aug 2011 – Feb 2012*
 
 - Integrated AirTran's digital presence into the Southwest ecosystem following the airlines' merger
-- Collaborated with SMEs to establish UX and digital best practices, laying groundwork for future design operations
+- Collaborated with SMEs to establish UX and digital best practices — work that helped build the case for later expanding and formalizing the UX Designer role within Marketing
 
 ---
 
@@ -89,4 +94,4 @@ Art Institute of Dallas, 2008–2011
 
 ## Skills
 
-Design Systems & Design Ops · Figma (Enterprise Administration & Governance) · Cross-Functional Leadership · Design System Governance & Federated Contribution Models · AI Tooling Strategy & Adoption · UX Research & Strategy · Stakeholder Management & Executive Communication · Mentoring · Accessibility (WCAG) · Design Token Systems
+Design Ops · Design Systems · Figma Governance · AI Tooling Strategy · AI Adoption · Mentoring · Figma Enterprise Administration · Cross-Functional Leadership · Design System Governance · UX Research & Strategy · Stakeholder Management · Accessibility (WCAG)

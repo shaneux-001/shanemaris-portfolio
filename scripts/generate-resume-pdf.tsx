@@ -41,7 +41,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 // the .md keeps the fuller CONTACT/SUMMARY from resume-pdf-content.ts.
 // Not shared with generate-resume-md.ts on purpose.
 const CONTACT_PDF = "Dallas, TX · 214.546.3047 · contact@shanemaris.com";
-const SUMMARY_PDF = "Design systems and design ops leader with over a decade at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system across web and native platforms.";
+const SUMMARY_PDF = "Design systems and design ops leader with a decade-plus career at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android.";
 // Dropped for space, per Shane's rule: cut oldest roles first, absolute
 // cutoff is 10 years back. "UX Designer (Contractor)" (Aug 2011–Feb 2012)
 // is the only role entirely outside that window — cut here, kept in the
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     fontSize: 9.5,
     color: color.lede,
-    paddingTop: 28,
-    paddingBottom: 24,
+    paddingTop: 22,
+    paddingBottom: 18,
     paddingHorizontal: 40,
   },
   name: {
@@ -241,7 +241,7 @@ function ResumeDocument() {
         ))}
 
         <Text style={styles.sectionLabel}>EXPERTISE</Text>
-        <Text style={styles.skillsText}>{SKILLS.join("  ·  ")}</Text>
+        <Text style={styles.skillsText}>{SKILLS.join(" · ")}</Text>
       </Page>
     </Document>
   );
