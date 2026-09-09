@@ -591,23 +591,34 @@ img {
   animation: pr-ghost-m 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
 }
 
-/* Dark-mode hover, everything EXCEPT the primary CTA (already tuned
-   separately via the color override below, kept at its original small
-   flash): nav links and the secondary button get the same bigger
-   held-then-settles keyframes used for the on-load heading fix — the
-   original small flash was just as hard to catch on hover in dark mode
-   as it was on page load. Light theme keeps the original small hover
-   (still reads fine there), same split as trigger="load" above. */
-.pr-hoverable:not(.pr-cta):hover .pr-ghost-c, .pr-hoverable:not(.pr-cta):focus-visible .pr-ghost-c {
+/* Dark-mode hover: nav links, the secondary button, AND the primary CTA
+   (2026-09-09 — CTA was previously excluded here, kept on the 320ms base
+   animation below, on the theory its own color override was enough
+   tuning on its own. That was wrong in practice: .pr-cta's background
+   also transitions on hover in 120ms (see .pr-cta's own rule), and 320ms
+   of ghost animation running another 200ms past that read as two
+   separate beats — background snaps, then the text visibly keeps
+   glitching after. .pr-btn-secondary/.pr-nav-link never had this problem
+   because they already got this same fast ~100ms treatment, which nearly
+   matches their own ~120ms background/border transitions. Bringing CTA
+   into the same fast timing here fixes the mismatch instead of slowing
+   the background down to match a 320ms glitch, which would make the
+   site's highest-visibility button feel sluggish to hover.) Everyone
+   gets the same bigger held-then-settles keyframes used for the on-load
+   heading fix — the original small flash was just as hard to catch on
+   hover in dark mode as it was on page load. Light theme keeps the
+   original small hover (still reads fine there), same split as
+   trigger="load" above. */
+.pr-hoverable:hover .pr-ghost-c, .pr-hoverable:focus-visible .pr-ghost-c {
   animation: pr-ghost-c-onload 100ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
 }
-.pr-hoverable:not(.pr-cta):hover .pr-ghost-m, .pr-hoverable:not(.pr-cta):focus-visible .pr-ghost-m {
+.pr-hoverable:hover .pr-ghost-m, .pr-hoverable:focus-visible .pr-ghost-m {
   animation: pr-ghost-m-onload 100ms cubic-bezier(0.3, 0.9, 0.2, 1) both;
 }
-[data-pr-theme="light"] .pr-hoverable:not(.pr-cta):hover .pr-ghost-c, [data-pr-theme="light"] .pr-hoverable:not(.pr-cta):focus-visible .pr-ghost-c {
+[data-pr-theme="light"] .pr-hoverable:hover .pr-ghost-c, [data-pr-theme="light"] .pr-hoverable:focus-visible .pr-ghost-c {
   animation: pr-ghost-c 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
 }
-[data-pr-theme="light"] .pr-hoverable:not(.pr-cta):hover .pr-ghost-m, [data-pr-theme="light"] .pr-hoverable:not(.pr-cta):focus-visible .pr-ghost-m {
+[data-pr-theme="light"] .pr-hoverable:hover .pr-ghost-m, [data-pr-theme="light"] .pr-hoverable:focus-visible .pr-ghost-m {
   animation: pr-ghost-m 320ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
 }
 
