@@ -64,6 +64,7 @@ Design systems and design ops leader with a decade-plus career at Southwest Airl
 *Apr 2014 – Feb 2019*
 
 - A core UX Designer on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
+- Partnered with agency Razorfish on Vision's initial launch during the 2014 rebrand, proving the UX skillset could be brought in-house, which further expanded the team
 - Designed and shipped a hybrid Select Flights page as a short-lived hedge between the existing experience and the full Vision redesign — leadership was wary of the conversion dip from changing that much at once, so this stopgap ran for about a month while we confirmed conversion rate and average order value held before fully committing to Vision
 - Partnered with Southwest's Innovation Group on two internal tools: one giving station leadership real-time employee context during in-person visits, another giving gate agents real-time tools to personally engage top-tier loyalty customers
 - Used A/B testing and established UX research (Baymard, NN/g) to validate design decisions when they conflicted with stakeholder preference, grounding product direction in data rather than opinion
