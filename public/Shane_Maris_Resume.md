@@ -22,10 +22,12 @@ Design systems and design ops leader with a decade-plus career at Southwest Airl
 - Directly managed a contractor through a proof-of-concept that validated extending HDS to native iOS and Android — work that led to a new long-term contractor relationship I continue to manage today, including skip-level visibility with leadership
 - Industry recognition: invited by Figma to co-present on its "In The File" content series, covering Southwest's design system journey and real-world use of the Design Token Playbook, variables, and Dev Mode
 
+
 ### Lead UX Designer
 *Mar 2022 to Dec 2022*
 
 - Defined and documented Heart Design System vision, establishing the strategic foundation for governance of HDS across Digital, Technology, and Marketing
+
 
 ### Senior UX Designer
 *Feb 2019 to Mar 2022*
@@ -33,15 +35,18 @@ Design systems and design ops leader with a decade-plus career at Southwest Airl
 - Pioneered the internal business case for design systems adoption at Southwest, early thinking that directly led to Heart DS, approved by the Director of Brand and the Managing Director of Digital
 - Co-founded and co-led the UX Community of Practice (with another UX Designer), establishing shared design standards across teams
 
+
 ### UX Designer
 *Apr 2014 to Feb 2019*
 
 - A core UX Designer on Vision, Southwest's multi-year overhaul of southwest.com, designing and launching core customer flows including Flight Status, Check-In, Cancel, Plan Trip, My Account, Rapid Rewards Shopping, and the original WiFi/IFE Portal, plus the EarlyBird Standalone flow, Business Select upgrades, and the Gift Card purchase experience
 
+
 ### Web Designer
 *Feb 2012 to Apr 2014*
 
 - Transitioned from contractor to FTE; designed and built Southwest's first mobile-optimized sale landing page, driving a 200% increase in mobile shopping immediately post-launch
+
 
 ### UX Designer (Contractor)
 *Aug 2011 to Feb 2012*
@@ -55,10 +60,14 @@ Design systems and design ops leader with a decade-plus career at Southwest Airl
 **B.A. Interactive Media Design**
 Art Institute of Dallas, 2008 to 2011
 
+---
+
 ## Certifications
 
 - NN/g Certificate in User Experience, with Specialty Recognition in UX Management — Nielsen Norman Group, 2022 to 2025
 - ICAgile Certified Professional, Agile Team Facilitation (ICP-ATF) — January 2022
+
+---
 
 ## Skills
 

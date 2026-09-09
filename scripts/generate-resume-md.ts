@@ -25,8 +25,15 @@ for (const e of EXPERIENCE) {
   lines.push(`### ${e.role}`);
   lines.push(`*${e.span}*`, "");
   for (const b of e.bullets) lines.push(`- ${b}`);
-  lines.push("");
+  // Extra blank line between role entries (not just one) — this file is
+  // meant to be readable as raw plain text, not only rendered markdown,
+  // and a single blank line reads cramped between entries once opened
+  // outside a markdown viewer. Kept to a blank-line gap rather than a
+  // "---" per entry — that many dividers inside one section would be
+  // more clutter than breathing room.
+  lines.push("", "");
 }
+lines.pop(); // drop the trailing extra blank line before the section's own "---"
 
 lines.push("---", "");
 lines.push("## Education", "");
@@ -35,12 +42,14 @@ for (const item of EDUCATION) {
   lines.push(item.meta, "");
 }
 
+lines.push("---", "");
 lines.push("## Certifications", "");
 for (const item of CERTIFICATIONS) {
   lines.push(`- ${item.title} — ${item.meta}`);
 }
 lines.push("");
 
+lines.push("---", "");
 lines.push("## Skills", "");
 lines.push(SKILLS.join(" · "), "");
 
