@@ -12,19 +12,26 @@
  * (ShieldCheck), Design System Governance (Blueprint), and AI Adoption
  * (TrendUp) are all abstract concepts without one universally-obvious glyph.
  *
- * Order (2026-09-08, re-verified after dropping Executive Communication):
- * grouped by rendered line count at the standard 5-column desktop width
- * (measured directly at a real 1280px viewport, not guessed) so 1-line
- * labels share a row with other 1-line labels and 2-line labels share a row
- * with other 2-line labels, avoiding the uneven look of mixed rows even with
- * the fixed chip height below. 6 one-liners and 6 two-liners still don't
- * split evenly across rows of 5 (6 mod 5 = 1 either way), so row 2
- * unavoidably mixes one straggler in with the two-liners regardless of which
- * group goes first — rows 1 and 3 come out fully clean, which is the best
- * "where possible" gets at this column count. Re-verify this grouping in the
- * browser (measure actual rendered line count at a real viewport width, not
- * the resize_window "desktop" preset which reflects the pane's own narrower
- * size — don't eyeball it) if any label text changes.
+ * Grid (2026-09-08): fixed 4 columns (.pr-expertise-grid, app/globals.css),
+ * not auto-fit — was 5 columns at desktop width before. Collapses to 2
+ * columns at ≤759px (same breakpoint as .pr-two-col etc.) — see that class
+ * for the mobile override.
+ *
+ * Order (2026-09-08, re-verified after both dropping Executive
+ * Communication AND the 4-column change above): grouped by rendered line
+ * count at a real 1280px viewport (measured directly, not guessed — the
+ * resize_window "desktop" preset reflects the pane's own narrower size and
+ * gives a false reading, don't use it for this). The wider fixed columns
+ * mean most labels that wrapped to 2 lines under the old 5-column auto-fit
+ * now fit on 1 — only "Figma Enterprise Administration" and
+ * "Cross-Functional Leadership" still wrap, out of 12 total. 10 one-liners
+ * and 2 two-liners don't split evenly across rows of 4, so row 2
+ * unavoidably mixes 2 one-liners in with the 2 two-liners — rows 1 and 3
+ * come out fully clean, which is the best "where possible" gets at this
+ * column count. The array order below already lands in exactly that
+ * arrangement without needing to be touched. Re-verify in the browser
+ * (measure actual rendered line count at a real viewport width, not the
+ * "desktop" preset — don't eyeball it) if any label text changes.
  */
 
 import {
@@ -61,7 +68,7 @@ const EXPERTISE = [
 
 export default function Expertise() {
   return (
-    <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
+    <div className="pr-expertise-grid">
       {EXPERTISE.map(({ label, Icon }) => (
         <div
           key={label}

@@ -524,11 +524,20 @@ img {
    .pr-row-link's own `display: grid`, regardless of source order. */
 .pr-row-link.pr-row-narrow { display: none; }
 
+/* Expertise chip grid (shared by /about + /resume) — fixed 4 columns
+   instead of auto-fit, per Shane's request (2026-09-08). */
+.pr-expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
 @media (max-width: 759px) {
   .pr-lead-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .pr-lead-grid > :first-child { aspect-ratio: 16 / 9; }
   .pr-two-col { grid-template-columns: minmax(0, 1fr); }
   .pr-about-intro-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .pr-expertise-grid { grid-template-columns: repeat(2, 1fr); }
   .pr-row-link.pr-row-wide { display: none; }
   .pr-row-link.pr-row-narrow { display: flex; }
 }
