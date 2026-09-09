@@ -36,7 +36,21 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   // Same collision, same fix — see the Archivo comment above.
   variable: "--font-plex-mono-face",
-  display: "swap",
+  // "optional", not "swap" (2026-09-09): this font never actually loaded
+  // before the circular-reference fix above, so its font-display strategy
+  // was never exercised. Once it started loading for real, a swap-in-place
+  // reflow became visible on .pr-cta (the primary CTA button) — monospace
+  // fonts are a known exception to next/font's automatic fallback metric
+  // matching, since that only corrects vertical metrics (ascent/descent),
+  // not IBM Plex Mono's fixed per-character advance width vs. a
+  // proportional fallback, so short labels like "VIEW RESUME" visibly
+  // widened right as the swap landed — often right after the hover-ghost
+  // glitch animation, reading as an unintended second shift. "optional"
+  // skips the swap on a cold/uncached load (uses the fallback for that
+  // paint rather than swapping mid-session) instead of risking a
+  // mid-interaction reflow; a warm cache shows the real font immediately,
+  // no swap needed. Reasonable trade for small label/UI text.
+  display: "optional",
 });
 
 export const metadata: Metadata = {
