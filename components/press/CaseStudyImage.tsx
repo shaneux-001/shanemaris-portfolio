@@ -20,7 +20,7 @@ export default function CaseStudyImage({ src, alt, hasImage, aspectClassName, ca
   const filename = src.split('/').pop() ?? src;
   return (
     <figure className={`m-0${wrapperClassName ? ` ${wrapperClassName}` : ''}`}>
-      <div className={`relative ${aspectClassName} overflow-hidden flex items-end p-3.5${hasImage ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+      <div className={`relative ${aspectClassName} overflow-hidden flex items-end p-3.5 border-b border-pr-rule-strong${hasImage ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
         {hasImage ? (
           <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover" />
         ) : (

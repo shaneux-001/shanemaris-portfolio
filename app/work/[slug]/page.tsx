@@ -16,6 +16,7 @@ import { portfolioProjects } from '@/lib/projects';
 import { getProjectMd } from '@/lib/parseProjectMd';
 import PressCta from '@/components/press/PressCta';
 import Ghost from '@/components/press/Ghost';
+import CaseStudyImage from '@/components/press/CaseStudyImage';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -124,20 +125,16 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
 
         {/* ── Hero image ── */}
-        <div className="aspect-[1/0.56] mt-8 mb-14 overflow-hidden relative flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHeroImg ? (
-            <img
-              src={`/work/${slug}/hero.jpg`}
-              alt={`${project.title} — Hero`}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">hero.jpg</span>
-          )}
-        </div>
+        <CaseStudyImage
+          src={`/work/${slug}/hero.jpg`}
+          alt={`${project.title} — Hero`}
+          hasImage={hasHeroImg}
+          aspectClassName="aspect-[1/0.56]"
+          wrapperClassName="mt-8 mb-14"
+        />
 
         {/* ── Case study body ── */}
-        <div className="max-w-[62ch]">
+        <div className="max-w-[62ch] mx-auto">
           {content ? (
             <>
               {/* Summary */}
@@ -158,17 +155,13 @@ export default async function ProjectPage({ params }: PageProps) {
 
                   {/* Image between sections (not after the last) */}
                   {i < content.sections.length - 1 && (
-                    <div className="aspect-[1.5/1] my-12 overflow-hidden relative flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-                      {sectionImgExists[i] ? (
-                        <img
-                          src={`/work/${slug}/section-${i + 1}.jpg`}
-                          alt={`${section.heading} — image`}
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                      ) : (
-                        <span className="font-plex-mono text-[11px] text-pr-muted">section-{i + 1}.jpg</span>
-                      )}
-                    </div>
+                    <CaseStudyImage
+                      src={`/work/${slug}/section-${i + 1}.jpg`}
+                      alt={`${section.heading} — image`}
+                      hasImage={sectionImgExists[i]}
+                      aspectClassName="aspect-[1.5/1]"
+                      wrapperClassName="my-12"
+                    />
                   )}
                 </div>
               ))}
