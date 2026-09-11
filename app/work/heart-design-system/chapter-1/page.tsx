@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyImage from "@/components/press/CaseStudyImage";
 import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
@@ -35,13 +36,13 @@ export default function Chapter1() {
         <p className="m-0 mb-3 text-base text-pr-lede">Origin Story</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter1}</p>
 
-        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-          {hasHero ?  (
-            <img src="/work/heart-design-system/chapter-1-hero.png" alt="Chapter 1 — The Long Game" className="absolute inset-0 w-full h-full object-cover" />
-          ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-hero.png</span>
-          )}
-        </div>
+        <CaseStudyImage
+          src="/work/heart-design-system/chapter-1-hero.png"
+          alt="Chapter 1 — The Long Game"
+          hasImage={hasHero}
+          aspectClassName="aspect-[1.6/1]"
+          wrapperClassName="mb-10"
+        />
 
         <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
@@ -64,13 +65,12 @@ export default function Chapter1() {
             A few years later, at a conference talk by Dan Mall, that line reoriented how I thought about what a design system actually is. Not a governance document. Not a constraint. A gift to the people building alongside you.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection1 ?  (
-              <img src="/work/heart-design-system/chapter-1-section-1.png" alt="Screenshot — Design artifact" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-1.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-1-section-1.png"
+            alt="Screenshot — Design artifact"
+            hasImage={hasSection1}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             At that same conference, I got the opportunity to ask the CTO of Virgin America a question that&apos;s stuck with me since: how does a company get to that decision without it coming from the top, when you&apos;re not the one with that kind of authority? His answer — no one at Virgin wanted to do it either. Airlines are risk-averse to a fault. You start by talking about it with anyone who&apos;ll listen, the hallway, the lunch table, and the moment you hear someone else telling your story back to you, you&apos;ve got a supporter.
@@ -84,13 +84,12 @@ export default function Chapter1() {
             2019 was the turning point. I&apos;d hit my limit with how long our transition off our old design language was taking, and I told my manager plainly: I was interviewing, and didn&apos;t see myself staying if we weren&apos;t going to do industry-standard work. He understood, and gave me 10% of my time to start making the case for real.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection2 ?  (
-              <img src="/work/heart-design-system/chapter-1-section-2.png" alt="Process — Deck screenshot" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-2.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-1-section-2.png"
+            alt="Process — Deck screenshot"
+            hasImage={hasSection2}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             It took years, and a different pitch for every person I needed on board. For my manager, an audit of the current digital experience was enough — seeing how far design had already drifted made the case for itself. For the Director of Digital Experience, it was cost and time: converting our old design language to the new one page by page was measurably more expensive than doing it systematically, and that argument got me a technology partner and 50% of my time. For the Director of Brand, it was consistency — she&apos;d watched the brand drift further from its own guidelines with every release we shipped, and a living system was the way to close that gap. That conversation is what turned 50% into nearly full-time, and unlocked the budget for an outside agency to help lay the actual brand foundations.

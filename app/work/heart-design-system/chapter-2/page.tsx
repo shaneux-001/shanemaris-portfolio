@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyImage from "@/components/press/CaseStudyImage";
 import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
@@ -35,13 +36,13 @@ export default function Chapter2() {
         <p className="m-0 mb-3 text-base text-pr-lede">Pandemic</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter2}</p>
 
-        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-          {hasHero ?  (
-            <img src="/work/heart-design-system/chapter-2-hero.png" alt="Chapter 2 — Staying Alive" className="absolute inset-0 w-full h-full object-cover" />
-          ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-hero.png</span>
-          )}
-        </div>
+        <CaseStudyImage
+          src="/work/heart-design-system/chapter-2-hero.png"
+          alt="Chapter 2 — Staying Alive"
+          hasImage={hasHero}
+          aspectClassName="aspect-[1.6/1]"
+          wrapperClassName="mb-10"
+        />
 
         <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
@@ -52,13 +53,12 @@ export default function Chapter2() {
             Then the pandemic hit. The engagement ended a week after the kickoff.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection1 ?  (
-              <img src="/work/heart-design-system/chapter-2-section-1.png" alt="Lippincott Foundations — Color System" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-1.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-2-section-1.png"
+            alt="Lippincott Foundations — Color System"
+            hasImage={hasSection1}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             I thought I was going to lose the whole thing. Aviation didn&apos;t pause, it collapsed, and Southwest was in survival mode like every other carrier. Design systems are easy to believe in when business is good. They&apos;re a much harder sell when the company is fighting to stay solvent. But the foundations work wasn&apos;t wasted — even incomplete, it gave us a real color system, typography, and grid philosophy to build on, and I turned that into a shared component library so the design team, at minimum, was working from the same set of pieces.
@@ -68,13 +68,12 @@ export default function Chapter2() {
             That library is what kept things alive through the next year. When rumors started that we&apos;d try our first fully responsive project, my leader allowed me to take those foundations and a small group of us to prove it on something low-stakes: a flight status lookup, a two-page flow with nothing riding on it. That&apos;s the project that got our engineering partners genuinely excited — there&apos;d already been appetite on the technology side to build reusable components once the codebase moved to React, they just hadn&apos;t had the design-side partner or the framing to make the case. We even pitched a version of it at an internal innovation event, using a components tool one of our engineers had built — it didn&apos;t win (it saved cost, not revenue, and revenue is what wins those rooms), but it&apos;s the project that turned &quot;maybe&quot; into an actual partnership.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection2 ?  (
-              <img src="/work/heart-design-system/chapter-2-section-2.png" alt="Team Foundation — Early Partnership" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-2.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-2-section-2.png"
+            alt="Team Foundation — Early Partnership"
+            hasImage={hasSection2}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             That&apos;s also when I connected with a senior technology manager, through nothing more formal than a comment in a weekly one-on-one that I was spinning my wheels — I could make everything look the same, but I couldn&apos;t make it <em>be</em> the same without engineering. From there, we synced every sprint, built the case together, and he got me in front of his own leadership. The argument I made there was never abstract: efficiency, reduced rework, faster delivery with fewer people. Southwest&apos;s culture runs on cost discipline, so I spoke that language. It landed slowly.

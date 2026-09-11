@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyImage from "@/components/press/CaseStudyImage";
 import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
@@ -35,13 +36,13 @@ export default function Chapter3() {
         <p className="m-0 mb-3 text-base text-pr-lede">Gift Card POC</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter3}</p>
 
-        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-          {hasHero ?  (
-            <img src="/work/heart-design-system/chapter-3-hero.png" alt="Chapter 3 — The Moment It Clicked" className="absolute inset-0 w-full h-full object-cover" />
-          ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-hero.png</span>
-          )}
-        </div>
+        <CaseStudyImage
+          src="/work/heart-design-system/chapter-3-hero.png"
+          alt="Chapter 3 — The Moment It Clicked"
+          hasImage={hasHero}
+          aspectClassName="aspect-[1.6/1]"
+          wrapperClassName="mb-10"
+        />
 
         <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
@@ -52,13 +53,12 @@ export default function Chapter3() {
             Which made it a perfect candidate for something I&apos;d been wanting to prove.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection1 ?  (
-              <img src="/work/heart-design-system/chapter-3-section-1.png" alt="Before / After — Gift Card Flow" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-1.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-3-section-1.png"
+            alt="Before / After — Gift Card Flow"
+            hasImage={hasSection1}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             I asked for six weeks — three sprints. I got three. That gap wasn&apos;t a negotiation I won; it came from a capacity window my leader was trying to hand me, and I took it. No new features, no new flows — just take what existed and translate it into the new system, component for component. Lower stakes than a booking flow or check-in, but still real, and still forced me to actually use what I&apos;d spent years designing instead of just advocating for it.
@@ -72,13 +72,12 @@ export default function Chapter3() {
             He had a set of documented components and a system built to be used — so he used it, and finished early enough that the freed-up time went to other work to fill the rest of his capacity. What would have previously taken a whole sprint or more of design-to-development back-and-forth was done before Monday morning. The delivered experience was visually consistent, the code was cleaner, and almost no interpretation was required. He was so excited he kept telling people — and anyone I pointed him at — that he wanted to continue working this way.
           </p>
 
-          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-            {hasSection2 ?  (
-              <img src="/work/heart-design-system/chapter-3-section-2.png" alt="Component library in use" className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-2.png</span>
-            )}
-          </div>
+          <CaseStudyImage
+            src="/work/heart-design-system/chapter-3-section-2.png"
+            alt="Component library in use"
+            hasImage={hasSection2}
+            aspectClassName="aspect-[1.5/1]"
+          />
 
           <p className="m-0">
             Leadership noticed — not because I told them the system was working, but because they saw it. I wasn&apos;t in the room for the budget conversations that followed, but I know what came out of them: the ask to extend the system beyond responsive web, and the case for my first contractor. That project quietly marked the end of an era. Our legacy design language had made it irrelevant. Everything &quot;new&quot; was built in this system.

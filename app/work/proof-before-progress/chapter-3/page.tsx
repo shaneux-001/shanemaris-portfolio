@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyImage from "@/components/press/CaseStudyImage";
 import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
@@ -32,13 +33,13 @@ export default function Chapter3() {
 
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.pbpChapter3}</p>
 
-        <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHero ? (
-            <img src="/work/proof-before-progress/chapter-3-hero.jpg" alt="Chapter 3 hero" className="absolute inset-0 w-full h-full object-cover" />
-          ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-hero.jpg</span>
-          )}
-        </div>
+        <CaseStudyImage
+          src="/work/proof-before-progress/chapter-3-hero.jpg"
+          alt="Chapter 3 hero"
+          hasImage={hasHero}
+          aspectClassName="aspect-[1.6/1]"
+          wrapperClassName="mb-10"
+        />
 
         <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
