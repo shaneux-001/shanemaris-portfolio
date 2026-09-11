@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function Chapter1() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-1-hero.jpg"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-1-section-1.jpg"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-1-section-2.jpg"));
+  const hasHero = fs.existsSync(path.join(workDir, "chapter-1-hero.png"));
+  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-1-section-1.png"));
+  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-1-section-2.png"));
 
   return (
     <main className="pr-page">
@@ -35,15 +35,15 @@ export default function Chapter1() {
         <p className="m-0 mb-3 text-base text-pr-lede">Origin Story</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter1}</p>
 
-        <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHero ? (
-            <img src="/work/heart-design-system/chapter-1-hero.jpg" alt="Chapter 1 — The Long Game" className="absolute inset-0 w-full h-full object-cover" />
+        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+          {hasHero ?  (
+            <img src="/work/heart-design-system/chapter-1-hero.png" alt="Chapter 1 — The Long Game" className="absolute inset-0 w-full h-full object-cover" />
           ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-hero.jpg</span>
+            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-hero.png</span>
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             I&apos;ve known design systems were the answer since before most people were calling them that. Before I was calling them that.
           </p>
@@ -64,11 +64,11 @@ export default function Chapter1() {
             A few years later, at a conference talk by Dan Mall, that line reoriented how I thought about what a design system actually is. Not a governance document. Not a constraint. A gift to the people building alongside you.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection1 ? (
-              <img src="/work/heart-design-system/chapter-1-section-1.jpg" alt="Screenshot — Design artifact" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection1 ?  (
+              <img src="/work/heart-design-system/chapter-1-section-1.png" alt="Screenshot — Design artifact" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-1.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-1.png</span>
             )}
           </div>
 
@@ -84,11 +84,11 @@ export default function Chapter1() {
             2019 was the turning point. I&apos;d hit my limit with how long our transition off our old design language was taking, and I told my manager plainly: I was interviewing, and didn&apos;t see myself staying if we weren&apos;t going to do industry-standard work. He understood, and gave me 10% of my time to start making the case for real.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection2 ? (
-              <img src="/work/heart-design-system/chapter-1-section-2.jpg" alt="Process — Deck screenshot" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection2 ?  (
+              <img src="/work/heart-design-system/chapter-1-section-2.png" alt="Process — Deck screenshot" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-2.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-1-section-2.png</span>
             )}
           </div>
 

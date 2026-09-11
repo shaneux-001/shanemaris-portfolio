@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function Chapter2() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-2-hero.jpg"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-2-section-1.jpg"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-2-section-2.jpg"));
+  const hasHero = fs.existsSync(path.join(workDir, "chapter-2-hero.png"));
+  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-2-section-1.png"));
+  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-2-section-2.png"));
 
   return (
     <main className="pr-page">
@@ -35,15 +35,15 @@ export default function Chapter2() {
         <p className="m-0 mb-3 text-base text-pr-lede">Pandemic</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter2}</p>
 
-        <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHero ? (
-            <img src="/work/heart-design-system/chapter-2-hero.jpg" alt="Chapter 2 — Staying Alive" className="absolute inset-0 w-full h-full object-cover" />
+        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+          {hasHero ?  (
+            <img src="/work/heart-design-system/chapter-2-hero.png" alt="Chapter 2 — Staying Alive" className="absolute inset-0 w-full h-full object-cover" />
           ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-hero.jpg</span>
+            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-hero.png</span>
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             When the brand director signed off, things started moving. I got time with Lippincott, one of our brand agencies, to help lay the foundations of the system — a grid at four breakpoints, a typography system, and an expanded color palette that finally broke free from the constraints of Pantone and CMYK values.
           </p>
@@ -52,11 +52,11 @@ export default function Chapter2() {
             Then the pandemic hit. The engagement ended a week after the kickoff.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection1 ? (
-              <img src="/work/heart-design-system/chapter-2-section-1.jpg" alt="Lippincott Foundations — Color System" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection1 ?  (
+              <img src="/work/heart-design-system/chapter-2-section-1.png" alt="Lippincott Foundations — Color System" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-1.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-1.png</span>
             )}
           </div>
 
@@ -68,20 +68,16 @@ export default function Chapter2() {
             That library is what kept things alive through the next year. When rumors started that we&apos;d try our first fully responsive project, my leader allowed me to take those foundations and a small group of us to prove it on something low-stakes: a flight status lookup, a two-page flow with nothing riding on it. That&apos;s the project that got our engineering partners genuinely excited — there&apos;d already been appetite on the technology side to build reusable components once the codebase moved to React, they just hadn&apos;t had the design-side partner or the framing to make the case. We even pitched a version of it at an internal innovation event, using a components tool one of our engineers had built — it didn&apos;t win (it saved cost, not revenue, and revenue is what wins those rooms), but it&apos;s the project that turned &quot;maybe&quot; into an actual partnership.
           </p>
 
-          <p className="m-0">
-            That&apos;s also when I connected with a senior technology manager, through nothing more formal than a comment in a weekly one-on-one that I was spinning my wheels — I could make everything look the same, but I couldn&apos;t make it <em>be</em> the same without engineering. From there, we synced every sprint, built the case together, and he got me in front of his own leadership. The argument I made there was never abstract: efficiency, reduced rework, faster delivery with fewer people. Southwest&apos;s culture runs on cost discipline, so I spoke that language.
-          </p>
-
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection2 ? (
-              <img src="/work/heart-design-system/chapter-2-section-2.jpg" alt="Team Foundation — Early Partnership" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection2 ?  (
+              <img src="/work/heart-design-system/chapter-2-section-2.png" alt="Team Foundation — Early Partnership" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-2.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-2-section-2.png</span>
             )}
           </div>
 
           <p className="m-0">
-            It landed slowly.
+            That&apos;s also when I connected with a senior technology manager, through nothing more formal than a comment in a weekly one-on-one that I was spinning my wheels — I could make everything look the same, but I couldn&apos;t make it <em>be</em> the same without engineering. From there, we synced every sprint, built the case together, and he got me in front of his own leadership. The argument I made there was never abstract: efficiency, reduced rework, faster delivery with fewer people. Southwest&apos;s culture runs on cost discipline, so I spoke that language. It landed slowly.
           </p>
         </div>
 

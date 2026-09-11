@@ -36,7 +36,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function About() {
-  const portraitPath = path.join(process.cwd(), "public", "about-portrait.jpg");
+  const portraitPath = path.join(process.cwd(), "public", "about-portrait.png");
   const hasPortrait = fs.existsSync(portraitPath);
 
   return (
@@ -58,15 +58,15 @@ export default function About() {
             <PressCta href="/resume" variant="secondary">VIEW RESUME</PressCta>
           </div>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+        <div className={`relative aspect-[4/5] overflow-hidden flex items-end p-3${hasPortrait ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
           {hasPortrait ? (
             <img
-              src="/about-portrait.jpg"
+              src="/about-portrait.png"
               alt="Shane Maris"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
             />
           ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">about-portrait.jpg</span>
+            <span className="font-plex-mono text-[11px] text-pr-muted">about-portrait.png</span>
           )}
         </div>
       </div>

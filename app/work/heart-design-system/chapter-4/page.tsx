@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 export default function Chapter4() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-4-hero.jpg"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-4-section-1.jpg"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-4-section-2.jpg"));
-  const hasSection3 = fs.existsSync(path.join(workDir, "chapter-4-section-3.jpg"));
+  const hasHero = fs.existsSync(path.join(workDir, "chapter-4-hero.png"));
+  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-4-section-1.png"));
+  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-4-section-2.png"));
+  const hasSection3 = fs.existsSync(path.join(workDir, "chapter-4-section-3.png"));
 
   return (
     <main className="pr-page">
@@ -36,15 +36,15 @@ export default function Chapter4() {
         <p className="m-0 mb-3 text-base text-pr-lede">Scaling</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter4}</p>
 
-        <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHero ? (
-            <img src="/work/heart-design-system/chapter-4-hero.jpg" alt="Chapter 4 — No Straight Lines" className="absolute inset-0 w-full h-full object-cover" />
+        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+          {hasHero ?  (
+            <img src="/work/heart-design-system/chapter-4-hero.png" alt="Chapter 4 — No Straight Lines" className="absolute inset-0 w-full h-full object-cover" />
           ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-hero.jpg</span>
+            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-hero.png</span>
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             I told my leader directly: I need help, I can&apos;t do this alone. That&apos;s how I got my first dedicated contractor.
           </p>
@@ -53,11 +53,11 @@ export default function Chapter4() {
             I didn&apos;t get to interview him individually — we vet through the staffing partner, not the person — but I coached him on the strategy from day one: no custom-building every native component, use the platform&apos;s own patterns where users already expect them, aim for feature parity instead of design parity. If Apple or Google had their own way of doing something, that was fine — we only needed the user to have the same capabilities. Southwest branding layered on top, customized only where it mattered. I was also deliberate about keeping the platforms from blurring together, following the same &quot;system of systems&quot; model I&apos;d seen larger companies use for their own multi-platform work, rather than one system pretending to be everything at once.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection1 ? (
-              <img src="/work/heart-design-system/chapter-4-section-1.jpg" alt="Multi-platform expansion — iOS & Android" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection1 ?  (
+              <img src="/work/heart-design-system/chapter-4-section-1.png" alt="Multi-platform expansion — iOS & Android" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-1.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-1.png</span>
             )}
           </div>
 
@@ -85,11 +85,11 @@ export default function Chapter4() {
             That&apos;s where I&apos;ve been living for the past few years.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection2 ? (
-              <img src="/work/heart-design-system/chapter-4-section-2.jpg" alt="Org Chart — Stakeholder Map" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection2 ?  (
+              <img src="/work/heart-design-system/chapter-4-section-2.png" alt="Org Chart — Stakeholder Map" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-2.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-2.png</span>
             )}
           </div>
 
@@ -101,11 +101,11 @@ export default function Chapter4() {
             What needs rethinking next isn&apos;t the system-of-systems approach itself — letting each platform&apos;s out-of-the-box components do the heavy lifting is still the right call, and I&apos;d make it again. It&apos;s the seams between them: unifying naming conventions and UI kits across iOS, Android, and web so the same small team can move across all three without holding three separate vocabularies in their heads. That matters more given the math. Our UX team, not counting me or my contractor, is about 12 designers with two to three contractors at any given time, working opposite a front-end engineering org of roughly 250 — something like one designer for every 17 or 18 engineers. That ratio isn&apos;t getting more forgiving, and the pressure to deliver faster only compounds it. Unifying naming and kits doesn&apos;t fix the ratio, but it&apos;s the lever I actually control, and it buys the team back real time.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection3 ? (
-              <img src="/work/heart-design-system/chapter-4-section-3.jpg" alt="Resilience — Navigation Through Crisis" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection3 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection3 ?  (
+              <img src="/work/heart-design-system/chapter-4-section-3.png" alt="Resilience — Navigation Through Crisis" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-3.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-4-section-3.png</span>
             )}
           </div>
 

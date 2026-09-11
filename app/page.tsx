@@ -6,7 +6,7 @@ import Ghost from '@/components/press/Ghost';
 import KonamiListener from '@/components/KonamiListener';
 
 export default function Home() {
-  const heroImgPath = path.join(process.cwd(), 'public', 'work', 'heart-design-system', 'heart-ds-hero.jpg');
+  const heroImgPath = path.join(process.cwd(), 'public', 'work', 'heart-design-system', 'heart-ds-hero.png');
   const hasHeroImg = fs.existsSync(heroImgPath);
 
   return (
@@ -62,15 +62,15 @@ export default function Home() {
           <span>LEAD CASE STUDY</span>
         </div>
         <div className="pr-lead-grid">
-          <div className="relative aspect-[4/3] min-w-0 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
+          <div className={`relative aspect-[4/3] min-w-0 overflow-hidden flex items-end p-3.5${hasHeroImg ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
             {hasHeroImg ? (
               <img
-                src="/work/heart-design-system/heart-ds-hero.jpg"
+                src="/work/heart-design-system/heart-ds-hero.png"
                 alt="Heart Design System — Hero"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">heart-ds-hero.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">heart-ds-hero.png</span>
             )}
           </div>
           <div className="flex flex-col gap-3.5 min-w-0">

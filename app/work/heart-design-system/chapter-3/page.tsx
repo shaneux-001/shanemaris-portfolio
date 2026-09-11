@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function Chapter3() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-3-hero.jpg"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-3-section-1.jpg"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-3-section-2.jpg"));
+  const hasHero = fs.existsSync(path.join(workDir, "chapter-3-hero.png"));
+  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-3-section-1.png"));
+  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-3-section-2.png"));
 
   return (
     <main className="pr-page">
@@ -35,15 +35,15 @@ export default function Chapter3() {
         <p className="m-0 mb-3 text-base text-pr-lede">Gift Card POC</p>
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.chapter3}</p>
 
-        <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-          {hasHero ? (
-            <img src="/work/heart-design-system/chapter-3-hero.jpg" alt="Chapter 3 — The Moment It Clicked" className="absolute inset-0 w-full h-full object-cover" />
+        <div className={`relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5${hasHero ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+          {hasHero ?  (
+            <img src="/work/heart-design-system/chapter-3-hero.png" alt="Chapter 3 — The Moment It Clicked" className="absolute inset-0 w-full h-full object-cover" />
           ) : (
-            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-hero.jpg</span>
+            <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-hero.png</span>
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             Southwest&apos;s gift card experience worked. Customers could buy and redeem without issue. But underneath, it was still wearing Leapfrog — our old design language, untouched since before I even started at Southwest. Years of piecemealing a site of this scale meant some flows never got updated. They just waited.
           </p>
@@ -52,11 +52,11 @@ export default function Chapter3() {
             Which made it a perfect candidate for something I&apos;d been wanting to prove.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection1 ? (
-              <img src="/work/heart-design-system/chapter-3-section-1.jpg" alt="Before / After — Gift Card Flow" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection1 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection1 ?  (
+              <img src="/work/heart-design-system/chapter-3-section-1.png" alt="Before / After — Gift Card Flow" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-1.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-1.png</span>
             )}
           </div>
 
@@ -72,11 +72,11 @@ export default function Chapter3() {
             He had a set of documented components and a system built to be used — so he used it, and finished early enough that the freed-up time went to other work to fill the rest of his capacity. What would have previously taken a whole sprint or more of design-to-development back-and-forth was done before Monday morning. The delivered experience was visually consistent, the code was cleaner, and almost no interpretation was required. He was so excited he kept telling people — and anyone I pointed him at — that he wanted to continue working this way.
           </p>
 
-          <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-            {hasSection2 ? (
-              <img src="/work/heart-design-system/chapter-3-section-2.jpg" alt="Component library in use" className="absolute inset-0 w-full h-full object-cover" />
+          <div className={`relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5${hasSection2 ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
+            {hasSection2 ?  (
+              <img src="/work/heart-design-system/chapter-3-section-2.png" alt="Component library in use" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-2.jpg</span>
+              <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-2.png</span>
             )}
           </div>
 
