@@ -182,6 +182,7 @@
 .pr-nav-link:focus-visible,
 .pr-cta:focus-visible,
 .pr-btn-secondary:focus-visible,
+.pr-btn-accent-outline:focus-visible,
 .pr-row-link:focus-visible,
 .pr-text-link:focus-visible,
 .pr-toggle-btn:focus-visible,
@@ -676,6 +677,23 @@ img {
 .pr-cta:hover { background: var(--pr-cta-hover); }
 .pr-cta:active { transform: translateY(1px); background: var(--pr-cta-active); }
 .pr-cta:disabled { cursor: not-allowed; opacity: 0.7; background: var(--pr-rule-strong); color: var(--pr-surface); }
+
+.pr-btn-accent-outline {
+  display: inline-block;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  background: none;
+  border: 1px solid var(--pr-cta-bg);
+  color: var(--pr-cta-bg);
+  padding: 13px 20px;
+  transition: background-color 0.12s, color 0.12s, transform 0.06s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.pr-btn-accent-outline:hover, .pr-btn-accent-outline:focus-visible { background: var(--pr-cta-bg); color: var(--pr-cta-fg); }
+.pr-btn-accent-outline:active { transform: translateY(1px); }
 
 .pr-btn-secondary {
   display: inline-block;

@@ -32,7 +32,7 @@ export default function SiteFooter() {
               © 2026 Shane Maris
             </p>
           </div>
-          <PressCta href="/contact" className="whitespace-nowrap">SAY HELLO</PressCta>
+          <PressCta href="/contact" variant="accent-outline" className="whitespace-nowrap">SAY HELLO</PressCta>
         </div>
       </footer>
     );
