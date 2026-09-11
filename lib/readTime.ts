@@ -14,11 +14,17 @@ export function calculateReadTime(text: string): string {
  * Pre-calculated read times for major content pieces
  */
 export const readTimes = {
-  // Heart Design System chapters (estimated)
-  chapter1: '3 minutes',
-  chapter2: '4 minutes',
-  chapter3: '3 minutes',
-  chapter4: '2 minutes',
+  // Heart Design System chapters (estimated, 200wpm)
+  chapter1: '4 minutes',
+  chapter2: '3 minutes',
+  chapter3: '2 minutes',
+  chapter4: '5 minutes',
+
+  // Proof Before Progress chapters (estimated, 200wpm)
+  pbpChapter1: '2 minutes',
+  pbpChapter2: '1 minute',
+  pbpChapter3: '1 minute',
+  pbpChapter4: '3 minutes',
 
   // HDS adoption stories
   homepageV2: '4 minutes',

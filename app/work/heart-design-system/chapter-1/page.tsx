@@ -45,11 +45,15 @@ export default function Chapter1() {
 
         <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
-            I&apos;ve known design systems were the answer since before most people were calling them that.
+            I&apos;ve known design systems were the answer since before most people were calling them that. Before I was calling them that.
           </p>
 
           <p className="m-0">
             It was 2013, maybe 2014 — Event Apart in Austin. I sat through a talk on Style Tiles and something clicked. Not just as a design methodology, but as an organizational one. Here was a way to stop redefining the same things over and over, to close the gap between what design intended and what development delivered, to make &quot;digital first&quot; mean something beyond a slide in a deck.
+          </p>
+
+          <p className="m-0">
+            I brought that back to my manager: we had to do this, we were working inefficiently and it was costing us real money. I was still early — hadn&apos;t earned the trust yet to make it land — and spent the next few years doing more spec work than UX design, fixing small inconsistencies in things we&apos;d already defined.
           </p>
 
           <blockquote className="font-archivo text-[28px] italic text-pr-magenta border-l-4 border-pr-magenta pl-8 my-4 leading-[1.4]">
@@ -57,7 +61,7 @@ export default function Chapter1() {
           </blockquote>
 
           <p className="m-0">
-            Around 2017 I was at Delight Conference in Portland when I heard Dan Mall speak for the first time. If Style Tiles gave me the idea, Dan gave me the framework — and more importantly, the philosophy. That line reoriented how I thought about what a design system actually is. Not a governance document. Not a constraint. A gift to the people building alongside you.
+            A few years later, at a conference talk by Dan Mall, that line reoriented how I thought about what a design system actually is. Not a governance document. Not a constraint. A gift to the people building alongside you.
           </p>
 
           <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
@@ -69,11 +73,15 @@ export default function Chapter1() {
           </div>
 
           <p className="m-0">
-            For years, converting Leapfrog — our 2008 design language — to Vision was like painting a house one brushstroke at a time while someone kept adding rooms. Requests piled up. Timelines stretched. We were moving slowly and inconsistently, and everyone on the ground felt it.
+            At that same conference, I got the opportunity to ask the CTO of Virgin America a question that&apos;s stuck with me since: how does a company get to that decision without it coming from the top, when you&apos;re not the one with that kind of authority? His answer — no one at Virgin wanted to do it either. Airlines are risk-averse to a fault. You start by talking about it with anyone who&apos;ll listen, the hallway, the lunch table, and the moment you hear someone else telling your story back to you, you&apos;ve got a supporter.
           </p>
 
           <p className="m-0">
-            So I started with my manager. He&apos;d been a UX designer himself, which helped — he didn&apos;t need a long explanation. He got it. From there it was our director, then the brand director. Each conversation was a rung.
+            That&apos;s exactly what I did. For years, I was the person in meetings who — when a problem came up that a design system would solve — said so, even knowing full well it wasn&apos;t on the roadmap. Enough of that, and it stops sounding like a pitch and starts sounding like consensus.
+          </p>
+
+          <p className="m-0">
+            2019 was the turning point. I&apos;d hit my limit with how long our transition off our old design language was taking, and I told my manager plainly: I was interviewing, and didn&apos;t see myself staying if we weren&apos;t going to do industry-standard work. He understood, and gave me 10% of my time to start making the case for real.
           </p>
 
           <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
@@ -85,11 +93,11 @@ export default function Chapter1() {
           </div>
 
           <p className="m-0">
-            Eventually I made the case plainly: give me the space to try to fix this. He was supportive — and while the business realities meant he couldn&apos;t hand me a team or a budget, he gave me what he could: permission to spend part of my time on it.
+            It took years, and a different pitch for every person I needed on board. For my manager, an audit of the current digital experience was enough — seeing how far design had already drifted made the case for itself. For the Director of Digital Experience, it was cost and time: converting our old design language to the new one page by page was measurably more expensive than doing it systematically, and that argument got me a technology partner and 50% of my time. For the Director of Brand, it was consistency — she&apos;d watched the brand drift further from its own guidelines with every release we shipped, and a living system was the way to close that gap. That conversation is what turned 50% into nearly full-time, and unlocked the budget for an outside agency to help lay the actual brand foundations.
           </p>
 
           <p className="m-0">
-            That was enough. For a while, that had to be.
+            Somewhere in that climb, I got the Lead title I&apos;d been working toward — and turned around and pitched a title change. It felt like Lead implied an end date to another project, something you finish, and I wanted the org to understand this was a product, not a project with a deadline. I pushed for Product Manager instead.
           </p>
         </div>
 

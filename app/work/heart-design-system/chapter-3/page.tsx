@@ -45,11 +45,11 @@ export default function Chapter3() {
 
         <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
-            Southwest&apos;s gift card experience worked. Customers could buy and redeem without issue. But underneath, it was still wearing Leapfrog — our 2008 design language — untouched through years of rebrands. Years of piecemealing a site of this scale meant some corners never got updated. They just waited.
+            Southwest&apos;s gift card experience worked. Customers could buy and redeem without issue. But underneath, it was still wearing Leapfrog — our old design language, untouched since before I even started at Southwest. Years of piecemealing a site of this scale meant some flows never got updated. They just waited.
           </p>
 
           <p className="m-0">
-            Which made the gift card flow a perfect candidate for something I&apos;d been wanting to prove.
+            Which made it a perfect candidate for something I&apos;d been wanting to prove.
           </p>
 
           <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
@@ -61,7 +61,7 @@ export default function Chapter3() {
           </div>
 
           <p className="m-0">
-            No new features. No new flows. Just take what existed and translate it into Heart, component for component. The gift card flow was relatively sheltered — not a booking flow, not check-in. Lower stakes, but still real.
+            I asked for six weeks — three sprints. I got three. That gap wasn&apos;t a negotiation I won; it came from a capacity window my leader was trying to hand me, and I took it. No new features, no new flows — just take what existed and translate it into the new system, component for component. Lower stakes than a booking flow or check-in, but still real, and still forced me to actually use what I&apos;d spent years designing instead of just advocating for it.
           </p>
 
           <blockquote className="font-archivo text-[28px] italic text-pr-magenta border-l-4 border-pr-magenta pl-8 my-4 leading-[1.4]">
@@ -69,19 +69,19 @@ export default function Chapter3() {
           </blockquote>
 
           <p className="m-0">
-            He had documented components, defined tokens, and a system built to be used — so he used it. What would have previously taken a sprint or more of design-to-development back and forth was done before Monday morning. The delivered experience was visually consistent, the code was cleaner, and almost no interpretation was required.
+            He had a set of documented components and a system built to be used — so he used it, and finished early enough that the freed-up time went to other work to fill the rest of his capacity. What would have previously taken a whole sprint or more of design-to-development back-and-forth was done before Monday morning. The delivered experience was visually consistent, the code was cleaner, and almost no interpretation was required. He was so excited he kept telling people — and anyone I pointed him at — that he wanted to continue working this way.
           </p>
 
           <div className="relative aspect-[1.5/1] overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
             {hasSection2 ? (
-              <img src="/work/heart-design-system/chapter-3-section-2.jpg" alt="Component Library — Token Usage" className="absolute inset-0 w-full h-full object-cover" />
+              <img src="/work/heart-design-system/chapter-3-section-2.jpg" alt="Component library in use" className="absolute inset-0 w-full h-full object-cover" />
             ) : (
               <span className="font-plex-mono text-[11px] text-pr-muted">chapter-3-section-2.jpg</span>
             )}
           </div>
 
           <p className="m-0">
-            Leadership noticed — not because I told them the system was working, but because they saw it. That project quietly marked the end of an era. Vision never finished. Heart had made it irrelevant. Everything forward was NextGen, built in Heart.
+            Leadership noticed — not because I told them the system was working, but because they saw it. I wasn&apos;t in the room for the budget conversations that followed, but I know what came out of them: the ask to extend the system beyond responsive web, and the case for my first contractor. That project quietly marked the end of an era. Our legacy design language had made it irrelevant. Everything &quot;new&quot; was built in this system.
           </p>
         </div>
 

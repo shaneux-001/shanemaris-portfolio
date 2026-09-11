@@ -45,7 +45,7 @@ export default function HeartDSLanding() {
         </p>
 
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
-          Read time: ~12 minutes
+          Read time: ~14 minutes
         </p>
 
         <h2 className="font-archivo text-xl font-bold text-pr-fg-strong mb-6 mt-0">
