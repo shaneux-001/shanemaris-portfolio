@@ -45,7 +45,7 @@ export default function ProofBeforeProgressLanding() {
         </p>
 
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
-          Read time: ~9 minutes
+          Read time: ~7 minutes
         </p>
 
         <div className="flex flex-col">

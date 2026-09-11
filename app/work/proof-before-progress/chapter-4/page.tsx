@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
   title: "The Weekend and the Proof · Proof Before Progress",
@@ -29,6 +30,8 @@ export default function Chapter4() {
           <Ghost trigger="load">The Weekend and the Proof</Ghost>
         </h1>
 
+        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.pbpChapter4}</p>
+
         <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
           {hasHero ? (
             <img src="/work/proof-before-progress/chapter-4-hero.jpg" alt="Chapter 4 hero" className="absolute inset-0 w-full h-full object-cover" />
@@ -39,22 +42,28 @@ export default function Chapter4() {
 
         <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
-            Then came what I&apos;d call my AI awakening. Southwest is conservative about AI tooling, but once internal Copilot access and Figma&apos;s AI features landed, I prototyped a component inventory tool in a single weekend.
+            Then came what I&apos;d call my AI awakening. Southwest is conservative about AI tooling, but once internal AI tooling started to land, I prototyped a component inventory tool in a single weekend — partly because I hate sitting still on a problem, and partly because I wanted to know what was possible without the vendor I&apos;d just walked away from.
           </p>
           <p className="m-0">
             It included a dashboard for design system health metrics, an agent that could answer real-time questions about the system (freeing my one designer from fielding every question that came up in a project meeting), an intake process that forced actual thought into a component request instead of just lobbing a question at us, visibility into who owns which component, and a booking system to replace poorly-attended office hours.
           </p>
           <p className="m-0">
-            Most of that is still a vision. The prototype is genuinely paused, not actively being built out, because HDS itself isn&apos;t in a state to be easily made AI-readable yet. It&apos;s homegrown and inconsistent in ways that need to be resolved first. But it gave me a concrete case for a larger team, and a real plan for closing out v1 and addressing the gaps that show up when you scale something fast with minimal support.
+            Most of that is still a vision, not a shipped tool. The prototype is genuinely paused — not actively being built out — because the system itself isn&apos;t in a state to be easily made AI-readable yet. It&apos;s homegrown and inconsistent in ways that need to be resolved first. But it gave me a concrete case for a larger team, and a real plan for closing out v1 and addressing the gaps that show up when you scale something fast with minimal support.
           </p>
           <p className="m-0">
-            One outcome is already real. We never moved forward on an estimated $150K-a-year vendor purchase, an early figure from initial conversations, before procurement negotiations would have shaped a final number. We&apos;re planning to build our own tool instead.
+            One outcome is already real. We never moved forward on an estimated $150K-a-year vendor purchase — an early figure from initial conversations, before procurement negotiations would have shaped a final number. We&apos;re now planning to build our own tool instead.
           </p>
           <p className="m-0">
-            The first-ever HDS satisfaction survey, in 2025, returned an NPS of 21.43. The most recent survey, in June 2026, returned an NPS of 52 — a real, measured improvement, not a claimed one.
+            The first-ever satisfaction survey for the system, in 2025, returned an NPS of 21.43. The most recent survey, in June 2026, returned an NPS of 52 — a real, measured improvement, tied more to the broader gains we&apos;d made and to people finally getting properly trained on the system than to anything AI-related. What the surveys also surfaced, underneath the headline number, was how apparent the lack of a real docsite and Living Style Guide had become — that&apos;s the data that gave us the case to pursue the Component Inventory tool, and everything now planned for v2.
           </p>
           <p className="m-0">
-            The same surveys also confirmed things I&apos;d known since the system&apos;s early days but had only ever had as observation, not data: documentation gaps, and a governance bottleneck around needing to route requests through a single person. Leaders work off data, not feelings, so gathering this wasn&apos;t a surprise that had to be solved for. It was proof for an argument I&apos;d already been making.
+            The same surveys also confirmed a governance bottleneck: too much still routes through too few people, myself included. That&apos;s not a hidden problem I&apos;m waiting to be caught on — it&apos;s one I&apos;ve said out loud, and it&apos;s part of why I&apos;m designing the next version of the system to govern itself where it can, rather than needing a person in the loop for every decision.
+          </p>
+          <blockquote className="font-archivo text-[28px] italic text-pr-magenta border-l-4 border-pr-magenta pl-8 my-4 leading-[1.4]">
+            I didn&apos;t go to art school to become a police officer.
+          </blockquote>
+          <p className="m-0">
+            Someone said that at Config earlier this year, and it&apos;s stuck with me since — I&apos;ve been using it as my own shorthand for the governance philosophy I want v2 to run on. If someone needs to go off the system&apos;s beaten path, that should be fine, as long as their work still holds up — the burden should be on the designer or builder to justify the exception, not on the design systems team policing every rule.
           </p>
         </div>
 

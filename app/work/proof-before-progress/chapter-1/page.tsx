@@ -4,6 +4,7 @@ import path from "path";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
+import { readTimes } from "@/lib/readTime";
 
 export const metadata: Metadata = {
   title: "The Belief · Proof Before Progress",
@@ -29,6 +30,8 @@ export default function Chapter1() {
           <Ghost trigger="load">The Belief</Ghost>
         </h1>
 
+        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.pbpChapter1}</p>
+
         <div className="relative aspect-[1.6/1] mb-10 overflow-hidden flex items-end p-3.5 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
           {hasHero ? (
             <img src="/work/proof-before-progress/chapter-1-hero.jpg" alt="Chapter 1 hero" className="absolute inset-0 w-full h-full object-cover" />
@@ -39,13 +42,13 @@ export default function Chapter1() {
 
         <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
-            I&apos;ve believed a real docsite was foundational to a design system since the beginning. For a long time, I wouldn&apos;t call what we had a &quot;real&quot; design system without one.
+            I&apos;ve believed a real docsite was foundational to a design system since the beginning. For a long time, I wouldn&apos;t call what we had a &quot;real&quot; design system without one. The wires for a Living Style Guide were one of the first things I designed, back in the 2020–21 timeframe.
           </p>
           <p className="m-0">
-            HDS never had one. It grew out of 10% of my time, then 50%, then a rotating cast of engineers trying to operationalize a concept I&apos;d sold before there was any real infrastructure behind it. Engineers defaulted to Storybook and Confluence, tools they already knew. Designers worked straight out of the Figma UI kits. I never trusted Confluence or SharePoint for this kind of thing. In my experience, that&apos;s where documentation goes to die, written once and never read again.
+            We never had one. Still don&apos;t. HDS grew out of 10% of my time, then 50%, then a rotating cast of engineers trying to operationalize a concept I&apos;d sold before there was real infrastructure behind it. Engineers defaulted to tools they already knew for technical documentation, which is fine for that purpose — but designers were left working straight out of Figma UI kits, with guidance embedded directly in the files next to the components themselves. That held for a while. It doesn&apos;t scale, it bloats the system it&apos;s supposed to support, and it goes stale the moment anything changes. There was zero automation behind any of it.
           </p>
           <p className="m-0">
-            I wanted something closer to Carbon&apos;s docsite. It wasn&apos;t in the budget. Southwest was navigating activist investor pressure at the time, and design wasn&apos;t high on my boss&apos;s list. So the workaround was keeping guidance embedded directly in the UI kits, next to the components themselves. That held for a while. But it doesn&apos;t scale, it bloats the system it&apos;s supposed to support, and it goes stale the moment anything changes. There was zero automation behind any of it.
+            I wanted something closer to what the real industry leaders had already built. It wasn&apos;t in the budget — the company was navigating investor pressure at the time, and design wasn&apos;t high on the priority list. So the workaround held longer than it should have.
           </p>
         </div>
 
