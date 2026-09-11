@@ -40,7 +40,7 @@ export default function Chapter4() {
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             Then came what I&apos;d call my AI awakening. Southwest is conservative about AI tooling, but once internal AI tooling started to land, I prototyped a component inventory tool in a single weekend — partly because I hate sitting still on a problem, and partly because I wanted to know what was possible without the vendor I&apos;d just walked away from.
           </p>

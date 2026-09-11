@@ -40,7 +40,7 @@ export default function Chapter3() {
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             I evaluated Zeroheight and Knapsack. InVision was already winding down, so it came down to those two. We chose Knapsack and spent about nine months building the internal case with my director.
           </p>

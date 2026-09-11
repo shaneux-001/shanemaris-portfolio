@@ -40,7 +40,7 @@ export default function Chapter1() {
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             I&apos;ve believed a real docsite was foundational to a design system since the beginning. For a long time, I wouldn&apos;t call what we had a &quot;real&quot; design system without one. The wires for a Living Style Guide were one of the first things I designed, back in the 2020–21 timeframe.
           </p>

@@ -40,7 +40,7 @@ export default function Chapter2() {
           )}
         </div>
 
-        <div className="max-w-[62ch] flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
+        <div className="max-w-[62ch] mx-auto flex flex-col gap-[22px] text-[15.5px] leading-[1.8] text-pr-lede">
           <p className="m-0">
             Southwest&apos;s first-ever reduction in force, in February 2025, barely touched my own team directly — the real shift happened above me, over the months that followed. A new director arrived to lead Digital Design and Research, a newly formed department built specifically around design, and I made the case to her plainly: our process had become slow and entirely manual, and we&apos;d been forced to scale the system without any real support to document or onboard people efficiently. She listened. A few months later, the Director of Digital Experience I&apos;d spent years building the original design-system case with moved into a new role, and the group got its first-ever VP of Digital.
           </p>
