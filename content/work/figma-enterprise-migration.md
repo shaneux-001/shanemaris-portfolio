@@ -4,7 +4,7 @@ eyebrow: Digital Product Manager, Design Ops · Southwest Airlines
 role: Digital Product Manager, Design Ops
 timeline: 2015 to present
 platform: "Design tooling · Enterprise-wide"
-readTime: 6 minutes
+readTime: 4 minutes
 ---
 
 Before Figma, the tooling story was a moving target. We started on the Adobe Creative Suite, Photoshop and Illustrator, before switching to Sketch around 2015–16. I actually evaluated Figma at the time too; it was brand new, but its prototyping capabilities already looked strong and the feature roadmap seemed packed. Sketch's feature set was still further along at the time, though, and Adobe XD was eliminated early as too basic for what we needed. Sketch won, paired with Marvel for prototyping and Principle/After Effects for motion.
@@ -19,11 +19,11 @@ During the pandemic, a split with the agency partner supporting our mobile app f
 
 ## Building the case
 
-I started pushing for Figma. By then it could cover roughly 90% of what we needed in one tool. But it was the pandemic, Southwest was hurting, and I wasn't going to ask for budget to replace a "perfectly fine" toolset. So I waited, and built the actual financial case: less spend, more capability. That case, plus some convincing of our most senior designer (who'd become genuinely excellent in Axure but agreed the code disconnect was a real problem), got the $20K secured through the AOP process in late 2022.
+I started pushing for Figma. By then it could cover roughly 90% of what we needed in one tool. But it was the pandemic, Southwest was hurting, and I wasn't going to ask for budget to replace a "perfectly fine" toolset. So I waited, and by 2022 the case built itself: the tools stack had sprawled — Sketch, Abstract for versioning, Miro for whiteboarding, Axure for prototyping, a full Adobe Creative Suite seat, and Zeplin for dev handoff — and the combined cost of running all of it was already more than consolidating into one platform. That case, plus convincing our most senior designer — who'd built real expertise in Axure but agreed the code disconnect was a real problem — got the $20K secured through the AOP process in late 2022.
 
 ## Procurement
 
-Procurement at an airline laser-focused on cost is its own kind of slow. It took most of Q1 2023 to work through supply chain and negotiate the contract, and we got first access in early May.
+Procurement at an airline laser-focused on cost is its own kind of slow. It started in Q4 2022, as soon as the budget was secured, and took through Q1 2023 to work through supply chain and negotiate the contract before we got first access, in early May.
 
 ## Confirmation at Config
 
@@ -31,12 +31,12 @@ Weeks later, our sales rep invited me to Config, hinting at big announcements. D
 
 ## From 20 seats to an enterprise tool
 
-It started around 100 total seats (20 design seats), against a Digital UX team of only 11 designers at the time, and grew from there, month over month. By 2024–25, dev seats outnumbered design seats, and it had become an enterprise tool spanning four separate design teams company-wide, now totaling 2,706 seats (320 of those paid: 14 collaboration, 129 dev, 177 full/design, with the remainder on free view access). Seat budget ownership eventually transferred to Technology per company policy, though I stayed on as account admin. We recently renegotiated the contract for unlimited seats and early feature access.
+It started around 100 total seats (20 design seats), against a Digital UX team of only 11 designers at the time, and grew from there, month over month. By 2024–25, dev seats outnumbered design seats, and it had become an enterprise tool spanning four separate design teams company-wide, now totaling 2,706 seats (320 of those paid: 14 collaboration, 129 dev, 177 full/design, with the remainder on free view access). Seat budget ownership eventually transferred to Technology per company policy, though I stayed on as account admin. We recently renegotiated the contract for unlimited seats and early feature access — not my deal to close, but one I pushed for internally: not every engineer who needed a seat had one yet, and the per-seat-tier math made unlimited the cheaper outcome long before we hit that ceiling.
 
 ## Onboarding across the company
 
-I led the initial onboarding across the company, running 101 sessions and helping teams convert from tools like Miro to FigJam, and have since set up 20 workspaces for groups across the organization.
+I led onboarding across the company, walking new departments through the basics, helping teams convert from tools like Miro to FigJam, setting up their workspaces, and adding their people. Several of those groups weren't part of my own org at all; I offered them library access anyway, transparent that I couldn't officially prioritize their requests, but they'd at least have the building blocks — some of those relationships are still active today. I've since set up 20 workspaces for groups across the organization.
 
 ## Sharing the journey publicly
 
-A few months later, Figma invited me to co-present a public webinar with a Southwest engineer, walking through our design system journey and how we were actually using the Design Token Playbook, variables, and Dev Mode in real workflows, not just the announcement version from the Config stage. Slides: https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey — Webinar: https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113
+A few months later, Figma invited me to co-present a public webinar with a Southwest engineer, walking through our design system journey and how we were actually using our own Design Token Playbook, variables, and Dev Mode in real workflows, not just the announcement version from the Config stage. Slides: https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey — Webinar: https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113
