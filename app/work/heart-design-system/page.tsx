@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyOrientation from "@/components/press/CaseStudyOrientation";
 
 export const metadata: Metadata = {
   title: "Heart Design System",
@@ -44,9 +45,16 @@ export default function HeartDSLanding() {
           From grassroots effort to enterprise-scale design infrastructure. The story of how I built and scaled Heart across web, iOS, and Android platforms at Southwest Airlines — and what I learned along the way.
         </p>
 
-        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
+        <p className="m-0 mb-8 font-plex-mono text-xs text-pr-muted">
           Read time: ~14 minutes
         </p>
+
+        <CaseStudyOrientation
+          role="Originated and led the system — from a grassroots side effort to Digital Product Manager, Design Ops"
+          problem="Southwest's product design ran on an aging, fragmented visual language, hand-recreated inconsistently across every team and page"
+          scale="~12 designers + 2-3 contractors opposite ~250 engineers (about 1:17-18); spans web, iOS, and Android"
+          whatChanged="A one-person side effort became a resourced, governed system with its own dedicated contractor and roadmap"
+        />
 
         <h2 className="font-archivo text-xl font-bold text-pr-fg-strong mb-6 mt-0">
           Four chapters tell the story

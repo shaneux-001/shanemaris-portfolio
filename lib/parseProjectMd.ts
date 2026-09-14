@@ -13,6 +13,10 @@
  *   timeline: 2022–2023
  *   platform: "Web · southwest.com"
  *   readTime: 4 minutes
+ *   orientationRole: "Optional, richer ROLE line for the block below — falls"
+ *   problem: "back to `role` if omitted. Renders a ROLE/PROBLEM/SCALE/WHAT"
+ *   scale: "CHANGED orientation block (CaseStudyOrientation) above the"
+ *   whatChanged: "summary, but only when problem, scale, and whatChanged are ALL present."
  *   ---
  *
  *   Summary paragraph(s) here, before the first ## heading.
@@ -42,6 +46,11 @@ export interface ParsedProject {
   timeline: string;
   platform: string;
   readTime: string;
+  problem: string;
+  scale: string;
+  whatChanged: string;
+  /** Optional richer ROLE line for the orientation block; falls back to `role` (used elsewhere too, so keeping them separate avoids repeating the same short title twice on one page). */
+  orientationRole: string;
   summary: string;
   sections: MdSection[];
 }
@@ -111,6 +120,10 @@ export function getProjectMd(slug: string): ParsedProject | null {
     timeline: data.timeline ?? '',
     platform: data.platform ?? '',
     readTime: data.readTime ?? '3 minutes',
+    problem: data.problem ?? '',
+    scale: data.scale ?? '',
+    whatChanged: data.whatChanged ?? '',
+    orientationRole: data.orientationRole ?? '',
     summary,
     sections,
   };

@@ -17,6 +17,7 @@ import { getProjectMd } from '@/lib/parseProjectMd';
 import PressCta from '@/components/press/PressCta';
 import Ghost from '@/components/press/Ghost';
 import CaseStudyImage from '@/components/press/CaseStudyImage';
+import CaseStudyOrientation from '@/components/press/CaseStudyOrientation';
 import { linkifyText } from '@/lib/linkify';
 
 interface PageProps {
@@ -137,6 +138,15 @@ export default async function ProjectPage({ params }: PageProps) {
         <div className="max-w-[62ch] mx-auto">
           {content ? (
             <>
+              {content.problem && content.scale && content.whatChanged && (
+                <CaseStudyOrientation
+                  role={content.orientationRole || content.role}
+                  problem={content.problem}
+                  scale={content.scale}
+                  whatChanged={content.whatChanged}
+                />
+              )}
+
               {/* Summary */}
               <p className="leading-[1.8] mt-0 mb-10 text-[17px] text-pr-lede">
                 {linkifyText(content.summary)}

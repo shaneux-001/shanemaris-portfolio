@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Ghost from "@/components/press/Ghost";
+import CaseStudyOrientation from "@/components/press/CaseStudyOrientation";
 
 export const metadata: Metadata = {
   title: "Proof Before Progress",
@@ -44,9 +45,16 @@ export default function ProofBeforeProgressLanding() {
           Why HDS needed a real docsite, how a company-wide reorg finally created room to fix it, and how a single prototyped weekend built the case that closed out a $150K vendor decision.
         </p>
 
-        <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">
+        <p className="m-0 mb-8 font-plex-mono text-xs text-pr-muted">
           Read time: ~7 minutes
         </p>
+
+        <CaseStudyOrientation
+          role="Design Ops lead who scoped, prototyped, and pitched the fix"
+          problem="HDS had no real documentation site, and a $150K/year vendor purchase was the assumed fix"
+          scale="9-month vendor evaluation vs. one prototyped weekend; system NPS moved 21.43 → 52"
+          whatChanged="A weekend AI prototype avoided the vendor spend and reset the system's roadmap toward v2"
+        />
 
         <div className="flex flex-col">
           {CHAPTERS.map((chapter) => {

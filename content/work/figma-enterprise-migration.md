@@ -5,6 +5,10 @@ role: Digital Product Manager, Design Ops
 timeline: 2015 to present
 platform: "Design tooling · Enterprise-wide"
 readTime: 4 minutes
+orientationRole: "Led the migration end-to-end and stayed on as Figma account admin"
+problem: "Design tooling was split across Sketch and Abstract, with no single source of truth or scalable governance model"
+scale: "Grew from ~100 total seats (20 design) to 2,706 seats (320 paid/functional) company-wide"
+whatChanged: "Figma became Southwest's single org-wide design tool — significant enough that Figma invited a co-presentation on it"
 ---
 
 Before Figma, the tooling story was a moving target. We started on the Adobe Creative Suite, Photoshop and Illustrator, before switching to Sketch around 2015–16. I actually evaluated Figma at the time too; it was brand new, but its prototyping capabilities already looked strong and the feature roadmap seemed packed. Sketch's feature set was still further along at the time, though, and Adobe XD was eliminated early as too basic for what we needed. Sketch won, paired with Marvel for prototyping and Principle/After Effects for motion.
