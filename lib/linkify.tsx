@@ -6,24 +6,18 @@ import { Fragment, type ReactNode } from 'react';
 const TOKEN_PATTERN = /(\[[^\]]+\]\(https?:\/\/[^)]+\))|(https?:\/\/[^\s]+)/g;
 const MARKDOWN_LINK = /^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/;
 
-/**
- * Turns markdown-style [label](url) links and bare http(s) URLs inside
- * plain text into real, clickable inline links — used for markdown-sourced
- * case study body copy. Bare URLs have trailing punctuation/dashes trimmed
- * off (e.g. a " — " separating two links, or a trailing period) since
- * that's sentence formatting, not part of the URL.
- */
-export function linkifyText(text: string): ReactNode {
-  const parts = text.split(TOKEN_PATTERN).filter((part) => part !== undefined);
-  if (parts.length === 1) return text;
+function linkifyLine(line: string, keyPrefix: string): ReactNode {
+  const parts = line.split(TOKEN_PATTERN).filter((part) => part !== undefined);
+  if (parts.length === 1) return line;
 
   return parts.map((part, i) => {
+    const key = `${keyPrefix}-${i}`;
     const mdMatch = part.match(MARKDOWN_LINK);
     if (mdMatch) {
       const [, label, url] = mdMatch;
       return (
         <a
-          key={i}
+          key={key}
           href={url}
           target="_blank"
           rel="noopener noreferrer"
@@ -35,7 +29,7 @@ export function linkifyText(text: string): ReactNode {
     }
 
     if (!/^https?:\/\//.test(part)) {
-      return <Fragment key={i}>{part}</Fragment>;
+      return <Fragment key={key}>{part}</Fragment>;
     }
 
     const trailingPunctuation = /[).,;:!?—-]+$/;
@@ -44,7 +38,7 @@ export function linkifyText(text: string): ReactNode {
     const url = trail ? part.slice(0, -trail.length) : part;
 
     return (
-      <Fragment key={i}>
+      <Fragment key={key}>
         <a
           href={url}
           target="_blank"
@@ -57,4 +51,28 @@ export function linkifyText(text: string): ReactNode {
       </Fragment>
     );
   });
+}
+
+/**
+ * Turns markdown-style [label](url) links and bare http(s) URLs inside
+ * plain text into real, clickable inline links — used for markdown-sourced
+ * case study body copy. Bare URLs have trailing punctuation/dashes trimmed
+ * off (e.g. a " | " separating two links, or a trailing period) since
+ * that's sentence formatting, not part of the URL.
+ *
+ * A literal newline in the source text becomes a real line break (<br />)
+ * — section bodies render as a single paragraph, but markdown source can
+ * still put something like a "Slides | Webinar" links line on its own row
+ * by just breaking the line in the .md file.
+ */
+export function linkifyText(text: string): ReactNode {
+  const lines = text.split('\n');
+  if (lines.length === 1) return linkifyLine(text, '0');
+
+  return lines.map((line, i) => (
+    <Fragment key={i}>
+      {i > 0 && <br />}
+      {linkifyLine(line, String(i))}
+    </Fragment>
+  ));
 }
