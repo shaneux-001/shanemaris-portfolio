@@ -40,7 +40,6 @@ export default function Chapter2() {
           src="/work/heart-design-system/chapter-2-hero.png"
           alt="Chapter 2 — Staying Alive"
           hasImage={hasHero}
-          aspectClassName="aspect-[1.6/1]"
           wrapperClassName="mb-10"
         />
 
@@ -57,7 +56,6 @@ export default function Chapter2() {
             src="/work/heart-design-system/chapter-2-section-1.png"
             alt="Lippincott Foundations — Color System"
             hasImage={hasSection1}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">
@@ -72,7 +70,6 @@ export default function Chapter2() {
             src="/work/heart-design-system/chapter-2-section-2.png"
             alt="Team Foundation — Early Partnership"
             hasImage={hasSection2}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">

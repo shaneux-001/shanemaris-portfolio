@@ -4,29 +4,30 @@ interface CaseStudyImageProps {
   src: string;
   alt: string;
   hasImage: boolean;
-  aspectClassName: string;
   caption?: ReactNode;
   wrapperClassName?: string;
 }
 
 /**
- * Image slot used across case study / chapter pages: the existing
- * placeholder-or-real-image behavior (fs.existsSync check passed in as
- * hasImage), plus an optional caption directly under the image — visually
- * separate from body copy (small, monospace, muted) and spaced tight to the
- * image so it reads as attached to it, not as another paragraph.
+ * Image slot used across case study / chapter pages (fs.existsSync check
+ * passed in as hasImage). Renders at the image's own natural aspect ratio —
+ * every export is a fixed width but heights vary per image by design, so no
+ * forced aspect-ratio box or object-cover crop — with a 1px bottom border so
+ * it reads as grounded rather than floating, and an optional caption
+ * directly underneath: visually separate from body copy (small, monospace,
+ * muted) and spaced tight to the image so it reads as attached to it, not
+ * as another paragraph.
+ *
+ * Renders nothing when the image doesn't exist — a missing slot disappears
+ * rather than showing a placeholder box, since that's meant for a final
+ * decision ("no image here"), not a mid-progress reminder.
  */
-export default function CaseStudyImage({ src, alt, hasImage, aspectClassName, caption, wrapperClassName }: CaseStudyImageProps) {
-  const filename = src.split('/').pop() ?? src;
+export default function CaseStudyImage({ src, alt, hasImage, caption, wrapperClassName }: CaseStudyImageProps) {
+  if (!hasImage) return null;
+
   return (
     <figure className={`m-0${wrapperClassName ? ` ${wrapperClassName}` : ''}`}>
-      <div className={`relative ${aspectClassName} overflow-hidden flex items-end p-3.5 border-b border-pr-rule-strong${hasImage ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
-        {hasImage ? (
-          <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover" />
-        ) : (
-          <span className="font-plex-mono text-[11px] text-pr-muted">{filename}</span>
-        )}
-      </div>
+      <img src={src} alt={alt} className="block w-full h-auto border-b border-pr-rule-strong" />
       {caption && (
         <figcaption className="mt-2 font-plex-mono text-[11px] leading-[1.5] text-pr-muted line-clamp-3">
           {caption}

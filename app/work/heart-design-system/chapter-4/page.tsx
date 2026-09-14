@@ -41,7 +41,6 @@ export default function Chapter4() {
           src="/work/heart-design-system/chapter-4-hero.png"
           alt="Chapter 4 — No Straight Lines"
           hasImage={hasHero}
-          aspectClassName="aspect-[1.6/1]"
           wrapperClassName="mb-10"
         />
 
@@ -58,7 +57,6 @@ export default function Chapter4() {
             src="/work/heart-design-system/chapter-4-section-1.png"
             alt="Multi-platform expansion — iOS & Android"
             hasImage={hasSection1}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">
@@ -89,7 +87,6 @@ export default function Chapter4() {
             src="/work/heart-design-system/chapter-4-section-2.png"
             alt="Org Chart — Stakeholder Map"
             hasImage={hasSection2}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">
@@ -104,7 +101,6 @@ export default function Chapter4() {
             src="/work/heart-design-system/chapter-4-section-3.png"
             alt="Resilience — Navigation Through Crisis"
             hasImage={hasSection3}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <blockquote className="font-archivo text-[28px] italic text-pr-magenta border-l-4 border-pr-magenta pl-8 my-4 leading-[1.4]">

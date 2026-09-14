@@ -40,7 +40,6 @@ export default function Chapter3() {
           src="/work/heart-design-system/chapter-3-hero.png"
           alt="Chapter 3 — The Moment It Clicked"
           hasImage={hasHero}
-          aspectClassName="aspect-[1.6/1]"
           wrapperClassName="mb-10"
         />
 
@@ -57,7 +56,6 @@ export default function Chapter3() {
             src="/work/heart-design-system/chapter-3-section-1.png"
             alt="Before / After — Gift Card Flow"
             hasImage={hasSection1}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">
@@ -76,7 +74,6 @@ export default function Chapter3() {
             src="/work/heart-design-system/chapter-3-section-2.png"
             alt="Component library in use"
             hasImage={hasSection2}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">

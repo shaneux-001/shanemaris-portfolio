@@ -4,7 +4,7 @@
  * Reads content from content/work/[slug].md via lib/parseProjectMd.ts.
  *
  * Image wiring: fs.existsSync checks public/work/[slug]/ at request time.
- * Drop hero.jpg or section-N.jpg into the folder and refresh — no restart needed.
+ * Drop hero.png or section-N.png into the folder and refresh — no restart needed.
  */
 
 import type { Metadata } from "next";
@@ -66,9 +66,9 @@ export default async function ProjectPage({ params }: PageProps) {
 
   // Image existence checks — evaluated at request time; no dev-server restart needed.
   const workDir = path.join(process.cwd(), 'public', 'work', slug);
-  const hasHeroImg = fs.existsSync(path.join(workDir, 'hero.jpg'));
+  const hasHeroImg = fs.existsSync(path.join(workDir, 'hero.png'));
   const sectionImgExists: boolean[] = content?.sections.map((_, i) =>
-    fs.existsSync(path.join(workDir, `section-${i + 1}.jpg`))
+    fs.existsSync(path.join(workDir, `section-${i + 1}.png`))
   ) ?? [];
 
   return (
@@ -126,10 +126,9 @@ export default async function ProjectPage({ params }: PageProps) {
 
         {/* ── Hero image ── */}
         <CaseStudyImage
-          src={`/work/${slug}/hero.jpg`}
+          src={`/work/${slug}/hero.png`}
           alt={`${project.title} — Hero`}
           hasImage={hasHeroImg}
-          aspectClassName="aspect-[1/0.56]"
           wrapperClassName="mt-8 mb-14"
         />
 
@@ -156,10 +155,9 @@ export default async function ProjectPage({ params }: PageProps) {
                   {/* Image between sections (not after the last) */}
                   {i < content.sections.length - 1 && (
                     <CaseStudyImage
-                      src={`/work/${slug}/section-${i + 1}.jpg`}
+                      src={`/work/${slug}/section-${i + 1}.png`}
                       alt={`${section.heading} — image`}
                       hasImage={sectionImgExists[i]}
-                      aspectClassName="aspect-[1.5/1]"
                       wrapperClassName="my-12"
                     />
                   )}

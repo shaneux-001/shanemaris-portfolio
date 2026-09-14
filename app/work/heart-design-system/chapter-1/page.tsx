@@ -40,7 +40,6 @@ export default function Chapter1() {
           src="/work/heart-design-system/chapter-1-hero.png"
           alt="Chapter 1 — The Long Game"
           hasImage={hasHero}
-          aspectClassName="aspect-[1.6/1]"
           wrapperClassName="mb-10"
         />
 
@@ -69,7 +68,6 @@ export default function Chapter1() {
             src="/work/heart-design-system/chapter-1-section-1.png"
             alt="Screenshot — Design artifact"
             hasImage={hasSection1}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">
@@ -88,7 +86,6 @@ export default function Chapter1() {
             src="/work/heart-design-system/chapter-1-section-2.png"
             alt="Process — Deck screenshot"
             hasImage={hasSection2}
-            aspectClassName="aspect-[1.5/1]"
           />
 
           <p className="m-0">

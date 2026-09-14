@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Chapter2() {
   const workDir = path.join(process.cwd(), "public", "work", "proof-before-progress");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-2-hero.jpg"));
+  const hasHero = fs.existsSync(path.join(workDir, "chapter-2-hero.png"));
 
   return (
     <main className="pr-page">
@@ -34,10 +34,9 @@ export default function Chapter2() {
         <p className="m-0 mb-10 font-plex-mono text-xs text-pr-muted">Read time: {readTimes.pbpChapter2}</p>
 
         <CaseStudyImage
-          src="/work/proof-before-progress/chapter-2-hero.jpg"
+          src="/work/proof-before-progress/chapter-2-hero.png"
           alt="Chapter 2 hero"
           hasImage={hasHero}
-          aspectClassName="aspect-[1.6/1]"
           wrapperClassName="mb-10"
         />
 
