@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
+import Image from "next/image";
 import PressCta from "@/components/press/PressCta";
 import Expertise from "@/components/press/Expertise";
 import Ghost from "@/components/press/Ghost";
@@ -60,10 +61,12 @@ export default function About() {
         </div>
         <div className={`relative aspect-[4/5] overflow-hidden flex items-end p-3${hasPortrait ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
           {hasPortrait ? (
-            <img
+            <Image
               src="/about-portrait.png"
               alt="Shane Maris"
-              className="absolute inset-0 w-full h-full object-contain"
+              fill
+              sizes="(min-width: 860px) 40vw, 100vw"
+              className="object-contain"
             />
           ) : (
             <span className="font-plex-mono text-[11px] text-pr-muted">about-portrait.png</span>

@@ -3,13 +3,13 @@
  * 2026-09-05 — was the pre-redesign plum/Playfair system before this).
  * Reads content from content/work/[slug].md via lib/parseProjectMd.ts.
  *
- * Image wiring: fs.existsSync checks public/work/[slug]/ at request time.
+ * Image wiring: getPngDimensions (an fs read) checks public/work/[slug]/ at request time.
  * Drop hero.png or section-N.png into the folder and refresh — no restart needed.
  */
 
 import type { Metadata } from "next";
-import fs from 'fs';
 import path from 'path';
+import { getPngDimensions } from '@/lib/imageDimensions';
 import Link from 'next/link';
 import { Clock, CalendarBlank, Monitor } from '@phosphor-icons/react/dist/ssr';
 import { portfolioProjects } from '@/lib/projects';
@@ -67,9 +67,9 @@ export default async function ProjectPage({ params }: PageProps) {
 
   // Image existence checks — evaluated at request time; no dev-server restart needed.
   const workDir = path.join(process.cwd(), 'public', 'work', slug);
-  const hasHeroImg = fs.existsSync(path.join(workDir, 'hero.png'));
-  const sectionImgExists: boolean[] = content?.sections.map((_, i) =>
-    fs.existsSync(path.join(workDir, `section-${i + 1}.png`))
+  const dimsHero = getPngDimensions(path.join(workDir, 'hero.png'));
+  const sectionImgDims: ({ width: number; height: number } | null)[] = content?.sections.map((_, i) =>
+    getPngDimensions(path.join(workDir, `section-${i + 1}.png`))
   ) ?? [];
 
   return (
@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }: PageProps) {
         <CaseStudyImage
           src={`/work/${slug}/hero.png`}
           alt={`${project.title} — Hero`}
-          hasImage={hasHeroImg}
+          dimensions={dimsHero}
           wrapperClassName="mt-8 mb-14"
         />
 
@@ -158,7 +158,7 @@ export default async function ProjectPage({ params }: PageProps) {
                     <CaseStudyImage
                       src={`/work/${slug}/section-${i + 1}.png`}
                       alt={`${section.heading} — image`}
-                      hasImage={sectionImgExists[i]}
+                      dimensions={sectionImgDims[i]}
                       wrapperClassName="my-12"
                     />
                   )}

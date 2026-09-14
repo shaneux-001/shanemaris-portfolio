@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
 import path from "path";
+import { getPngDimensions } from "@/lib/imageDimensions";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Chapter4() {
   const workDir = path.join(process.cwd(), "public", "work", "proof-before-progress");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-4-hero.png"));
+  const dimsHero = getPngDimensions(path.join(workDir, "chapter-4-hero.png"));
 
   return (
     <main className="pr-page">
@@ -36,7 +36,7 @@ export default function Chapter4() {
         <CaseStudyImage
           src="/work/proof-before-progress/chapter-4-hero.png"
           alt="Chapter 4 hero"
-          hasImage={hasHero}
+          dimensions={dimsHero}
           wrapperClassName="mb-10"
         />
 

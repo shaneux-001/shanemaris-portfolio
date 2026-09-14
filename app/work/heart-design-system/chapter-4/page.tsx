@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
 import path from "path";
+import { getPngDimensions } from "@/lib/imageDimensions";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 
 export default function Chapter4() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-4-hero.png"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-4-section-1.png"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-4-section-2.png"));
-  const hasSection3 = fs.existsSync(path.join(workDir, "chapter-4-section-3.png"));
+  const dimsHero = getPngDimensions(path.join(workDir, "chapter-4-hero.png"));
+  const dimsSection1 = getPngDimensions(path.join(workDir, "chapter-4-section-1.png"));
+  const dimsSection2 = getPngDimensions(path.join(workDir, "chapter-4-section-2.png"));
+  const dimsSection3 = getPngDimensions(path.join(workDir, "chapter-4-section-3.png"));
 
   return (
     <main className="pr-page">
@@ -40,7 +40,7 @@ export default function Chapter4() {
         <CaseStudyImage
           src="/work/heart-design-system/chapter-4-hero.png"
           alt="Chapter 4 — No Straight Lines"
-          hasImage={hasHero}
+          dimensions={dimsHero}
           wrapperClassName="mb-10"
         />
 
@@ -56,7 +56,7 @@ export default function Chapter4() {
           <CaseStudyImage
             src="/work/heart-design-system/chapter-4-section-1.png"
             alt="Multi-platform expansion — iOS & Android"
-            hasImage={hasSection1}
+            dimensions={dimsSection1}
           />
 
           <p className="m-0">
@@ -86,7 +86,7 @@ export default function Chapter4() {
           <CaseStudyImage
             src="/work/heart-design-system/chapter-4-section-2.png"
             alt="Org Chart — Stakeholder Map"
-            hasImage={hasSection2}
+            dimensions={dimsSection2}
           />
 
           <p className="m-0">
@@ -100,7 +100,7 @@ export default function Chapter4() {
           <CaseStudyImage
             src="/work/heart-design-system/chapter-4-section-3.png"
             alt="Resilience — Navigation Through Crisis"
-            hasImage={hasSection3}
+            dimensions={dimsSection3}
           />
 
           <blockquote className="font-archivo text-[28px] italic text-pr-magenta border-l-4 border-pr-magenta pl-8 my-4 leading-[1.4]">

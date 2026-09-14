@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
 import path from "path";
+import { getPngDimensions } from "@/lib/imageDimensions";
 import Link from "next/link";
 import PressCta from "@/components/press/PressCta";
 import Ghost from "@/components/press/Ghost";
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 export default function Chapter2() {
   const workDir = path.join(process.cwd(), "public", "work", "heart-design-system");
-  const hasHero = fs.existsSync(path.join(workDir, "chapter-2-hero.png"));
-  const hasSection1 = fs.existsSync(path.join(workDir, "chapter-2-section-1.png"));
-  const hasSection2 = fs.existsSync(path.join(workDir, "chapter-2-section-2.png"));
+  const dimsHero = getPngDimensions(path.join(workDir, "chapter-2-hero.png"));
+  const dimsSection1 = getPngDimensions(path.join(workDir, "chapter-2-section-1.png"));
+  const dimsSection2 = getPngDimensions(path.join(workDir, "chapter-2-section-2.png"));
 
   return (
     <main className="pr-page">
@@ -39,7 +39,7 @@ export default function Chapter2() {
         <CaseStudyImage
           src="/work/heart-design-system/chapter-2-hero.png"
           alt="Chapter 2 — Staying Alive"
-          hasImage={hasHero}
+          dimensions={dimsHero}
           wrapperClassName="mb-10"
         />
 
@@ -55,7 +55,7 @@ export default function Chapter2() {
           <CaseStudyImage
             src="/work/heart-design-system/chapter-2-section-1.png"
             alt="Lippincott Foundations — Color System"
-            hasImage={hasSection1}
+            dimensions={dimsSection1}
           />
 
           <p className="m-0">
@@ -69,7 +69,7 @@ export default function Chapter2() {
           <CaseStudyImage
             src="/work/heart-design-system/chapter-2-section-2.png"
             alt="Team Foundation — Early Partnership"
-            hasImage={hasSection2}
+            dimensions={dimsSection2}
           />
 
           <p className="m-0">

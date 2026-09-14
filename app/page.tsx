@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import Image from 'next/image';
 import PressCta from '@/components/press/PressCta';
 import Ghost from '@/components/press/Ghost';
 import KonamiListener from '@/components/KonamiListener';
@@ -64,10 +65,12 @@ export default function Home() {
         <div className="pr-lead-grid">
           <div className={`relative aspect-[4/3] min-w-0 overflow-hidden flex items-end p-3.5${hasHeroImg ? "" : " bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]"}`}>
             {hasHeroImg ? (
-              <img
+              <Image
                 src="/work/heart-design-system/heart-ds-hero.png"
                 alt="Heart Design System — Hero"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                sizes="(min-width: 860px) 50vw, 100vw"
+                className="object-cover"
               />
             ) : (
               <span className="font-plex-mono text-[11px] text-pr-muted">heart-ds-hero.png</span>
