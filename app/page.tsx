@@ -41,7 +41,7 @@ export default function Home() {
         <div className="relative flex flex-col gap-[22px] max-w-[680px]">
           <div className="flex items-center gap-[10px] font-plex-mono text-[11px] tracking-[0.1em] text-pr-muted">
             <span className="w-3.5 h-px bg-pr-cyan" />
-            <span>DESIGN OPS &amp; SYSTEMS · SOUTHWEST AIRLINES</span>
+            <span>DESIGN SYSTEMS &amp; OPS LEADER · SOUTHWEST AIRLINES</span>
           </div>
           <h1 className="pr-hero-title m-0 font-archivo font-bold leading-[0.98] tracking-[-0.035em] text-pr-fg-strong">
             <Ghost trigger="load">I help design teams stop rebuilding the same things twice.</Ghost>

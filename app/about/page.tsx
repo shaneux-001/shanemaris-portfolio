@@ -7,15 +7,15 @@ import Ghost from "@/components/press/Ghost";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
+  description: "Design Systems & Ops leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
   openGraph: {
     title: "About · Shane Maris",
-    description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
+    description: "Design Systems & Ops leader. Designer by trade, systems thinker by necessity — building the infrastructure that helps teams do their best work.",
     url: "https://shanemaris.com/about",
   },
   twitter: {
     title: "About · Shane Maris",
-    description: "Design Ops & Systems leader. Designer by trade, systems thinker by necessity.",
+    description: "Design Systems & Ops leader. Designer by trade, systems thinker by necessity.",
   },
 };
 
@@ -45,7 +45,7 @@ export default function About() {
       <div className="pr-about-intro-grid mb-2">
         <div>
           <h1 className="pr-page-title m-0 mb-[18px] font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong max-w-[22ch]">
-            <Ghost trigger="load">I design the systems behind great design.</Ghost>
+            <Ghost trigger="load">I lead the teams that build great design systems.</Ghost>
           </h1>
           <p className="pr-lede m-0 mb-3 leading-[1.7] text-pr-lede max-w-[54ch]">
             I build the scaffolding designers actually need to do good work — processes that hold up, tools people will use without a fight, and enough shared standard that teams stop reinventing the same decisions.

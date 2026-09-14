@@ -56,10 +56,10 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://shanemaris.com"),
   title: {
-    default: "Shane Maris — Design Ops & Systems Leader",
+    default: "Shane Maris — Design Systems & Ops Leader",
     template: "%s · Shane Maris",
   },
-  description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
+  description: "Design Systems & Ops leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
   icons: {
     icon: [
       { url: "/logo-16.svg", sizes: "16x16", type: "image/svg+xml" },
@@ -70,8 +70,8 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.svg",
   },
   openGraph: {
-    title: "Shane Maris — Design Ops & Systems Leader",
-    description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
+    title: "Shane Maris — Design Systems & Ops Leader",
+    description: "Design Systems & Ops leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
     url: "https://shanemaris.com",
     siteName: "Shane Maris",
     locale: "en_US",
@@ -81,14 +81,14 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Shane Maris — Design Ops & Systems Leader",
+        alt: "Shane Maris — Design Systems & Ops Leader",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Maris — Design Ops & Systems Leader",
-    description: "Design Ops & Systems leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
+    title: "Shane Maris — Design Systems & Ops Leader",
+    description: "Design Systems & Ops leader building scalable design infrastructure and mentoring teams to create meaningful digital experiences.",
     images: ["/og-image.svg"],
   },
   robots: {

@@ -21,7 +21,7 @@ the fragmented reconstruction still missed.
 
 # Shane Maris
 
-**Design Systems Leader | Design Operations Strategy**
+**Design Systems & Ops Leader**
 Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com · [linkedin.com/in/shanemaris](https://www.linkedin.com/in/shanemaris/)
 
 ---

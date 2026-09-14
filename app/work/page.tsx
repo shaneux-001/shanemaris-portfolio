@@ -38,7 +38,7 @@ export default function WorkPage() {
         <Ghost trigger="load">Work</Ghost>
       </h1>
       <p className="pr-page-lede m-0 mb-9 leading-[1.65] text-pr-lede max-w-[52ch]">
-        Systems and product work at Southwest Airlines.
+        Design leadership at Southwest Airlines.
       </p>
 
       {visibleProjects.length === 0 ? (

@@ -109,7 +109,7 @@ export default function Resume() {
         <h1 className="pr-page-title m-0 mb-2.5 font-archivo font-bold leading-none tracking-[-0.03em] text-pr-fg-strong">
           <Ghost trigger="load">Shane Maris</Ghost>
         </h1>
-        <p className="m-0 mb-1.5 text-base text-pr-lede">Design Systems Leader | Design Operations Strategy</p>
+        <p className="m-0 mb-1.5 text-base text-pr-lede">Design Systems &amp; Ops Leader</p>
         <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
           Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com ·{" "}
           <a href="https://www.linkedin.com/in/shanemaris/" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">linkedin.com/in/shanemaris</a>

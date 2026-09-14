@@ -47,19 +47,20 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 
 const EXPERTISE = [
+  // Leadership-facing first, per the Systems-vs-Design-Leader rebalance
+  { label: "Cross-Team Leadership", Icon: UsersThree },
+  { label: "Mentoring", Icon: GraduationCap },
+  { label: "Stakeholder Management", Icon: Handshake },
   // 1-line labels at the standard desktop width
   { label: "Design Ops", Icon: Gear },
   { label: "Design Systems", Icon: Stack },
   { label: "Figma Governance", Icon: ShieldCheck },
   { label: "AI Tooling Strategy", Icon: Robot },
   { label: "AI Adoption", Icon: TrendUp },
-  { label: "Mentoring", Icon: GraduationCap },
   // 2-line labels at the standard desktop width
   { label: "Figma Enterprise Admin", Icon: FigmaLogo },
-  { label: "Cross-Team Leadership", Icon: UsersThree },
   { label: "Design System Governance", Icon: Blueprint },
   { label: "UX Research & Strategy", Icon: MagnifyingGlass },
-  { label: "Stakeholder Management", Icon: Handshake },
   { label: "Accessibility (WCAG)", Icon: Wheelchair },
 ];
 
