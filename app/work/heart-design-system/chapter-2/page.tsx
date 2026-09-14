@@ -59,7 +59,7 @@ export default function Chapter2() {
           />
 
           <p className="m-0">
-            I thought I was going to lose the whole thing. Aviation didn&apos;t pause, it collapsed, and Southwest was in survival mode like every other carrier. Design systems are easy to believe in when business is good. They&apos;re a much harder sell when the company is fighting to stay solvent. But the foundations work wasn&apos;t wasted — even incomplete, it gave us a real color system, typography, and grid philosophy to build on, and I turned that into a shared component library so the design team, at minimum, was working from the same set of pieces.
+            I thought I was going to lose the whole thing. Aviation didn&apos;t pause, it collapsed, and Southwest was in survival mode like every other carrier. But the foundations work wasn&apos;t wasted — even incomplete, it gave us a real color system, typography, and grid philosophy to build on, and I turned that into a shared component library so the design team, at minimum, was working from the same set of pieces.
           </p>
 
           <p className="m-0">

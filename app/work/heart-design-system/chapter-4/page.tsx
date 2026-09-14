@@ -100,10 +100,6 @@ export default function Chapter4() {
           </blockquote>
 
           <p className="m-0">
-            The components are the easy part. The hard part is alignment — getting the right people pointed in the same direction, across teams with different priorities, timelines, and definitions of done.
-          </p>
-
-          <p className="m-0">
             None of this is fully solved. I want to be honest about that. What&apos;s changed is that I now have a leader who&apos;s spent real time understanding what this work actually is and why it matters to the business, rather than a leader who inherited design systems as one line item among many. That&apos;s given me room to plan seriously — bringing in outside design-systems specialists to assess where the system actually stands (not to tell us anything we didn&apos;t already suspect, but to give it outside authority), and to start building a real case for the team this needs, rather than the team it&apos;s had to survive on.
           </p>
 
