@@ -35,7 +35,7 @@ const GOOD_AT = [
   { term: "Funding a system without formal authority", line: "Southwest's design system ran on borrowed time for years before it had a real budget — built by pitching every stakeholder in whatever language actually moved them: cost, time, consistency." },
   { term: "Turning disruption into forward motion", line: "A pandemic canceled a funded initiative overnight. A company-wide layoff, years later, reshuffled leadership above me. Both times, I used the opening the disruption created instead of just surviving it." },
   { term: "Scaling adoption without a mandate", line: "Grew Southwest's design tooling from about 100 seats to 2,706 — including departments outside my own org that I onboarded anyway, with no authority to prioritize their requests, because they wanted in." },
-  { term: "Making (and unmaking) high-stakes vendor calls", line: "Built a nine-month case for a $150K/year vendor, then walked away when the internal math stopped holding up — and separately pushed for better enterprise contract terms as our other tooling scaled past 2,700 seats." },
+  { term: "Making (and unmaking) high-stakes vendor calls", line: "Built a nine-month case for a $150K/year vendor, then found the opening to walk away when internal momentum had stalled and the spend was becoming a bigger barrier than the problem it was solving — and separately pushed for better enterprise contract terms as our other tooling scaled past 2,700 seats." },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
