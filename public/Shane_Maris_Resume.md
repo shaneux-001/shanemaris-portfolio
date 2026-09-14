@@ -1,7 +1,7 @@
 # Shane Maris
 
 **Design Systems & Ops Leader**
-Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com · linkedin.com/in/shanemaris
+Dallas, TX (open to relocating) · 214.546.3047 · contact@shanemaris.com · linkedin.com/in/shanemaris
 
 ---
 

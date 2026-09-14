@@ -16,7 +16,7 @@
 
 export const NAME = "Shane Maris";
 export const TITLE = "Design Systems & Ops Leader";
-export const CONTACT = "Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com · linkedin.com/in/shanemaris";
+export const CONTACT = "Dallas, TX (open to relocating) · 214.546.3047 · contact@shanemaris.com · linkedin.com/in/shanemaris";
 
 export const SUMMARY = "Design systems and design ops leader with a decade-plus career at Southwest Airlines, currently driving strategy for the airline's customer-facing commercial design system, spanning responsive web and native iOS and Android. Built and scaled Southwest's digital design system from the ground up, led the org-wide tool migration that now reaches over 2,700 users (320 paid seats), and turned that work into outcomes senior leadership could act on.";
 

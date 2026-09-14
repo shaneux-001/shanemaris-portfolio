@@ -111,7 +111,7 @@ export default function Resume() {
         </h1>
         <p className="m-0 mb-1.5 text-base text-pr-lede">Design Systems &amp; Ops Leader</p>
         <p className="m-0 mb-[18px] font-plex-mono text-[12.5px] tracking-[0.02em] text-pr-muted">
-          Dallas, TX (open to relocating; prefers Remote or Hybrid) · 214.546.3047 · contact@shanemaris.com ·{" "}
+          Dallas, TX (open to relocating) · 214.546.3047 · contact@shanemaris.com ·{" "}
           <a href="https://www.linkedin.com/in/shanemaris/" target="_blank" rel="noopener noreferrer" className="text-pr-accent-text border-b border-pr-accent-text">linkedin.com/in/shanemaris</a>
         </p>
         <div className="flex flex-wrap items-center gap-3 mb-1">
