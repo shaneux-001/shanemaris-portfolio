@@ -44,10 +44,10 @@ export default function Home() {
             <span>DESIGN OPS &amp; SYSTEMS · SOUTHWEST AIRLINES</span>
           </div>
           <h1 className="pr-hero-title m-0 font-archivo font-bold leading-[0.98] tracking-[-0.035em] text-pr-fg-strong">
-            <Ghost trigger="load">I design systems that scale.</Ghost>
+            <Ghost trigger="load">I help design teams stop rebuilding the same things twice.</Ghost>
           </h1>
           <p className="pr-lede m-0 leading-[1.6] text-pr-lede max-w-[44ch]">
-            Building the foundations product teams rely on at Southwest Airlines.
+            The foundations design teams rely on at Southwest Airlines.
           </p>
           <div className="flex gap-[10px] items-center flex-wrap pt-1">
             <PressCta href="/resume">VIEW RESUME</PressCta>
