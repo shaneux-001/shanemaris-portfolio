@@ -18,12 +18,16 @@ interface CaseStudyImageProps {
  * muted) and spaced tight to the image so it reads as attached to it, not
  * as another paragraph.
  *
- * Renders nothing when the image doesn't exist — a missing slot disappears
- * rather than showing a placeholder box, since that's meant for a final
- * decision ("no image here"), not a mid-progress reminder.
+ * When the image doesn't exist, renders a small invisible spacer instead of
+ * a placeholder box — a missing slot shouldn't show a "still needs this"
+ * reminder (that's a final decision, "no image here"), but the surrounding
+ * paragraphs also shouldn't butt up against each other at plain
+ * paragraph-to-paragraph spacing — that reads like the section break was
+ * never there. The spacer adds just enough of a pause to imply "something
+ * was considered here" without an obviously empty gap.
  */
 export default function CaseStudyImage({ src, alt, hasImage, caption, wrapperClassName }: CaseStudyImageProps) {
-  if (!hasImage) return null;
+  if (!hasImage) return <div aria-hidden="true" className="h-6" />;
 
   return (
     <figure className={`m-0${wrapperClassName ? ` ${wrapperClassName}` : ''}`}>
