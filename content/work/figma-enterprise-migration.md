@@ -39,4 +39,4 @@ I led onboarding across the company, walking new departments through the basics,
 
 ## Sharing the journey publicly
 
-A few months later, Figma invited me to co-present a public webinar with a Southwest engineer, walking through our design system journey and how we were actually using our own Design Token Playbook, variables, and Dev Mode in real workflows, not just the announcement version from the Config stage. Slides: https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey — Webinar: https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113
+A few months later, Figma invited me to co-present a public webinar with a Southwest engineer, walking through our design system journey and how we were actually using our own Design Token Playbook, variables, and Dev Mode in real workflows, not just the announcement version from the Config stage. [Slides](https://www.figma.com/community/file/1413217155092677522/in-the-file-southwest-airlines-design-system-journey) — [Webinar](https://www.figma.com/webinars/southwest-airlines-ds/?fuid=1222657138998324113)

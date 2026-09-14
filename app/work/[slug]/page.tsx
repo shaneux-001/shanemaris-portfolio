@@ -17,6 +17,7 @@ import { getProjectMd } from '@/lib/parseProjectMd';
 import PressCta from '@/components/press/PressCta';
 import Ghost from '@/components/press/Ghost';
 import CaseStudyImage from '@/components/press/CaseStudyImage';
+import { linkifyText } from '@/lib/linkify';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -138,7 +139,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <>
               {/* Summary */}
               <p className="leading-[1.8] mt-0 mb-10 text-[17px] text-pr-lede">
-                {content.summary}
+                {linkifyText(content.summary)}
               </p>
 
               {/* Sections */}
@@ -149,7 +150,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   </h2>
 
                   <p className="leading-[1.8] mt-0 mb-0 text-[15.5px] text-pr-lede break-words">
-                    {section.body}
+                    {linkifyText(section.body)}
                   </p>
 
                   {/* Image between sections (not after the last) */}
