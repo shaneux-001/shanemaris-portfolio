@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 };
 
 const PRINCIPLES = [
-  { term: "One bite at a time", line: "Complex problems rarely yield to brute force. Break the work into its smallest meaningful parts and the right solution tends to assemble itself." },
-  { term: "Constraints force creativity", line: "The best design rarely comes from unlimited resources. A tight deadline, budget, or platform limit is often the pressure that produces the most durable solution." },
-  { term: "Less is more", line: "Every element in a design earns its place, or it doesn't belong. If it's not improving the experience or solving a real objective, the right move is usually to remove it." },
-  { term: "Design works for everyone", line: "Design that only works for some people isn't finished. Accessible, inclusive systems multiply impact — better work comes out when more people can participate." },
-  { term: "Build tools not rules", line: "Rigid processes create silos. Tools that invite collaboration get teams working together instead of around each other." },
+  { term: "Own the call", line: "Some calls have to be made without the resourcing to do them the “right” way. Make the call, and if it doesn't fully pan out, own that instead of rewriting the story." },
+  { term: "Coach the approach", line: "Reviewing someone's output after the fact teaches them what you wanted. Setting the approach with them up front teaches them how to think — the version that outlasts you." },
+  { term: "Earn trust, don't police it", line: "Rules assume everyone's looking for a shortcut. A system that's earned trust puts the burden on the builder to justify the exception, not on itself to catch everyone in advance." },
+  { term: "Data over feelings", line: "Confidence isn't where you start, it's what's left after the research holds up. When the data doesn't back an opinion yet, the honest answer is “let me get back to you.”" },
+  { term: "Protect your people", line: "When someone's work is being undermined, say something directly first. If that doesn't fix it, escalate — quietly, and all the way up if that's what it takes." },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -84,7 +84,7 @@ export default function About() {
         </p>
       </div>
 
-      <SectionLabel>HOW I WORK</SectionLabel>
+      <SectionLabel>HOW I LEAD</SectionLabel>
       <div className="pr-two-col max-w-[860px] mb-10">
         {PRINCIPLES.map((p) => (
           <div key={p.term} className="flex flex-col gap-[5px]">
