@@ -97,7 +97,8 @@ export default function Chapter1() {
           </p>
         </div>
 
-        <div className="flex justify-end items-center mt-14 pt-6 border-t border-pr-rule">
+        <div className="flex justify-between items-center mt-14 pt-6 border-t border-pr-rule">
+          <PressCta href="/work/heart-design-system" variant="secondary">← BACK TO OVERVIEW</PressCta>
           <PressCta href="/work/heart-design-system/chapter-2">NEXT CHAPTER →</PressCta>
         </div>
       </div>

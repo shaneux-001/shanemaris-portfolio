@@ -20,7 +20,7 @@ export default function Chapter4() {
     <main className="pr-page">
       <div className="pr-main pt-[clamp(36px,5vw,56px)]">
         <Link href="/work/proof-before-progress" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline inline-block mb-6">
-          <Ghost>← BACK TO OVERVIEW</Ghost>
+          <Ghost>← BACK TO PROOF BEFORE PROGRESS</Ghost>
         </Link>
 
         <span className="block font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-3.5">
@@ -69,7 +69,7 @@ export default function Chapter4() {
 
         <div className="flex justify-between items-center mt-14 pt-6 border-t border-pr-rule">
           <PressCta href="/work/proof-before-progress/chapter-3" variant="secondary">← PREVIOUS</PressCta>
-          <PressCta href="/work">BACK TO WORK</PressCta>
+          <PressCta href="/work/proof-before-progress">BACK TO OVERVIEW</PressCta>
         </div>
       </div>
     </main>

@@ -20,7 +20,7 @@ export default function Chapter2() {
     <main className="pr-page">
       <div className="pr-main pt-[clamp(36px,5vw,56px)]">
         <Link href="/work/proof-before-progress" className="pr-arrow-link pr-hoverable font-plex-mono text-xs tracking-[0.06em] text-pr-accent-text no-underline inline-block mb-6">
-          <Ghost>← BACK TO OVERVIEW</Ghost>
+          <Ghost>← BACK TO PROOF BEFORE PROGRESS</Ghost>
         </Link>
 
         <span className="block font-plex-mono text-[11px] tracking-[0.06em] text-pr-magenta mb-3.5">
