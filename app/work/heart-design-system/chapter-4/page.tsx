@@ -72,15 +72,7 @@ export default function Chapter4() {
           </p>
 
           <p className="m-0">
-            It wasn&apos;t official. But it was real.
-          </p>
-
-          <p className="m-0">
-            Scaling a design system is hard. Scaling one without a dedicated team, across two departments, four different teams, and reporting lines that stretch up to two directors and a VP — while the company around you is navigating one of the most turbulent stretches in its history — is a different kind of hard.
-          </p>
-
-          <p className="m-0">
-            That&apos;s where I&apos;ve been living for the past few years.
+            Scaling a design system is hard. Scaling one without a dedicated team, across two departments, four different teams, and reporting lines that stretch up to two directors and a VP — while the company around you is navigating one of the most turbulent stretches in its history — is a different kind of hard. That&apos;s where I&apos;ve been living for the past few years.
           </p>
 
           <CaseStudyImage
@@ -116,7 +108,7 @@ export default function Chapter4() {
           </p>
 
           <p className="m-0">
-            The system survived things it probably shouldn&apos;t have. What it needs next isn&apos;t more conviction — I&apos;ve never been short on that. It needs resourcing to match the scope it&apos;s already grown into.
+            The system survived things it probably shouldn&apos;t have. What it needs next isn&apos;t more conviction. It needs resourcing to match the scope it&apos;s already grown into.
           </p>
         </div>
 
