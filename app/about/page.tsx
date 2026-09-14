@@ -28,11 +28,34 @@ const PRINCIPLES = [
   { term: "Protect your people", line: "When someone's work is being undermined, say something directly first. If that doesn't fix it, escalate — quietly, and all the way up if that's what it takes." },
 ];
 
+// Grounded in what's already published in the case studies and resume —
+// no new stories invented for this section, per the no-fabrication rule
+// that governs every other leadership claim on this site.
+const GOOD_AT = [
+  { term: "Funding a system without formal authority", line: "Southwest's design system ran on borrowed time for years before it had a real budget — built by pitching every stakeholder in whatever language actually moved them: cost, time, consistency." },
+  { term: "Turning disruption into forward motion", line: "A pandemic canceled a funded initiative overnight. A company-wide layoff, years later, reshuffled leadership above me. Both times, I used the opening the disruption created instead of just surviving it." },
+  { term: "Scaling adoption without a mandate", line: "Grew Southwest's design tooling from about 100 seats to 2,706 — including departments outside my own org that I onboarded anyway, with no authority to prioritize their requests, because they wanted in." },
+  { term: "Making (and unmaking) high-stakes vendor calls", line: "Built a nine-month case for a $150K/year vendor, then walked away when the internal math stopped holding up — and separately pushed for better enterprise contract terms as our other tooling scaled past 2,700 seats." },
+];
+
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="m-0 font-plex-mono text-[11px] font-normal tracking-[0.1em] text-pr-muted mb-[22px] border-t border-pr-rule pt-[22px]">
       {children}
     </h2>
+  );
+}
+
+function TermGrid({ items }: { items: { term: string; line: string }[] }) {
+  return (
+    <div className="pr-two-col max-w-[860px] mb-10">
+      {items.map((item) => (
+        <div key={item.term} className="flex flex-col gap-[5px]">
+          <div className="text-[17px] font-semibold text-pr-fg-strong">{item.term}</div>
+          <div className="text-sm leading-[1.6] text-pr-lede">{item.line}</div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -74,6 +97,12 @@ export default function About() {
         </div>
       </div>
 
+      <SectionLabel>HOW I LEAD</SectionLabel>
+      <TermGrid items={PRINCIPLES} />
+
+      <SectionLabel>WHAT I&apos;M GOOD AT</SectionLabel>
+      <TermGrid items={GOOD_AT} />
+
       <SectionLabel>OUTSIDE OF WORK</SectionLabel>
       <div className="max-w-[62ch] mb-2 flex flex-col gap-3.5">
         <p className="text-sm text-pr-lede leading-[1.7] m-0">
@@ -85,16 +114,6 @@ export default function About() {
         <p className="text-sm text-pr-lede leading-[1.7] m-0">
           Also trying to get back outdoors more: hiking, walking, easing back into biking, for the roughly five months a year Texas isn&apos;t doing its best impression of a convection oven.
         </p>
-      </div>
-
-      <SectionLabel>HOW I LEAD</SectionLabel>
-      <div className="pr-two-col max-w-[860px] mb-10">
-        {PRINCIPLES.map((p) => (
-          <div key={p.term} className="flex flex-col gap-[5px]">
-            <div className="text-[17px] font-semibold text-pr-fg-strong">{p.term}</div>
-            <div className="text-sm leading-[1.6] text-pr-lede">{p.line}</div>
-          </div>
-        ))}
       </div>
 
       <SectionLabel>EXPERTISE</SectionLabel>
