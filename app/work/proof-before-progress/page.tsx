@@ -52,7 +52,7 @@ export default function ProofBeforeProgressLanding() {
         <CaseStudyOrientation
           role="Design Ops lead who scoped, prototyped, and pitched the fix"
           problem="HDS had no real documentation site, and a $150K/year vendor purchase was the assumed fix"
-          scale="9-month vendor evaluation vs. one prototyped weekend; system NPS moved 21.43 → 52"
+          scale="9-month vendor evaluation vs. one prototyped weekend"
           whatChanged="A weekend AI prototype avoided the vendor spend and reset the system's roadmap toward v2"
         />
 
