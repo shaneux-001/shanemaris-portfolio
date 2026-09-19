@@ -259,6 +259,31 @@ job; no new ones going forward).
   executing.** Small, well-scoped fixes don't need this; genuine scope
   or judgment calls do.
 
+### Versioning
+
+Policy set 2026-09-19. **Apply this without being asked** — proactively
+propose a tag at the checkpoints below, rather than waiting for Shane to
+remember to request one. Git tags are the version history; there is no
+separate changelog file to keep in sync.
+
+- **Tags mark checkpoints, not commits or pushes.** Most sessions land
+  ordinary commits on `main` (or a feature branch) with no tag at all —
+  that's correct, not a gap. Propose a tag when: Shane asks for one, a
+  meaningful batch of related work just landed and got verified, or
+  something risky/experimental is about to start (the same reasoning
+  that produced `v1.0.0` before Labs work began).
+- **Bump level depends on what changed since the last tag:**
+  - **MAJOR** (`2.0.0`) — a full redesign, new design system, or
+    restructured navigation/IA. Rare, maybe once or twice a year.
+  - **MINOR** (`1.1.0`) — new content or a new feature: a new Labs
+    entry, un-hiding one of the 9 backlog case studies, the
+    systems-thinking feature, analytics setup.
+  - **PATCH** (`1.0.1`) — fixes, copy edits, polish, cleanup, doc
+    updates. Most work lands here.
+- When proposing a tag, state the proposed version and a one-line reason
+  ("this batch is content-only, proposing v1.1.0") — Shane confirms or
+  adjusts, same as any other judgment call.
+
 ---
 
 ## Shane's additions
