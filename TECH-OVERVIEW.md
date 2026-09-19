@@ -104,8 +104,8 @@ never appear in public, committed files.
 ```
 app/
   globals.css          ← BOTH token sets live here: old --color-* (/particle-demo, /particle-test only) and new --pr-* (Press Room). Press Room custom CSS wrapped in @layer components; see gotcha #1.
-  layout.tsx           ← root layout + shared footer (SiteFooter) + shared header (SiteHeader) — both opt out per-route via an exclude list
-  page.tsx             ← home (use client — Konami code) — Press Room theme, Tailwind utilities
+  layout.tsx           ← root layout + shared footer (SiteFooter) + shared header (SiteHeader) — each opts out per-route via its own exclude list, and the two lists differ: SiteHeader excludes /labs (which uses LabsHeader instead), SiteFooter does NOT exclude /labs (it gets the shared footer) — both exclude /particle-demo and /particle-test
+  page.tsx             ← home — SERVER COMPONENT (Konami-code listener extracted to its own client component, KonamiListener, specifically so this could be one), Press Room theme, Tailwind utilities
   about/page.tsx       ← server component. Order: intro → HOW I LEAD (leadership beliefs) → WHAT I'M GOOD AT → Outside of Work → Expertise (no Experience — that's resume-only)
   contact/page.tsx     ← client component (form state); posts to /api/contact
   resume/page.tsx      ← server component; content copied verbatim from resume-source/MASTER_RESUME.md
@@ -118,7 +118,8 @@ app/
   api/contact/route.ts ← contact form API handler — honeypot + validation + Resend {error} check
 
 components/
-  press/               ← PressMark, PressNavLink, PressCta (primary/secondary variant), Ghost (misregistration hover effect, trigger="hover" default or trigger="load" for page-load glitch), PressThemeToggle, SiteHeader, SiteFooter, Expertise (shared by about + resume), CaseStudyImage (next/image wrapper, takes real `dimensions` not a boolean — see gotcha below), CaseStudyOrientation (the ROLE/PROBLEM/SCALE/WHAT CHANGED block)
+  press/               ← PressMark, PressNavLink, PressCta (primary/secondary/accent-outline variants), Ghost (misregistration hover effect, trigger="hover" default or trigger="load" for page-load glitch), PressThemeToggle, SiteHeader, SiteFooter, Expertise (shared by about + resume), CaseStudyImage (next/image wrapper, takes real `dimensions` not a boolean — see gotcha below), CaseStudyOrientation (the ROLE/PROBLEM/SCALE/WHAT CHANGED block)
+  KonamiListener.tsx   ← extracted from app/page.tsx (2026-09-07) so Home could become a server component; listens for the Konami code client-side, renders nothing itself
   PasswordGate.tsx     ← old system, currently unused anywhere (no live callers) — kept in case a future Labs project needs password-gating
   LabsHeader.tsx       ← /labs's own header — mark/wordmark link to /labs with a "(labs)" tag, plus a "Main Site" nav link back to /
   ThemeToggle.tsx      ← /particle-demo /particle-test's old dark-mode toggle (distinct from PressThemeToggle) — /labs no longer uses this
@@ -128,7 +129,7 @@ content/work/          ← case study MD files — edit these, not the TypeScrip
 lib/
   projects.ts          ← project registry. labsProjects is currently [] (Project Oasis removed 2026-09-19); portfolioProjects has the 3 live case studies + 9 hidden ones.
   parseProjectMd.ts    ← server-side MD parser. Frontmatter fields: tagline, eyebrow, role, timeline, platform, readTime, problem/scale/whatChanged/orientationRole (all optional, drive CaseStudyOrientation). NOTE: does not parse markdown links — `[text](url)` renders as literal text.
-  password.ts          ← reads from env vars (NEXT_PUBLIC_PORTFOLIO_PASSWORD, RESEND_API_KEY)
+  password.ts          ← reads NEXT_PUBLIC_PORTFOLIO_PASSWORD (the master password) from env vars. RESEND_API_KEY is separate — read directly in app/api/contact/route.ts, not here.
   imageDimensions.ts   ← reads width/height straight from a PNG's IHDR chunk (no dependency) — every image lives in public/ with no build-time asset pipeline, so next/image needs explicit dimensions passed in.
 
 resume-source/
@@ -159,11 +160,12 @@ CLAUDE.md                ← imports AGENTS.md
 ## Server/client boundaries
 
 `app/work/page.tsx`, `app/work/[slug]/page.tsx`, `app/about/page.tsx`,
-`app/resume/page.tsx`, `app/work/heart-design-system/**`, and
-`app/work/proof-before-progress/**` are server components. They read MD
-files or the filesystem via Node `fs`. Never add `'use client'` to these —
-push any interactivity into sub-components. `app/page.tsx` (Konami code)
-and `app/contact/page.tsx` (form state) are `'use client'` by necessity.
+`app/resume/page.tsx`, `app/page.tsx`, `app/work/heart-design-system/**`,
+and `app/work/proof-before-progress/**` are server components. They read
+MD files or the filesystem via Node `fs`. Never add `'use client'` to
+these — push any interactivity into sub-components, the way `app/page.tsx`
+pushes its Konami-code listener into `KonamiListener.tsx`. Only
+`app/contact/page.tsx` (form state) is `'use client'` by necessity.
 
 ## Interaction patterns
 
