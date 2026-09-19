@@ -159,7 +159,13 @@ export function computeWeekUsage(calendarLog: CalendarEntry[], pantry: PantryDat
 
   const upcoming = calendarLog.filter((e) => e.date >= todayStr && e.date <= endStr);
 
-  const needed: Record<string, { name: string; unit: string; qty: number; hasNonNumeric: boolean }> = {};
+  // Keyed by ingredient name alone — recipes disagree on units for the same
+  // ingredient often enough (10 oz here, 1 lb there) that keying by name+unit
+  // used to split one ingredient into multiple confusing rows. We still can't
+  // safely sum across incompatible units without a conversion table, so a
+  // second unit for an already-seen name just flags the row for manual review
+  // instead of silently duplicating or dropping it.
+  const needed: Record<string, { name: string; unit: string; qty: number; hasNonNumeric: boolean; hasMixedUnits: boolean }> = {};
   upcoming.forEach((entry) => {
     [entry.main, entry.side].filter((id): id is string => Boolean(id)).forEach((id) => {
       const r = recipeById(id);
@@ -168,11 +174,12 @@ export function computeWeekUsage(calendarLog: CalendarEntry[], pantry: PantryDat
         const name = (ing.name ?? '').trim().toLowerCase();
         if (!name) return;
         const unit = (ing.unit ?? '').trim().toLowerCase();
-        const key = `${name}|${unit}`;
         const qty = parseApproxQty(ing.amount);
-        if (!needed[key]) needed[key] = { name: ing.name.trim(), unit, qty: 0, hasNonNumeric: false };
-        if (qty === null) needed[key].hasNonNumeric = true;
-        else needed[key].qty += qty;
+        if (!needed[name]) needed[name] = { name: ing.name.trim(), unit, qty: 0, hasNonNumeric: false, hasMixedUnits: false };
+        const entry = needed[name];
+        if (unit !== entry.unit) entry.hasMixedUnits = true;
+        if (qty === null) entry.hasNonNumeric = true;
+        else entry.qty += qty;
       });
     });
   });
@@ -186,6 +193,9 @@ export function computeWeekUsage(calendarLog: CalendarEntry[], pantry: PantryDat
     const pantryItem = pantryByName[n.name.trim().toLowerCase()];
     if (!pantryItem) return { name: n.name, status: 'buy', detail: 'Not tracked in pantry' };
 
+    if (n.hasMixedUnits) {
+      return { name: n.name, status: 'check', detail: 'Needed in different units across recipes — check manually' };
+    }
     const pantryUnit = (pantryItem.unit ?? '').trim().toLowerCase();
     if (pantryUnit !== n.unit || n.hasNonNumeric) {
       return { name: n.name, status: 'check', detail: `Have ${pantryItem.amount || '?'} ${pantryItem.unit || ''} — check manually` };
