@@ -292,17 +292,17 @@ _(Add new items here as they come up — this section is yours.)_
 
 ---
 
-## Future project (on hold) — "The Recipe Box" → Labs
+## In progress — "The Recipe Box" → Labs (`labs/recipe-box` branch)
 
-**Gate cleared 2026-09-19** — the core portfolio pass (all P0/P1 quality-gate items, plus a full repo cleanup and `v1.0.0` tag) is done. This is no longer on hold; go ahead whenever this is picked up.
+**Gate cleared 2026-09-19** — the core portfolio pass (all P0/P1 quality-gate items, plus a full repo cleanup and `v1.0.0` tag) is done. Picked up 2026-09-19; building on the `labs/recipe-box` branch, off the `v1.0.0` tag.
 
-**What it is:** a personal recipe archive + meal-planning tool Shane built for his family — started as digitizing old recipe cards (including a handwritten one from his mom) and meal-kit recipes, and grew into a real tool. Built as a single self-contained HTML file (no backend, no build step, offline-capable) through an extended conversation with Claude in another session. Shane wants to showcase it in `/labs` specifically to demonstrate he builds and experiments on his own time, outside of work.
+**What it is:** a personal recipe archive + meal-planning tool Shane built for his family — started as digitizing old recipe cards (including a handwritten one from his mom) and meal-kit recipes, and grew into a real tool. Source data/UI came in as a self-contained HTML prototype (`master_recipes.json` + `recipe_box.html`, ~90 recipes) built iteratively through an earlier Claude conversation. Shane wants to showcase it in `/labs` to demonstrate he builds and experiments on his own time, outside of work.
 
-**Source file:** `/Users/e103138/Downloads/folio-work-sept5/recipe-box/recipe_box.html` — the standalone app referenced in the prompt below. Confirm it's still at that path (or ask Shane for the current copy) before starting; it may have been iterated on since 2026-09-08.
+**Scope confirmed 2026-09-19 — supersedes the prompt below on one key point:** the AI planning is a live **in-app chat feature**, not Shane chatting with Claude in a separate conversation. Concretely: a server-side Route Handler calls the Claude API (key never shipped to the client), gated behind a signed-cookie session (not the site's existing `NEXT_PUBLIC_*` client-side password pattern — real API cost is at stake here) with Upstash-backed rate limiting as a backstop against bugs/abuse. The recipe library, meal-pairing heuristic, shopping-list builder, and pantry-diffing logic from the prototype are being reused/ported; the AI's job is limited to picking/pairing meals from the existing library (returning structured `{main, side, reason}` per meal) and taking free-text "what's in the fridge" input — the deterministic JS still does the ingredient math. v1 is single-shot (describe fridge → get a plan → refine), not a full multi-turn chat thread. Pantry state persists via Upstash, keyed to the session, so it's available from any device.
 
 **Resolved 2026-09-19:** Project Oasis was removed (wasn't ready, was sitting as unused clutter) — The Recipe Box is now simply the first real Labs entry, no need to decide how it coexists with anything else.
 
-**The prompt Shane generated in another session (kept verbatim for whoever picks this up):**
+**Superseded by the scope note above, kept verbatim for history — the prompt Shane generated in another session, which described the AI planning as happening via a separate conversation with Claude rather than an in-app call:**
 
 > I want to add a project to the "Labs" section of my portfolio. This is a
 > side project I built — a personal recipe manager and meal-planning tool
