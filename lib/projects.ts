@@ -38,8 +38,23 @@ interface ProjectConfig {
 /**
  * Labs projects (hidden, gated behind Konami code + auth)
  * Passwords come from env vars — see lib/password.ts
+ *
+ * Exception: `recipe-box` is NOT gated through the password/public fields
+ * below — it runs a live server-side AI endpoint under Shane's own API key,
+ * so it needs a real auth boundary rather than the client-exposed
+ * NEXT_PUBLIC_* password check. It's gated by `proxy.ts` (a signed,
+ * httpOnly session cookie, re-verified inside each API route) instead —
+ * see lib/labs/recipeBox/session.ts.
  */
-export const labsProjects: ProjectConfig[] = [];
+export const labsProjects: ProjectConfig[] = [
+  {
+    slug: 'recipe-box',
+    title: 'The Recipe Box',
+    tags: ['AI', 'Full-Stack', 'Personal'],
+    description:
+      'A family recipe archive with an AI meal planner that reasons about what’s actually in the fridge, and a pantry that keeps the shopping list honest.',
+  },
+];
 
 /**
  * Portfolio case studies (on /work)
