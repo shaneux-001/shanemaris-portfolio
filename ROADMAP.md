@@ -1,9 +1,9 @@
 # Roadmap — single source of truth
 
-**Last updated: 2026-09-13.** This file is now the ONE place tracking what's left to do on this project. It supersedes:
-- `HANDOFF.md`'s old `## To-do` section (now just points here — the rest of HANDOFF.md, the architecture/gotchas/file-map reference material, is still accurate and stays where it is)
+**Last updated: 2026-09-19.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
+- `HANDOFF.md` — retired 2026-09-19. Its task-list role was already dead (this file replaced it months ago); its architecture/gotchas/file-map reference content moved to the new `TECH-OVERVIEW.md`, corrected against the live codebase rather than carried forward stale.
 - The Cowork artifact **"Shane Portfolio Roadmap"** (`~/Documents/Claude/Artifacts/shane-portfolio-roadmap/`) — last touched May 1, targeted a June 22 launch that's long past, and several of its own "DONE" claims turned out to be stale once the September redesign rebuilt large parts of the site. A stale banner has been added to it.
-- `IMAGE-SPEC.md` was refreshed 2026-09-07 and is now the accurate, current image punch list (was previously flagged stale here — that's resolved now).
+- `IMAGE-SPEC.md` — trimmed 2026-09-19 to Priority 2 only (the 9 hidden case studies). Priority 1 is done (Heart DS, Proof Before Progress, Figma Enterprise Migration, Home, About all have real photography live) so that section was deleted rather than left with stale numbers and a wrong file extension (`.jpg` — the real files are `.png`).
 
 **Why this exists:** work happened in two bursts — April 19 through May 11 (foundation, then a big content/QA push), then a ~4-month gap, picking back up 2026-09-05. During the restart, some stale context from the spring got pulled in and briefly overwrote edits from the day before; that's been caught and fixed, but it's why this consolidation exists — one place, one history, so it doesn't happen again.
 
@@ -16,6 +16,40 @@
 **Also shipped:** all three case studies now have real, exported photography (transparent PNGs, sized to each image's own natural aspect ratio rather than a forced crop) — Heart Design System is fully wired (13/13 slots), Proof Before Progress has all 4 chapter heroes, Figma Enterprise Migration has 5 of 8 slots filled with the remaining 3 a deliberate "no image" decision rather than a gap (missing slots now render nothing, with a small spacer for rhythm, instead of a dev placeholder box). Home's lead-case-study card and About's portrait were also re-exported with real transparency. New shared `CaseStudyImage` component (grounding border, optional caption support — infrastructure built, no caption text written yet) and `linkifyText` util (turns markdown `[label](url)` / bare URLs into real clickable links) now back every case study page. Also fixed: stale purple `favicon.ico`, a new button variant so "NEXT CHAPTER" doesn't visually compete with the footer "SAY HELLO" CTA, and body-copy centering under hero images on every chapter-style page (including `app/work/[slug]/page.tsx`, which the first pass at that fix missed since it was scoped to the chapter files directly in front of the fix rather than searched for across every matching layout — worth remembering for future structural fixes: grep for every instance of a pattern before calling it done, not just the files currently in view).
 
 **Verified still open, checked directly against the live code 2026-09-13** (not assumed from an old doc): homepage `<h1>` is still "I design systems that scale." / "Building the foundations product teams rely on at Southwest Airlines." — the Leadership Proposition reframe has NOT happened. `/about`'s `PRINCIPLES` array is still the same 5 generic design-philosophy statements ("One bite at a time," "Constraints force creativity," "Less is more," "Design works for everyone," "Build tools not rules") — the Generic Principles → Leadership Beliefs item has NOT happened. No case study has a ROLE/PROBLEM/SCALE/WHAT CHANGED-style orientation block — case-study scanability (P1) has NOT happened. `next/image` has zero usages anywhere in the codebase — the Lighthouse/performance pass has NOT started.
+
+---
+
+## 2026-09-13 through 2026-09-19 — quality-gate closeout + repo cleanup
+
+All four quality-gate P0 items and every P1 item except the "systems
+thinking on the site itself" feature (deliberately deferred — a real
+enhancement, not a gap) are now done — see the "Quality gate" checklist
+below for full detail on each with commits. Highlights: homepage/About
+headlines reframed away from "systems" as the primary identity; About's
+5 generic principles replaced with 5 real leadership beliefs and a new
+"WHAT I'M GOOD AT" section, both grounded only in facts already
+published elsewhere (no invented stories); a ROLE/PROBLEM/SCALE/WHAT
+CHANGED orientation block added to all 3 case studies; every `<img>`
+migrated to `next/image` (confirmed via a real Lighthouse run:
+Performance 99, Accessibility 100, Best Practices 96, SEO 100); a
+human-narrative pass cut 2 generic "could be written by any designer"
+sentences; case-study navigation made consistent (symmetric footers,
+matching back-link naming) across Heart DS and Proof Before Progress.
+
+**2026-09-19 — "v1" checkpoint + doc consolidation.** Before starting
+the first real Labs project ("The Recipe Box," on hold since 2026-09-08
+pending exactly this), did a full repo audit and cleanup: deleted a
+stale fully-merged branch, removed Project Oasis (never wired up, not
+ready to be public, was sitting as clutter — see the "Hidden case
+studies" checklist above for the *other* 9 hidden case studies, which
+are real backlog and were left alone), fixed 4 unused-var lint
+warnings, and tagged the result `v1.0.0` as a named rollback point.
+Also retired `HANDOFF.md` (see "Doc map" below) — its task-list role
+was already dead, its architecture reference moved to the new
+`TECH-OVERVIEW.md`, corrected against the live codebase rather than
+carried forward stale. Two private `session-handoff-*.md` snapshots
+were found to duplicate this file's own job; decided not to keep
+generating new ones (see "Working agreements" below).
 
 ---
 
@@ -108,7 +142,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 - [x] ~~Whether the RZF/agency-partnership story should become a new bullet~~ — resolved 2026-09-08, commit `88d03e1`: Shane confirmed UX Designer role, agency name is Razorfish (not "RZF"). Added to `MASTER_RESUME.md` and `app/resume/page.tsx`, deliberately left out of the condensed one-pager (space-constrained, Shane's call to keep it master-only for now).
 
 **Content/assets — infrastructure is done, files just aren't there yet:**
-- [x] ~~Full image punch list~~ — **effectively done as of 2026-09-13** for Priority 1; `IMAGE-SPEC.md` itself is stale (still dated 2026-09-07, hasn't been refreshed against this week's work — treat the status here as current, not that file). Heart Design System: 13/13 real slots filled (note the actual final slot count is 13, not the 17 IMAGE-SPEC estimated — the landing page switched to a link-list layout, which dropped the need for chapter-thumbnail images entirely). Proof Before Progress: 4/4 chapter heroes filled; no section-image slots exist in the current code (never built — only heroes were ever wired for PBP). Figma Enterprise Migration: 5 of 8 slots filled (hero, sections 1/2/3/5); sections 4/6/7 are a deliberate "no image" decision, not a gap — the template renders nothing for a missing slot rather than a placeholder. Home's lead-case-study card and About's portrait were both re-exported this week with real transparency (previous versions from 2026-09-08 had gotten deleted at some point; re-created). Priority 2 (9 hidden case studies) remains not started, explicitly deferred, unchanged.
+- [x] ~~Full image punch list~~ — **effectively done as of 2026-09-13** for Priority 1; `IMAGE-SPEC.md` was trimmed 2026-09-19 to drop its now-done, stale Priority 1 section entirely — treat the status here as current. Heart Design System: 13/13 real slots filled (note the actual final slot count is 13, not the 17 IMAGE-SPEC estimated — the landing page switched to a link-list layout, which dropped the need for chapter-thumbnail images entirely). Proof Before Progress: 4/4 chapter heroes filled; no section-image slots exist in the current code (never built — only heroes were ever wired for PBP). Figma Enterprise Migration: 5 of 8 slots filled (hero, sections 1/2/3/5); sections 4/6/7 are a deliberate "no image" decision, not a gap — the template renders nothing for a missing slot rather than a placeholder. Home's lead-case-study card and About's portrait were both re-exported this week with real transparency (previous versions from 2026-09-08 had gotten deleted at some point; re-created). Priority 2 (9 hidden case studies) remains not started, explicitly deferred, unchanged.
 - [x] ~~Home's lead-case-study card and About's portrait weren't wired to `fs.existsSync`~~ — both fixed 2026-09-07, commits `51f2ee3` (Home, required extracting the Konami-code listener into its own client component so the page could become a server component) and `f62bf1d` (About, new `.pr-about-intro-grid` two-column layout). Both verified end-to-end with a real test file before/after.
 - [ ] A commissioned/illustrated portrait for the About page — external dependency, was flagged back in May as something to start early since it's the longest lead time; never started.
 
@@ -132,6 +166,30 @@ These are cases where an old doc claims something is DONE, but either the underl
 - [ ] The old PressMark "broken in dark mode" report (Phase 3, spring) — self-resolved or was a visual misread, hasn't reproduced since. Reopen only if it shows up again during a real QA pass.
 - [x] ~~`/labs` has no page-specific `<title>`/meta description~~ — fixed 2026-09-07, commit `63dcaf4`. Added `app/labs/layout.tsx` following the `/contact` pattern.
 
+## Hidden case studies — pick-up-later checklist (not gated for v1)
+
+Nine `portfolioProjects` entries in `lib/projects.ts` are `hidden: true` —
+real, intentional backlog (unlike Project Oasis, which was removed
+2026-09-19 for being unready clutter). Not required for v1; listed here as
+a menu to pick from whenever there's appetite for a second wave of case
+studies. Image counts are from `IMAGE-SPEC.md`'s Priority 2 table (hero +
+section images needed to un-hide each one).
+
+- [ ] `homepage-v2` — "Responsive Homepage" (Leadership, DesignOps, Design System, Responsive) — 4 images (1 hero + 3 section)
+- [ ] `native-app-homepage` — "Native App Homepage" (Native, iOS, Android) — 4 images (1 hero + 3 section)
+- [ ] `vision-decommission` — "Vision Decommission" (Leadership, DesignOps, Design System, Web, Responsive, Mobile, Native) — 4 images (1 hero + 3 section)
+- [ ] `ife-starlink` — "IFE Starlink Portal" (Leadership, DesignOps, Design System) — 4 images (1 hero + 3 section)
+- [ ] `my-account-redesign` — "My Account Redesign" (DesignOps, Design System, Responsive, UX) — 4 images (1 hero + 3 section)
+- [ ] `mobile-check-in` — "Check-in Flow Redesign" (Mobile, Web, UX) — 3 images (1 hero + 2 section)
+- [ ] `homepage-redesign` — "Homepage Redesign (2014)" (Rebrand, Web, Mobile, UX) — 3 images (1 hero + 2 section)
+- [ ] `change-cancel-experience` — "Change & Cancel Experience" (Web, UX) — 4 images (1 hero + 3 section)
+- [ ] `enhanced-reaccom` — "Enhanced Reaccom Program" (Web, Mobile, UX) — 4 images (1 hero + 3 section)
+
+Each already has a `content/work/[slug].md` file with real copy — un-hiding
+is a matter of setting `hidden: false` (or removing the flag) once real
+photography exists for that project, same pattern as the three live case
+studies.
+
 ## Superseded — no longer applicable, kept only for historical record
 
 Everything below was marked "DONE" in the May roadmap, but the underlying work it refers to was fully replaced by the September Press Room redesign. Not open tasks — just noted so nobody goes looking for the old versions of these:
@@ -150,13 +208,56 @@ The May roadmap targeted **launch June 22, 2026** with a week-by-week schedule t
 
 | Doc | Status | What it's actually for now |
 |---|---|---|
-| `ROADMAP.md` (this file) | **Live** | The only place task status is tracked. Add new items here. |
-| `HANDOFF.md` | **Live**, but its old `## To-do` section is stale — replaced with a pointer to this file | Stack info, critical gotchas, file map, style approach, bear traps, safety-net SHAs, and the phase-by-phase session history changelog. Still accurate technical/architectural reference. |
+| `ROADMAP.md` (this file) | **Live** | The only place task status, backlog, and working agreements are tracked. Add new items here. Start here when picking this project back up. |
+| `TECH-OVERVIEW.md` | **Live**, added 2026-09-19 (replaces `HANDOFF.md`) | Stack info, critical gotchas, file map, style approach, bear traps. Pure architecture reference — no task status, changes rarely. |
 | Cowork artifact "Shane Portfolio Roadmap" | **Stale, banner added** | Historical snapshot of the May plan only. Do not use for current status. |
-| `IMAGE-SPEC.md` | **Live, refreshed 2026-09-07** | The current, accurate image punch list — every dimension read from the actual component code. Update this (not a new doc) as image needs change. |
+| `IMAGE-SPEC.md` | **Live, trimmed to Priority 2 only, 2026-09-19** | Priority 1 (the 3 live case studies + Home + About) is done and was deleted from this file rather than left stale. What remains is production detail (exact filenames/aspect ratios) for the 9 hidden case studies — see "Hidden case studies" checklist above for status. |
 | `resume-source/MASTER_RESUME.md` | **Live** — renamed from `Shane_Maris_Resume.md` 2026-09-08 to signal it's canonical | Single source of truth for resume wording. `scripts/resume-pdf-content.ts` (PDF + .md downloads) and `app/resume/page.tsx` (live page, hand-duplicated content) are both manual, one-way copies of this file — re-sync by hand after any edit here, nothing auto-propagates. |
-| `CASE-STUDY-QUESTIONS.md` | **Live, added 2026-09-09, fully answered** | Punch list of prodding questions for Shane to answer, aimed at deepening the 3 live case studies and specifically surfacing real people-leadership evidence. Answered in full; the case studies themselves now reflect the answers that passed fact-checking (see the 2026-09-09–2026-09-13 section above). This file stays as the historical record of the questions, not a live to-do. |
-| `private/case-study-raw-answers.md`, `private/case-study-drafts.md` | **Live, gitignored — never commit** | Raw unfiltered answers to the above, and the approved-copy draft workspace, kept local-only since some answers include real internal/colleague detail that can never appear in a public repo, even genericized. Inline boundary markers note what's permanently excluded. |
+| `resume-source/Resume_Audit_Rules.md` | **Live** | Fact-check governance for all resume/case-study content — locked-content rules, hard boundaries (no formal direct reports, HDS is customer-facing only, no Jetstream mentions), naming conventions, voice rules. Check before writing anything content-adjacent, regardless of which page it's for. |
+| `CASE-STUDY-QUESTIONS.md` | **Closed, added 2026-09-09, fully answered** | Punch list of prodding questions for Shane to answer, aimed at deepening the 3 live case studies and specifically surfacing real people-leadership evidence. Answered in full; the case studies themselves now reflect the answers that passed fact-checking (see the 2026-09-09–2026-09-13 section above). Historical record of the questions, not a live to-do. |
+| `private/case-study-raw-answers.md`, `private/case-study-drafts.md`, `private/case-study-image-manifest.md` | **Live, gitignored — never commit** | Raw unfiltered answers, the approved-copy draft workspace, and a per-image content-brief manifest — kept local-only since some answers include real internal/colleague detail that can never appear in a public repo, even genericized. Inline boundary markers note what's permanently excluded. |
+| `private/session-handoff-*.md` | **Historical, gitignored — no new ones going forward** | Point-in-time snapshots from before this doc consolidation (2026-09-19). Superseded by `ROADMAP.md`'s own dated history entries + "Working agreements" section below — left in place as-is, not actively maintained. |
+
+---
+
+## Working agreements
+
+How Shane wants this project actually worked on — collected from
+explicit corrections and confirmations across sessions, consolidated
+here 2026-09-19 (previously scattered across gitignored
+`private/session-handoff-*.md` snapshots that duplicated this file's
+job; no new ones going forward).
+
+- **Commit locally as logical chunks land; never push without an
+  explicit go-ahead** ("push it live," "push it," or similarly
+  unambiguous) — every push to `main` auto-deploys to production within
+  minutes, with no review step in between. This is the single most
+  important standing rule for how this repo gets worked on.
+- **Verify in the actual rendered page, not just the diff.** Shane
+  iterates fast and reviews visually — use the local dev server /
+  Browser pane to confirm a change looks and works right before calling
+  it done, especially for anything visual or content-facing.
+- **When making a structural/pattern fix, grep for every other instance
+  of that pattern before calling it done** — not just the files already
+  in view. A real miss this month: a centering fix and later a nav-link
+  fix each first landed only on the files directly being edited and
+  missed another file with the identical layout pattern; both were
+  caught, but the lesson is to search first.
+- **When Shane gives a direct correction, verify against the literal
+  artifact** (the actual file, the actual rendered page, his actual
+  words) rather than re-arguing from reasoning. When he says drop a
+  topic, drop it.
+- **Never invent leadership stories, metrics, or people-management
+  scope to close a gap** — mark anything needing his real input rather
+  than generating plausible filler. Every leadership claim on this site
+  traces to something he actually confirmed.
+- **For copy/positioning decisions, bring real options with honest
+  tradeoffs**, not one polished answer — he wants to steer a direction,
+  not approve/reject a single take.
+- **For anything substantial (new features, doc/architecture
+  restructuring, multi-step cleanup) — audit and present a plan before
+  executing.** Small, well-scoped fixes don't need this; genuine scope
+  or judgment calls do.
 
 ---
 
