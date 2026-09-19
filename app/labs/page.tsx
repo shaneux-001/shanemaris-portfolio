@@ -114,19 +114,36 @@ function LabsContent() {
           </p>
 
           {visibleLabsProjects.length > 0 ? (
-            <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] mb-4">
-              {visibleLabsProjects.map((project) => (
-                <Link key={project.slug} href={`/labs/${project.slug}`} className="pr-card">
-                  <div className="relative aspect-[4/3] mb-4 overflow-hidden flex items-end p-3 bg-[repeating-linear-gradient(45deg,var(--pr-surface)_0_8px,var(--pr-surface-2)_8px_16px)]">
-                    <span className="font-plex-mono text-[11px] text-pr-muted relative">
-                      {project.title} preview
+            <div className="flex flex-col">
+              {visibleLabsProjects.map((project) => {
+                const meta = (project.tags ?? []).slice(0, 3).join(' · ').toUpperCase();
+                return (
+                  <Link key={project.slug} href={`/labs/${project.slug}`} className="pr-arrow-link pr-hoverable">
+                    {/* Wide row */}
+                    <span className="pr-row-link pr-row-wide items-start grid-cols-[minmax(0,1fr)_260px_24px]">
+                      <span className="flex flex-col gap-1.5 min-w-0">
+                        <span className="text-2xl font-semibold tracking-[-0.02em] text-pr-fg-strong">{project.title}</span>
+                        {project.description && (
+                          <span className="text-sm leading-[1.6] text-pr-lede max-w-[62ch]">{project.description}</span>
+                        )}
+                      </span>
+                      <span className="font-plex-mono text-[11px] text-pr-muted tracking-[0.04em] text-right whitespace-nowrap">{meta}</span>
+                      <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text text-right" aria-hidden="true">→</span>
                     </span>
-                  </div>
-                  <h2 className="font-archivo text-xl font-bold tracking-[-0.02em] text-pr-fg-strong m-0">
-                    {project.title}
-                  </h2>
-                </Link>
-              ))}
+                    {/* Narrow row */}
+                    <span className="pr-row-link pr-row-narrow flex-col gap-1.5 py-4 pr-2.5">
+                      <span className="flex items-baseline justify-between gap-3.5">
+                        <span className="text-xl font-semibold tracking-[-0.02em] text-pr-fg-strong min-w-0">{project.title}</span>
+                        <span className="pr-row-arrow font-plex-mono text-[13px] text-pr-accent-text" aria-hidden="true">→</span>
+                      </span>
+                      {project.description && (
+                        <span className="text-sm leading-[1.55] text-pr-lede">{project.description}</span>
+                      )}
+                      <span className="font-plex-mono text-[10.5px] text-pr-muted tracking-[0.04em] min-w-0 whitespace-nowrap overflow-x-auto">{meta}</span>
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             /* ── Empty state ── */
