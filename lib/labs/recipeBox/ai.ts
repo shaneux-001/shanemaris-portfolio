@@ -51,7 +51,7 @@ export async function generateMealPlan(
     },
     body: JSON.stringify({
       model: 'claude-sonnet-5',
-      max_tokens: 1000,
+      max_tokens: 4096, // headroom for the model's internal reasoning tokens, which count against this budget too
       messages: [{ role: 'user', content: buildPrompt(numMeals, fridgeNotes, recipes) }],
     }),
   });

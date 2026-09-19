@@ -28,7 +28,8 @@ export async function POST(request: NextRequest) {
   try {
     meals = await generateMealPlan(numMeals, fridgeNotes, compactRecipesForPrompt());
     if (!meals.length) throw new Error('empty plan');
-  } catch {
+  } catch (err) {
+    console.error('Recipe Box: AI meal plan failed, using local fallback —', err);
     meals = localHeuristicPlan(recipes, numMeals);
     usedFallback = true;
   }
