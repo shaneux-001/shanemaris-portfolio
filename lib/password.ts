@@ -127,10 +127,3 @@ export function getMasterPassword(): string {
   return MASTER_PASSWORD;
 }
 
-/**
- * Get the Project Oasis-specific password.
- * Uses a separate env var so it can be shared independently.
- */
-export function getOasisPassword(): string {
-  return process.env.NEXT_PUBLIC_OASIS_PASSWORD ?? '';
-}

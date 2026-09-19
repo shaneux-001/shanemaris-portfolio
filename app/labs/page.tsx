@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { labsProjects } from '@/lib/projects';
-import PasswordGate from '@/components/PasswordGate';
 import LabsHeader from '@/components/LabsHeader';
 import Ghost from '@/components/press/Ghost';
 import { useEffect, useRef } from 'react';
@@ -49,7 +48,7 @@ function AnimatedParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'rgba(123, 94, 167, 0.36)';
 
-      particlesRef.current.forEach((particle, idx) => {
+      particlesRef.current.forEach((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 

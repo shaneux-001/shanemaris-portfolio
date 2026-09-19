@@ -39,17 +39,7 @@ interface ProjectConfig {
  * Labs projects (hidden, gated behind Konami code + auth)
  * Passwords come from env vars — see lib/password.ts
  */
-export const labsProjects: ProjectConfig[] = [
-  {
-    // Hidden until ready — route lives at /labs/project-oasis, password-gated
-    slug: 'project-oasis',
-    title: 'Project Oasis',
-    password: process.env.NEXT_PUBLIC_OASIS_PASSWORD,
-    expiryDays: 30,
-    public: false,
-    hidden: true,
-  },
-];
+export const labsProjects: ProjectConfig[] = [];
 
 /**
  * Portfolio case studies (on /work)

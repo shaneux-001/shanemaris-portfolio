@@ -121,7 +121,7 @@ These are cases where an old doc claims something is DONE, but either the underl
 
 **Post-launch / lower priority, carried forward from the May roadmap, untouched since:**
 - [ ] Analytics setup (GA4 or a privacy-friendly alternative like Plausible/Fathom) — track page views, form submissions, resume downloads.
-- [ ] Project Oasis labs page — has `content/work/project-oasis.md` and a `labsProjects` registry entry (`lib/projects.ts`), but no route built yet (would be Konami-gated, under `/labs`).
+- [x] ~~Project Oasis labs page~~ — removed 2026-09-19, as part of buttoning up the repo before Labs work starts. Wasn't ready to be written up and was sitting as unused clutter (no route, never wired up) — `labsProjects` registry entry, `content/work/project-oasis.md`, and the unused `getOasisPassword()` helper in `lib/password.ts` were all deleted. Revisit as a fresh entry if/when there's real content for it.
 - [ ] Ultra-wide layout optimization (e.g. Samsung G9 Odyssey, 32:9) — max-width/layout adjustments for extreme aspect ratios.
 - [ ] Performance monitoring + error tracking (Sentry or similar), uptime monitoring — once there's real traffic to monitor.
 - [ ] Launch announcement strategy — message for LinkedIn/email/personal network, a short list of people to share with before any public post.
@@ -168,13 +168,13 @@ _(Add new items here as they come up — this section is yours.)_
 
 ## Future project (on hold) — "The Recipe Box" → Labs
 
-**Not for tonight, and not until the core portfolio pass is finished.** Stored here per Shane's explicit instruction (2026-09-08) — do not start this until he asks, even if it looks like quick/easy work.
+**Gate cleared 2026-09-19** — the core portfolio pass (all P0/P1 quality-gate items, plus a full repo cleanup and `v1.0.0` tag) is done. This is no longer on hold; go ahead whenever this is picked up.
 
 **What it is:** a personal recipe archive + meal-planning tool Shane built for his family — started as digitizing old recipe cards (including a handwritten one from his mom) and meal-kit recipes, and grew into a real tool. Built as a single self-contained HTML file (no backend, no build step, offline-capable) through an extended conversation with Claude in another session. Shane wants to showcase it in `/labs` specifically to demonstrate he builds and experiments on his own time, outside of work.
 
 **Source file:** `/Users/e103138/Downloads/folio-work-sept5/recipe-box/recipe_box.html` — the standalone app referenced in the prompt below. Confirm it's still at that path (or ask Shane for the current copy) before starting; it may have been iterated on since 2026-09-08.
 
-**Related, already tracked elsewhere in this roadmap:** `/labs` currently shows an empty-state message — `project-oasis` has content and a registry entry but no route built yet (see "Still open → Post-launch / lower priority" above). Worth deciding, when this is picked up, whether The Recipe Box becomes the first real Labs entry or sits alongside Project Oasis once that's also built.
+**Resolved 2026-09-19:** Project Oasis was removed (wasn't ready, was sitting as unused clutter) — The Recipe Box is now simply the first real Labs entry, no need to decide how it coexists with anything else.
 
 **The prompt Shane generated in another session (kept verbatim for whoever picks this up):**
 

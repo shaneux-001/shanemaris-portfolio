@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { validatePassword } from '@/lib/password';
 import LabsHeader from './LabsHeader';
 
 interface PasswordGateProps {
-  projectSlug: string;
   projectTitle: string;
   config: {
     password?: string;
@@ -16,7 +14,6 @@ interface PasswordGateProps {
 }
 
 export default function PasswordGate({
-  projectSlug,
   projectTitle,
   config,
   children,
