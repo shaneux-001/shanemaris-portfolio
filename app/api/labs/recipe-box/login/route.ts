@@ -12,7 +12,11 @@ export async function POST(request: Request) {
   response.cookies.set(SESSION_COOKIE, createSessionToken(), {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    // 'strict' gets dropped across the redirect-through-vercel.com-and-back
+    // chain Vercel's own SSO protection does on preview deployments — 'lax'
+    // still blocks third-party sites from triggering state-changing requests
+    // (the actual CSRF risk), it just also survives same-site redirect hops.
+    sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 30, // 30 days
   });

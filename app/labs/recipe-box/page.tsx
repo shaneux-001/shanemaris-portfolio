@@ -7,8 +7,9 @@ import type { CalendarEntry } from '@/lib/labs/recipeBox/upstash';
 import RecipeLibrary from './_components/RecipeLibrary';
 import MealPlanner from './_components/MealPlanner';
 import PantryView from './_components/PantryView';
+import CalendarView from './_components/CalendarView';
 
-type Tab = 'library' | 'plan' | 'pantry';
+type Tab = 'library' | 'plan' | 'calendar' | 'pantry';
 
 export default function RecipeBoxPage() {
   const [tab, setTab] = useState<Tab>('plan');
@@ -38,6 +39,7 @@ export default function RecipeBoxPage() {
               [
                 ['plan', 'Meal Plan'],
                 ['library', 'Recipe Box'],
+                ['calendar', 'Calendar'],
                 ['pantry', 'Pantry'],
               ] as [Tab, string][]
             ).map(([key, label]) => (
@@ -55,6 +57,7 @@ export default function RecipeBoxPage() {
 
           {tab === 'library' && <RecipeLibrary recipes={recipes} />}
           {tab === 'plan' && <MealPlanner recipes={recipes} onCalendarUpdated={setCalendar} />}
+          {tab === 'calendar' && <CalendarView recipes={recipes} calendar={calendar} onCalendarUpdated={setCalendar} />}
           {tab === 'pantry' && <PantryView calendar={calendar} />}
         </div>
       </main>
