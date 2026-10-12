@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ArrowCounterClockwise, CheckCircle, GitPullRequest, Moon, SquaresFour, Sun, Warning, XCircle } from '@phosphor-icons/react';
 import { completeness, driftFor, parityStatus } from '@/lib/labs/dsManager/metrics';
 import { snippets } from '@/lib/labs/dsManager/codegen';
@@ -94,7 +95,8 @@ export default function ComponentDoc({ slug }: { slug: string }) {
   const it = item(slug);
   const demo = DEMOS[slug];
   const [values, setValues] = useState<Props>(() => (demo ? defaultsFor(demo) : {}));
-  const [tab, setTab] = useState<Tab>('overview');
+  const initialTab = useSearchParams().get('tab');
+  const [tab, setTab] = useState<Tab>(['overview', 'specs', 'history', 'health'].includes(initialTab ?? '') ? (initialTab as Tab) : 'overview');
 
   const code = useMemo(() => (it && demo ? snippets(it, values, defaultsFor(demo), { childProp: demo.childProp, codeName: demo.codeName }) : null), [it, demo, values]);
   const tokenMap = useMemo(() => new Map(db.tokens.map((t) => [t.name, t])), [db.tokens]);

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { items } from '@/lib/labs/dsManager/seed/items';
 import ComponentDoc from './ComponentDoc';
 
@@ -13,5 +14,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  return <ComponentDoc slug={slug} />;
+  return (
+    <Suspense>
+      <ComponentDoc key={slug} slug={slug} />
+    </Suspense>
+  );
 }
