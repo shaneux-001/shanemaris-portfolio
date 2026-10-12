@@ -175,7 +175,7 @@ export default function Inventory() {
           If you expected something here, it may exist under another name. Try search (⌘K), which also matches aliases.
         </EmptyState>
       ) : (
-        <div className="ks-scroll overflow-x-auto rounded-lg border border-ks-border bg-ks-surface">
+        <div className="ks-scroll relative overflow-x-auto rounded-lg border border-ks-border bg-ks-surface">
           <table className="w-full min-w-[1080px] border-collapse text-[13px]">
             <thead className="border-b border-ks-border bg-ks-surface-2/60">
               <tr>
