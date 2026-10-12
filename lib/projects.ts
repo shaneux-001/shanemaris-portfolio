@@ -54,6 +54,14 @@ export const labsProjects: ProjectConfig[] = [
     description:
       'A family recipe archive with an AI meal planner that reasons about what’s actually in the fridge, and a pantry that keeps the shopping list honest.',
   },
+  {
+    slug: 'ds-manager',
+    // Title tracks lib/labs/dsManager/brand.ts (TOOL.name) — rename both together.
+    title: 'Keystone',
+    tags: ['Design Systems', 'AI', 'Prototype'],
+    description:
+      'A design system management prototype: one source of truth for inventory, health, living docs and tokens, with a request flow that pushes back on duplicates and AI guidance in plain language.',
+  },
 ];
 
 /**
