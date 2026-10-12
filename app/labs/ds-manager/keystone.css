@@ -132,6 +132,11 @@ html[data-ks-theme='dark'] .ks-root .ks-when-light { display: none; }
   scrollbar-color: var(--ks-border-strong) transparent;
 }
 
+/* Scroll areas that end mid-list: fade the last line so the cut reads as "more below". */
+.ks-root .ks-fade-bottom {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+}
+
 /* Prose inside docs and assistant answers. */
 .ks-root .ks-prose p {
   margin: 0 0 0.75em;

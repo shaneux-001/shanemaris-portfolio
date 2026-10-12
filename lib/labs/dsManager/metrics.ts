@@ -1,4 +1,5 @@
 import { SNAPSHOT_DATE } from './brand';
+import { contrastChecks } from './foundations';
 import type { Category, Database, Platform, RoadmapItem, SystemItem } from './types';
 import { PLATFORMS, PLATFORM_LABEL } from './types';
 
@@ -96,7 +97,7 @@ const pct = (n: number, d: number) => (d ? Math.round((n / d) * 100) : 0);
 export interface Risk {
   id: string;
   severity: 'high' | 'medium' | 'low';
-  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate';
+  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate' | 'contrast';
   title: string;
   detail: string;
   itemSlug?: string;
@@ -127,6 +128,14 @@ export function risksFor(db: Database): Risk[] {
   for (const r of db.roadmap.filter((r) => r.status === 'blocked')) {
     risks.push({ id: `blocked-${r.id}`, severity: r.impact === 'high' || r.impact === 'breaking' ? 'high' : 'medium', kind: 'blocked', title: `Blocked: ${r.title}`, detail: r.risks ?? 'Blocked.', itemSlug: r.itemSlug });
   }
+  // Token pairs that fail WCAG contrast, grouped across themes.
+  const failing = new Map<string, string[]>();
+  for (const c of contrastChecks(db.tokens).filter((c) => !c.pass)) failing.set(c.label, [...(failing.get(c.label) ?? []), `${c.mode} ${c.ratio?.toFixed(2)}:1`]);
+  for (const [label, where] of failing) {
+    const pair = contrastChecks(db.tokens).find((c) => c.label === label)!;
+    risks.push({ id: `contrast-${label}`, severity: 'high', kind: 'contrast', title: `${label} fails contrast`, detail: `${pair.fg} on ${pair.bg} needs ${pair.min}:1 — ${where.join(', ')}.` });
+  }
+
   const order = { high: 0, medium: 1, low: 2 };
   return risks.sort((a, b) => order[a.severity] - order[b.severity]);
 }

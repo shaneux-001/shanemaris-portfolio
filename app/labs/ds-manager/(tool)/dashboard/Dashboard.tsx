@@ -133,6 +133,7 @@ const RISK_KIND: Record<Risk['kind'], string> = {
   blocked: 'Blocked',
   a11y: 'Accessibility',
   duplicate: 'Duplicate',
+  contrast: 'Contrast',
 };
 
 function RiskRow({ r }: { r: Risk }) {
@@ -152,8 +153,9 @@ function RiskRow({ r }: { r: Risk }) {
       </div>
     </>
   );
-  return r.itemSlug ? (
-    <Link href={`${BASE}/components/${r.itemSlug}?tab=health`} className="-mx-2 flex items-start gap-2.5 rounded-md px-2 py-2 hover:bg-ks-surface-2">
+  const href = r.itemSlug ? `${BASE}/components/${r.itemSlug}?tab=health` : r.kind === 'contrast' ? `${BASE}/foundations/color#contrast` : null;
+  return href ? (
+    <Link href={href} className="-mx-2 flex items-start gap-2.5 rounded-md px-2 py-2 hover:bg-ks-surface-2">
       {inner}
     </Link>
   ) : (
@@ -260,8 +262,12 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[3fr_2fr]">
+        {/* Fills the row height set by the right-hand column and scrolls
+            inside it, instead of a fixed max-height that stops short. The
+            list is absolutely positioned so its length never stretches the row. */}
         <Panel
-          title={`Risks (${risks.length})`}
+          className="flex flex-col"
+          title={`Risks (${shownRisks.length})`}
           actions={
             <select value={riskFilter} onChange={(e) => setRiskFilter(e.target.value as typeof riskFilter)} aria-label="Filter risks" className="h-7 rounded-md border border-ks-border bg-ks-surface px-2 text-[12px]">
               <option value="all">All risks</option>
@@ -272,11 +278,13 @@ export default function Dashboard() {
               ))}
             </select>
           }
-          bodyClassName="ks-scroll max-h-[420px] overflow-y-auto px-4 py-2"
+          bodyClassName="relative min-h-[380px] flex-1 p-0"
         >
-          {shownRisks.map((r) => (
-            <RiskRow key={r.id} r={r} />
-          ))}
+          <div className="ks-scroll ks-fade-bottom absolute inset-0 overflow-y-auto px-4 pb-6 pt-2">
+            {shownRisks.map((r) => (
+              <RiskRow key={r.id} r={r} />
+            ))}
+          </div>
         </Panel>
 
         <div className="flex flex-col gap-5">

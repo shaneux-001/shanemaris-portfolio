@@ -261,7 +261,8 @@ export function Panel({ title, actions, children, className, bodyClassName }: { 
           {actions}
         </header>
       )}
-      <div className={cx('p-4', bodyClassName)}>{children}</div>
+      {/* Default padding only when the caller didn't set its own — two padding utilities would fight on CSS order. */}
+      <div className={cx(!/(^|\s)p[xytrbl]?-/.test(bodyClassName ?? '') && 'p-4', bodyClassName)}>{children}</div>
     </section>
   );
 }

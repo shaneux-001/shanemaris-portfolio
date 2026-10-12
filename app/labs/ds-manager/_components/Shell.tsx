@@ -185,7 +185,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
           <ul className="m-0 flex list-none flex-col gap-px p-0">
             {g.links.map(({ href, label, icon: Icon }) => {
               const full = BASE + href;
-              const active = pathname === full || pathname?.startsWith(full + '/');
+              const active = pathname === full || pathname?.startsWith(full + '/') || (href === '/components' && pathname?.startsWith(`${BASE}/foundations`));
               return (
                 <li key={href}>
                   <Link

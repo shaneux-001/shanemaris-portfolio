@@ -1,5 +1,6 @@
 import { SYSTEM, SNAPSHOT_DATE } from './brand';
 import { completeness, driftFor, parityStatus } from './metrics';
+import { TYPE_ROLES } from './foundations';
 import { rawValue, resolve, type Mode } from './tokens';
 import type { Database, SystemItem, Token } from './types';
 import { PLATFORMS, PLATFORM_LABEL, KIND_LABEL } from './types';
@@ -229,6 +230,8 @@ export function toAgentSpec(db: Database, mode: Mode = 'light'): string {
   for (const i of active.filter((x) => x.kind === 'pattern')) lines.push(`- **${i.name}**: ${i.docs.summary}`);
   lines.push('', '## Do not use', '');
   for (const i of deprecated) lines.push(`- ~~${i.name}~~ → use ${db.items.find((x) => x.slug === i.replacedBy)?.name ?? 'the replacement noted in docs'}.`);
+  lines.push('', '## Typography roles', '', '| Role | Size / line height / weight | Use for |', '|---|---|---|');
+  for (const r of TYPE_ROLES) lines.push(`| ${r.name} | ${resolve(map, r.size, mode)} / ${resolve(map, r.lineHeight, mode)} / ${resolve(map, r.weight, mode)} | ${r.usage} |`);
   lines.push('', `## Tokens (${mode} mode, resolved)`, '', '| Token | Value |', '|---|---|');
   for (const t of semantic) lines.push(`| \`${t.name}\` | \`${resolve(map, t.name, mode)}\` |`);
   return lines.join('\n') + '\n';

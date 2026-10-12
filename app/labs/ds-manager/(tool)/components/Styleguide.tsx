@@ -7,17 +7,18 @@ import { completeness } from '@/lib/labs/dsManager/metrics';
 import type { ItemKind } from '@/lib/labs/dsManager/types';
 import type { Mode } from '@/lib/labs/dsManager/tokens';
 import { SYSTEM } from '@/lib/labs/dsManager/brand';
+import { contrastChecks, FOUNDATIONS } from '@/lib/labs/dsManager/foundations';
 import { useStore } from '../../_components/Store';
 import { BASE } from '../../_components/Shell';
 import MeridianScope from '../../_components/meridian/MeridianScope';
 import { DEMOS, defaultsFor } from '../../_components/meridian/demos';
 import { LifecyclePill, PageHeader, Segmented, ScoreCell, cx } from '../../_components/ui';
 
-type Filter = 'component' | 'pattern' | 'product-component' | 'deprecated';
+type Filter = 'foundations' | 'component' | 'pattern' | 'product-component' | 'deprecated';
 
 export default function Styleguide() {
   const { db } = useStore();
-  const [filter, setFilter] = useState<Filter>('component');
+  const [filter, setFilter] = useState<Filter>('foundations');
   const [mode, setMode] = useState<Mode>('light');
 
   const groups = useMemo(() => {
@@ -49,6 +50,7 @@ export default function Styleguide() {
           value={filter}
           onChange={setFilter}
           options={[
+            { value: 'foundations', label: 'Foundations' },
             { value: 'component', label: 'Components' },
             { value: 'pattern', label: 'Patterns' },
             { value: 'product-component', label: 'Product components' },
@@ -56,8 +58,9 @@ export default function Styleguide() {
           ]}
         />
       </div>
+      {filter === 'foundations' && <FoundationGrid mode={mode} />}
       <div className="flex flex-col gap-8">
-        {groups.map((g) => (
+        {filter !== 'foundations' && groups.map((g) => (
           <section key={g.category}>
             <h2 className="m-0 mb-3 text-[13px] font-semibold text-ks-fg-muted">{g.category}</h2>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -92,5 +95,60 @@ export default function Styleguide() {
         ))}
       </div>
     </>
+  );
+}
+
+/** Small visual for each foundation card, rendered from live tokens. */
+function FoundationPreview({ slug }: { slug: string }) {
+  const swatch = (v: string) => <span key={v} className="h-10 w-10 rounded-md" style={{ background: `var(--mer-${v})` }} />;
+  switch (slug) {
+    case 'color':
+      return <div className="flex gap-1.5">{['color-action-primary-bg', 'color-feedback-info-bg', 'color-feedback-success-bg', 'color-feedback-warning-bg', 'color-feedback-danger-bg', 'color-surface-inverse'].map(swatch)}</div>;
+    case 'typography':
+      return (
+        <div className="flex items-baseline gap-3">
+          <span style={{ fontSize: 'var(--mer-font-size-xl)', fontWeight: 650 }}>Aa</span>
+          <span style={{ fontSize: 'var(--mer-font-size-lg)', fontWeight: 650 }}>Aa</span>
+          <span style={{ fontSize: 'var(--mer-font-size-md)' }}>Aa</span>
+          <span style={{ fontSize: 'var(--mer-font-size-xs)' }}>Aa</span>
+        </div>
+      );
+    case 'spacing':
+      return <div className="flex items-end gap-1.5">{[1, 2, 3, 4, 5, 6, 8, 12].map((n) => <span key={n} className="w-3 rounded-sm" style={{ height: `var(--mer-space-${n})`, background: 'var(--mer-color-action-primary-bg)' }} />)}</div>;
+    case 'radius':
+      return <div className="flex gap-3">{['sm', 'md', 'lg', 'full'].map((r) => <span key={r} className="h-10 w-10 border-2" style={{ borderRadius: `var(--mer-radius-${r})`, borderColor: 'var(--mer-color-action-primary-bg)' }} />)}</div>;
+    case 'elevation':
+      return <div className="flex gap-4">{['shadow-card', 'shadow-overlay'].map((s) => <span key={s} className="h-12 w-16 rounded-md" style={{ background: 'var(--mer-color-surface-raised)', boxShadow: `var(--mer-${s})` }} />)}</div>;
+    case 'motion':
+      return <span className="text-[12px] opacity-70">120ms · 200ms · 6000ms</span>;
+    default:
+      return <div className="scale-75">{DEMOS.icon.render({})}</div>;
+  }
+}
+
+function FoundationGrid({ mode }: { mode: Mode }) {
+  const { db } = useStore();
+  const failing = contrastChecks(db.tokens).filter((c) => !c.pass).length;
+  return (
+    <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      {FOUNDATIONS.map((f) => (
+        <div key={f.slug} className="group relative flex flex-col overflow-hidden rounded-lg border border-ks-border bg-ks-surface transition-colors hover:border-ks-border-strong">
+          <MeridianScope mode={mode} className="flex h-[120px] items-center justify-center border-b border-ks-border p-4">
+            <div inert aria-hidden="true">
+              <FoundationPreview slug={f.slug} />
+            </div>
+          </MeridianScope>
+          <div className="flex flex-col gap-1 px-4 py-3">
+            <div className="flex items-center justify-between gap-2">
+              <Link href={`${BASE}/foundations/${f.slug}`} className="font-medium text-ks-fg after:absolute after:inset-0 after:content-[''] group-hover:text-ks-accent-text">
+                {f.name}
+              </Link>
+              {f.slug === 'color' && failing > 0 && <span className="text-[11.5px] font-medium text-ks-danger">{failing} contrast fails</span>}
+            </div>
+            <p className="m-0 text-[12.5px] text-ks-fg-muted">{f.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
