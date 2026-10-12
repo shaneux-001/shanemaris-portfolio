@@ -1,0 +1,145 @@
+/* ============================================================
+   Keystone — the DS management prototype's own UI tokens.
+   Scoped to .ks-root so nothing leaks into the rest of the site.
+   Tailwind utilities (bg-ks-surface, text-ks-fg-muted…) are mapped
+   in app/globals.css's @theme inline block.
+
+   Theme: follows the OS by default; an explicit choice is stored as
+   data-ks-theme on <html> (set before paint by the tool layout).
+   ============================================================ */
+
+.ks-root {
+  --ks-bg: #f5f6f8;
+  --ks-surface: #ffffff;
+  --ks-surface-2: #f1f3f6;
+  --ks-sunken: #eceff3;
+  --ks-border: #e2e5ea;
+  --ks-border-strong: #c9ced7;
+  --ks-fg: #13161b;
+  --ks-fg-muted: #4f5766;
+  --ks-fg-subtle: #677080;
+  --ks-accent: #3354dd;
+  --ks-accent-hover: #2843bd;
+  --ks-accent-fg: #ffffff;
+  --ks-accent-soft: #e9eeff;
+  --ks-accent-text: #2a48c9;
+  --ks-success: #1c7f46;
+  --ks-success-soft: #e4f4ea;
+  --ks-warning: #9a5c00;
+  --ks-warning-soft: #fcf1dc;
+  --ks-danger: #c0362e;
+  --ks-danger-soft: #fdeceb;
+  --ks-info: #2a68b8;
+  --ks-info-soft: #e7f0fb;
+  --ks-neutral-soft: #eceef2;
+  --ks-shadow-pop: 0 1px 2px rgb(16 20 28 / 0.06), 0 8px 24px rgb(16 20 28 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-ks-theme='light']) .ks-root {
+    --ks-bg: #0e1014;
+    --ks-surface: #15181e;
+    --ks-surface-2: #1b1f26;
+    --ks-sunken: #0a0c0f;
+    --ks-border: #252a33;
+    --ks-border-strong: #353b47;
+    --ks-fg: #e8ebf0;
+    --ks-fg-muted: #a6aebb;
+    --ks-fg-subtle: #8a93a3;
+    --ks-accent: #7d95ff;
+    --ks-accent-hover: #9aadff;
+    --ks-accent-fg: #0a0e1d;
+    --ks-accent-soft: #1c2444;
+    --ks-accent-text: #96aaff;
+    --ks-success: #52c486;
+    --ks-success-soft: #12271b;
+    --ks-warning: #e9ab4c;
+    --ks-warning-soft: #2b2112;
+    --ks-danger: #f27d74;
+    --ks-danger-soft: #311816;
+    --ks-info: #6ea9f0;
+    --ks-info-soft: #132136;
+    --ks-neutral-soft: #20242c;
+    --ks-shadow-pop: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+html[data-ks-theme='dark'] .ks-root {
+  --ks-bg: #0e1014;
+  --ks-surface: #15181e;
+  --ks-surface-2: #1b1f26;
+  --ks-sunken: #0a0c0f;
+  --ks-border: #252a33;
+  --ks-border-strong: #353b47;
+  --ks-fg: #e8ebf0;
+  --ks-fg-muted: #a6aebb;
+  --ks-fg-subtle: #8a93a3;
+  --ks-accent: #7d95ff;
+  --ks-accent-hover: #9aadff;
+  --ks-accent-fg: #0a0e1d;
+  --ks-accent-soft: #1c2444;
+  --ks-accent-text: #96aaff;
+  --ks-success: #52c486;
+  --ks-success-soft: #12271b;
+  --ks-warning: #e9ab4c;
+  --ks-warning-soft: #2b2112;
+  --ks-danger: #f27d74;
+  --ks-danger-soft: #311816;
+  --ks-info: #6ea9f0;
+  --ks-info-soft: #132136;
+  --ks-neutral-soft: #20242c;
+  --ks-shadow-pop: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+.ks-root {
+  min-height: 100dvh;
+  background: var(--ks-bg);
+  color: var(--ks-fg);
+  font-family: var(--ks-font-sans), system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ks-root :focus-visible {
+  outline: 2px solid var(--ks-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.ks-root ::selection {
+  background: var(--ks-accent-soft);
+}
+
+.ks-root .ks-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.ks-root .ks-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-border-strong) transparent;
+}
+
+/* Prose inside docs and assistant answers. */
+.ks-root .ks-prose p {
+  margin: 0 0 0.75em;
+}
+.ks-root .ks-prose code {
+  font-family: var(--ks-font-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--ks-neutral-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-root *,
+  .ks-root *::before,
+  .ks-root *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -16,8 +16,16 @@ import ThemeToggle from '@/components/ThemeToggle';
 
 const OLD_SYSTEM_PREFIXES = ['/particle-demo', '/particle-test'];
 
+/**
+ * Full-viewport Labs apps with their own chrome — no site footer at all.
+ * Trailing slash on purpose: the app's intro page at /labs/ds-manager keeps
+ * the footer; only the tool's own views below it opt out.
+ */
+const APP_SHELL_PREFIXES = ['/labs/ds-manager/'];
+
 export default function SiteFooter() {
   const pathname = usePathname();
+  if (APP_SHELL_PREFIXES.some((prefix) => pathname?.startsWith(prefix))) return null;
   const isPressRoom = !OLD_SYSTEM_PREFIXES.some((prefix) => pathname?.startsWith(prefix));
 
   if (isPressRoom) {

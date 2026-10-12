@@ -57,6 +57,36 @@
      2026-09-05 to 2026-09-09 — fixed here, see layout.tsx for the story. */
   --font-archivo: var(--font-archivo-face);
   --font-plex-mono: var(--font-plex-mono-face);
+
+  /* Keystone (Labs: /labs/ds-manager) — the DS management prototype has
+     its own visual language, deliberately NOT Press Room. Values live in
+     app/labs/ds-manager/keystone.css, scoped to .ks-root; only the utility
+     mapping lives here because @theme must be in the Tailwind entry file. */
+  --color-ks-bg: var(--ks-bg);
+  --color-ks-surface: var(--ks-surface);
+  --color-ks-surface-2: var(--ks-surface-2);
+  --color-ks-sunken: var(--ks-sunken);
+  --color-ks-border: var(--ks-border);
+  --color-ks-border-strong: var(--ks-border-strong);
+  --color-ks-fg: var(--ks-fg);
+  --color-ks-fg-muted: var(--ks-fg-muted);
+  --color-ks-fg-subtle: var(--ks-fg-subtle);
+  --color-ks-accent: var(--ks-accent);
+  --color-ks-accent-hover: var(--ks-accent-hover);
+  --color-ks-accent-fg: var(--ks-accent-fg);
+  --color-ks-accent-soft: var(--ks-accent-soft);
+  --color-ks-accent-text: var(--ks-accent-text);
+  --color-ks-success: var(--ks-success);
+  --color-ks-success-soft: var(--ks-success-soft);
+  --color-ks-warning: var(--ks-warning);
+  --color-ks-warning-soft: var(--ks-warning-soft);
+  --color-ks-danger: var(--ks-danger);
+  --color-ks-danger-soft: var(--ks-danger-soft);
+  --color-ks-info: var(--ks-info);
+  --color-ks-info-soft: var(--ks-info-soft);
+  --color-ks-neutral-soft: var(--ks-neutral-soft);
+  --font-ks-sans: var(--ks-font-sans);
+  --font-ks-mono: var(--ks-font-mono);
 }
 
 @import "tailwindcss/utilities";
