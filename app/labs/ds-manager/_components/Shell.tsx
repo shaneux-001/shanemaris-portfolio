@@ -301,7 +301,6 @@ export default function Shell({ children }: { children: React.ReactNode }) {
               <button
                 type="button"
                 onClick={reset}
-                title="Restore the demo data"
                 className={cx('hidden h-8 items-center gap-1.5 rounded-md px-2.5 text-[12.5px] sm:inline-flex', confirmReset ? 'bg-ks-danger-soft text-ks-danger' : 'text-ks-fg-muted hover:bg-ks-surface-2 hover:text-ks-fg')}
               >
                 <ArrowCounterClockwise size={15} />
