@@ -35,7 +35,7 @@ export const tokens: Token[] = [
   t('radius.lg', 'primitive', 'dimension', '12px'),
   t('radius.full', 'primitive', 'dimension', '999px'),
 
-  t('font.family.sans', 'primitive', 'fontFamily', "'Inter Tight', 'Segoe UI', system-ui, sans-serif"),
+  t('font.family.sans', 'primitive', 'fontFamily', "Figtree, 'Segoe UI', system-ui, sans-serif"),
   t('font.family.mono', 'primitive', 'fontFamily', "'JetBrains Mono', ui-monospace, monospace"),
   t('font.weight.regular', 'primitive', 'fontWeight', '400'),
   t('font.weight.medium', 'primitive', 'fontWeight', '500'),

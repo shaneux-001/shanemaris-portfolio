@@ -3,6 +3,7 @@ import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import SiteHeader from "@/components/press/SiteHeader";
 import SiteFooter from "@/components/press/SiteFooter";
 import "./globals.css";
+import { KEYSTONE_THEME_SCRIPT } from "@/lib/labs/dsManager/theme";
 
 // Press Room typeface pair — Archivo carries display, body, AND the italic
 // accent/quote role (2026-09-09, replacing the Inter + Playfair Display
@@ -112,6 +113,10 @@ export default function RootLayout({
         {/* No-FOUC: apply saved Press Room theme before React hydrates.
             Dark is the default — only a stored 'light' choice flips it. */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(localStorage.getItem('pr-theme')==='light')document.documentElement.setAttribute('data-pr-theme','light');}catch(e){}})();` }} />
+        {/* Same idea for the Keystone Labs prototype (/labs/ds-manager), which
+            has its own light/dark theme independent of Press Room. Lives here
+            because a pre-paint script has to be in the root layout's <head>. */}
+        <script dangerouslySetInnerHTML={{ __html: KEYSTONE_THEME_SCRIPT }} />
       </head>
       {/* backgroundColor/color stay on the OLD tokens here — /resume and the
           work case-study pages still use --color-ink on the assumption of a

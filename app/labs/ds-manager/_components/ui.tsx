@@ -135,6 +135,8 @@ export function scoreTone(score: number): Tone {
   return score >= 85 ? 'success' : score >= 70 ? 'info' : score >= 50 ? 'warning' : 'danger';
 }
 
+export const TONE_TEXT: Record<Tone, string> = { neutral: 'text-ks-fg-muted', accent: 'text-ks-accent-text', success: 'text-ks-success', warning: 'text-ks-warning', danger: 'text-ks-danger', info: 'text-ks-info' };
+
 const BAR: Record<Tone, string> = { neutral: 'bg-ks-fg-subtle', accent: 'bg-ks-accent', success: 'bg-ks-success', warning: 'bg-ks-warning', danger: 'bg-ks-danger', info: 'bg-ks-info' };
 
 export function Meter({ value, tone, className, label }: { value: number; tone?: Tone; className?: string; label?: string }) {

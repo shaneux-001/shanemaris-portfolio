@@ -114,6 +114,15 @@ html[data-ks-theme='dark'] .ks-root {
   background: var(--ks-accent-soft);
 }
 
+/* Theme-dependent icon swap (ThemeToggle). */
+.ks-root .ks-when-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-ks-theme='light']) .ks-root .ks-when-dark { display: inline; }
+  html:not([data-ks-theme='light']) .ks-root .ks-when-light { display: none; }
+}
+html[data-ks-theme='dark'] .ks-root .ks-when-dark { display: inline; }
+html[data-ks-theme='dark'] .ks-root .ks-when-light { display: none; }
+
 .ks-root .ks-tabular {
   font-variant-numeric: tabular-nums;
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Figtree } from 'next/font/google';
 import { TOOL } from '@/lib/labs/dsManager/brand';
 import { StoreProvider } from '../_components/Store';
-import Shell, { themeScript } from '../_components/Shell';
+import Shell from '../_components/Shell';
 import '../keystone.css';
 
 // Keystone's chrome uses Geist; the fictional Meridian system it documents
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 export default function ToolLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${geist.variable} ${geistMono.variable} ${figtree.variable}`}>
-      <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       <StoreProvider>
         <Shell>{children}</Shell>
       </StoreProvider>

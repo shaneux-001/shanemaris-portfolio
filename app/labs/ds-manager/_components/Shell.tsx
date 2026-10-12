@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ArrowCounterClockwise,
   ArrowLeft,
@@ -24,6 +24,7 @@ import {
 } from '@phosphor-icons/react';
 import { TOOL, SYSTEM } from '@/lib/labs/dsManager/brand';
 import { findMatches } from '@/lib/labs/dsManager/match';
+import { KEYSTONE_THEME_KEY } from '@/lib/labs/dsManager/theme';
 import { useStore } from './Store';
 import { cx, Kbd, LifecyclePill } from './ui';
 
@@ -64,49 +65,36 @@ const NAV = [
 
 // ── Theme ───────────────────────────────────────────────────────
 
-const THEME_KEY = 'keystone-theme';
-/** Inline, pre-paint: apply a stored explicit theme choice before React hydrates. */
-export const themeScript = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-ks-theme',t);}catch(e){}})();`;
-
 function ThemeToggle() {
-  const [dark, setDark] = useState<boolean | null>(null);
-  useEffect(() => {
-    const explicit = document.documentElement.getAttribute('data-ks-theme');
-    setDark(explicit ? explicit === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
-  }, []);
+  // No React state: which icon shows is pure CSS (see .ks-when-dark in
+  // keystone.css), so there's nothing to sync after hydration.
   const toggle = () => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.setAttribute('data-ks-theme', next ? 'dark' : 'light');
+    const root = document.documentElement;
+    const explicit = root.getAttribute('data-ks-theme');
+    const dark = explicit ? explicit === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const next = dark ? 'light' : 'dark';
+    root.setAttribute('data-ks-theme', next);
     try {
-      localStorage.setItem(THEME_KEY, next ? 'dark' : 'light');
+      localStorage.setItem(KEYSTONE_THEME_KEY, next);
     } catch {
       /* not persisted */
     }
   };
   return (
-    <button type="button" onClick={toggle} aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} className="rounded-md p-2 text-ks-fg-muted hover:bg-ks-surface-2 hover:text-ks-fg">
-      {dark ? <Sun size={18} /> : <Moon size={18} />}
+    <button type="button" onClick={toggle} aria-label="Toggle light and dark theme" className="rounded-md p-2 text-ks-fg-muted hover:bg-ks-surface-2 hover:text-ks-fg">
+      <Sun size={18} className="ks-when-dark" />
+      <Moon size={18} className="ks-when-light" />
     </button>
   );
 }
 
 // ── Command palette ─────────────────────────────────────────────
 
-function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
+function CommandPalette({ onClose }: { onClose: () => void }) {
   const { db } = useStore();
   const router = useRouter();
   const [q, setQ] = useState('');
   const [active, setActive] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (open) {
-      setQ('');
-      setActive(0);
-      setTimeout(() => inputRef.current?.focus(), 0);
-    }
-  }, [open]);
 
   const results = useMemo(() => {
     const views = NAV.flatMap((g) => g.links).filter((l) => !q || l.label.toLowerCase().includes(q.toLowerCase()));
@@ -122,14 +110,13 @@ function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void 
     router.push(BASE + href);
   };
 
-  if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/30 px-4 pt-[12vh]" onClick={onClose}>
       <div role="dialog" aria-modal="true" aria-label="Search the system" className="w-full max-w-[560px] overflow-hidden rounded-xl border border-ks-border bg-ks-surface shadow-[var(--ks-shadow-pop)]" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center gap-2 border-b border-ks-border px-4">
           <MagnifyingGlass size={16} className="text-ks-fg-subtle" />
           <input
-            ref={inputRef}
+            autoFocus
             value={q}
             onChange={(e) => {
               setQ(e.target.value);
@@ -240,7 +227,6 @@ function Brand() {
 
 export default function Shell({ children }: { children: React.ReactNode }) {
   const { run } = useStore();
-  const pathname = usePathname();
   const [cmdOpen, setCmdOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -255,8 +241,6 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
-
-  useEffect(() => setNavOpen(false), [pathname]);
 
   const reset = useCallback(async () => {
     if (!confirmReset) {
@@ -335,7 +319,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           </main>
         </div>
       </div>
-      <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
+      {cmdOpen && <CommandPalette onClose={() => setCmdOpen(false)} />}
     </div>
   );
 }
