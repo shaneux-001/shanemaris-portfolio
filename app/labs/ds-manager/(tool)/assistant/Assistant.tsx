@@ -124,7 +124,9 @@ export default function Assistant() {
   const endRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
 
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }), [msgs]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [msgs]);
 
   const ask = async (question: string) => {
     const text = question.trim();
