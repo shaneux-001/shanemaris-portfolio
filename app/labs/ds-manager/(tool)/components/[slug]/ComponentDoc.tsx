@@ -16,10 +16,11 @@ import MeridianScope from '../../../_components/meridian/MeridianScope';
 import { DEMOS, defaultsFor, type Props } from '../../../_components/meridian/demos';
 import CodeBlock, { CopyButton } from '../../../_components/CodeBlock';
 import DocFeedback, { HelpfulnessSummary, WatchButton } from '../../../_components/DocFeedback';
+import FigmaMappingView from '../../../_components/FigmaMappingView';
 import { CompletenessBreakdown, ItemEditor, PlatformTable } from '../../../_components/ItemQuickView';
 import { ButtonLink, EmptyState, LifecyclePill, Panel, ParityPill, PersonChip, Pill, ProposalStatusPill, RoadmapStatusPill, Segmented, cx, formatDate, inputClass } from '../../../_components/ui';
 
-type Tab = 'overview' | 'specs' | 'history' | 'health';
+type Tab = 'overview' | 'specs' | 'figma' | 'history' | 'health';
 
 function Playground({ slug, values, setValues }: { slug: string; values: Props; setValues: (p: Props) => void }) {
   const demo = DEMOS[slug];
@@ -98,7 +99,7 @@ export default function ComponentDoc({ slug }: { slug: string }) {
   const demo = DEMOS[slug];
   const [values, setValues] = useState<Props>(() => (demo ? defaultsFor(demo) : {}));
   const initialTab = useSearchParams().get('tab');
-  const [tab, setTab] = useState<Tab>(['overview', 'specs', 'history', 'health'].includes(initialTab ?? '') ? (initialTab as Tab) : 'overview');
+  const [tab, setTab] = useState<Tab>(['overview', 'specs', 'figma', 'history', 'health'].includes(initialTab ?? '') ? (initialTab as Tab) : 'overview');
 
   const code = useMemo(() => (it && demo ? snippets(it, values, defaultsFor(demo), { childProp: demo.childProp, codeName: demo.codeName }) : null), [it, demo, values]);
   const tokenMap = useMemo(() => new Map(db.tokens.map((t) => [t.name, t])), [db.tokens]);
@@ -174,6 +175,7 @@ export default function ComponentDoc({ slug }: { slug: string }) {
           [
             ['overview', 'Overview'],
             ['specs', 'Specs'],
+            ['figma', 'Figma'],
             ['history', `History${changes.length ? ` (${changes.length})` : ''}`],
             ['health', 'Health'],
           ] as [Tab, string][]
@@ -322,6 +324,8 @@ export default function ComponentDoc({ slug }: { slug: string }) {
           </Panel>
         </div>
       )}
+
+      {tab === 'figma' && <FigmaMappingView slug={slug} />}
 
       {tab === 'history' && (
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_340px]">

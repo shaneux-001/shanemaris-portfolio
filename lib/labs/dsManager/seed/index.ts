@@ -6,6 +6,7 @@ import { tokens } from './tokens';
 import { products, historySprints, buildAdoptionHistory, healthHistory } from './adoption';
 import { releases, migrations } from './releases';
 import { feedback, watches } from './feedback';
+import { figma } from './figma';
 
 /** A fresh copy every call — the repository mutates its own copy, never the seed modules. */
 export function createSeed(): Database {
@@ -26,6 +27,7 @@ export function createSeed(): Database {
     migrations,
     feedback,
     watches,
+    figma,
   });
 }
 

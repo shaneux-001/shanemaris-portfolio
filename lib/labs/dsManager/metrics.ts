@@ -97,7 +97,7 @@ const pct = (n: number, d: number) => (d ? Math.round((n / d) * 100) : 0);
 export interface Risk {
   id: string;
   severity: 'high' | 'medium' | 'low';
-  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate' | 'contrast' | 'feedback';
+  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate' | 'contrast' | 'feedback' | 'figma';
   title: string;
   detail: string;
   itemSlug?: string;
@@ -134,6 +134,13 @@ export function risksFor(db: Database): Risk[] {
     if (h.votes >= 5 && h.pct !== null && h.pct < 50) {
       risks.push({ id: `fb-${i.slug}`, severity: 'medium', kind: 'feedback', title: `${i.name} docs rated unhelpful`, detail: `${h.pct}% of ${h.votes} readers found them helpful; ${h.open} open comment${h.open === 1 ? '' : 's'}.`, itemSlug: i.slug });
     }
+  }
+
+  // Designers working around a component in Figma.
+  for (const m of db.figma.filter((m) => m.detachRate > 0.1)) {
+    const i = db.items.find((x) => x.slug === m.itemSlug);
+    const why = m.props.find((r) => r.note && !r.intentional && (!r.codeProp || !r.figmaProp || r.values?.some(([, c]) => c === null)));
+    risks.push({ id: `figma-${m.itemSlug}`, severity: 'medium', kind: 'figma', title: `${i?.name} is detached ${Math.round(m.detachRate * 100)}% of the time in Figma`, detail: why?.note ?? 'Designers are working around the library component.', itemSlug: m.itemSlug });
   }
 
   // Token pairs that fail WCAG contrast, grouped across themes.

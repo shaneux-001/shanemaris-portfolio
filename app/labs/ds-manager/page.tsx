@@ -22,6 +22,7 @@ const VIEWS: { name: string; href: string; line: string }[] = [
   { name: 'Adoption', href: '/adoption', line: 'Instances in code over time, what’s growing, and how far each migration off a deprecated component has got, product by product.' },
   { name: 'Styleguide', href: '/components', line: 'Foundations and living docs with a playground that renders the real component and writes the React, SwiftUI, Compose and Figma usage for whatever you configure. Contrast is checked live.' },
   { name: 'Tokens', href: '/tokens', line: 'Three tiers, light and dark, with blast radius before you edit. Exports to Figma Variables, DTCG JSON, CSS, Swift, Kotlin, and an AGENTS.md an AI coding tool can build from.' },
+  { name: 'Figma ↔ code', href: '/figma', line: 'Which components are connected through Code Connect, where Figma properties and code props disagree, detach rates from the library, and generated Code Connect files for React, SwiftUI and Compose.' },
   { name: 'Requests', href: '/proposals/new', line: 'An intake flow that checks for duplicates as you type and scores the request, so the DS team only triages clean ones.' },
   { name: 'Sandbox', href: '/sandbox', line: 'Compose with real components; it flags anything you add that already exists and turns genuine gaps into a pre-filled request.' },
   { name: 'Ask the system', href: '/assistant', line: '“Do we have X?” answered in plain language, and it can only recommend what actually exists.' },

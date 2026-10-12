@@ -25,7 +25,7 @@ export interface Repository {
 }
 
 /** Bump the version whenever the Database shape changes, so old saved state is ignored rather than loaded half-formed. */
-const STORAGE_KEY = 'keystone-demo:v3';
+const STORAGE_KEY = 'keystone-demo:v4';
 
 /**
  * Demo implementation: the seed in memory, persisted per-browser. Storage can

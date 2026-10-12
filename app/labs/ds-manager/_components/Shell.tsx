@@ -22,6 +22,7 @@ import {
   UsersThree,
   MapTrifold,
   ChatCircleText,
+  FigmaLogo,
   Package,
   RocketLaunch,
   TrendUp,
@@ -51,6 +52,7 @@ const NAV = [
       { href: '/inventory', label: 'Inventory', icon: Table },
       { href: '/components', label: 'Styleguide', icon: BookOpenText },
       { href: '/tokens', label: 'Tokens', icon: Palette },
+      { href: '/figma', label: 'Figma ↔ code', icon: FigmaLogo },
     ],
   },
   {

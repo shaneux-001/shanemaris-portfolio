@@ -312,6 +312,36 @@ export interface Watch {
   itemSlug: string;
 }
 
+export type FigmaPropType = 'VARIANT' | 'BOOLEAN' | 'TEXT' | 'INSTANCE_SWAP';
+
+/**
+ * One row of a Figma ↔ code mapping. Either side can be missing: a Figma
+ * property with no code prop, or a code prop Figma doesn't expose.
+ */
+export interface PropMapping {
+  figmaProp?: string;
+  figmaType?: FigmaPropType;
+  codeProp?: string;
+  /** Figma variant value → code value. A null code value means Figma offers it but code doesn't. */
+  values?: [string, string | null][];
+  /** One-sided by design (e.g. interaction states Figma draws and code renders itself). */
+  intentional?: boolean;
+  note?: string;
+}
+
+export interface FigmaMapping {
+  itemSlug: string;
+  /** Component name in the Figma library, e.g. "Meridian / Actions / Button". */
+  nodeName: string;
+  nodeId: string;
+  props: PropMapping[];
+  lastSynced: string;
+  /** Instances across product design files at the last library scan. */
+  figmaInstances: number;
+  /** Share of those instances that are detached, 0–1. */
+  detachRate: number;
+}
+
 export interface Database {
   items: SystemItem[];
   people: Person[];
@@ -330,4 +360,5 @@ export interface Database {
   migrations: MigrationGuide[];
   feedback: Feedback[];
   watches: Watch[];
+  figma: FigmaMapping[];
 }

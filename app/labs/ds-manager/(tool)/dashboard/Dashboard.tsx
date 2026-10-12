@@ -139,6 +139,7 @@ const RISK_KIND: Record<Risk['kind'], string> = {
   duplicate: 'Duplicate',
   contrast: 'Contrast',
   feedback: 'Feedback',
+  figma: 'Figma',
 };
 
 function RiskRow({ r }: { r: Risk }) {
@@ -158,7 +159,7 @@ function RiskRow({ r }: { r: Risk }) {
       </div>
     </>
   );
-  const href = r.itemSlug ? `${BASE}/components/${r.itemSlug}?tab=health` : r.kind === 'contrast' ? `${BASE}/foundations/color#contrast` : null;
+  const href = r.kind === 'figma' ? `${BASE}/components/${r.itemSlug}?tab=figma` : r.itemSlug ? `${BASE}/components/${r.itemSlug}?tab=health` : r.kind === 'contrast' ? `${BASE}/foundations/color#contrast` : null;
   return href ? (
     <Link href={href} className="-mx-2 flex items-start gap-2.5 rounded-md px-2 py-2 hover:bg-ks-surface-2">
       {inner}
