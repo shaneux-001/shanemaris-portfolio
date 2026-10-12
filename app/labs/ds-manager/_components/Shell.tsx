@@ -21,6 +21,9 @@ import {
   Table,
   UsersThree,
   MapTrifold,
+  Package,
+  RocketLaunch,
+  TrendUp,
 } from '@phosphor-icons/react';
 import { TOOL, SYSTEM } from '@/lib/labs/dsManager/brand';
 import { findMatches } from '@/lib/labs/dsManager/match';
@@ -34,7 +37,9 @@ const NAV = [
   {
     group: 'Overview',
     links: [
+      { href: '/getting-started', label: 'Getting started', icon: RocketLaunch },
       { href: '/dashboard', label: 'Dashboard', icon: ChartLineUp },
+      { href: '/adoption', label: 'Adoption', icon: TrendUp },
       { href: '/assistant', label: 'Ask the system', icon: Sparkle },
     ],
   },
@@ -50,6 +55,7 @@ const NAV = [
     group: 'Planning',
     links: [
       { href: '/roadmap', label: 'Roadmap', icon: MapTrifold },
+      { href: '/releases', label: 'Releases', icon: Package },
       { href: '/changelog', label: 'Changelog', icon: ClockCounterClockwise },
       { href: '/owners', label: 'Owners', icon: UsersThree },
     ],
@@ -185,7 +191,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
           <ul className="m-0 flex list-none flex-col gap-px p-0">
             {g.links.map(({ href, label, icon: Icon }) => {
               const full = BASE + href;
-              const active = pathname === full || pathname?.startsWith(full + '/') || (href === '/components' && pathname?.startsWith(`${BASE}/foundations`));
+              const active = pathname === full || pathname?.startsWith(full + '/') || (href === '/components' && pathname?.startsWith(`${BASE}/foundations`)) || (href === '/releases' && pathname?.startsWith(`${BASE}/migrations`));
               return (
                 <li key={href}>
                   <Link

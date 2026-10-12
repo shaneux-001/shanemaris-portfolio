@@ -18,7 +18,8 @@ export interface Repository {
   reset(): Promise<Database>;
 }
 
-const STORAGE_KEY = 'keystone-demo:v1';
+/** Bump the version whenever the Database shape changes, so old saved state is ignored rather than loaded half-formed. */
+const STORAGE_KEY = 'keystone-demo:v2';
 
 /**
  * Demo implementation: the seed in memory, persisted per-browser. Storage can

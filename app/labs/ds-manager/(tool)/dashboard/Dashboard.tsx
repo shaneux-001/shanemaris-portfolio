@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { ArrowRight, Info, Warning, WarningOctagon } from '@phosphor-icons/react';
-import { categoryReadiness, isActive, isHighImpactWip, platformCoverage, risksFor, systemMetrics, type Risk } from '@/lib/labs/dsManager/metrics';
+import { categoryReadiness, healthSeries, isActive, isHighImpactWip, platformCoverage, risksFor, systemMetrics, type Risk } from '@/lib/labs/dsManager/metrics';
+import { Delta, Sparkline } from '../../_components/charts';
 import { LAST_SPRINT_ID } from '@/lib/labs/dsManager/seed';
 import { SYSTEM, SNAPSHOT_DATE } from '@/lib/labs/dsManager/brand';
 import type { Lifecycle } from '@/lib/labs/dsManager/types';
@@ -36,15 +37,18 @@ function Tip({ label, children, className, style }: { label: React.ReactNode; ch
 
 // ── Stat tiles ──────────────────────────────────────────────────
 
-function Stat({ label, value, sub, href, tone }: { label: string; value: React.ReactNode; sub?: React.ReactNode; href?: string; tone?: 'warning' | 'danger' }) {
+function Stat({ label, value, sub, href, tone, trend, goodWhen = 'up', suffix }: { label: string; value: React.ReactNode; sub?: React.ReactNode; href?: string; tone?: 'warning' | 'danger'; trend?: number[]; goodWhen?: 'up' | 'down'; suffix?: string }) {
   const body = (
     <>
-      <div className="text-[12.5px] text-ks-fg-muted">{label}</div>
+      <div className="flex items-start justify-between gap-2">
+        <div className="text-[12.5px] text-ks-fg-muted">{label}</div>
+        {trend && <Sparkline values={trend} width={64} height={22} />}
+      </div>
       <div className="ks-tabular mt-1 flex items-center gap-1.5 text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ks-fg">
         {tone && (tone === 'danger' ? <WarningOctagon size={18} weight="fill" className="text-ks-danger" aria-label="Needs attention" /> : <Warning size={18} weight="fill" className="text-ks-warning" aria-label="Watch" />)}
         {value}
       </div>
-      {sub && <div className="mt-0.5 text-[12px] text-ks-fg-subtle">{sub}</div>}
+      {trend ? <Delta values={trend} goodWhen={goodWhen} suffix={suffix} /> : sub && <div className="mt-0.5 text-[12px] text-ks-fg-subtle">{sub}</div>}
     </>
   );
   const cls = 'block rounded-lg border border-ks-border bg-ks-surface px-4 py-3.5';
@@ -171,6 +175,7 @@ export default function Dashboard() {
   const cats = useMemo(() => categoryReadiness(db), [db]);
   const plats = useMemo(() => platformCoverage(db), [db]);
   const risks = useMemo(() => risksFor(db), [db]);
+  const trends = useMemo(() => healthSeries(db), [db]);
   const [riskFilter, setRiskFilter] = useState<'all' | Risk['kind']>('all');
   const sprintChanges = db.changes.filter((c) => c.sprintId === LAST_SPRINT_ID || c.id.startsWith('chg-local'));
   const wip = db.roadmap.filter((r) => r.horizon === 'now' && r.status !== 'complete').sort((a, b) => +isHighImpactWip(b) - +isHighImpactWip(a));
@@ -194,6 +199,10 @@ export default function Dashboard() {
             {m.avgCompleteness}
             <span className="text-[28px] text-ks-fg-subtle">%</span>
           </div>
+          <div className="mb-3 flex items-center gap-3">
+            <Sparkline values={trends.avgCompleteness} width={120} height={30} />
+            <Delta values={trends.avgCompleteness} suffix=" pts" />
+          </div>
           <div className="text-[12.5px] text-ks-fg-subtle">
             Across {active.length} active items. {m.belowThreshold} are below 70%.{' '}
             <Link href={`${BASE}/inventory`} className="text-ks-accent-text hover:underline">
@@ -202,14 +211,14 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          <Stat label="Platform parity" value={`${m.parity}%`} sub="multi-platform items fully aligned" href={`${BASE}/inventory?parity=aligned`} />
-          <Stat label="Stable ratio" value={`${m.stableRatio}%`} sub="of active items" href={`${BASE}/inventory?lifecycle=stable`} />
+          <Stat label="Platform parity" value={`${m.parity}%`} trend={trends.parity} suffix=" pts" href={`${BASE}/inventory?parity=aligned`} />
+          <Stat label="Stable ratio" value={`${m.stableRatio}%`} trend={trends.stableRatio} suffix=" pts" href={`${BASE}/inventory?lifecycle=stable`} />
           <Stat label="High-impact work in progress" value={m.highImpactWip} sub="on the roadmap now" href={`${BASE}/roadmap`} />
-          <Stat label="Drifting items" value={m.driftCount} sub="a platform diverges from spec" href={`${BASE}/inventory?parity=drift`} tone={m.driftCount > 8 ? 'warning' : undefined} />
+          <Stat label="Drifting items" value={m.driftCount} trend={trends.driftCount} goodWhen="down" href={`${BASE}/inventory?parity=drift`} tone={m.driftCount > 8 ? 'warning' : undefined} />
           <Stat label="Components" value={m.components} sub={`${m.deprecated} deprecated, not counted`} href={`${BASE}/inventory?kind=component`} />
           <Stat label="Patterns" value={m.patterns} href={`${BASE}/inventory?kind=pattern`} />
           <Stat label="Product components" value={m.productComponents} sub={`${m.promotionCandidates} ready to promote`} href={`${BASE}/inventory?kind=product-component`} />
-          <Stat label="Unowned" value={m.unowned} sub={`${m.staleDocs} with stale docs`} href={`${BASE}/inventory?owner=none`} tone={m.unowned > 0 ? 'danger' : undefined} />
+          <Stat label="Unowned" value={m.unowned} trend={trends.unowned} goodWhen="down" href={`${BASE}/inventory?owner=none`} tone={m.unowned > 0 ? 'danger' : undefined} />
         </div>
       </div>
 

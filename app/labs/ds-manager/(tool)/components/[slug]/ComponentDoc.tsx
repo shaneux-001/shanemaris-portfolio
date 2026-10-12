@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ArrowCounterClockwise, CheckCircle, GitPullRequest, Moon, SquaresFour, Sun, Warning, XCircle } from '@phosphor-icons/react';
-import { completeness, driftFor, parityStatus } from '@/lib/labs/dsManager/metrics';
+import { adoptionSeries, completeness, driftFor, parityStatus } from '@/lib/labs/dsManager/metrics';
+import { LineChart } from '../../../_components/charts';
 import { snippets } from '@/lib/labs/dsManager/codegen';
 import { itemMarkdown } from '@/lib/labs/dsManager/exporters';
 import { chain, resolve, type Mode } from '@/lib/labs/dsManager/tokens';
@@ -110,6 +111,7 @@ export default function ComponentDoc({ slug }: { slug: string }) {
   const roadmap = db.roadmap.filter((r) => r.itemSlug === slug);
   const proposals = db.proposals.filter((p) => p.targetSlug === slug || p.closestMatch?.slug === slug);
   const dependents = db.items.filter((i) => i.dependencies.includes(slug));
+  const migrations = db.migrations.filter((m) => m.itemSlug === slug || m.toSlug === slug);
   const owner = person(it.ownerId);
 
   return (
@@ -346,6 +348,18 @@ export default function ComponentDoc({ slug }: { slug: string }) {
             )}
           </Panel>
           <div className="flex flex-col gap-5">
+            {migrations.length > 0 && (
+              <Panel title="Migration guides">
+                {migrations.map((m) => (
+                  <Link key={m.id} href={`${BASE}/migrations/${m.id}`} className="mb-2 block rounded-md border border-ks-border p-3 last:mb-0 hover:border-ks-border-strong">
+                    <div className="text-[13px] font-medium">{m.title}</div>
+                    <div className="text-[12px] text-ks-fg-subtle">
+                      {m.products.filter((p) => p.status === 'done').length} of {m.products.length} products migrated · due {formatDate(m.deadline, { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </div>
+                  </Link>
+                ))}
+              </Panel>
+            )}
             <Panel title="On the roadmap">
               {roadmap.length ? (
                 roadmap.map((r) => (
@@ -393,10 +407,11 @@ export default function ComponentDoc({ slug }: { slug: string }) {
             <ItemEditor item={it} />
           </Panel>
           <Panel title="Adoption">
-            <div className="grid grid-cols-2 gap-3">
+            <LineChart values={adoptionSeries(db, it.slug)} labels={db.historySprints} label={`${it.name} instances in code by sprint`} height={150} />
+            <div className="mt-3 grid grid-cols-2 gap-3">
               <div className="rounded-md bg-ks-sunken p-3">
                 <div className="ks-tabular text-[22px] font-semibold">{it.adoption.products}</div>
-                <div className="text-[12px] text-ks-fg-subtle">of 14 products</div>
+                <div className="text-[12px] text-ks-fg-subtle">of {db.products.length} products</div>
               </div>
               <div className="rounded-md bg-ks-sunken p-3">
                 <div className="ks-tabular text-[22px] font-semibold">{it.adoption.instances.toLocaleString()}</div>

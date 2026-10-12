@@ -19,11 +19,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 const VIEWS: { name: string; href: string; line: string }[] = [
   { name: 'Dashboard', href: '/dashboard', line: 'Completeness, platform parity, stable ratio, drift, unowned work and risks, all computed from the inventory rather than typed into a slide.' },
   { name: 'Inventory', href: '/inventory', line: 'System components, product components and patterns in one table, with version, platform coverage, lifecycle, owner and a link to the docs.' },
-  { name: 'Styleguide', href: '/components', line: 'Living docs with a playground that renders the real component and writes the React, SwiftUI, Compose and Figma usage for whatever you configure.' },
+  { name: 'Adoption', href: '/adoption', line: 'Instances in code over time, what’s growing, and how far each migration off a deprecated component has got, product by product.' },
+  { name: 'Styleguide', href: '/components', line: 'Foundations and living docs with a playground that renders the real component and writes the React, SwiftUI, Compose and Figma usage for whatever you configure. Contrast is checked live.' },
   { name: 'Tokens', href: '/tokens', line: 'Three tiers, light and dark, with blast radius before you edit. Exports to Figma Variables, DTCG JSON, CSS, Swift, Kotlin, and an AGENTS.md an AI coding tool can build from.' },
   { name: 'Requests', href: '/proposals/new', line: 'An intake flow that checks for duplicates as you type and scores the request, so the DS team only triages clean ones.' },
   { name: 'Sandbox', href: '/sandbox', line: 'Compose with real components; it flags anything you add that already exists and turns genuine gaps into a pre-filled request.' },
   { name: 'Ask the system', href: '/assistant', line: '“Do we have X?” answered in plain language, and it can only recommend what actually exists.' },
+  { name: 'Releases & migrations', href: '/releases', line: 'Release notes per version with package versions per platform, and a migration guide (steps, before/after code, codemod, progress by product) for every breaking change.' },
+  { name: 'Getting started', href: '/getting-started', line: 'Setup for designers and engineers, how contributions work, and the versioning and deprecation policy.' },
   { name: 'Roadmap, changelog, owners', href: '/roadmap', line: 'What ships each sprint by platform, what the team is working on next, and who is accountable for what.' },
 ];
 

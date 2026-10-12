@@ -230,6 +230,59 @@ export interface Token {
   deprecated?: boolean;
 }
 
+/** A product (app or surface) that consumes the system. */
+export interface Product {
+  id: string;
+  name: string;
+  teamId: string;
+  platforms: Platform[];
+}
+
+/** Instances in code per sprint, oldest first; aligned to Database.historySprints. */
+export type AdoptionHistory = Record<string, number[]>;
+
+/** Past values of the system-level metrics, oldest first; the live value is appended at read time. */
+export interface HealthHistory {
+  avgCompleteness: number[];
+  parity: number[];
+  stableRatio: number[];
+  driftCount: number[];
+  unowned: number[];
+}
+
+export interface Release {
+  version: string;
+  date: string;
+  sprintId: string;
+  summary: string;
+  /** Package version shipped per platform. */
+  packages: Record<Platform, string>;
+  migrationIds: string[];
+}
+
+export type MigrationStatus = 'done' | 'in-progress' | 'not-started';
+
+export interface MigrationGuide {
+  id: string;
+  itemSlug: string;
+  /** e.g. "Text Field 3.x → 4.0" */
+  title: string;
+  kind: 'breaking-change' | 'deprecation';
+  fromVersion: string;
+  toVersion: string;
+  /** Replacement item, for deprecations. */
+  toSlug?: string;
+  releasedIn: string;
+  deadline: string;
+  why: string;
+  steps: string[];
+  codemod?: string;
+  before: Partial<Record<Platform, string>>;
+  after: Partial<Record<Platform, string>>;
+  products: { productId: string; status: MigrationStatus; remaining?: number }[];
+  ownerId: string;
+}
+
 export interface Database {
   items: SystemItem[];
   people: Person[];
@@ -239,4 +292,11 @@ export interface Database {
   roadmap: RoadmapItem[];
   proposals: Proposal[];
   tokens: Token[];
+  products: Product[];
+  /** Sprint ids the history arrays line up with, oldest first. */
+  historySprints: string[];
+  adoptionHistory: AdoptionHistory;
+  healthHistory: HealthHistory;
+  releases: Release[];
+  migrations: MigrationGuide[];
 }

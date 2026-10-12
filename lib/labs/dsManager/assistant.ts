@@ -103,9 +103,21 @@ export function answer(question: string, db: Database): Answer {
   if (/\b(what('?s| is)? new|what changed|changelog|release notes|last sprint|shipped)\b/.test(q)) {
     const changes = db.changes.filter((c) => c.sprintId === LAST_SPRINT_ID);
     return {
-      text: `In Sprint ${LAST_SPRINT_ID} the team shipped ${changes.length} changes:\n\n${changes.map((c) => `- ${c.itemSlug ? `**${db.items.find((i) => i.slug === c.itemSlug)?.name}**: ` : ''}${c.summary}${c.breaking ? ' _(breaking)_' : ''}`).join('\n')}`,
+      text: `${db.releases[0] ? `**${SYSTEM.name} ${db.releases[0].version}** — ` : ''}In Sprint ${LAST_SPRINT_ID} the team shipped ${changes.length} changes:\n\n${changes.map((c) => `- ${c.itemSlug ? `**${db.items.find((i) => i.slug === c.itemSlug)?.name}**: ` : ''}${c.summary}${c.breaking ? ' _(breaking)_' : ''}`).join('\n')}`,
       items: [],
-      actions: [{ label: 'Full changelog', href: '/changelog' }],
+      actions: [...(db.releases[0] ? [{ label: 'Release notes', href: `/releases/${db.releases[0].version}` }] : []), { label: 'Full changelog', href: '/changelog' }],
+      source: 'retrieval',
+    };
+  }
+
+  // Migrations: "how do I migrate…", "upgrade to Text Field 4", "breaking changes"
+  if (/\b(migrat|upgrade|breaking)/.test(q)) {
+    const guides = db.migrations.filter((m) => !top || m.itemSlug === top.item.slug || m.toSlug === top.item.slug);
+    const list = guides.length ? guides : db.migrations;
+    return {
+      text: `${list.length === 1 ? 'There’s a migration guide for that' : 'Open migration guides'}:\n\n${list.map((m) => `- **${m.title}** — ${m.products.filter((p) => p.status === 'done').length} of ${m.products.length} products done${m.codemod ? ', codemod available' : ''}`).join('\n')}`,
+      items: [],
+      actions: list.map((m) => ({ label: m.title, href: `/migrations/${m.id}` })),
       source: 'retrieval',
     };
   }
@@ -206,5 +218,6 @@ export const SUGGESTED_QUESTIONS = [
   'Who owns Accordion?',
   'What shipped last sprint?',
   'Can I still use Ghost Button?',
+  'How do I migrate to Text Field 4?',
   'I need a popup to confirm deleting a booking',
 ];

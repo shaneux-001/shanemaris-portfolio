@@ -139,6 +139,14 @@ export default function Changelog() {
                         </div>
                         <p className="m-0 mt-1 text-[13.5px]">{e.summary}</p>
                         {e.details && <p className="m-0 mt-1 text-[12.5px] text-ks-fg-muted">{e.details}</p>}
+                        {(e.breaking || e.type === 'deprecated') &&
+                          db.migrations
+                            .filter((m) => m.itemSlug === e.itemSlug)
+                            .map((m) => (
+                              <Link key={m.id} href={`${BASE}/migrations/${m.id}`} className="mt-1 inline-block text-[12.5px] font-medium text-ks-accent-text hover:underline">
+                                Migration guide: {m.title} →
+                              </Link>
+                            ))}
                         <div className="mt-1 text-[12px] text-ks-fg-subtle">
                           {formatDate(e.date, { month: 'short', day: 'numeric', year: 'numeric' })} · {person(e.authorId)?.name} · {e.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}
                         </div>

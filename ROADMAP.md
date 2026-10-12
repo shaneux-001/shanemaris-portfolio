@@ -294,12 +294,13 @@ _(Add new items here as they come up — this section is yours.)_
 
 ## Planned — Design System Manager → Labs (second Labs entry)
 
-**Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done; production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
+**Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, and a Getting started page; production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
 
 **Open before merge:**
 - [ ] **Name.** Placeholders are `Keystone` (tool) and `Meridian` (fictional system), both in `lib/labs/dsManager/brand.ts`; the Labs listing title in `lib/projects.ts` must match.
 - [ ] **Framing-page copy** (`app/labs/ds-manager/page.tsx`) is a draft — needs Shane's own voice pass.
 - [ ] **Live AI tier not exercised end to end.** The route (`app/api/labs/ds-manager/ask`) type-checks and correctly returns 401 without a session, but no real Claude call has been made (needs a Labs session + spends money). Uses `claude-opus-5-5` via `@anthropic-ai/sdk` (new dependency), effort `low`, prompt-cached grounding, server-side refusal fallback; reuses `ANTHROPIC_API_KEY` and the Upstash env vars already set for Recipe Box.
+- [ ] **Next candidate (deferred, Shane to decide):** Figma ↔ code mapping view (Code Connect-style component/prop mapping).
 - [ ] `npm audit` reports high-severity `brace-expansion`/`braces` advisories in dev tooling (eslint chain) — pre-existing, not from this branch; `npm audit fix` is non-breaking, worth a separate PATCH.
 
 **What it is:** a prototype of a design system management tool (the Knapsack / Zeroheight / Supernova / Storybook category) that is the single source of truth for a system: inventory, health, living docs, ownership, change history, roadmap, intake, tokens, and AI guidance. It shows Shane's thinking as a DS leader. It's a prototype, not a product. It should behave as if only a backend is missing.

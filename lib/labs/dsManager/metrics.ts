@@ -212,3 +212,47 @@ export function platformCoverage(db: Database): { platform: Platform; shipped: n
     return { platform, shipped: shipped.length, applicable: applicable.length, pct: pct(shipped.length, applicable.length), drift };
   });
 }
+
+// ── Trends & adoption ───────────────────────────────────────────
+
+export type TrendKey = keyof Database['healthHistory'];
+
+/** Past sprints from history plus today's live value, so edits move the last point. */
+export function healthSeries(db: Database): Record<TrendKey, number[]> {
+  const m = systemMetrics(db);
+  const live: Record<TrendKey, number> = { avgCompleteness: m.avgCompleteness, parity: m.parity, stableRatio: m.stableRatio, driftCount: m.driftCount, unowned: m.unowned };
+  return Object.fromEntries((Object.keys(live) as TrendKey[]).map((k) => [k, [...db.healthHistory[k], live[k]]])) as Record<TrendKey, number[]>;
+}
+
+export function adoptionSeries(db: Database, slug: string): number[] {
+  return db.adoptionHistory[slug] ?? db.historySprints.map(() => 0);
+}
+
+/** Growth across the history window, as a fraction; null when the item didn't exist at the start. */
+export function adoptionGrowth(series: number[]): number | null {
+  const first = series.find((v) => v > 0);
+  const last = series[series.length - 1];
+  if (!first || first === last) return first ? 0 : null;
+  return (last - first) / first;
+}
+
+export function totalInstancesSeries(db: Database): number[] {
+  return db.historySprints.map((_, i) => db.items.filter((it) => it.lifecycle !== 'deprecated').reduce((s, it) => s + (adoptionSeries(db, it.slug)[i] ?? 0), 0));
+}
+
+export interface MigrationProgress {
+  done: number;
+  inProgress: number;
+  notStarted: number;
+  total: number;
+  pct: number;
+  remainingInstances: number | null;
+}
+
+export function migrationProgress(m: Database['migrations'][number]): MigrationProgress {
+  const done = m.products.filter((p) => p.status === 'done').length;
+  const inProgress = m.products.filter((p) => p.status === 'in-progress').length;
+  const total = m.products.length;
+  const remaining = m.products.some((p) => p.remaining !== undefined) ? m.products.reduce((s, p) => s + (p.remaining ?? 0), 0) : null;
+  return { done, inProgress, notStarted: total - done - inProgress, total, pct: total ? Math.round((done / total) * 100) : 0, remainingInstances: remaining };
+}

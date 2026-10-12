@@ -30,6 +30,8 @@ export const people: Person[] = [
 /** Two-week sprints rolling up into quarterly PIs. The snapshot date sits on the boundary of 26.20 → 26.21. */
 export const sprints: Sprint[] = [
   { id: '26.03', name: 'Sprint 26.03', pi: 'PI 26.1', start: '2026-01-26', end: '2026-02-06' },
+  { id: '26.15', name: 'Sprint 26.15', pi: 'PI 26.3', start: '2026-07-20', end: '2026-07-31' },
+  { id: '26.16', name: 'Sprint 26.16', pi: 'PI 26.3', start: '2026-08-03', end: '2026-08-14' },
   { id: '26.17', name: 'Sprint 26.17', pi: 'PI 26.3', start: '2026-08-17', end: '2026-08-28' },
   { id: '26.18', name: 'Sprint 26.18', pi: 'PI 26.3', start: '2026-08-31', end: '2026-09-11' },
   { id: '26.19', name: 'Sprint 26.19', pi: 'PI 26.3', start: '2026-09-14', end: '2026-09-25' },

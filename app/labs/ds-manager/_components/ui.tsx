@@ -198,7 +198,8 @@ export function ButtonLink({ href, variant = 'secondary', size = 'md', className
 
 export function Segmented<T extends string>({ value, onChange, options, label }: { value: T; onChange: (v: T) => void; options: { value: T; label: React.ReactNode }[]; label: string }) {
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex rounded-md border border-ks-border bg-ks-sunken p-0.5">
+    // Scrolls inside itself on narrow screens rather than widening the page.
+    <div role="radiogroup" aria-label={label} className="ks-scroll inline-flex max-w-full overflow-x-auto rounded-md border border-ks-border bg-ks-sunken p-0.5">
       {options.map((o) => (
         <button
           key={o.value}
@@ -206,7 +207,7 @@ export function Segmented<T extends string>({ value, onChange, options, label }:
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={cx('inline-flex h-7 items-center gap-1.5 rounded px-2.5 text-[12.5px] font-medium', value === o.value ? 'bg-ks-surface text-ks-fg shadow-sm' : 'text-ks-fg-muted hover:text-ks-fg')}
+          className={cx('inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded px-2.5 text-[12.5px] font-medium', value === o.value ? 'bg-ks-surface text-ks-fg shadow-sm' : 'text-ks-fg-muted hover:text-ks-fg')}
         >
           {o.label}
         </button>
