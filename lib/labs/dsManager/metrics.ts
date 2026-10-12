@@ -97,7 +97,7 @@ const pct = (n: number, d: number) => (d ? Math.round((n / d) * 100) : 0);
 export interface Risk {
   id: string;
   severity: 'high' | 'medium' | 'low';
-  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate' | 'contrast';
+  kind: 'unowned' | 'drift' | 'stale-docs' | 'deprecated-in-use' | 'blocked' | 'a11y' | 'duplicate' | 'contrast' | 'feedback';
   title: string;
   detail: string;
   itemSlug?: string;
@@ -128,6 +128,14 @@ export function risksFor(db: Database): Risk[] {
   for (const r of db.roadmap.filter((r) => r.status === 'blocked')) {
     risks.push({ id: `blocked-${r.id}`, severity: r.impact === 'high' || r.impact === 'breaking' ? 'high' : 'medium', kind: 'blocked', title: `Blocked: ${r.title}`, detail: r.risks ?? 'Blocked.', itemSlug: r.itemSlug });
   }
+  // Docs people say aren't helping them.
+  for (const i of db.items) {
+    const h = helpfulness(db, i.slug);
+    if (h.votes >= 5 && h.pct !== null && h.pct < 50) {
+      risks.push({ id: `fb-${i.slug}`, severity: 'medium', kind: 'feedback', title: `${i.name} docs rated unhelpful`, detail: `${h.pct}% of ${h.votes} readers found them helpful; ${h.open} open comment${h.open === 1 ? '' : 's'}.`, itemSlug: i.slug });
+    }
+  }
+
   // Token pairs that fail WCAG contrast, grouped across themes.
   const failing = new Map<string, string[]>();
   for (const c of contrastChecks(db.tokens).filter((c) => !c.pass)) failing.set(c.label, [...(failing.get(c.label) ?? []), `${c.mode} ${c.ratio?.toFixed(2)}:1`]);
@@ -255,4 +263,12 @@ export function migrationProgress(m: Database['migrations'][number]): MigrationP
   const total = m.products.length;
   const remaining = m.products.some((p) => p.remaining !== undefined) ? m.products.reduce((s, p) => s + (p.remaining ?? 0), 0) : null;
   return { done, inProgress, notStarted: total - done - inProgress, total, pct: total ? Math.round((done / total) * 100) : 0, remainingInstances: remaining };
+}
+
+// ── Feedback ────────────────────────────────────────────────────
+
+export function helpfulness(db: Database, slug: string): { votes: number; helpful: number; pct: number | null; open: number } {
+  const fb = db.feedback.filter((f) => f.itemSlug === slug);
+  const helpful = fb.filter((f) => f.helpful).length;
+  return { votes: fb.length, helpful, pct: fb.length ? Math.round((helpful / fb.length) * 100) : null, open: fb.filter((f) => f.message && f.status === 'open').length };
 }

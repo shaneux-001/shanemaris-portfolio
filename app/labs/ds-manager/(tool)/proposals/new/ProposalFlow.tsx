@@ -26,7 +26,7 @@ function Field({ label, hint, children, htmlFor }: { label: string; hint?: strin
 }
 
 export default function ProposalFlow() {
-  const { db, item, run } = useStore();
+  const { db, item, run, can, setRole } = useStore();
   const params = useSearchParams();
   const enhance = params.get('enhance');
 
@@ -97,7 +97,7 @@ export default function ProposalFlow() {
   }
 
   const submit = async () => {
-    const { proposal } = await run(
+    const res = await run(
       (r) =>
         r.submitProposal({
           title: d.title.trim(),
@@ -111,9 +111,9 @@ export default function ProposalFlow() {
           qualityScore: a.score,
           closestMatch: top ? { slug: top.item.slug, score: Math.round(top.score * 100) / 100 } : undefined,
         }),
-      (res) => res.db,
+      (r) => r.db,
     );
-    setOutcome({ kind: 'submitted', proposal });
+    if (res) setOutcome({ kind: 'submitted', proposal: res.proposal });
   };
 
   const stepValid = [d.title.trim() && d.problem.trim().length >= 20 && (d.kind !== 'enhancement' || d.targetSlug), d.reach && d.platforms.length, true][step];
@@ -129,6 +129,14 @@ export default function ProposalFlow() {
         title={d.kind === 'enhancement' ? 'Request an enhancement' : 'Propose something new'}
         description="Requests that reach the DS team are clear, evidenced, and not already solved. This form checks as you go so you don't wait a sprint to hear “we already have that.”"
       />
+      {!can('proposal.submit') && (
+        <div role="status" className="mb-4 rounded-lg border border-ks-border bg-ks-warning-soft px-4 py-3 text-[13px] text-ks-fg">
+          You&apos;re viewing as a <strong>Viewer</strong>. Viewers can explore this form and see what the check says, but submitting needs Contributor access.{' '}
+          <button type="button" onClick={() => setRole('contributor')} className="font-medium text-ks-accent-text underline">
+            Switch to Contributor
+          </button>
+        </div>
+      )}
       {fromSandbox && <div className="mb-4 rounded-lg bg-ks-accent-soft px-4 py-3 text-[13px] text-ks-accent-text">Prefilled from your sandbox exploration{params.get('with') ? `, built alongside ${params.get('with')}` : ''}. Edit anything that isn&apos;t right.</div>}
 
       <ol className="m-0 mb-6 flex list-none flex-wrap gap-2 p-0" aria-label="Steps">
@@ -347,7 +355,7 @@ export default function ProposalFlow() {
                 Continue <ArrowRight size={15} />
               </Button>
             ) : (
-              <Button variant="primary" disabled={!a.canSubmit} onClick={submit}>
+              <Button variant="primary" disabled={!a.canSubmit || !can('proposal.submit')} onClick={submit}>
                 Submit for triage
               </Button>
             )}

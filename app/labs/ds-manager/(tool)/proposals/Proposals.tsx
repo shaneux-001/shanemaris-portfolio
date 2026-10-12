@@ -8,14 +8,14 @@ import type { Proposal, ProposalStatus } from '@/lib/labs/dsManager/types';
 import { PLATFORM_LABEL } from '@/lib/labs/dsManager/types';
 import { useStore } from '../../_components/Store';
 import { BASE } from '../../_components/Shell';
-import { Button, ButtonLink, Drawer, EmptyState, PageHeader, PersonChip, ProposalStatusPill, Segmented, ScoreCell, cx, formatDate, inputClass } from '../../_components/ui';
+import { Button, ButtonLink, Drawer, EmptyState, LockedNote, PageHeader, PersonChip, ProposalStatusPill, Segmented, ScoreCell, cx, formatDate, inputClass } from '../../_components/ui';
 
 type Filter = 'queue' | 'resolved' | 'all';
 
 const KIND_LABEL = { 'new-component': 'New component', 'new-pattern': 'New pattern', enhancement: 'Enhancement' };
 
 function TriagePanel({ p, onDone }: { p: Proposal; onDone: () => void }) {
-  const { item, person, run } = useStore();
+  const { item, person, run, can } = useStore();
   const [note, setNote] = useState(p.triageNote ?? '');
   const match = p.closestMatch && item(p.closestMatch.slug);
   const target = p.targetSlug && item(p.targetSlug);
@@ -80,6 +80,12 @@ function TriagePanel({ p, onDone }: { p: Proposal; onDone: () => void }) {
           Design: <span className="font-ks-mono text-ks-fg-muted">{p.figmaLink}</span>
         </p>
       )}
+      {!can('proposal.triage') ? (
+        <div className="border-t border-ks-border pt-4">
+          {p.triageNote && <p className="m-0 mb-2 rounded-md bg-ks-sunken p-3">{p.triageNote}</p>}
+          <LockedNote>Triage is done by the DS team.</LockedNote>
+        </div>
+      ) : (
       <div className="border-t border-ks-border pt-4">
         <label htmlFor="triage-note" className="mb-1.5 block text-[13px] font-medium">
           Triage note
@@ -102,6 +108,7 @@ function TriagePanel({ p, onDone }: { p: Proposal; onDone: () => void }) {
           </Button>
         </div>
       </div>
+      )}
     </div>
   );
 }

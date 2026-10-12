@@ -15,6 +15,7 @@ import { BASE } from '../../../_components/Shell';
 import MeridianScope from '../../../_components/meridian/MeridianScope';
 import { DEMOS, defaultsFor, type Props } from '../../../_components/meridian/demos';
 import CodeBlock, { CopyButton } from '../../../_components/CodeBlock';
+import DocFeedback, { HelpfulnessSummary, WatchButton } from '../../../_components/DocFeedback';
 import { CompletenessBreakdown, ItemEditor, PlatformTable } from '../../../_components/ItemQuickView';
 import { ButtonLink, EmptyState, LifecyclePill, Panel, ParityPill, PersonChip, Pill, ProposalStatusPill, RoadmapStatusPill, Segmented, cx, formatDate, inputClass } from '../../../_components/ui';
 
@@ -140,6 +141,7 @@ export default function ComponentDoc({ slug }: { slug: string }) {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
+          <WatchButton slug={slug} />
           <CopyButton text={itemMarkdown(it, db)} label="Copy as Markdown" className="h-9 border border-ks-border-strong bg-ks-surface px-3" />
           <ButtonLink href={`${BASE}/sandbox?add=${slug}`}>
             <SquaresFour size={15} /> Sandbox
@@ -222,6 +224,7 @@ export default function ComponentDoc({ slug }: { slug: string }) {
               </div>
             </section>
           )}
+          <DocFeedback slug={slug} name={it.name} />
         </div>
       )}
 
@@ -418,6 +421,20 @@ export default function ComponentDoc({ slug }: { slug: string }) {
                 <div className="text-[12px] text-ks-fg-subtle">instances in code</div>
               </div>
             </div>
+          </Panel>
+          <Panel
+            title="Docs feedback"
+            actions={
+              <Link href={`${BASE}/feedback?item=${slug}`} className="text-[12px] text-ks-accent-text hover:underline">
+                Inbox
+              </Link>
+            }
+          >
+            <HelpfulnessSummary slug={slug} />
+            <p className="m-0 mt-2 text-[12.5px] text-ks-fg-muted">
+              {db.feedback.filter((f) => f.itemSlug === slug && f.message && f.status === 'open').length} open comments ·{' '}
+              {db.watches.filter((w) => w.itemSlug === slug).length} watching
+            </p>
           </Panel>
           <Panel title={`Drift (${drift.length})`}>
             {drift.length ? (

@@ -294,7 +294,7 @@ _(Add new items here as they come up — this section is yours.)_
 
 ## Planned — Design System Manager → Labs (second Labs entry)
 
-**Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, and a Getting started page; production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
+**Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, a Getting started page, viewer/contributor/DS-team roles (enforced in the repository, not just the UI), and docs feedback + watching with notifications; production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
 
 **Open before merge:**
 - [ ] **Name.** Placeholders are `Keystone` (tool) and `Meridian` (fictional system), both in `lib/labs/dsManager/brand.ts`; the Labs listing title in `lib/projects.ts` must match.

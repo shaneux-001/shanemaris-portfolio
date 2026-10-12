@@ -283,6 +283,35 @@ export interface MigrationGuide {
   ownerId: string;
 }
 
+export type FeedbackCategory = 'unclear-docs' | 'missing-example' | 'bug' | 'accessibility' | 'request' | 'other';
+export const FEEDBACK_CATEGORY_LABEL: Record<FeedbackCategory, string> = {
+  'unclear-docs': 'Docs unclear',
+  'missing-example': 'Missing example',
+  bug: 'Bug',
+  accessibility: 'Accessibility',
+  request: 'Feature request',
+  other: 'Other',
+};
+
+export interface Feedback {
+  id: string;
+  itemSlug: string;
+  authorId: string;
+  createdAt: string;
+  /** The page-level "Was this helpful?" vote. */
+  helpful: boolean;
+  category?: FeedbackCategory;
+  message?: string;
+  status: 'open' | 'resolved' | 'wont-fix';
+  response?: string;
+  respondedBy?: string;
+}
+
+export interface Watch {
+  personId: string;
+  itemSlug: string;
+}
+
 export interface Database {
   items: SystemItem[];
   people: Person[];
@@ -299,4 +328,6 @@ export interface Database {
   healthHistory: HealthHistory;
   releases: Release[];
   migrations: MigrationGuide[];
+  feedback: Feedback[];
+  watches: Watch[];
 }

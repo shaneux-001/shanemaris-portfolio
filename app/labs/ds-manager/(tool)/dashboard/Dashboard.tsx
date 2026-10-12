@@ -138,6 +138,7 @@ const RISK_KIND: Record<Risk['kind'], string> = {
   a11y: 'Accessibility',
   duplicate: 'Duplicate',
   contrast: 'Contrast',
+  feedback: 'Feedback',
 };
 
 function RiskRow({ r }: { r: Risk }) {

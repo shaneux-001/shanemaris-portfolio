@@ -5,6 +5,7 @@ import { changes, roadmap, proposals } from './activity';
 import { tokens } from './tokens';
 import { products, historySprints, buildAdoptionHistory, healthHistory } from './adoption';
 import { releases, migrations } from './releases';
+import { feedback, watches } from './feedback';
 
 /** A fresh copy every call — the repository mutates its own copy, never the seed modules. */
 export function createSeed(): Database {
@@ -23,6 +24,8 @@ export function createSeed(): Database {
     healthHistory,
     releases,
     migrations,
+    feedback,
+    watches,
   });
 }
 

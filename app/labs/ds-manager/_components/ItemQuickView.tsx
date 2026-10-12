@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { ArrowRight } from '@phosphor-icons/react';
 import { completeness, driftFor, parityStatus } from '@/lib/labs/dsManager/metrics';
+import { lockedReason } from '@/lib/labs/dsManager/permissions';
 import type { Lifecycle, SystemItem } from '@/lib/labs/dsManager/types';
 import { KIND_LABEL, LIFECYCLES, PLATFORMS, PLATFORM_LABEL } from '@/lib/labs/dsManager/types';
 import { useStore } from './Store';
 import { BASE } from './Shell';
-import { ButtonLink, Drawer, LifecyclePill, Meter, ParityPill, PersonChip, scoreTone, TONE_TEXT, cx } from './ui';
+import { ButtonLink, Drawer, LifecyclePill, LockedNote, Meter, ParityPill, PersonChip, scoreTone, TONE_TEXT, cx } from './ui';
 
 /** Completeness breakdown — the factors behind the score, not just the number. */
 export function CompletenessBreakdown({ item }: { item: SystemItem }) {
@@ -61,19 +62,26 @@ export function PlatformTable({ item }: { item: SystemItem }) {
 
 /** Owner + lifecycle editing — exercises the repository's write path. */
 export function ItemEditor({ item }: { item: SystemItem }) {
-  const { db, run, person } = useStore();
+  const { db, run, person, can } = useStore();
   const owners = db.people.filter((p) => p.id !== 'p-you');
+  const locked = !can('item.edit');
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {locked && (
+        <div className="sm:col-span-2">
+          <LockedNote>{lockedReason('item.edit')}</LockedNote>
+        </div>
+      )}
       <label className="flex flex-col gap-1 text-[12px] text-ks-fg-muted">
         Owner
         <select
+          disabled={locked}
           value={item.ownerId ?? ''}
           onChange={(e) => {
             const id = e.target.value || undefined;
             run((r) => r.updateItem(item.slug, { ownerId: id }, id ? `Ownership assigned to ${person(id)?.name}.` : 'Owner removed.'));
           }}
-          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg"
+          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
         >
           <option value="">Unassigned</option>
           {owners.map((p) => (
@@ -86,12 +94,13 @@ export function ItemEditor({ item }: { item: SystemItem }) {
       <label className="flex flex-col gap-1 text-[12px] text-ks-fg-muted">
         Lifecycle
         <select
+          disabled={locked}
           value={item.lifecycle}
           onChange={(e) => {
             const l = e.target.value as Lifecycle;
             run((r) => r.updateItem(item.slug, { lifecycle: l }, `Lifecycle changed from ${item.lifecycle} to ${l}.`));
           }}
-          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg"
+          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
         >
           {LIFECYCLES.map((l) => (
             <option key={l} value={l}>

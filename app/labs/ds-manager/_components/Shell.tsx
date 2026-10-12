@@ -21,6 +21,7 @@ import {
   Table,
   UsersThree,
   MapTrifold,
+  ChatCircleText,
   Package,
   RocketLaunch,
   TrendUp,
@@ -30,6 +31,7 @@ import { findMatches } from '@/lib/labs/dsManager/match';
 import { KEYSTONE_THEME_KEY } from '@/lib/labs/dsManager/theme';
 import { useStore } from './Store';
 import { cx, Kbd, LifecyclePill } from './ui';
+import { NoticeToast, NotificationBell, RoleSwitcher } from './HeaderMenus';
 
 export const BASE = '/labs/ds-manager';
 
@@ -65,6 +67,7 @@ const NAV = [
     links: [
       { href: '/sandbox', label: 'Sandbox', icon: SquaresFour },
       { href: '/proposals', label: 'Proposals', icon: PlusSquare },
+      { href: '/feedback', label: 'Feedback', icon: ChatCircleText },
     ],
   },
 ];
@@ -181,8 +184,9 @@ function CommandPalette({ onClose }: { onClose: () => void }) {
 
 function SideNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const { db } = useStore();
+  const { db, can } = useStore();
   const pending = db.proposals.filter((p) => p.status === 'submitted').length;
+  const openFeedback = db.feedback.filter((f) => f.message && f.status === 'open').length;
   return (
     <nav aria-label="Keystone" className="flex flex-col gap-5 px-3 py-4">
       {NAV.map((g) => (
@@ -202,7 +206,8 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
                   >
                     <Icon size={17} weight={active ? 'fill' : 'regular'} />
                     <span className="flex-1">{label}</span>
-                    {href === '/proposals' && pending > 0 && <span className="ks-tabular rounded-full bg-ks-accent px-1.5 text-[11px] font-semibold text-ks-accent-fg">{pending}</span>}
+                    {href === '/proposals' && pending > 0 && can('proposal.triage') && <span className="ks-tabular rounded-full bg-ks-accent px-1.5 text-[11px] font-semibold text-ks-accent-fg">{pending}</span>}
+                    {href === '/feedback' && openFeedback > 0 && can('feedback.resolve') && <span className="ks-tabular rounded-full bg-ks-accent px-1.5 text-[11px] font-semibold text-ks-accent-fg">{openFeedback}</span>}
                   </Link>
                 </li>
               );
@@ -312,6 +317,8 @@ export default function Shell({ children }: { children: React.ReactNode }) {
                 <ArrowCounterClockwise size={15} />
                 {confirmReset ? 'Click again to reset' : 'Reset demo'}
               </button>
+              <RoleSwitcher />
+              <NotificationBell />
               <ThemeToggle />
               <Link href="/labs" className="hidden h-8 items-center gap-1.5 rounded-md px-2.5 text-[12.5px] text-ks-fg-muted hover:bg-ks-surface-2 hover:text-ks-fg md:inline-flex">
                 <ArrowLeft size={15} />
@@ -325,6 +332,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         </div>
       </div>
       {cmdOpen && <CommandPalette onClose={() => setCmdOpen(false)} />}
+      <NoticeToast />
     </div>
   );
 }

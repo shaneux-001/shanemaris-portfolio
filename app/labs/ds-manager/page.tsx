@@ -26,6 +26,7 @@ const VIEWS: { name: string; href: string; line: string }[] = [
   { name: 'Sandbox', href: '/sandbox', line: 'Compose with real components; it flags anything you add that already exists and turns genuine gaps into a pre-filled request.' },
   { name: 'Ask the system', href: '/assistant', line: '“Do we have X?” answered in plain language, and it can only recommend what actually exists.' },
   { name: 'Releases & migrations', href: '/releases', line: 'Release notes per version with package versions per platform, and a migration guide (steps, before/after code, codemod, progress by product) for every breaking change.' },
+  { name: 'Feedback & roles', href: '/feedback', line: '“Was this page helpful?” on every component, an inbox where the DS team replies in public, watch lists with notifications, and viewer / contributor / DS team roles enforced in the data layer.' },
   { name: 'Getting started', href: '/getting-started', line: 'Setup for designers and engineers, how contributions work, and the versioning and deprecation policy.' },
   { name: 'Roadmap, changelog, owners', href: '/roadmap', line: 'What ships each sprint by platform, what the team is working on next, and who is accountable for what.' },
 ];
@@ -79,7 +80,7 @@ export default function Page() {
                 <li>Component demos render from the token store, so a token edit re-skins them live.</li>
                 <li>Every export is generated, including the agent-ready spec.</li>
                 <li>Duplicate detection and the instant assistant run on the same retrieval engine.</li>
-                <li>All reads and writes go through one async repository, the seam where a backend plugs in.</li>
+                <li>All reads and writes go through one async repository, the seam where a backend plugs in. It also enforces role permissions.</li>
               </ul>
             </div>
             <div>
@@ -89,6 +90,7 @@ export default function Page() {
                   {SYSTEM.name} and everyone on its team are fictional. The data is deliberately messy (drift, orphans, stale docs) so the dashboard has something to find.
                 </li>
                 <li>Edits save to your browser only. &ldquo;Reset demo&rdquo; puts everything back.</li>
+                <li>The role switcher is a demo control; in production your role would come from sign-in.</li>
                 <li>&ldquo;Push to Figma&rdquo; explains what it would do; the JSON it would send is downloadable.</li>
                 <li>Live AI answers are limited to signed-in sessions to keep API costs sane. The instant tier is open to everyone.</li>
               </ul>

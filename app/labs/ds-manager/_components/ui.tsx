@@ -7,7 +7,7 @@
 
 import Link from 'next/link';
 import { forwardRef, useEffect, useRef } from 'react';
-import { X } from '@phosphor-icons/react';
+import { LockSimple, X } from '@phosphor-icons/react';
 import type { Lifecycle, Person, Platform, PlatformImpl, Impact, RoadmapStatus, ProposalStatus } from '@/lib/labs/dsManager/types';
 import { PLATFORM_LABEL, PLATFORMS } from '@/lib/labs/dsManager/types';
 import type { ParityStatus } from '@/lib/labs/dsManager/metrics';
@@ -314,6 +314,16 @@ export function Drawer({ open, onClose, title, children, width = 520 }: { open: 
         <div className="p-5">{children}</div>
       </div>
     </div>
+  );
+}
+
+/** Explains a disabled control. Pair with `disabled` on the control itself. */
+export function LockedNote({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="m-0 flex items-center gap-1.5 text-[12px] text-ks-fg-subtle">
+      <LockSimple size={13} aria-hidden="true" />
+      {children}
+    </p>
   );
 }
 

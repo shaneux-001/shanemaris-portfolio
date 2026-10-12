@@ -44,7 +44,7 @@ function Card({ r, onOpen }: { r: RoadmapItem; onOpen: () => void }) {
 }
 
 function Detail({ r }: { r: RoadmapItem }) {
-  const { item, person, run, db } = useStore();
+  const { item, person, run, db, can } = useStore();
   const it = r.itemSlug ? item(r.itemSlug) : undefined;
   const proposal = r.proposalId ? db.proposals.find((p) => p.id === r.proposalId) : undefined;
   return (
@@ -68,7 +68,7 @@ function Detail({ r }: { r: RoadmapItem }) {
       </p>
       <label className="flex flex-col gap-1 text-[12px] text-ks-fg-muted">
         Status
-        <select value={r.status} onChange={(e) => run((x) => x.updateRoadmapItem(r.id, { status: e.target.value as RoadmapStatus, progress: e.target.value === 'complete' ? 100 : r.progress }))} className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg">
+        <select disabled={!can('roadmap.edit')} value={r.status} onChange={(e) => run((x) => x.updateRoadmapItem(r.id, { status: e.target.value as RoadmapStatus, progress: e.target.value === 'complete' ? 100 : r.progress }))} className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60">
           {STATUSES.map((s) => (
             <option key={s} value={s}>
               {s.replace('-', ' ')}

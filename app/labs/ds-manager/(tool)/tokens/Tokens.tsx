@@ -63,9 +63,10 @@ function ModeEditor({ token, mode, value, onChange, map, tokens }: { token: Toke
 }
 
 function TokenEditor({ name, onClose }: { name: string; onClose: () => void }) {
-  const { db, run } = useStore();
+  const { db, run, can } = useStore();
   const map = useMemo(() => new Map(db.tokens.map((t) => [t.name, t])), [db.tokens]);
   const token = map.get(name)!;
+  const locked = !can('token.edit');
   const [draft, setDraft] = useState<Token['value']>(token.value);
   const [saved, setSaved] = useState(false);
 
@@ -143,7 +144,7 @@ function TokenEditor({ name, onClose }: { name: string; onClose: () => void }) {
 
       <div className="sticky bottom-0 -mx-5 -mb-5 flex items-center justify-between gap-2 border-t border-ks-border bg-ks-surface px-5 py-3">
         <span className="text-[12px] text-ks-fg-subtle" aria-live="polite">
-          {saved ? 'Saved. Logged to the changelog.' : changed ? 'Previewing unsaved change' : 'No changes'}
+          {locked ? 'Preview only — only the DS team can save token changes.' : saved ? 'Saved. Logged to the changelog.' : changed ? 'Previewing unsaved change' : 'No changes'}
         </span>
         <div className="flex gap-2">
           <Button size="sm" variant="ghost" onClick={onClose}>
@@ -155,7 +156,7 @@ function TokenEditor({ name, onClose }: { name: string; onClose: () => void }) {
           <Button
             size="sm"
             variant="primary"
-            disabled={!changed}
+            disabled={!changed || locked}
             onClick={async () => {
               await run((r) => r.updateToken(name, draft));
               setSaved(true);
