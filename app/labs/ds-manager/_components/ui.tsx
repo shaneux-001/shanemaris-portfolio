@@ -1,7 +1,7 @@
 'use client';
 
 /*
- * Keystone's own small UI kit — the tool's chrome, not the Daedalus
+ * The management tool's own small UI kit — its chrome, not the Daedalus
  * components it documents (those live in daedalus/).
  */
 

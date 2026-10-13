@@ -3,10 +3,10 @@ import { Geist, Geist_Mono, Figtree } from 'next/font/google';
 import { TOOL } from '@/lib/labs/dsManager/brand';
 import { StoreProvider } from '../_components/Store';
 import Shell from '../_components/Shell';
-import '../keystone.css';
+import '../tool.css';
 
-// Keystone's chrome uses Geist; the fictional Daedalus system it documents
-// uses Figtree, so live component demos visibly read as a different brand.
+// The tool's chrome uses Geist; the Daedalus components it documents use
+// Figtree, so live demos visibly read as the system, not the site around them.
 const geist = Geist({ subsets: ['latin'], variable: '--ks-font-sans', display: 'swap' });
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--ks-font-mono', display: 'swap' });
 const figtree = Figtree({ subsets: ['latin'], variable: '--dae-font-brand', display: 'swap' });

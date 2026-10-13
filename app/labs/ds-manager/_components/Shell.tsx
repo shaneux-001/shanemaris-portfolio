@@ -29,7 +29,7 @@ import {
 } from '@phosphor-icons/react';
 import { TOOL, SYSTEM } from '@/lib/labs/dsManager/brand';
 import { findMatches } from '@/lib/labs/dsManager/match';
-import { KEYSTONE_THEME_KEY } from '@/lib/labs/dsManager/theme';
+import { TOOL_THEME_KEY } from '@/lib/labs/dsManager/theme';
 import { useStore } from './Store';
 import { cx, Kbd, LifecyclePill } from './ui';
 import { NoticeToast, NotificationBell, RoleSwitcher } from './HeaderMenus';
@@ -78,7 +78,7 @@ const NAV = [
 
 function ThemeToggle() {
   // No React state: which icon shows is pure CSS (see .ks-when-dark in
-  // keystone.css), so there's nothing to sync after hydration.
+  // tool.css), so there's nothing to sync after hydration.
   const toggle = () => {
     const root = document.documentElement;
     const explicit = root.getAttribute('data-ks-theme');
@@ -86,7 +86,7 @@ function ThemeToggle() {
     const next = dark ? 'light' : 'dark';
     root.setAttribute('data-ks-theme', next);
     try {
-      localStorage.setItem(KEYSTONE_THEME_KEY, next);
+      localStorage.setItem(TOOL_THEME_KEY, next);
     } catch {
       /* not persisted */
     }
@@ -190,7 +190,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
   const pending = db.proposals.filter((p) => p.status === 'submitted').length;
   const openFeedback = db.feedback.filter((f) => f.message && f.status === 'open').length;
   return (
-    <nav aria-label="Keystone" className="flex flex-col gap-5 px-3 py-4">
+    <nav aria-label={TOOL.name} className="flex flex-col gap-5 px-3 py-4">
       {NAV.map((g) => (
         <div key={g.group}>
           <div className="mb-1 px-2 text-[11px] font-medium uppercase tracking-[0.06em] text-ks-fg-subtle">{g.group}</div>
@@ -232,7 +232,7 @@ function Brand() {
       </span>
       <span className="flex flex-col leading-tight">
         <span className="text-[14.5px] font-semibold tracking-[-0.01em] text-ks-fg">{TOOL.name}</span>
-        <span className="text-[11.5px] text-ks-fg-subtle">{SYSTEM.name} Design System</span>
+        <span className="text-[11.5px] text-ks-fg-subtle">{SYSTEM.org} Design System</span>
       </span>
     </Link>
   );

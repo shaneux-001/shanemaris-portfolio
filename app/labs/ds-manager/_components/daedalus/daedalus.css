@@ -1,5 +1,6 @@
 /* ============================================================
-   Daedalus — the fictional design system Keystone documents.
+   Daedalus — the fictional design system's components, as documented
+   by the tool.
    Every value comes from a --dae-* custom property generated
    from the token store (see DaedalusScope), so editing a token
    in the Tokens view re-skins every live demo immediately.

@@ -58,9 +58,9 @@
   --font-archivo: var(--font-archivo-face);
   --font-plex-mono: var(--font-plex-mono-face);
 
-  /* Keystone (Labs: /labs/ds-manager) — the DS management prototype has
+  /* Daedalus tool chrome (Labs: /labs/ds-manager) — the DS management prototype has
      its own visual language, deliberately NOT Press Room. Values live in
-     app/labs/ds-manager/keystone.css, scoped to .ks-root; only the utility
+     app/labs/ds-manager/tool.css, scoped to .ks-root; only the utility
      mapping lives here because @theme must be in the Tailwind entry file. */
   --color-ks-bg: var(--ks-bg);
   --color-ks-surface: var(--ks-surface);

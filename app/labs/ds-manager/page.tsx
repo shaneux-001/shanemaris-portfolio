@@ -88,7 +88,7 @@ export default function Page() {
               <h3 className="m-0 mb-2 text-[15px] font-semibold text-pr-fg-strong">Mocked</h3>
               <ul className="m-0 list-disc pl-5 text-pr-lede">
                 <li>
-                  {SYSTEM.name} and everyone on its team are fictional. The data is deliberately messy (drift, orphans, stale docs) so the dashboard has something to find.
+                  {SYSTEM.org}, its {SYSTEM.name} design system, and everyone on the team are fictional. The data is deliberately messy (drift, orphans, stale docs) so the dashboard has something to find.
                 </li>
                 <li>Edits save to your browser only. &ldquo;Reset demo&rdquo; puts everything back.</li>
                 <li>The role switcher is a demo control; in production your role would come from sign-in.</li>

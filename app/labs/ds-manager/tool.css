@@ -1,5 +1,6 @@
 /* ============================================================
-   Keystone — the DS management prototype's own UI tokens.
+   Daedalus tool chrome — the management site's own UI tokens
+   (not the Daedalus component tokens, which live in daedalus.css).
    Scoped to .ks-root so nothing leaks into the rest of the site.
    Tailwind utilities (bg-ks-surface, text-ks-fg-muted…) are mapped
    in app/globals.css's @theme inline block.

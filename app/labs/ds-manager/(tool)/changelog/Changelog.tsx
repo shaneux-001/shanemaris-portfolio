@@ -58,7 +58,7 @@ export default function Changelog() {
     <>
       <PageHeader
         title={it ? `${it.name} changelog` : 'Changelog'}
-        description={it ? `Every recorded change to ${it.name} across platforms.` : 'What changed in the system, by sprint and platform. Edits made in Keystone (owner, lifecycle, tokens) are logged here too.'}
+        description={it ? `Every recorded change to ${it.name} across platforms.` : 'What changed in the system, by sprint and platform. Edits made here (owner, lifecycle, tokens) are logged too.'}
         actions={
           <Button size="sm" onClick={() => downloadText('daedalus-changelog.md', markdown())}>
             <DownloadSimple size={15} /> Release notes (.md)

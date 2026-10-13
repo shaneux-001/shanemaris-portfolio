@@ -1,10 +1,11 @@
 /**
  * Every user-facing name for this prototype lives here, so a rename is a
- * one-file change. Both are fictional placeholders — TOOL is the management
- * tool itself, SYSTEM is the made-up design system it manages.
+ * one-file change. All fictional: SYSTEM is the design system, TOOL is the
+ * site that manages it. They share a name, the way most real design
+ * system sites are simply named after the system.
  */
 export const TOOL = {
-  name: 'Keystone',
+  name: 'Daedalus',
   tagline: 'The source of truth for your design system',
 };
 

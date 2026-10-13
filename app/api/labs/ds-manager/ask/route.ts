@@ -5,7 +5,7 @@ import { askRateLimit } from '@/lib/labs/dsManager/server/rateLimit';
 import { askClaude, type Turn } from '@/lib/labs/dsManager/server/ask';
 
 /**
- * Live answers for Keystone's assistant. Gated by the same signed Labs
+ * Live answers for the Daedalus assistant. Gated by the same signed Labs
  * session as The Recipe Box (real API cost), with a rate limit as backstop.
  * The free retrieval tier runs entirely in the browser and needs neither.
  */
@@ -35,10 +35,10 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     if (err instanceof Anthropic.RateLimitError) return NextResponse.json({ error: 'The model is busy — try again in a minute.' }, { status: 429 });
     if (err instanceof Anthropic.APIError) {
-      console.error('Keystone ask: API error', err.status, err.message);
+      console.error('Daedalus ask: API error', err.status, err.message);
       return NextResponse.json({ error: 'The live assistant is unavailable right now.' }, { status: 502 });
     }
-    console.error('Keystone ask: failed', err);
+    console.error('Daedalus ask: failed', err);
     return NextResponse.json({ error: 'The live assistant is unavailable right now.' }, { status: 500 });
   }
 }

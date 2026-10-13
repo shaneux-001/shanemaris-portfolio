@@ -57,7 +57,7 @@ export const labsProjects: ProjectConfig[] = [
   {
     slug: 'ds-manager',
     // Title tracks lib/labs/dsManager/brand.ts (TOOL.name) — rename both together.
-    title: 'Keystone',
+    title: 'Daedalus',
     tags: ['Design Systems', 'AI', 'Prototype'],
     description:
       'A design system management prototype: one source of truth for inventory, health, living docs and tokens, with a request flow that pushes back on duplicates and AI guidance in plain language.',

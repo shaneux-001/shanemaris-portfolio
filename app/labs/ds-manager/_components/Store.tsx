@@ -6,7 +6,7 @@ import { createSeed } from '@/lib/labs/dsManager/seed';
 import { can as canDo, lockedReason, PermissionError, type Action, type AppRole } from '@/lib/labs/dsManager/permissions';
 import type { Database, Person, SystemItem, Team } from '@/lib/labs/dsManager/types';
 
-const ROLE_KEY = 'keystone-role';
+const ROLE_KEY = 'daedalus-role';
 
 interface Store {
   db: Database;
