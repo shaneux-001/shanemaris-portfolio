@@ -24,7 +24,7 @@ export const changes: ChangeEntry[] = [
   c('2026-10-02', '26.20', 'text-field', 'changed', ['web', 'ios', 'figma'], 'v4: label stays above the field; floating label animation removed.', 'p-amir', { version: '4.0.0', breaking: true, details: 'The floating label failed usability testing with older users. Migration: remove `floatingLabel` prop; no visual regressions expected for forms already using helper text. Android ships in 26.21.' }),
   c('2026-10-01', '26.20', 'data-table', 'added', ['web'], 'Row selection with shift-click range select.', 'p-june', { version: '0.7.0' }),
   c('2026-09-30', '26.20', 'stepper', 'added', ['web', 'figma'], 'Experimental Stepper contributed by Bookings.', 'p-kit', { version: '0.2.0' }),
-  c('2026-09-29', '26.20', undefined, 'tokens', ALL, 'Raised `color.border.focus` in dark mode to teal.300 to meet 3:1 focus contrast.', 'p-maya'),
+  c('2026-09-29', '26.20', undefined, 'tokens', ALL, 'Raised `color.border.focus` in dark mode to lagoon.300 to meet 3:1 focus contrast.', 'p-maya'),
   c('2026-09-29', '26.20', 'skeleton', 'fixed', ['ios'], 'Shimmer no longer runs when Reduce Motion is on.', 'p-sol', { version: '0.8.0' }),
   c('2026-09-28', '26.20', 'bottom-sheet', 'changed', ['ios', 'android'], 'Added medium detent; drag handle is now focusable.', 'p-sol', { version: '1.0.0-beta.4' }),
 
