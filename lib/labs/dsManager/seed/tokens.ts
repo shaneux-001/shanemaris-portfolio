@@ -15,12 +15,13 @@ export const tokens: Token[] = [
   // ── Primitives ─────────────────────────────────────────────
   // Daedalus palette. Each brand hue is a 50–950 ramp built in OKLCH: even
   // perceptual lightness steps, chroma tapering toward the ends, and the
-  // chosen brand color kept exact at its natural step (indigo 800, steel
-  // 600, lagoon 500, mint 300). Neutral is indigo-tinted ("cool"), with
+  // chosen brand color kept exact at its natural step (indigo 800 —
+  // #4B2FA4, Shane's #2F39A9 nudged 15° toward purple — steel
+  // 600, lagoon 500, mint 300). Neutral is tinted with the original, bluer indigo ("cool"), with
   // lightness matched to the previous grays so text contrast carries over.
   // Coral and amber cover the danger/warning roles the palette doesn't.
   ...scale('neutral', { '0': '#ffffff', '50': '#f6f8fd', '100': '#edeff6', '200': '#dbdee8', '300': '#bcc0ce', '400': '#8f95a6', '500': '#666b7c', '600': '#4f5362', '700': '#3a3e4a', '800': '#272a33', '900': '#191b21', '950': '#0f1013' }),
-  ...scale('indigo', { '50': '#f4f7fe', '100': '#e8ecf9', '200': '#d1daf5', '300': '#b5c2ef', '400': '#92a4e4', '500': '#7286d7', '600': '#5468c8', '700': '#3d4cb7', '800': '#2f39a9', '900': '#1c2079', '950': '#12184b' }),
+  ...scale('indigo', { '50': '#f6f6ff', '100': '#ecebf9', '200': '#d8d7f4', '300': '#c1beed', '400': '#a39fe1', '500': '#887fd3', '600': '#6e60c3', '700': '#5943b2', '800': '#4b2fa4', '900': '#311774', '950': '#1f1348' }),
   ...scale('steel', { '50': '#f2f7fc', '100': '#e6eef5', '200': '#ccddec', '300': '#acc8e0', '400': '#84adcf', '500': '#5e92bc', '600': '#2e6fa0', '700': '#1e5f8e', '800': '#0e4971', '900': '#0a3350', '950': '#0b2132' }),
   ...scale('lagoon', { '50': '#f2f8fa', '100': '#e1f0f4', '200': '#c1e1ea', '300': '#9acedd', '400': '#67b5c9', '500': '#49a4bb', '600': '#247e93', '700': '#126578', '800': '#094d5c', '900': '#093641', '950': '#0b2329' }),
   ...scale('mint', { '50': '#eefaf6', '100': '#d2f6eb', '200': '#9ceed6', '300': '#15d8b3', '400': '#04c3a1', '500': '#0ba387', '600': '#02856d', '700': '#016b57', '800': '#015242', '900': '#003a2e', '950': '#00261e' }),

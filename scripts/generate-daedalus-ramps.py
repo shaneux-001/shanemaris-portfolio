@@ -64,7 +64,8 @@ def contrast(h1,h2):
     a,b=lum(h1),lum(h2); hi,lo=max(a,b),min(a,b)
     return (hi+0.05)/(lo+0.05)
 
-palette={'indigo':'#2F39A9','steel':'#2E6FA0','lagoon':'#49A4BB','mint':'#15D8B3',
+# Indigo: Shane's #2F39A9 rotated +15° toward purple in OKLCH (same lightness/chroma).
+palette={'indigo':'#4B2FA4','steel':'#2E6FA0','lagoon':'#49A4BB','mint':'#15D8B3',
          # status hues the palette doesn't cover, re-ramped to sit with it
          'coral':'#d6462a','amber':'#e09a12'}
 result={}
@@ -74,7 +75,8 @@ for name,hx in palette.items():
     print(f"{name:7} anchor {hx} at {STEPS[idx]}  L={lch[0]:.3f} C={lch[1]:.3f} H={lch[2]:.0f}")
     print('   ', ' '.join(f"{s}:{v}" for s,v in r.items()))
 
-# Cool neutral: indigo hue, low chroma, lightness matched to the old neutral so contrast behavior carries over
+# Cool neutral: tinted with the ORIGINAL indigo hue (#2F39A9, ~272°) so it stays cool even though the brand indigo
+# moved toward purple. Low chroma, lightness matched to the old neutral so contrast behavior carries over.
 H=rgb_to_oklch('#2F39A9')[2]
 NL={'0':1.0,'50':0.978,'100':0.952,'200':0.902,'300':0.81,'400':0.67,'500':0.53,'600':0.445,'700':0.365,'800':0.285,'900':0.222,'950':0.172}
 neutral={}
