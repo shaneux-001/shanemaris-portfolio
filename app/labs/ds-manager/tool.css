@@ -1,0 +1,167 @@
+/* ============================================================
+   Daedalus tool chrome — the management site's own UI tokens
+   (not the Daedalus component tokens, which live in daedalus.css).
+   Values are drawn from the Daedalus palette (indigo accent, cool
+   neutrals, mint/amber/coral/steel status) so the site and the system
+   read as one brand. --ks-border-input is the only off-ramp value: form
+   fields need 3:1 against their surface, and no neutral step lands there.
+   Scoped to .ks-root so nothing leaks into the rest of the site.
+   Tailwind utilities (bg-ks-surface, text-ks-fg-muted…) are mapped
+   in app/globals.css's @theme inline block.
+
+   Theme: follows the OS by default; an explicit choice is stored as
+   data-ks-theme on <html> (set before paint by the tool layout).
+   ============================================================ */
+
+.ks-root {
+  --ks-bg: #f6f8fd;
+  --ks-surface: #ffffff;
+  --ks-surface-2: #f1f3f9;
+  --ks-sunken: #edeff6;
+  --ks-border: #dbdee8;
+  --ks-border-strong: #bcc0ce;
+  --ks-border-input: #818694;
+  --ks-fg: #191b21;
+  --ks-fg-muted: #4f5362;
+  --ks-fg-subtle: #666b7c;
+  --ks-accent: #4b2fa4;
+  --ks-accent-hover: #311774;
+  --ks-accent-fg: #ffffff;
+  --ks-accent-soft: #ecebf9;
+  --ks-accent-text: #5943b2;
+  --ks-success: #016b57;
+  --ks-success-soft: #eefaf6;
+  --ks-warning: #7a5202;
+  --ks-warning-soft: #fcf6ee;
+  --ks-danger: #a52103;
+  --ks-danger-soft: #fef4f2;
+  --ks-info: #1e5f8e;
+  --ks-info-soft: #f2f7fc;
+  --ks-neutral-soft: #edeff6;
+  --ks-shadow-pop: 0 1px 2px rgb(15 16 19 / 0.06), 0 8px 24px rgb(15 16 19 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-ks-theme='light']) .ks-root {
+    --ks-bg: #0f1013;
+    --ks-surface: #191b21;
+    --ks-surface-2: #20232a;
+    --ks-sunken: #0a0b0e;
+    --ks-border: #272a33;
+    --ks-border-strong: #3a3e4a;
+    --ks-border-input: #6d717f;
+    --ks-fg: #f6f8fd;
+    --ks-fg-muted: #bcc0ce;
+    --ks-fg-subtle: #8f95a6;
+    --ks-accent: #c1beed;
+    --ks-accent-hover: #d8d7f4;
+    --ks-accent-fg: #0f1013;
+    --ks-accent-soft: #1f1348;
+    --ks-accent-text: #c1beed;
+    --ks-success: #15d8b3;
+    --ks-success-soft: #00261e;
+    --ks-warning: #f0b96a;
+    --ks-warning-soft: #2c1b01;
+    --ks-danger: #f2846d;
+    --ks-danger-soft: #3a0f07;
+    --ks-info: #acc8e0;
+    --ks-info-soft: #0b2132;
+    --ks-neutral-soft: #23262e;
+    --ks-shadow-pop: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+html[data-ks-theme='dark'] .ks-root {
+  --ks-bg: #0f1013;
+  --ks-surface: #191b21;
+  --ks-surface-2: #20232a;
+  --ks-sunken: #0a0b0e;
+  --ks-border: #272a33;
+  --ks-border-strong: #3a3e4a;
+  --ks-border-input: #6d717f;
+  --ks-fg: #f6f8fd;
+  --ks-fg-muted: #bcc0ce;
+  --ks-fg-subtle: #8f95a6;
+  --ks-accent: #c1beed;
+  --ks-accent-hover: #d8d7f4;
+  --ks-accent-fg: #0f1013;
+  --ks-accent-soft: #1f1348;
+  --ks-accent-text: #c1beed;
+  --ks-success: #15d8b3;
+  --ks-success-soft: #00261e;
+  --ks-warning: #f0b96a;
+  --ks-warning-soft: #2c1b01;
+  --ks-danger: #f2846d;
+  --ks-danger-soft: #3a0f07;
+  --ks-info: #acc8e0;
+  --ks-info-soft: #0b2132;
+  --ks-neutral-soft: #23262e;
+  --ks-shadow-pop: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+.ks-root {
+  min-height: 100dvh;
+  background: var(--ks-bg);
+  color: var(--ks-fg);
+  font-family: var(--ks-font-sans), system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ks-root :focus-visible {
+  outline: 2px solid var(--ks-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.ks-root ::selection {
+  background: var(--ks-accent-soft);
+}
+
+/* Theme-dependent icon swap (ThemeToggle). */
+.ks-root .ks-when-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-ks-theme='light']) .ks-root .ks-when-dark { display: inline; }
+  html:not([data-ks-theme='light']) .ks-root .ks-when-light { display: none; }
+}
+html[data-ks-theme='dark'] .ks-root .ks-when-dark { display: inline; }
+html[data-ks-theme='dark'] .ks-root .ks-when-light { display: none; }
+
+.ks-root .ks-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.ks-root .ks-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-border-strong) transparent;
+}
+
+/* Scroll areas that end mid-list: fade the last line so the cut reads as "more below". */
+.ks-root .ks-fade-bottom {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+}
+
+/* Prose inside docs and assistant answers. */
+.ks-root .ks-prose p {
+  margin: 0 0 0.75em;
+}
+.ks-root .ks-prose code {
+  font-family: var(--ks-font-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--ks-neutral-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-root *,
+  .ks-root *::before,
+  .ks-root *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,6 +1,6 @@
 # Roadmap — single source of truth
 
-**Last updated: 2026-09-19.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
+**Last updated: 2026-10-12.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
 - `HANDOFF.md` — retired 2026-09-19. Its task-list role was already dead (this file replaced it months ago); its architecture/gotchas/file-map reference content moved to the new `TECH-OVERVIEW.md`, corrected against the live codebase rather than carried forward stale.
 - The Cowork artifact **"Shane Portfolio Roadmap"** (`~/Documents/Claude/Artifacts/shane-portfolio-roadmap/`) — last touched May 1, targeted a June 22 launch that's long past, and several of its own "DONE" claims turned out to be stale once the September redesign rebuilt large parts of the site. A stale banner has been added to it.
 - `IMAGE-SPEC.md` — trimmed 2026-09-19 to Priority 2 only (the 9 hidden case studies). Priority 1 is done (Heart DS, Proof Before Progress, Figma Enterprise Migration, Home, About all have real photography live) so that section was deleted rather than left with stale numbers and a wrong file extension (`.jpg` — the real files are `.png`).
@@ -291,6 +291,57 @@ separate changelog file to keep in sync.
 _(Add new items here as they come up — this section is yours.)_
 
 ---
+
+## Done — Daedalus (design system manager) → Labs (second Labs entry)
+
+**Shipped 2026-10-12** — built on `labs/ds-manager` (2026-10-11 → 12), merged into `main` and deployed. Further polish continues on `labs/daedalus-polish` (draft PR). All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, a Getting started page, viewer/contributor/DS-team roles (enforced in the repository, not just the UI), docs feedback + watching with notifications, and a Figma ↔ code view (Code Connect-style property mapping, mismatch detection, library detach rates, generated Code Connect files); production build passes; every route checked for overflow at 375px. Proposed tag: `v1.2.0` (new Labs entry = MINOR), pending Shane's OK.
+
+**Still open (not blocking — carried to the polish branch):**
+- [x] ~~**Name.**~~ — decided 2026-10-12: fictional company **Skyforge**, design system **Daedalus** (was placeholder Larkspur / Meridian; renamed everywhere incl. package names, `dae-` CSS prefix, `DAE-` item IDs). The tool shares the system's name (**Daedalus**; Keystone placeholder retired) — all in `lib/labs/dsManager/brand.ts`, Labs listing title in `lib/projects.ts`.
+- [x] ~~**Daedalus color palette**~~ — done 2026-10-12 from Shane's four colors (#2F39A9 indigo — nudged 15° toward purple to #4B2FA4 —, #2E6FA0 steel, #49A4BB lagoon, #15D8B3 mint), each expanded to a 50–950 OKLCH ramp with the chosen color kept exact; cool indigo-tinted neutral; coral/amber re-ramped for danger/warning. Regenerate with `scripts/generate-daedalus-ramps.py`. All WCAG checks pass in both themes except `color.border.default`, kept as the deliberate planted finding (Shane confirmed 2026-10-12 — it demos the tool catching a real issue). The site's own interface now uses the Daedalus palette too (indigo accent, cool neutrals); its form fields have their own 3:1 input border so the planted failure only lives in Daedalus itself.
+- [ ] **Framing-page copy** (`app/labs/ds-manager/page.tsx`) is a draft — needs Shane's own voice pass.
+- [ ] **Live AI tier not exercised end to end.** The route (`app/api/labs/ds-manager/ask`) type-checks and correctly returns 401 without a session, but no real Claude call has been made (needs a Labs session + spends money). Uses `claude-opus-5-5` via `@anthropic-ai/sdk` (new dependency), effort `low`, prompt-cached grounding, server-side refusal fallback; reuses `ANTHROPIC_API_KEY` and the Upstash env vars already set for Recipe Box.
+- [ ] `npm audit` reports high-severity `brace-expansion`/`braces` advisories in dev tooling (eslint chain) — pre-existing, not from this branch; `npm audit fix` is non-breaking, worth a separate PATCH.
+
+**What it is:** a prototype of a design system management tool (the Knapsack / Zeroheight / Supernova / Storybook category) that is the single source of truth for a system: inventory, health, living docs, ownership, change history, roadmap, intake, tokens, and AI guidance. It shows Shane's thinking as a DS leader. It's a prototype, not a product. It should behave as if only a backend is missing.
+
+**Decisions (Shane, 2026-10-11):**
+- **Fictional design system.** No Heart DS (employer) data or naming anywhere, and no real-company branding.
+- **Fully public.** No login. Edits persist per browser (localStorage) behind a typed service layer, with a "Reset demo" control.
+- **Hybrid AI.** Free, deterministic retrieval over the inventory answers everyone. Live Claude answers sit behind the same signed-session gate and Upstash rate limit as Recipe Box.
+- **Own visual identity.** Scoped tokens, does not inherit Press Room styling. Dense SaaS look with light and dark themes.
+- **Platforms tracked:** Web (React), iOS (SwiftUI), Android (Compose), plus Figma as its own parity column.
+
+**Reference: Shane's Figma Make export, "Design System Inventory – V1".** It was reviewed but not copied in. It's a Vite + react-router + shadcn + MUI bundle (~11k lines), so its code doesn't fit this repo's stack (Next 16, Tailwind 4, no shadcn). It's useful for IA and flows. What carries forward:
+- Views: Inventory (table/grid + detail drawer), Health dashboard (KPIs, category readiness, risk alerts, parity, owner distribution), Owners directory, Audit log, Roadmap (the spec in `design-system-roadmap.md` is solid: Timeline/Coverage/List views, impact tags, completeness breakdown), Sandbox, 5-step Proposal flow, AI assistant with a context panel.
+- Data model: ComponentItem (maturity, parity, design/code readiness, UX/Ops/Dev owners, a11y, theming, dependencies), RoadmapItem, AuditEntry, Owner.
+- Concepts to keep: the "Reuse Predictability Score" in Sandbox and Proposal, the proposal's self-attestation checklist, the impact-definition helper.
+
+**What has to change from the export:**
+- **Scrub all employer references.** About 21 hits: "Heart Design System", "HDS Assistant", `HDS-COMP-` IDs, the Heart logo icon.
+- **Replace the Unsplash headshot avatars** with initials or generated avatars. Fictional owners shouldn't carry real people's faces.
+- **The mock AI is keyword `if`s with canned text.** Replace it with real retrieval over the inventory and docs, plus the live Claude tier.
+- **Reuse scores are hard-coded point bumps that don't check the inventory.** Duplicate detection should actually match the request against existing components (name, category, description, props/variants) and name the match.
+- **Health metrics mix sources.** Average completeness is computed from roadmap items, not components. Every metric should derive from one inventory model.
+- **Missing from the export (net new):** living styleguide pages with live demos, token management + exports, a per-component changelog drill-down, Figma as a parity platform, sprint/PI framing on roadmap and changelog, a DS-team triage queue for proposals, the "agent-ready" system spec export, and responsive behavior.
+
+**Views (final IA):**
+1. **Dashboard:** avg completeness, platform parity, totals (components/patterns), stable ratio, high-impact WIP, drift, category readiness, risks (unowned, drift, stale docs, completeness drop), recent changes feed.
+2. **Inventory:** system components, product components, and patterns in one table. Version, platform coverage, lifecycle, owner, docs link. Sort, filter, group. Rows link to the styleguide.
+3. **Living styleguide:** per component: live demo, variant/prop playground, usage do/don't, a11y notes, per-platform code snippets, tokens used, changelog tab.
+4. **Sandbox:** compose components on a canvas. Live "this already exists, use X" nudges. Hand off to the proposal flow prefilled.
+5. **Owners:** people and teams, what they own, load and coverage gaps.
+6. **Changelog:** filter by platform and sprint, per-component drill-down.
+7. **Roadmap:** current sprint plus a PI view (Timeline / Coverage / List from the export spec).
+8. **Ask the system:** plain-language Q&A grounded in the system data. Cites the components it recommends.
+9. **Proposals:** step-by-step intake with real duplicate detection and pushback, a quality score, and a DS-team triage queue.
+10. **Tokens:** browse and edit primitive, semantic, and component tiers across themes. Export to W3C DTCG JSON, Figma Variables JSON, CSS / SCSS / Swift / Kotlin, and an agent-ready `AGENTS.md`-style system spec.
+
+**Architecture:** domain types + seed data + service layer in `lib/labs/dsManager/`. UI components call async services (`getComponents()`, `submitProposal()`), never the data directly, so a real API swaps in behind the same functions. All metrics derive from the inventory. One shared export module powers every "copy as code / MD / JSON" action. Routes under `app/labs/ds-manager/`. The live AI handler is under `app/api/labs/ds-manager/`, reusing Recipe Box's session + rate-limit helpers.
+
+**Build sequence:** (1) data model, fictional system seed data (~40 items with realistic mess: drift, orphans, gaps), service layer; (2) app shell, nav, theming; (3) Inventory + styleguide; (4) Dashboard; (5) Tokens + exports; (6) Proposals + Sandbox + duplicate detection; (7) Ask the system (retrieval, then live tier); (8) Owners, Changelog, Roadmap; (9) Labs index entry + framing write-up (problem, audience, what's real vs. mocked); (10) responsive/a11y QA pass, build, PR.
+
+**Open (defaults chosen, change anytime):** phone width supports dashboard/AI/styleguide fully, with sandbox and wide tables read-only.
 
 ## Done — "The Recipe Box" → Labs
 

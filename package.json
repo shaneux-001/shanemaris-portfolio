@@ -10,6 +10,7 @@
     "generate:resume": "esbuild scripts/generate-resume-pdf.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=scripts/.generated-pdf-bundle.mjs && node scripts/.generated-pdf-bundle.mjs && tsx scripts/generate-resume-md.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
     "@phosphor-icons/react": "^2.1.7",
     "@upstash/ratelimit": "^2.1.0",
     "@upstash/redis": "^1.38.4",

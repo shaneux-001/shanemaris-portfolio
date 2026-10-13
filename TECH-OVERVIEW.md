@@ -26,6 +26,7 @@ rather than reviving a separate doc that can drift out of sync.
 | Tailwind CSS | **^4** (v4) | Via `@tailwindcss/postcss`. Fully wired site-wide (see gotcha #1) |
 | TypeScript | ^5 | |
 | Icons | `@phosphor-icons/react@^2.1.7` | v2 |
+| Claude API | `@anthropic-ai/sdk` | Server-only, for the Daedalus Labs assistant's live tier (`lib/labs/dsManager/server/ask.ts`). The Recipe Box still calls the API with raw `fetch`. |
 | Hosting | Vercel | Project: `shanemaris-portfolio`, auto-deploys from `main` — every push goes live within a minute or two |
 | Domain | shanemaris.com | |
 | Fonts | **Archivo + IBM Plex Mono** | Loaded via `next/font/google` in `app/layout.tsx`. Inter and Playfair Display were both removed in the 2026-09-09 typography audit — both are individually common "looks AI-generated" tells, and the safe-body+serif-accent combo was its own recognizable template formula. |
@@ -104,12 +105,12 @@ never appear in public, committed files.
 ```
 app/
   globals.css          ← BOTH token sets live here: old --color-* (/particle-demo, /particle-test only) and new --pr-* (Press Room). Press Room custom CSS wrapped in @layer components; see gotcha #1.
-  layout.tsx           ← root layout + shared footer (SiteFooter) + shared header (SiteHeader) — each opts out per-route via its own exclude list, and the two lists differ: SiteHeader excludes /labs (which uses LabsHeader instead), SiteFooter does NOT exclude /labs (it gets the shared footer) — both exclude /particle-demo and /particle-test
+  layout.tsx           ← root layout + shared footer (SiteFooter) + shared header (SiteHeader) — each opts out per-route via its own exclude list, and the two lists differ: SiteHeader excludes /labs (which uses LabsHeader instead), SiteFooter does NOT exclude /labs (it gets the shared footer) except the Daedalus tool views under `/labs/ds-manager/` (trailing slash — its intro page keeps the footer) via `APP_SHELL_PREFIXES` — both exclude /particle-demo and /particle-test
   page.tsx             ← home — SERVER COMPONENT (Konami-code listener extracted to its own client component, KonamiListener, specifically so this could be one), Press Room theme, Tailwind utilities
   about/page.tsx       ← server component. Order: intro → HOW I LEAD (leadership beliefs) → WHAT I'M GOOD AT → Outside of Work → Expertise (no Experience — that's resume-only)
   contact/page.tsx     ← client component (form state); posts to /api/contact
   resume/page.tsx      ← server component; content copied verbatim from resume-source/MASTER_RESUME.md
-  labs/page.tsx        ← empty-state page currently (labsProjects is []); Press Room theme
+  labs/page.tsx        ← Labs index, row list from labsProjects; Press Room theme
   work/
     page.tsx           ← SERVER COMPONENT — flat typographic list, Press Room theme. Do NOT add 'use client'.
     [slug]/page.tsx    ← SERVER COMPONENT — reads case study MD via lib/parseProjectMd.ts. Renders a CaseStudyOrientation block (ROLE/PROBLEM/SCALE/WHAT CHANGED) when a project's frontmatter has problem/scale/whatChanged all set. Do NOT add 'use client'.
@@ -127,7 +128,7 @@ components/
 
 content/work/          ← case study MD files — edit these, not the TypeScript. 9 more slugs exist here with hidden:true entries (see ROADMAP.md's hidden-case-studies checklist) — real content, pending photography.
 lib/
-  projects.ts          ← project registry. labsProjects is currently [] (Project Oasis removed 2026-09-19); portfolioProjects has the 3 live case studies + 9 hidden ones.
+  projects.ts          ← project registry. labsProjects: The Recipe Box, Daedalus; portfolioProjects has the 3 live case studies + 9 hidden ones.
   parseProjectMd.ts    ← server-side MD parser. Frontmatter fields: tagline, eyebrow, role, timeline, platform, readTime, problem/scale/whatChanged/orientationRole (all optional, drive CaseStudyOrientation). NOTE: does not parse markdown links — `[text](url)` renders as literal text.
   password.ts          ← reads NEXT_PUBLIC_PORTFOLIO_PASSWORD (the master password) from env vars. RESEND_API_KEY is separate — read directly in app/api/contact/route.ts, not here.
   imageDimensions.ts   ← reads width/height straight from a PNG's IHDR chunk (no dependency) — every image lives in public/ with no build-time asset pipeline, so next/image needs explicit dimensions passed in.
@@ -151,6 +152,15 @@ CLAUDE.md                ← imports AGENTS.md
 ```
 
 ---
+
+## Labs apps
+
+- **The Recipe Box** (`/labs/recipe-box`) — gated by a signed session cookie (`proxy.ts` + `requireSession` in each API route), Upstash for state and rate limiting.
+- **Daedalus** (`/labs/ds-manager`) — public design system management prototype for the fictional Daedalus system by Skyforge. Intro page is Press Room; everything under `app/labs/ds-manager/(tool)/` is its own app shell with its own tokens (`app/labs/ds-manager/tool.css`, `ks-*` utilities mapped in `globals.css`) and does not use Press Room. The fictional system's components live in `app/labs/ds-manager/_components/daedalus/` (`dae-*` CSS vars generated from the token store).
+  - Data: `lib/labs/dsManager/` — seed data, pure metrics/matcher/exporters, and `repository.ts`, the single async seam the UI writes through (also enforces role permissions). Demo edits persist to localStorage; bump `STORAGE_KEY` whenever the `Database` shape changes.
+  - Names live in `lib/labs/dsManager/brand.ts`; the palette is generated by `scripts/generate-daedalus-ramps.py`.
+  - The only server route is the live assistant (`app/api/labs/ds-manager/ask`), which reuses The Recipe Box's session gate and needs `ANTHROPIC_API_KEY` + the Upstash env vars.
+  - Its pre-paint theme script is in the root layout's `<head>` (`TOOL_THEME_SCRIPT`), because a `<script>` inside a nested layout warns in React 19.
 
 ## Style approach
 
