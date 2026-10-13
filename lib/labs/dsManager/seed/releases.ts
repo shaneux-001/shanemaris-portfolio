@@ -7,7 +7,7 @@ import type { MigrationGuide, Release } from '../types';
  * nothing here duplicates change entries.
  */
 
-const pkgs = (v: string, android = v) => ({ web: `@meridian/react ${v}`, ios: `MeridianUI ${v}`, android: `meridian-compose ${android}`, figma: `Library ${v.split('.').slice(0, 2).join('.')}` });
+const pkgs = (v: string, android = v) => ({ web: `@daedalus/react ${v}`, ios: `DaedalusUI ${v}`, android: `daedalus-compose ${android}`, figma: `Library ${v.split('.').slice(0, 2).join('.')}` });
 
 export const releases: Release[] = [
   { version: '3.4.0', date: '2026-10-09', sprintId: '26.20', summary: 'Text Field 4 on web and iOS, accessible loading states for Button, row selection in Data Table, and an experimental Stepper.', packages: pkgs('3.4.0', '3.3.1'), migrationIds: ['MIG-004'] },
@@ -32,7 +32,7 @@ export const migrations: MigrationGuide[] = [
       'Remove the `floatingLabel` prop. Labels are always visible now, so there is nothing to configure.',
       'If you hid helper text to save space, check the layout — helper text is now always rendered below the field.',
       'Replace any custom error placement with the `error` prop. Errors now replace helper text in the same spot.',
-      'Android: wait for meridian-compose 3.4.0 (Sprint 26.21). Do not hand-roll the new layout in the meantime.',
+      'Android: wait for daedalus-compose 3.4.0 (Sprint 26.21). Do not hand-roll the new layout in the meantime.',
     ],
     before: {
       web: `<TextField\n  floatingLabel\n  label="Email address"\n  placeholder="Email address"\n/>`,
@@ -99,9 +99,9 @@ export const migrations: MigrationGuide[] = [
     toSlug: 'button',
     releasedIn: '3.0.0',
     deadline: '2027-01-29',
-    why: 'Ghost Button failed 4.5:1 text contrast in dark mode. The tertiary Button keeps the same low-emphasis look and meets contrast in both themes. Ghost Button is removed in Meridian 4.0 (PI 27.1).',
+    why: 'Ghost Button failed 4.5:1 text contrast in dark mode. The tertiary Button keeps the same low-emphasis look and meets contrast in both themes. Ghost Button is removed in Daedalus 4.0 (PI 27.1).',
     steps: ['Run the codemod — it handles every straightforward usage.', 'Review anything the codemod flags: Ghost Buttons with custom colors usually wanted `variant="secondary"` instead.', 'Remove any local overrides that forced Ghost Button text color.'],
-    codemod: 'npx @meridian/codemods ghost-to-tertiary ./src',
+    codemod: 'npx @daedalus/codemods ghost-to-tertiary ./src',
     before: { web: `<GhostButton onPress={showDetails}>Learn more</GhostButton>`, ios: `MGhostButton("Learn more", action: showDetails)` },
     after: { web: `<Button variant="tertiary" onPress={showDetails}>Learn more</Button>`, ios: `MButton("Learn more", variant: .tertiary, action: showDetails)` },
     products: [

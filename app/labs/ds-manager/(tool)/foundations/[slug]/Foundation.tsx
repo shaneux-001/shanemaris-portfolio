@@ -9,8 +9,8 @@ import type { Token } from '@/lib/labs/dsManager/types';
 import { SYSTEM } from '@/lib/labs/dsManager/brand';
 import { useStore } from '../../../_components/Store';
 import { BASE } from '../../../_components/Shell';
-import MeridianScope from '../../../_components/meridian/MeridianScope';
-import { DEMOS, defaultsFor } from '../../../_components/meridian/demos';
+import DaedalusScope from '../../../_components/daedalus/DaedalusScope';
+import { DEMOS, defaultsFor } from '../../../_components/daedalus/demos';
 import { EmptyState, Panel, Pill, Segmented, cx } from '../../../_components/ui';
 
 function useTokens() {
@@ -197,12 +197,12 @@ function Typography() {
   return (
     <div className="flex flex-col gap-6">
       <Panel title="Typeface">
-        <MeridianScope className="rounded-md p-5">
+        <DaedalusScope className="rounded-md p-5">
           <div style={{ fontSize: 44, fontWeight: 650, lineHeight: 1.1 }}>Figtree</div>
-          <div className="mt-2" style={{ fontSize: 15, color: 'var(--mer-color-text-secondary)' }}>
+          <div className="mt-2" style={{ fontSize: 15, color: 'var(--dae-color-text-secondary)' }}>
             Aa Bb Cc Dd Ee Ff Gg 0123456789 — friendly, open, legible at small sizes.
           </div>
-        </MeridianScope>
+        </DaedalusScope>
         <p className="m-0 mt-3 text-[12.5px] text-ks-fg-muted">
           <TokenName name="font.family.sans" /> · Native apps fall back to the platform face (SF Pro, Roboto) for Dynamic Type and font scaling.
         </p>
@@ -219,9 +219,9 @@ function Typography() {
                 </div>
                 <div className="mt-1.5 text-[12px] text-ks-fg-muted">{r.usage}</div>
               </div>
-              <MeridianScope className="flex items-center rounded-md px-4 py-3">
-                <span style={{ fontSize: `var(--mer-${r.size.replace(/\./g, '-')})`, fontWeight: `var(--mer-${r.weight.replace(/\./g, '-')})`, lineHeight: `var(--mer-${r.lineHeight.replace(/\./g, '-')})` }}>{r.sample}</span>
-              </MeridianScope>
+              <DaedalusScope className="flex items-center rounded-md px-4 py-3">
+                <span style={{ fontSize: `var(--dae-${r.size.replace(/\./g, '-')})`, fontWeight: `var(--dae-${r.weight.replace(/\./g, '-')})`, lineHeight: `var(--dae-${r.lineHeight.replace(/\./g, '-')})` }}>{r.sample}</span>
+              </DaedalusScope>
             </div>
           ))}
         </div>
@@ -258,10 +258,10 @@ function Spacing() {
         <p className="m-0 mb-3 text-[13px] text-ks-fg-muted">
           Buttons, inputs and selects share <TokenName name="space.control.height" /> ({val('space.control.height')}) and <TokenName name="space.control.x" /> ({val('space.control.x')}) so they align in a row. Touch targets stay at least 44pt on iOS and 48dp on Android regardless.
         </p>
-        <MeridianScope className="flex flex-wrap items-center gap-3 rounded-md p-5">
+        <DaedalusScope className="flex flex-wrap items-center gap-3 rounded-md p-5">
           {DEMOS['text-field'].render({ ...defaultsFor(DEMOS['text-field']), helperText: '', required: false, label: 'Search' })}
           {DEMOS.button.render(defaultsFor(DEMOS.button))}
-        </MeridianScope>
+        </DaedalusScope>
         <UsedBy names={['space.control.x', 'space.control.height']} />
       </Panel>
       <Panel title="Rules">
@@ -313,18 +313,18 @@ function Elevation() {
         />
       }
     >
-      <MeridianScope mode={mode} className="grid grid-cols-1 gap-8 rounded-md p-8 sm:grid-cols-3">
+      <DaedalusScope mode={mode} className="grid grid-cols-1 gap-8 rounded-md p-8 sm:grid-cols-3">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-24 w-full rounded-lg border" style={{ borderColor: 'var(--mer-color-border-subtle)', background: 'var(--mer-color-surface-raised)' }} />
+          <div className="h-24 w-full rounded-lg border" style={{ borderColor: 'var(--dae-color-border-subtle)', background: 'var(--dae-color-surface-raised)' }} />
           <span className="text-[13px]">Flat · border only</span>
         </div>
         {shadows.map((t) => (
           <div key={t.name} className="flex flex-col items-center gap-3">
-            <div className="h-24 w-full rounded-lg" style={{ background: 'var(--mer-color-surface-raised)', boxShadow: `var(--mer-${t.name.replace(/\./g, '-')})` }} />
+            <div className="h-24 w-full rounded-lg" style={{ background: 'var(--dae-color-surface-raised)', boxShadow: `var(--dae-${t.name.replace(/\./g, '-')})` }} />
             <span className="text-[13px]">{t.name}</span>
           </div>
         ))}
-      </MeridianScope>
+      </DaedalusScope>
       <p className="m-0 mt-3 text-[12.5px] text-ks-fg-muted">Two levels only: cards (resting) and overlays (modals, menus, toasts). Dark mode leans on surface color, not shadow, to show depth.</p>
       <UsedBy names={shadows.map((t) => t.name)} />
     </Panel>
@@ -373,7 +373,7 @@ function Iconography() {
   return (
     <div className="flex flex-col gap-6">
       <Panel title={`${SYSTEM.name} icon set`}>
-        <MeridianScope className="rounded-md p-6">{DEMOS.icon.render({})}</MeridianScope>
+        <DaedalusScope className="rounded-md p-6">{DEMOS.icon.render({})}</DaedalusScope>
         <p className="m-0 mt-3 text-[13px] text-ks-fg-muted">
           {icon?.description}{' '}
           <Link href={`${BASE}/components/icon`} className="text-ks-accent-text hover:underline">

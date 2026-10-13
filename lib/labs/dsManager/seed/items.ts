@@ -64,7 +64,7 @@ function item(i: Input): SystemItem {
   seq += 1;
   const slug = i.slug ?? i.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   return {
-    id: `MER-${String(seq).padStart(3, '0')}`,
+    id: `DAE-${String(seq).padStart(3, '0')}`,
     slug,
     name: i.name,
     kind: i.kind ?? 'component',
@@ -105,7 +105,7 @@ export const items: SystemItem[] = [
     lifecycle: 'stable',
     version: '3.2.0',
     ownerId: 'p-dev',
-    platforms: plat({ status: 'shipped', version: '3.2.0', ref: '@meridian/react/Button' }, { status: 'shipped', version: '3.2.0', ref: 'MeridianUI.MButton' }, { status: 'shipped', version: '3.2.0', ref: 'meridian.compose.MButton' }, { status: 'shipped', version: '3.2.0', ref: 'Meridian / Actions' }),
+    platforms: plat({ status: 'shipped', version: '3.2.0', ref: '@daedalus/react/Button' }, { status: 'shipped', version: '3.2.0', ref: 'DaedalusUI.MButton' }, { status: 'shipped', version: '3.2.0', ref: 'daedalus.compose.MButton' }, { status: 'shipped', version: '3.2.0', ref: 'Daedalus / Actions' }),
     readiness: ready(),
     a11yLevel: 'AAA',
     adoption: [14, 2310],
@@ -803,7 +803,7 @@ export const items: SystemItem[] = [
   item({
     name: 'Icon',
     category: 'Data Display',
-    description: 'The Meridian icon set: 240 glyphs on a 24px grid, two weights.',
+    description: 'The Daedalus icon set: 240 glyphs on a 24px grid, two weights.',
     aliases: ['glyph', 'symbol', 'pictogram', 'icons'],
     lifecycle: 'stable',
     version: '4.1.0',

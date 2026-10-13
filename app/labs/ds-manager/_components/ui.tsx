@@ -1,8 +1,8 @@
 'use client';
 
 /*
- * Keystone's own small UI kit — the tool's chrome, not the Meridian
- * components it documents (those live in meridian/).
+ * Keystone's own small UI kit — the tool's chrome, not the Daedalus
+ * components it documents (those live in daedalus/).
  */
 
 import Link from 'next/link';

@@ -120,7 +120,7 @@ export default function Inventory() {
         description="Every system component, product component and pattern, with version, platform coverage, lifecycle and ownership. Click a row for a quick view."
         actions={
           <>
-            <Button size="sm" onClick={() => downloadText('meridian-inventory.csv', inventoryCSV(db), 'text/csv')}>
+            <Button size="sm" onClick={() => downloadText('daedalus-inventory.csv', inventoryCSV(db), 'text/csv')}>
               <DownloadSimple size={15} /> Export CSV
             </Button>
             <ButtonLink size="sm" variant="primary" href={`${BASE}/proposals/new`}>

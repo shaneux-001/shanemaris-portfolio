@@ -297,7 +297,8 @@ _(Add new items here as they come up — this section is yours.)_
 **Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, a Getting started page, viewer/contributor/DS-team roles (enforced in the repository, not just the UI), docs feedback + watching with notifications, and a Figma ↔ code view (Code Connect-style property mapping, mismatch detection, library detach rates, generated Code Connect files); production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
 
 **Open before merge:**
-- [ ] **Name.** Placeholders are `Keystone` (tool) and `Meridian` (fictional system), both in `lib/labs/dsManager/brand.ts`; the Labs listing title in `lib/projects.ts` must match.
+- [x] ~~**Name.**~~ — decided 2026-10-12: fictional company **Skyforge**, design system **Daedalus** (was placeholder Larkspur / Meridian; renamed everywhere incl. package names, `dae-` CSS prefix, `DAE-` item IDs). Tool name stays **Keystone** unless Shane changes it — all in `lib/labs/dsManager/brand.ts`, Labs listing title in `lib/projects.ts`.
+- [ ] **Daedalus color palette** — Shane is choosing one. Swap the primitive ramps in `lib/labs/dsManager/seed/tokens.ts`; Foundations → Color re-runs the WCAG checks automatically. Decide whether to fix the seeded `color.border.default` 3:1 failure or keep it as a deliberate finding.
 - [ ] **Framing-page copy** (`app/labs/ds-manager/page.tsx`) is a draft — needs Shane's own voice pass.
 - [ ] **Live AI tier not exercised end to end.** The route (`app/api/labs/ds-manager/ask`) type-checks and correctly returns 401 without a session, but no real Claude call has been made (needs a Labs session + spends money). Uses `claude-opus-5-5` via `@anthropic-ai/sdk` (new dependency), effort `low`, prompt-cached grounding, server-side refusal fallback; reuses `ANTHROPIC_API_KEY` and the Upstash env vars already set for Recipe Box.
 - [ ] `npm audit` reports high-severity `brace-expansion`/`braces` advisories in dev tooling (eslint chain) — pre-existing, not from this branch; `npm audit fix` is non-breaking, worth a separate PATCH.
@@ -340,7 +341,7 @@ _(Add new items here as they come up — this section is yours.)_
 
 **Build sequence:** (1) data model, fictional system seed data (~40 items with realistic mess: drift, orphans, gaps), service layer; (2) app shell, nav, theming; (3) Inventory + styleguide; (4) Dashboard; (5) Tokens + exports; (6) Proposals + Sandbox + duplicate detection; (7) Ask the system (retrieval, then live tier); (8) Owners, Changelog, Roadmap; (9) Labs index entry + framing write-up (problem, audience, what's real vs. mocked); (10) responsive/a11y QA pass, build, PR.
 
-**Open (defaults chosen, change anytime):** system/company name (placeholder "Meridian DS"); phone width supports dashboard/AI/styleguide fully, with sandbox and wide tables read-only.
+**Open (defaults chosen, change anytime):** phone width supports dashboard/AI/styleguide fully, with sandbox and wide tables read-only.
 
 ## Done — "The Recipe Box" → Labs
 

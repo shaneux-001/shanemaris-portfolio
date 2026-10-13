@@ -34,7 +34,7 @@ export function chain(byName: Map<string, Token>, name: string, mode: Mode): str
   return out;
 }
 
-export const cssVar = (name: string) => `--mer-${name.replace(/\./g, '-')}`;
+export const cssVar = (name: string) => `--dae-${name.replace(/\./g, '-')}`;
 
 export function toCssVars(tokens: Token[], mode: Mode): Record<string, string> {
   const byName = new Map(tokens.map((t) => [t.name, t]));

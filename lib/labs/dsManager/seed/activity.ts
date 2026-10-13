@@ -83,7 +83,7 @@ export const roadmap: RoadmapItem[] = [
   {
     id: 'RM-105', title: 'Promote Rating Stars to the system', type: 'new', status: 'planned', priority: 'medium', impact: 'medium',
     platforms: ['web', 'ios', 'android', 'figma'], itemSlug: 'rating-stars', ownerIds: ['p-dev', 'p-omar'], sprintId: '26.22', pi: 'PI 26.4', horizon: 'next',
-    description: 'Harden, document, and move Rating Stars from Marketplace into Meridian.', why: 'Three product teams already use it; two more have asked. Promoting it stops forks.',
+    description: 'Harden, document, and move Rating Stars from Marketplace into Daedalus.', why: 'Three product teams already use it; two more have asked. Promoting it stops forks.',
     dependencies: [], proposalId: 'PRP-031', progress: 0,
   },
   {

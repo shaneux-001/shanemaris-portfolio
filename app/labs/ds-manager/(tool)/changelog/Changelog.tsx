@@ -60,7 +60,7 @@ export default function Changelog() {
         title={it ? `${it.name} changelog` : 'Changelog'}
         description={it ? `Every recorded change to ${it.name} across platforms.` : 'What changed in the system, by sprint and platform. Edits made in Keystone (owner, lifecycle, tokens) are logged here too.'}
         actions={
-          <Button size="sm" onClick={() => downloadText('meridian-changelog.md', markdown())}>
+          <Button size="sm" onClick={() => downloadText('daedalus-changelog.md', markdown())}>
             <DownloadSimple size={15} /> Release notes (.md)
           </Button>
         }

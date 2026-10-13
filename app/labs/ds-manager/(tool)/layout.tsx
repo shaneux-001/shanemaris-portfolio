@@ -5,11 +5,11 @@ import { StoreProvider } from '../_components/Store';
 import Shell from '../_components/Shell';
 import '../keystone.css';
 
-// Keystone's chrome uses Geist; the fictional Meridian system it documents
+// Keystone's chrome uses Geist; the fictional Daedalus system it documents
 // uses Figtree, so live component demos visibly read as a different brand.
 const geist = Geist({ subsets: ['latin'], variable: '--ks-font-sans', display: 'swap' });
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--ks-font-mono', display: 'swap' });
-const figtree = Figtree({ subsets: ['latin'], variable: '--mer-font-brand', display: 'swap' });
+const figtree = Figtree({ subsets: ['latin'], variable: '--dae-font-brand', display: 'swap' });
 
 export const metadata: Metadata = {
   title: { default: TOOL.name, template: `%s · ${TOOL.name}` },

@@ -331,7 +331,7 @@ export interface PropMapping {
 
 export interface FigmaMapping {
   itemSlug: string;
-  /** Component name in the Figma library, e.g. "Meridian / Actions / Button". */
+  /** Component name in the Figma library, e.g. "Daedalus / Actions / Button". */
   nodeName: string;
   nodeId: string;
   props: PropMapping[];

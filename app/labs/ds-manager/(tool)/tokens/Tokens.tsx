@@ -9,8 +9,8 @@ import type { Token, TokenTier } from '@/lib/labs/dsManager/types';
 import { SYSTEM } from '@/lib/labs/dsManager/brand';
 import { useStore } from '../../_components/Store';
 import { BASE } from '../../_components/Shell';
-import MeridianScope from '../../_components/meridian/MeridianScope';
-import { DEMOS, defaultsFor } from '../../_components/meridian/demos';
+import DaedalusScope from '../../_components/daedalus/DaedalusScope';
+import { DEMOS, defaultsFor } from '../../_components/daedalus/demos';
 import CodeBlock from '../../_components/CodeBlock';
 import { Button, Drawer, PageHeader, Panel, Pill, Segmented, SelectFilter, cx, inputClass } from '../../_components/ui';
 
@@ -170,14 +170,14 @@ function TokenEditor({ name, onClose }: { name: string; onClose: () => void }) {
   );
 }
 
-/** A Meridian scope fed an explicit token list (for previewing unsaved edits). */
+/** A Daedalus scope fed an explicit token list (for previewing unsaved edits). */
 function PreviewScope({ mode, tokens, children }: { mode: Mode; tokens: Token[]; children: React.ReactNode }) {
   const map = new Map(tokens.map((t) => [t.name, t]));
-  const vars = Object.fromEntries(tokens.map((t) => [`--mer-${t.name.replace(/\./g, '-')}`, resolve(map, t.name, mode)]));
+  const vars = Object.fromEntries(tokens.map((t) => [`--dae-${t.name.replace(/\./g, '-')}`, resolve(map, t.name, mode)]));
   return (
-    <MeridianScope mode={mode} style={vars as React.CSSProperties}>
+    <DaedalusScope mode={mode} style={vars as React.CSSProperties}>
       {children}
-    </MeridianScope>
+    </DaedalusScope>
   );
 }
 
@@ -233,12 +233,12 @@ function Exports() {
         maxHeight={520}
         tabs={[
           { id: 'agent', label: 'AGENTS.md', code: toAgentSpec(db, mode), filename: 'AGENTS.md' },
-          { id: 'figma', label: 'Figma Variables', code: toFigmaVariables(db.tokens), filename: 'meridian.figma-variables.json' },
-          { id: 'dtcg', label: 'DTCG JSON', code: toDTCG(db.tokens), filename: 'meridian.tokens.json' },
-          { id: 'css', label: 'CSS', code: toCSS(db.tokens), filename: 'meridian.css' },
-          { id: 'scss', label: 'SCSS', code: toSCSS(db.tokens), filename: '_meridian.scss' },
-          { id: 'swift', label: 'Swift', code: toSwift(db.tokens), filename: 'MeridianTokens.swift' },
-          { id: 'kotlin', label: 'Kotlin', code: toKotlin(db.tokens), filename: 'MeridianTokens.kt' },
+          { id: 'figma', label: 'Figma Variables', code: toFigmaVariables(db.tokens), filename: 'daedalus.figma-variables.json' },
+          { id: 'dtcg', label: 'DTCG JSON', code: toDTCG(db.tokens), filename: 'daedalus.tokens.json' },
+          { id: 'css', label: 'CSS', code: toCSS(db.tokens), filename: 'daedalus.css' },
+          { id: 'scss', label: 'SCSS', code: toSCSS(db.tokens), filename: '_daedalus.scss' },
+          { id: 'swift', label: 'Swift', code: toSwift(db.tokens), filename: 'DaedalusTokens.swift' },
+          { id: 'kotlin', label: 'Kotlin', code: toKotlin(db.tokens), filename: 'DaedalusTokens.kt' },
         ]}
       />
     </div>

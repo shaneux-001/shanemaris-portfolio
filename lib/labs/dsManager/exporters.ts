@@ -117,15 +117,15 @@ export function toFigmaVariables(tokens: Token[]): string {
 const kebab = (n: string) => n.replace(/\./g, '-');
 
 export function toCSS(tokens: Token[]): string {
-  const ref = (v: string) => v.replace(/^\{(.+)\}$/, (_, r: string) => `var(--mer-${kebab(r)})`);
-  const light = tokens.map((t) => `  --mer-${kebab(t.name)}: ${ref(rawValue(t, 'light'))};`);
-  const dark = tokens.filter((t) => typeof t.value !== 'string').map((t) => `  --mer-${kebab(t.name)}: ${ref(rawValue(t, 'dark'))};`);
+  const ref = (v: string) => v.replace(/^\{(.+)\}$/, (_, r: string) => `var(--dae-${kebab(r)})`);
+  const light = tokens.map((t) => `  --dae-${kebab(t.name)}: ${ref(rawValue(t, 'light'))};`);
+  const dark = tokens.filter((t) => typeof t.value !== 'string').map((t) => `  --dae-${kebab(t.name)}: ${ref(rawValue(t, 'dark'))};`);
   return `/* ${SYSTEM.name} tokens — generated ${SNAPSHOT_DATE}. Do not edit by hand. */\n:root {\n${light.join('\n')}\n}\n\n[data-theme='dark'] {\n${dark.join('\n')}\n}\n`;
 }
 
 export function toSCSS(tokens: Token[]): string {
   const map = byName(tokens);
-  return `// ${SYSTEM.name} tokens — generated ${SNAPSHOT_DATE}. Light-mode resolved values.\n` + tokens.map((t) => `$mer-${kebab(t.name)}: ${resolve(map, t.name, 'light')};`).join('\n') + '\n';
+  return `// ${SYSTEM.name} tokens — generated ${SNAPSHOT_DATE}. Light-mode resolved values.\n` + tokens.map((t) => `$dae-${kebab(t.name)}: ${resolve(map, t.name, 'light')};`).join('\n') + '\n';
 }
 
 const hexToRgb = (hex: string) => {
@@ -147,13 +147,13 @@ export function toSwift(tokens: Token[]): string {
   return [
     `// ${SYSTEM.name} tokens — generated ${SNAPSHOT_DATE}. Do not edit by hand.`,
     'import SwiftUI',
-    '// Color(light:dark:) is provided by MeridianUI and resolves against the trait collection.',
+    '// Color(light:dark:) is provided by DaedalusUI and resolves against the trait collection.',
     '',
-    'public enum MeridianColor {',
+    'public enum DaedalusColor {',
     ...colors.map((t) => `    public static let ${swiftName(t.name.replace(/^color\./, ''))} = Color(light: ${c(resolve(map, t.name, 'light'))}, dark: ${c(resolve(map, t.name, 'dark'))})`),
     '}',
     '',
-    'public enum MeridianSpacing {',
+    'public enum DaedalusSpacing {',
     ...dims.map((t) => `    public static let ${swiftName(t.name)}: CGFloat = ${parseFloat(resolve(map, t.name, 'light'))}`),
     '}',
     '',
@@ -167,20 +167,20 @@ export function toKotlin(tokens: Token[]): string {
   const k = (hex: string) => (hex.startsWith('#') ? `Color(0xFF${hex.slice(1).toUpperCase()})` : 'Color.Unspecified');
   return [
     `// ${SYSTEM.name} tokens — generated ${SNAPSHOT_DATE}. Do not edit by hand.`,
-    'package meridian.tokens',
+    'package daedalus.tokens',
     '',
     'import androidx.compose.ui.graphics.Color',
     'import androidx.compose.ui.unit.dp',
     '',
-    'object MeridianLightColors {',
+    'object DaedalusLightColors {',
     ...colors.map((t) => `    val ${swiftName(t.name.replace(/^color\./, ''))} = ${k(resolve(map, t.name, 'light'))}`),
     '}',
     '',
-    'object MeridianDarkColors {',
+    'object DaedalusDarkColors {',
     ...colors.map((t) => `    val ${swiftName(t.name.replace(/^color\./, ''))} = ${k(resolve(map, t.name, 'dark'))}`),
     '}',
     '',
-    'object MeridianSpacing {',
+    'object DaedalusSpacing {',
     ...dims.map((t) => `    val ${swiftName(t.name)} = ${parseFloat(resolve(map, t.name, 'light'))}.dp`),
     '}',
     '',
@@ -206,7 +206,7 @@ export function toAgentSpec(db: Database, mode: Mode = 'light'): string {
     '',
     '## Rules',
     '',
-    `1. Use ${SYSTEM.name} components from \`@meridian/react\` (web), \`MeridianUI\` (iOS) or \`meridian.compose\` (Android). Never hand-roll an equivalent.`,
+    `1. Use ${SYSTEM.name} components from \`@daedalus/react\` (web), \`DaedalusUI\` (iOS) or \`daedalus.compose\` (Android). Never hand-roll an equivalent.`,
     '2. Style only with semantic tokens (`color.*`, `space.control.*`, `radius.control`). Never use raw hex values or primitive tokens directly.',
     '3. Prefer `stable` components. `beta` is fine with a note. Avoid `experimental` unless asked.',
     '4. One primary Button per view. Destructive actions follow the Destructive Confirmation pattern.',

@@ -34,7 +34,7 @@ export default function ReleaseDetail({ version }: { version: string }) {
         actions={
           <>
             <CopyButton text={md} label="Copy as Markdown" className="h-9 border border-ks-border-strong bg-ks-surface px-3" />
-            <Button onClick={() => downloadText(`meridian-${r.version}.md`, md)}>Download</Button>
+            <Button onClick={() => downloadText(`daedalus-${r.version}.md`, md)}>Download</Button>
           </>
         }
       />

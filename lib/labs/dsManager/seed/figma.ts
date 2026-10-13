@@ -16,7 +16,7 @@ const codeOnly = (codeProp: string, note: string, intentional = false): PropMapp
 let node = 100;
 function map(itemSlug: string, category: string, name: string, props: PropMapping[], figmaInstances: number, detachRate: number, lastSynced = '2026-10-10'): FigmaMapping {
   node += 7;
-  return { itemSlug, nodeName: `Meridian / ${category} / ${name}`, nodeId: `${node}:${(node * 13) % 997}`, props, lastSynced, figmaInstances, detachRate };
+  return { itemSlug, nodeName: `Daedalus / ${category} / ${name}`, nodeId: `${node}:${(node * 13) % 997}`, props, lastSynced, figmaInstances, detachRate };
 }
 
 const STATE_NOTE = 'Hover, pressed and focus are drawn in Figma for specs; code renders them itself.';

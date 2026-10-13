@@ -8,8 +8,8 @@ import { PATTERN_SIGNATURES } from '@/lib/labs/dsManager/intake';
 import type { Mode } from '@/lib/labs/dsManager/tokens';
 import { useStore } from '../../_components/Store';
 import { BASE } from '../../_components/Shell';
-import MeridianScope from '../../_components/meridian/MeridianScope';
-import { DEMOS, defaultsFor, type Props } from '../../_components/meridian/demos';
+import DaedalusScope from '../../_components/daedalus/DaedalusScope';
+import { DEMOS, defaultsFor, type Props } from '../../_components/daedalus/demos';
 import { Button, LifecyclePill, PageHeader, Panel, Segmented, cx, inputClass } from '../../_components/ui';
 
 interface Block {
@@ -85,7 +85,7 @@ export default function Sandbox() {
     <>
       <PageHeader
         title="Sandbox"
-        description="Compose with real Meridian components. The sandbox points out when what you're building already exists, and turns genuine gaps into a pre-filled request."
+        description="Compose with real Daedalus components. The sandbox points out when what you're building already exists, and turns genuine gaps into a pre-filled request."
         actions={
           <>
             <Segmented
@@ -150,7 +150,7 @@ export default function Sandbox() {
         {/* Canvas */}
         <div className="min-w-0">
           <div className="flex justify-center rounded-lg border border-ks-border bg-ks-sunken p-4 sm:p-6">
-            <MeridianScope
+            <DaedalusScope
               mode={mode}
               className={cx('flex min-h-[460px] w-full flex-col overflow-hidden rounded-[20px] shadow-[var(--ks-shadow-pop)]', device === 'mobile' ? 'max-w-[390px]' : 'max-w-[880px] rounded-lg')}
             >
@@ -166,7 +166,7 @@ export default function Sandbox() {
                       {demo ? (
                         <div className={cx('flex', demo.layout === 'stretch' || edge ? 'justify-stretch [&>*]:w-full' : 'justify-start')}>{demo.render(b.props)}</div>
                       ) : (
-                        <div className="flex min-h-[64px] items-center justify-center rounded-md border-2 border-dashed border-[var(--mer-color-border-default)] text-[13px] opacity-80">
+                        <div className="flex min-h-[64px] items-center justify-center rounded-md border-2 border-dashed border-[var(--dae-color-border-default)] text-[13px] opacity-80">
                           {b.customName} <span className="ml-1 opacity-60">(not in system)</span>
                         </div>
                       )}
@@ -194,7 +194,7 @@ export default function Sandbox() {
                   );
                 })
               )}
-            </MeridianScope>
+            </DaedalusScope>
           </div>
           <p className="mt-2 text-center text-[12px] text-ks-fg-subtle">Components are live. Click one to edit its props; hover for move and remove.</p>
         </div>

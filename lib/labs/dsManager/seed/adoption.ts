@@ -1,6 +1,6 @@
 import type { AdoptionHistory, HealthHistory, Product, SystemItem } from '../types';
 
-/** The 14 products that consume Meridian (items' `adoption.products` counts are out of these). */
+/** The 14 products that consume Daedalus (items' `adoption.products` counts are out of these). */
 export const products: Product[] = [
   { id: 'booking-web', name: 'Booking (web)', teamId: 'bookings', platforms: ['web'] },
   { id: 'booking-ios', name: 'Booking (iOS)', teamId: 'bookings', platforms: ['ios'] },

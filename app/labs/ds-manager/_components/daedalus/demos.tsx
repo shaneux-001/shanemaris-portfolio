@@ -1,7 +1,7 @@
 'use client';
 
 /*
- * Live demos for the Meridian styleguide. Each entry declares its
+ * Live demos for the Daedalus styleguide. Each entry declares its
  * playground controls, a render function, and enough metadata to generate
  * per-platform code from the current control values — so the snippet you
  * copy always matches the preview you're looking at.
@@ -62,7 +62,7 @@ const b = (v: ControlValue) => v === true;
 function SwitchDemo({ label, initial, disabled }: { label: string; initial: boolean; disabled: boolean }) {
   const [on, setOn] = useState(initial);
   return (
-    <label className="mer-switch" style={{ opacity: disabled ? 0.5 : 1 }}>
+    <label className="dae-switch" style={{ opacity: disabled ? 0.5 : 1 }}>
       <button type="button" role="switch" aria-checked={on} disabled={disabled} onClick={() => setOn(!on)} aria-label={label} />
       <span>{label}</span>
     </label>
@@ -73,11 +73,11 @@ function TabsDemo({ style, count }: { style: string; count: number }) {
   const labels = ['Upcoming', 'Past', 'Cancelled', 'Drafts', 'Archived'].slice(0, count);
   const [active, setActive] = useState(0);
   return (
-    <div role="tablist" className={style === 'segmented' ? 'mer-segmented' : 'mer-tabs'} style={{ width: style === 'segmented' ? undefined : '100%' }}>
+    <div role="tablist" className={style === 'segmented' ? 'dae-segmented' : 'dae-tabs'} style={{ width: style === 'segmented' ? undefined : '100%' }}>
       {labels.map((l, i) => (
-        <button key={l} role="tab" aria-selected={i === active} className="mer-tab" onClick={() => setActive(i)} type="button">
+        <button key={l} role="tab" aria-selected={i === active} className="dae-tab" onClick={() => setActive(i)} type="button">
           {l}
-          {i === 0 && <span className="mer-badge" data-tone="neutral">3</span>}
+          {i === 0 && <span className="dae-badge" data-tone="neutral">3</span>}
         </button>
       ))}
     </div>
@@ -88,10 +88,10 @@ function RadioDemo({ label, disabled }: { label: string; disabled: boolean }) {
   const [v, setV] = useState('standard');
   return (
     <fieldset style={{ border: 0, padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }} disabled={disabled}>
-      <legend className="mer-label" style={{ marginBottom: 8 }}>{label}</legend>
+      <legend className="dae-label" style={{ marginBottom: 8 }}>{label}</legend>
       {['Standard', 'Express', 'Same day'].map((o) => (
-        <label key={o} className="mer-check">
-          <input type="radio" name="mer-radio-demo" checked={v === o.toLowerCase()} onChange={() => setV(o.toLowerCase())} />
+        <label key={o} className="dae-check">
+          <input type="radio" name="dae-radio-demo" checked={v === o.toLowerCase()} onChange={() => setV(o.toLowerCase())} />
           {o}
         </label>
       ))}
@@ -108,14 +108,14 @@ function AccordionDemo({ multiple }: { multiple: boolean }) {
   const [open, setOpen] = useState<number[]>([0]);
   const toggle = (i: number) => setOpen((o) => (o.includes(i) ? o.filter((x) => x !== i) : multiple ? [...o, i] : [i]));
   return (
-    <div className="mer-accordion" style={{ maxWidth: 440 }}>
+    <div className="dae-accordion" style={{ maxWidth: 440 }}>
       {items.map(([q, a], i) => (
         <div key={q}>
           <button type="button" aria-expanded={open.includes(i)} onClick={() => toggle(i)}>
             {q}
             <CaretDown size={16} />
           </button>
-          {open.includes(i) && <div className="mer-acc-panel">{a}</div>}
+          {open.includes(i) && <div className="dae-acc-panel">{a}</div>}
         </div>
       ))}
     </div>
@@ -129,21 +129,21 @@ function TagDemo({ kind }: { kind: string }) {
     return (
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         {list.map((t) => (
-          <span key={t} className="mer-tag" style={{ cursor: 'default' }}>
+          <span key={t} className="dae-tag" style={{ cursor: 'default' }}>
             {t}
-            <button type="button" className="mer-tag-x" aria-label={`Remove ${t}`} onClick={() => setList(list.filter((x) => x !== t))}>
+            <button type="button" className="dae-tag-x" aria-label={`Remove ${t}`} onClick={() => setList(list.filter((x) => x !== t))}>
               <X size={14} />
             </button>
           </span>
         ))}
-        {list.length === 0 && <button type="button" className="mer-btn" data-variant="tertiary" data-size="sm" onClick={() => setList(['Plumbing', 'Electrical', 'Painting'])}>Reset</button>}
+        {list.length === 0 && <button type="button" className="dae-btn" data-variant="tertiary" data-size="sm" onClick={() => setList(['Plumbing', 'Electrical', 'Painting'])}>Reset</button>}
       </div>
     );
   }
   return (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
       {['Available today', 'Top rated', 'Under $100', 'Verified'].map((t) => (
-        <button key={t} type="button" className="mer-tag" aria-pressed={sel.includes(t)} onClick={() => setSel(sel.includes(t) ? sel.filter((x) => x !== t) : [...sel, t])}>
+        <button key={t} type="button" className="dae-tag" aria-pressed={sel.includes(t)} onClick={() => setSel(sel.includes(t) ? sel.filter((x) => x !== t) : [...sel, t])}>
           {t}
         </button>
       ))}
@@ -163,7 +163,7 @@ function TableDemo({ selectable }: { selectable: boolean }) {
   const sorted = [...rows].sort((a, b) => (asc ? a[3] - b[3] : b[3] - a[3]));
   const tone = { Paid: 'success', Due: 'info', Overdue: 'danger' } as const;
   return (
-    <table className="mer-table">
+    <table className="dae-table">
       <thead>
         <tr>
           {selectable && <th style={{ width: 32 }} />}
@@ -180,7 +180,7 @@ function TableDemo({ selectable }: { selectable: boolean }) {
           <tr key={id} aria-selected={sel.includes(id)}>
             {selectable && (
               <td>
-                <label className="mer-check">
+                <label className="dae-check">
                   <input type="checkbox" aria-label={`Select ${id}`} checked={sel.includes(id)} onChange={() => setSel(sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id])} />
                 </label>
               </td>
@@ -188,7 +188,7 @@ function TableDemo({ selectable }: { selectable: boolean }) {
             <td>{id}</td>
             <td>{d}</td>
             <td>
-              <span className="mer-badge" data-tone={tone[st]}>{st}</span>
+              <span className="dae-badge" data-tone={tone[st]}>{st}</span>
             </td>
             <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>${amt}</td>
           </tr>
@@ -201,7 +201,7 @@ function TableDemo({ selectable }: { selectable: boolean }) {
 function StarsDemo({ readOnly, value }: { readOnly: boolean; value: number }) {
   const [v, setV] = useState(value);
   return (
-    <span className="mer-stars" role={readOnly ? 'img' : 'radiogroup'} aria-label={`Rating: ${readOnly ? value : v} of 5`}>
+    <span className="dae-stars" role={readOnly ? 'img' : 'radiogroup'} aria-label={`Rating: ${readOnly ? value : v} of 5`}>
       {[1, 2, 3, 4, 5].map((n) =>
         readOnly ? (
           <Star key={n} size={22} weight={n <= value ? 'fill' : 'regular'} />
@@ -228,11 +228,11 @@ function DateDemo({ range }: { range: boolean }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button type="button" className="mer-icon-btn" aria-label="Previous month"><CaretLeft size={16} /></button>
+        <button type="button" className="dae-icon-btn" aria-label="Previous month"><CaretLeft size={16} /></button>
         <strong>October 2026</strong>
-        <button type="button" className="mer-icon-btn" aria-label="Next month"><CaretRight size={16} /></button>
+        <button type="button" className="dae-icon-btn" aria-label="Next month"><CaretRight size={16} /></button>
       </div>
-      <div className="mer-cal">
+      <div className="dae-cal">
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => <span key={i}>{d}</span>)}
         {[0, 1, 2, 3].map((i) => <span key={`b${i}`} />)}
         {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
@@ -255,7 +255,7 @@ function DateDemo({ range }: { range: boolean }) {
 function ToastDemo({ message, action }: { message: string; action: boolean }) {
   const [shown, setShown] = useState(true);
   return shown ? (
-    <div className="mer-toast" role="status">
+    <div className="dae-toast" role="status">
       <span>{message}</span>
       {action && (
         <button type="button" onClick={() => setShown(false)}>
@@ -264,7 +264,7 @@ function ToastDemo({ message, action }: { message: string; action: boolean }) {
       )}
     </div>
   ) : (
-    <button type="button" className="mer-btn" data-variant="secondary" data-size="sm" onClick={() => setShown(true)}>
+    <button type="button" className="dae-btn" data-variant="secondary" data-size="sm" onClick={() => setShown(true)}>
       Show toast again
     </button>
   );
@@ -288,8 +288,8 @@ export const DEMOS: Record<string, Demo> = {
     render: (p) => {
       const Icon = { plus: Plus, pencil: PencilSimple, trash: Trash }[s(p.iconStart)];
       return (
-        <button type="button" className="mer-btn" data-variant={s(p.variant)} data-size={s(p.size)} disabled={b(p.disabled)} aria-busy={b(p.loading)}>
-          {b(p.loading) ? <span className="mer-spinner" aria-hidden="true" /> : Icon ? <Icon size={16} /> : null}
+        <button type="button" className="dae-btn" data-variant={s(p.variant)} data-size={s(p.size)} disabled={b(p.disabled)} aria-busy={b(p.loading)}>
+          {b(p.loading) ? <span className="dae-spinner" aria-hidden="true" /> : Icon ? <Icon size={16} /> : null}
           {s(p.label)}
         </button>
       );
@@ -303,7 +303,7 @@ export const DEMOS: Record<string, Demo> = {
     render: (p) => {
       const [Icon, label] = ({ more: [DotsThreeVertical, 'More actions'], edit: [PencilSimple, 'Edit'], share: [ShareNetwork, 'Share'], heart: [Heart, 'Save'] } as const)[s(p.icon) as 'more'];
       return (
-        <button type="button" className="mer-icon-btn" data-variant={s(p.variant)} aria-label={label}>
+        <button type="button" className="dae-icon-btn" data-variant={s(p.variant)} aria-label={label}>
           <Icon size={20} />
         </button>
       );
@@ -318,10 +318,10 @@ export const DEMOS: Record<string, Demo> = {
     render: (p) =>
       s(p.variant) === 'inline' ? (
         <p style={{ margin: 0, maxWidth: 360 }}>
-          Your appointment is confirmed. <a className="mer-link" data-variant="inline">{s(p.label)}</a> or add it to your calendar.
+          Your appointment is confirmed. <a className="dae-link" data-variant="inline">{s(p.label)}</a> or add it to your calendar.
         </p>
       ) : (
-        <a className="mer-link" data-variant="standalone">
+        <a className="dae-link" data-variant="standalone">
           {s(p.label)} →
         </a>
       ),
@@ -338,15 +338,15 @@ export const DEMOS: Record<string, Demo> = {
     ],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-field" style={{ maxWidth: 340, width: '100%' }}>
-        <label className="mer-label" htmlFor="mer-tf">
-          {s(p.label)} {b(p.required) && <span className="mer-req">(required)</span>}
+      <div className="dae-field" style={{ maxWidth: 340, width: '100%' }}>
+        <label className="dae-label" htmlFor="dae-tf">
+          {s(p.label)} {b(p.required) && <span className="dae-req">(required)</span>}
         </label>
-        <div className="mer-control" data-invalid={!!p.error} data-disabled={b(p.disabled)}>
-          {s(p.prefix) !== 'none' && <span className="mer-affix">{s(p.prefix)}</span>}
-          <input id="mer-tf" defaultValue={p.error ? 'jamie@' : ''} disabled={b(p.disabled)} aria-invalid={!!p.error} aria-describedby="mer-tf-help" placeholder="" />
+        <div className="dae-control" data-invalid={!!p.error} data-disabled={b(p.disabled)}>
+          {s(p.prefix) !== 'none' && <span className="dae-affix">{s(p.prefix)}</span>}
+          <input id="dae-tf" defaultValue={p.error ? 'jamie@' : ''} disabled={b(p.disabled)} aria-invalid={!!p.error} aria-describedby="dae-tf-help" placeholder="" />
         </div>
-        <span id="mer-tf-help" className={p.error ? 'mer-error' : 'mer-help'}>
+        <span id="dae-tf-help" className={p.error ? 'dae-error' : 'dae-help'}>
           {s(p.error) || s(p.helperText)}
         </span>
       </div>
@@ -357,12 +357,12 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'label', type: 'text', default: 'Notes for your provider' }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-field" style={{ maxWidth: 380, width: '100%' }}>
-        <label className="mer-label">{s(p.label)}</label>
-        <div className="mer-control">
+      <div className="dae-field" style={{ maxWidth: 380, width: '100%' }}>
+        <label className="dae-label">{s(p.label)}</label>
+        <div className="dae-control">
           <textarea defaultValue="Gate code is 4412. Dog is friendly." />
         </div>
-        <span className="mer-help">36 / 500</span>
+        <span className="dae-help">36 / 500</span>
       </div>
     ),
   },
@@ -372,9 +372,9 @@ export const DEMOS: Record<string, Demo> = {
       { name: 'disabled', type: 'boolean', default: false },
     ],
     render: (p) => (
-      <div className="mer-field" style={{ width: 280 }}>
-        <label className="mer-label">{s(p.label)}</label>
-        <div className="mer-control" data-disabled={b(p.disabled)}>
+      <div className="dae-field" style={{ width: 280 }}>
+        <label className="dae-label">{s(p.label)}</label>
+        <div className="dae-control" data-disabled={b(p.disabled)}>
           <select disabled={b(p.disabled)} defaultValue="">
             <option value="" disabled>
               Choose a service
@@ -396,7 +396,7 @@ export const DEMOS: Record<string, Demo> = {
       { name: 'checked', type: 'select', options: ['false', 'true', 'indeterminate'], default: 'true' },
     ],
     render: (p) => (
-      <label className="mer-check">
+      <label className="dae-check">
         <input
           type="checkbox"
           key={s(p.checked)}
@@ -436,10 +436,10 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'placeholder', type: 'text', default: 'Search providers' }],
     layout: 'stretch',
     render: (p) => (
-      <div role="search" className="mer-control" style={{ maxWidth: 360, width: '100%', borderRadius: 999 }}>
+      <div role="search" className="dae-control" style={{ maxWidth: 360, width: '100%', borderRadius: 999 }}>
         <MagnifyingGlass size={16} aria-hidden="true" />
         <input aria-label={s(p.placeholder)} placeholder={s(p.placeholder)} defaultValue="plumb" />
-        <button type="button" className="mer-tag-x" aria-label="Clear search">
+        <button type="button" className="dae-tag-x" aria-label="Clear search">
           <X size={14} />
         </button>
       </div>
@@ -449,9 +449,9 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'label', type: 'text', default: 'Max price' }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-field" style={{ maxWidth: 320, width: '100%' }}>
-        <label className="mer-label">{s(p.label)}</label>
-        <input className="mer-slider" type="range" min={0} max={500} defaultValue={180} aria-label={s(p.label)} />
+      <div className="dae-field" style={{ maxWidth: 320, width: '100%' }}>
+        <label className="dae-label">{s(p.label)}</label>
+        <input className="dae-slider" type="range" min={0} max={500} defaultValue={180} aria-label={s(p.label)} />
       </div>
     ),
   },
@@ -468,11 +468,11 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'title', type: 'text', default: 'Booking details' }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-appbar">
-        <button type="button" className="mer-icon-btn" aria-label="Back"><ArrowLeft size={20} /></button>
+      <div className="dae-appbar">
+        <button type="button" className="dae-icon-btn" aria-label="Back"><ArrowLeft size={20} /></button>
         <h4>{s(p.title)}</h4>
-        <button type="button" className="mer-icon-btn" aria-label="Share"><ShareNetwork size={20} /></button>
-        <button type="button" className="mer-icon-btn" aria-label="More"><DotsThreeVertical size={20} /></button>
+        <button type="button" className="dae-icon-btn" aria-label="Share"><ShareNetwork size={20} /></button>
+        <button type="button" className="dae-icon-btn" aria-label="More"><DotsThreeVertical size={20} /></button>
       </div>
     ),
   },
@@ -481,7 +481,7 @@ export const DEMOS: Record<string, Demo> = {
     controls: [],
     layout: 'stretch',
     render: () => (
-      <nav className="mer-bottomnav" style={{ maxWidth: 380 }}>
+      <nav className="dae-bottomnav" style={{ maxWidth: 380 }}>
         {[[House, 'Home'], [MagnifyingGlass, 'Search'], [CalendarBlank, 'Bookings'], [User, 'Account']].map(([Icon, l], i) => {
           const I = Icon as typeof House;
           return (
@@ -498,7 +498,7 @@ export const DEMOS: Record<string, Demo> = {
     codeName: 'SideNavigation',
     controls: [],
     render: () => (
-      <nav className="mer-sidenav">
+      <nav className="dae-sidenav">
         {['Overview', 'Schedule', 'Clients', 'Payouts', 'Settings'].map((l, i) => (
           <button key={l} type="button" aria-current={i === 1 ? 'page' : undefined}>
             {l}
@@ -510,15 +510,15 @@ export const DEMOS: Record<string, Demo> = {
   breadcrumbs: {
     controls: [],
     render: () => (
-      <nav aria-label="Breadcrumb" className="mer-crumbs">
-        <a className="mer-link">Home</a>/<a className="mer-link">Plumbing</a>/<span aria-current="page">Leak repair</span>
+      <nav aria-label="Breadcrumb" className="dae-crumbs">
+        <a className="dae-link">Home</a>/<a className="dae-link">Plumbing</a>/<span aria-current="page">Leak repair</span>
       </nav>
     ),
   },
   pagination: {
     controls: [{ name: 'page', type: 'number', default: 2 }],
     render: (p) => (
-      <nav aria-label="Pagination" className="mer-pager">
+      <nav aria-label="Pagination" className="dae-pager">
         <button type="button" aria-label="Previous page"><CaretLeft size={14} /></button>
         {[1, 2, 3, 4, 5].map((n) => (
           <button key={n} type="button" aria-current={n === Number(p.page) ? 'page' : undefined}>
@@ -533,13 +533,13 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'current', type: 'number', default: 2 }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-stepper" style={{ maxWidth: 520 }}>
+      <div className="dae-stepper" style={{ maxWidth: 520 }}>
         {['Service', 'Time', 'Details', 'Pay'].map((l, i) => {
           const state = i + 1 < Number(p.current) ? 'done' : i + 1 === Number(p.current) ? 'current' : 'todo';
           return (
             <div key={l} style={{ display: 'contents' }}>
-              {i > 0 && <span className="mer-step-line" />}
-              <span className="mer-step" data-state={state} aria-current={state === 'current' ? 'step' : undefined}>
+              {i > 0 && <span className="dae-step-line" />}
+              <span className="dae-step" data-state={state} aria-current={state === 'current' ? 'step' : undefined}>
                 <span>{state === 'done' ? '✓' : i + 1}</span>
                 <span>{l}</span>
               </span>
@@ -560,19 +560,19 @@ export const DEMOS: Record<string, Demo> = {
     render: (p) => {
       const Icon = ALERT_ICON[s(p.tone) as keyof typeof ALERT_ICON];
       return (
-        <div className="mer-alert" data-tone={s(p.tone)} role={s(p.tone) === 'danger' || s(p.tone) === 'warning' ? 'alert' : 'status'} style={{ maxWidth: 520, width: '100%' }}>
+        <div className="dae-alert" data-tone={s(p.tone)} role={s(p.tone) === 'danger' || s(p.tone) === 'warning' ? 'alert' : 'status'} style={{ maxWidth: 520, width: '100%' }}>
           <Icon size={20} weight="fill" style={{ flexShrink: 0, marginTop: 1 }} />
           <div style={{ flex: 1 }}>
-            <p className="mer-alert-title">{s(p.title)}</p>
-            <p className="mer-alert-body">Update your payment method before Oct 31 to avoid interrupted bookings.</p>
+            <p className="dae-alert-title">{s(p.title)}</p>
+            <p className="dae-alert-body">Update your payment method before Oct 31 to avoid interrupted bookings.</p>
             {b(p.action) && (
-              <button type="button" className="mer-btn" data-variant="secondary" data-size="sm">
+              <button type="button" className="dae-btn" data-variant="secondary" data-size="sm">
                 Update card
               </button>
             )}
           </div>
           {b(p.dismissible) && (
-            <button type="button" className="mer-tag-x" aria-label="Dismiss">
+            <button type="button" className="dae-tag-x" aria-label="Dismiss">
               <X size={16} />
             </button>
           )}
@@ -593,28 +593,28 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'value', type: 'number', default: 60 }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-field" style={{ maxWidth: 320, width: '100%' }}>
-        <span className="mer-label">Uploading documents</span>
-        <div className="mer-progress" role="progressbar" aria-valuenow={Number(p.value)} aria-valuemin={0} aria-valuemax={100}>
+      <div className="dae-field" style={{ maxWidth: 320, width: '100%' }}>
+        <span className="dae-label">Uploading documents</span>
+        <div className="dae-progress" role="progressbar" aria-valuenow={Number(p.value)} aria-valuemin={0} aria-valuemax={100}>
           <span style={{ width: `${Math.min(100, Math.max(0, Number(p.value)))}%` }} />
         </div>
-        <span className="mer-help">{Number(p.value)}% · 2 of 3 files</span>
+        <span className="dae-help">{Number(p.value)}% · 2 of 3 files</span>
       </div>
     ),
   },
   spinner: {
     controls: [],
-    render: () => <span className="mer-spinner" role="status" aria-label="Loading" />,
+    render: () => <span className="dae-spinner" role="status" aria-label="Loading" />,
   },
   skeleton: {
     controls: [],
     layout: 'stretch',
     render: () => (
       <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 360 }} aria-busy="true" aria-label="Loading">
-        <div className="mer-skeleton" style={{ width: 48, height: 48, borderRadius: '50%' }} />
+        <div className="dae-skeleton" style={{ width: 48, height: 48, borderRadius: '50%' }} />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 4 }}>
-          <div className="mer-skeleton" style={{ height: 12, width: '70%' }} />
-          <div className="mer-skeleton" style={{ height: 12, width: '45%' }} />
+          <div className="dae-skeleton" style={{ height: 12, width: '70%' }} />
+          <div className="dae-skeleton" style={{ height: 12, width: '45%' }} />
         </div>
       </div>
     ),
@@ -626,15 +626,15 @@ export const DEMOS: Record<string, Demo> = {
     ],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-backdrop">
-        <div className="mer-modal" role="dialog" aria-label={s(p.title)}>
+      <div className="dae-backdrop">
+        <div className="dae-modal" role="dialog" aria-label={s(p.title)}>
           <h4>{s(p.title)}</h4>
           <p>Kitchen faucet repair with Ana R. on Oct 14 at 9:00 AM. You won&apos;t be charged.</p>
-          <div className="mer-modal-actions">
-            <button type="button" className="mer-btn" data-variant="secondary">
+          <div className="dae-modal-actions">
+            <button type="button" className="dae-btn" data-variant="secondary">
               Keep booking
             </button>
-            <button type="button" className="mer-btn" data-variant={b(p.destructive) ? 'danger' : 'primary'}>
+            <button type="button" className="dae-btn" data-variant={b(p.destructive) ? 'danger' : 'primary'}>
               Cancel booking
             </button>
           </div>
@@ -646,15 +646,15 @@ export const DEMOS: Record<string, Demo> = {
     codeName: 'BottomSheet',
     controls: [],
     render: () => (
-      <div className="mer-sheet">
-        <div className="mer-sheet-handle" />
-        <div className="mer-list" style={{ border: 0 }}>
+      <div className="dae-sheet">
+        <div className="dae-sheet-handle" />
+        <div className="dae-list" style={{ border: 0 }}>
           {[[PencilSimple, 'Reschedule'], [ShareNetwork, 'Share details'], [Trash, 'Cancel booking']].map(([Icon, l]) => {
             const I = Icon as typeof Trash;
             return (
-              <div key={l as string} className="mer-list-item" style={{ minHeight: 48, padding: '8px 4px' }}>
+              <div key={l as string} className="dae-list-item" style={{ minHeight: 48, padding: '8px 4px' }}>
                 <I size={20} />
-                <span className="mer-li-body">{l as string}</span>
+                <span className="dae-li-body">{l as string}</span>
               </div>
             );
           })}
@@ -666,8 +666,8 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'text', type: 'text', default: 'Copy link' }],
     render: (p) => (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-        <span className="mer-tooltip" role="tooltip">{s(p.text)}</span>
-        <button type="button" className="mer-icon-btn" data-variant="outlined" aria-label={s(p.text)}>
+        <span className="dae-tooltip" role="tooltip">{s(p.text)}</span>
+        <button type="button" className="dae-icon-btn" data-variant="outlined" aria-label={s(p.text)}>
           <ShareNetwork size={18} />
         </button>
       </div>
@@ -677,11 +677,11 @@ export const DEMOS: Record<string, Demo> = {
     codeName: 'PopoverMenu',
     controls: [],
     render: () => (
-      <div className="mer-menu" role="menu">
+      <div className="dae-menu" role="menu">
         <button type="button" role="menuitem">Reschedule</button>
         <button type="button" role="menuitem">Message provider</button>
         <button type="button" role="menuitem">Add to calendar</button>
-        <hr className="mer-divider" style={{ margin: '4px 0' }} />
+        <hr className="dae-divider" style={{ margin: '4px 0' }} />
         <button type="button" role="menuitem" data-danger="true">Cancel booking</button>
       </div>
     ),
@@ -693,7 +693,7 @@ export const DEMOS: Record<string, Demo> = {
       { name: 'tone', type: 'select', options: ['neutral', 'info', 'success', 'warning', 'danger'], default: 'success' },
     ],
     render: (p) => (
-      <span className="mer-badge" data-tone={s(p.tone)}>
+      <span className="dae-badge" data-tone={s(p.tone)}>
         {s(p.label)}
       </span>
     ),
@@ -711,7 +711,7 @@ export const DEMOS: Record<string, Demo> = {
       const px = { sm: 24, md: 32, lg: 48 }[s(p.size) as 'md'];
       const initials = s(p.name).split(' ').map((n) => n[0]).slice(0, 2).join('');
       return (
-        <span className="mer-avatar" style={{ width: px, height: px, fontSize: px * 0.4 }} role="img" aria-label={s(p.name)}>
+        <span className="dae-avatar" style={{ width: px, height: px, fontSize: px * 0.4 }} role="img" aria-label={s(p.name)}>
           {initials}
         </span>
       );
@@ -720,7 +720,7 @@ export const DEMOS: Record<string, Demo> = {
   icon: {
     controls: [],
     render: () => (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 32px)', gap: 12, color: 'var(--mer-color-icon-default)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 32px)', gap: 12, color: 'var(--dae-color-icon-default)' }}>
         {[House, MagnifyingGlass, CalendarBlank, User, Bell, Heart, Star, ShareNetwork, PencilSimple, Trash, Plus, X, Info, Warning, CheckCircle, DotsThreeVertical].map((I, i) => (
           <I key={i} size={24} />
         ))}
@@ -734,13 +734,13 @@ export const DEMOS: Record<string, Demo> = {
       { name: 'interactive', type: 'boolean', default: true },
     ],
     render: (p) => (
-      <div className="mer-card" data-variant={s(p.variant)} data-interactive={b(p.interactive)} style={{ width: 280 }}>
-        {b(p.media) && <div className="mer-card-media" />}
+      <div className="dae-card" data-variant={s(p.variant)} data-interactive={b(p.interactive)} style={{ width: 280 }}>
+        {b(p.media) && <div className="dae-card-media" />}
         <h4>Deep clean, 2 bed</h4>
         <p>Brightside Cleaning · 4.9 ★ (212)</p>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 }}>
           <strong>$140</strong>
-          <span className="mer-badge" data-tone="success">Available today</span>
+          <span className="dae-badge" data-tone="success">Available today</span>
         </div>
       </div>
     ),
@@ -751,7 +751,7 @@ export const DEMOS: Record<string, Demo> = {
     render: () => (
       <div style={{ maxWidth: 360, width: '100%' }}>
         <div>Subtotal</div>
-        <hr className="mer-divider" />
+        <hr className="dae-divider" />
         <div>Total</div>
       </div>
     ),
@@ -772,16 +772,16 @@ export const DEMOS: Record<string, Demo> = {
     controls: [{ name: 'trailing', type: 'select', options: ['chevron', 'switch', 'badge'], default: 'chevron' }],
     layout: 'stretch',
     render: (p) => (
-      <div className="mer-list" style={{ maxWidth: 380, width: '100%' }}>
+      <div className="dae-list" style={{ maxWidth: 380, width: '100%' }}>
         {[['Ana Reyes', 'Plumbing · 4.9 ★'], ['Brightside Cleaning', 'Cleaning · 4.8 ★']].map(([t, sub]) => (
-          <div key={t} className="mer-list-item">
-            <span className="mer-avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{t[0]}</span>
-            <div className="mer-li-body">
+          <div key={t} className="dae-list-item">
+            <span className="dae-avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{t[0]}</span>
+            <div className="dae-li-body">
               <div>{t}</div>
-              <div className="mer-li-sub">{sub}</div>
+              <div className="dae-li-sub">{sub}</div>
             </div>
             {s(p.trailing) === 'chevron' && <CaretRight size={16} />}
-            {s(p.trailing) === 'badge' && <span className="mer-badge" data-tone="info">New</span>}
+            {s(p.trailing) === 'badge' && <span className="dae-badge" data-tone="info">New</span>}
             {s(p.trailing) === 'switch' && <SwitchDemo label={`Favorite ${t}`} initial={false} disabled={false} />}
           </div>
         ))}
@@ -792,10 +792,10 @@ export const DEMOS: Record<string, Demo> = {
     controls: [],
     layout: 'stretch',
     render: () => (
-      <div className="mer-carousel" style={{ maxWidth: 520 }}>
+      <div className="dae-carousel" style={{ maxWidth: 520 }}>
         {['Spring cleaning', 'Gutter check', 'AC tune-up', 'Window wash'].map((t) => (
-          <div key={t} className="mer-card">
-            <div className="mer-card-media" style={{ height: 64 }} />
+          <div key={t} className="dae-card">
+            <div className="dae-card-media" style={{ height: 64 }} />
             <h4 style={{ fontSize: 14 }}>{t}</h4>
           </div>
         ))}
@@ -807,7 +807,7 @@ export const DEMOS: Record<string, Demo> = {
     codeName: 'GhostButton',
     controls: [{ name: 'label', type: 'text', default: 'Learn more' }],
     render: (p) => (
-      <button type="button" className="mer-btn" data-variant="ghost">
+      <button type="button" className="dae-btn" data-variant="ghost">
         {s(p.label)}
       </button>
     ),
@@ -824,17 +824,17 @@ export const DEMOS: Record<string, Demo> = {
     codeName: 'BookingSummaryCard',
     controls: [],
     render: () => (
-      <div className="mer-card" style={{ width: 320 }}>
+      <div className="dae-card" style={{ width: 320 }}>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <span className="mer-avatar" style={{ width: 40, height: 40, fontSize: 15 }}>AR</span>
+          <span className="dae-avatar" style={{ width: 40, height: 40, fontSize: 15 }}>AR</span>
           <div>
             <h4>Kitchen faucet repair</h4>
             <p>Ana Reyes · Tue, Oct 14 · 9:00 AM</p>
           </div>
         </div>
         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-          <button type="button" className="mer-btn" data-variant="secondary" data-size="sm">Reschedule</button>
-          <button type="button" className="mer-btn" data-variant="tertiary" data-size="sm">Message</button>
+          <button type="button" className="dae-btn" data-variant="secondary" data-size="sm">Reschedule</button>
+          <button type="button" className="dae-btn" data-variant="tertiary" data-size="sm">Message</button>
         </div>
       </div>
     ),
@@ -844,13 +844,13 @@ export const DEMOS: Record<string, Demo> = {
     controls: [],
     layout: 'stretch',
     render: () => (
-      <div className="mer-promo" style={{ maxWidth: 520 }}>
-        <div style={{ width: 56, height: 56, borderRadius: 12, background: 'var(--mer-color-coral-100)', flexShrink: 0 }} />
+      <div className="dae-promo" style={{ maxWidth: 520 }}>
+        <div style={{ width: 56, height: 56, borderRadius: 12, background: 'var(--dae-color-coral-100)', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <strong>20% off your first deep clean</strong>
           <div style={{ fontSize: 14 }}>Book by Oct 31.</div>
         </div>
-        <button type="button" className="mer-btn" data-variant="primary" data-size="sm">Book now</button>
+        <button type="button" className="dae-btn" data-variant="primary" data-size="sm">Book now</button>
       </div>
     ),
   },
@@ -859,23 +859,23 @@ export const DEMOS: Record<string, Demo> = {
     layout: 'stretch',
     render: () => (
       <form style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 360, width: '100%' }} onSubmit={(e) => e.preventDefault()}>
-        <div className="mer-alert" data-tone="danger" role="alert">
+        <div className="dae-alert" data-tone="danger" role="alert">
           <WarningOctagon size={20} weight="fill" />
           <div>
-            <p className="mer-alert-title">Fix 1 problem to continue</p>
-            <p className="mer-alert-body"><a className="mer-link">Enter an email like name@example.com</a></p>
+            <p className="dae-alert-title">Fix 1 problem to continue</p>
+            <p className="dae-alert-body"><a className="dae-link">Enter an email like name@example.com</a></p>
           </div>
         </div>
-        <div className="mer-field">
-          <label className="mer-label">Full name</label>
-          <div className="mer-control"><input defaultValue="Jamie Chen" /></div>
+        <div className="dae-field">
+          <label className="dae-label">Full name</label>
+          <div className="dae-control"><input defaultValue="Jamie Chen" /></div>
         </div>
-        <div className="mer-field">
-          <label className="mer-label">Email <span className="mer-req">(required)</span></label>
-          <div className="mer-control" data-invalid="true"><input defaultValue="jamie@" aria-invalid="true" /></div>
-          <span className="mer-error">Enter an email like name@example.com</span>
+        <div className="dae-field">
+          <label className="dae-label">Email <span className="dae-req">(required)</span></label>
+          <div className="dae-control" data-invalid="true"><input defaultValue="jamie@" aria-invalid="true" /></div>
+          <span className="dae-error">Enter an email like name@example.com</span>
         </div>
-        <button type="submit" className="mer-btn" data-variant="primary">Continue</button>
+        <button type="submit" className="dae-btn" data-variant="primary">Continue</button>
       </form>
     ),
   },
@@ -889,10 +889,10 @@ export const DEMOS: Record<string, Demo> = {
       }[s(p.type) as 'first use'];
       return (
         <div style={{ textAlign: 'center', maxWidth: 300, display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
-          <CalendarBlank size={40} style={{ color: 'var(--mer-color-icon-default)' }} />
+          <CalendarBlank size={40} style={{ color: 'var(--dae-color-icon-default)' }} />
           <strong>{copy[0]}</strong>
-          <span style={{ color: 'var(--mer-color-text-secondary)', fontSize: 14 }}>{copy[1]}</span>
-          <button type="button" className="mer-btn" data-variant="secondary" data-size="sm">{copy[2]}</button>
+          <span style={{ color: 'var(--dae-color-text-secondary)', fontSize: 14 }}>{copy[1]}</span>
+          <button type="button" className="dae-btn" data-variant="secondary" data-size="sm">{copy[2]}</button>
         </div>
       );
     },
@@ -902,18 +902,18 @@ export const DEMOS: Record<string, Demo> = {
     layout: 'stretch',
     render: (p) =>
       b(p.reversible) ? (
-        <div className="mer-toast" role="status">
+        <div className="dae-toast" role="status">
           <span>Provider removed from favorites</span>
           <button type="button">Undo</button>
         </div>
       ) : (
-        <div className="mer-backdrop">
-          <div className="mer-modal" role="dialog" aria-label="Delete payment method?">
+        <div className="dae-backdrop">
+          <div className="dae-modal" role="dialog" aria-label="Delete payment method?">
             <h4>Delete Visa ending 4242?</h4>
             <p>Upcoming bookings using this card will need a new payment method.</p>
-            <div className="mer-modal-actions">
-              <button type="button" className="mer-btn" data-variant="secondary">Keep card</button>
-              <button type="button" className="mer-btn" data-variant="danger">Delete card</button>
+            <div className="dae-modal-actions">
+              <button type="button" className="dae-btn" data-variant="secondary">Keep card</button>
+              <button type="button" className="dae-btn" data-variant="danger">Delete card</button>
             </div>
           </div>
         </div>
@@ -931,7 +931,7 @@ export const DEMOS: Record<string, Demo> = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', maxWidth: 480 }}>
         {DEMOS['search-field'].render({ placeholder: 'Search providers' })}
         <TagDemo kind="filter" />
-        <span style={{ fontSize: 14, color: 'var(--mer-color-text-secondary)' }} aria-live="polite">
+        <span style={{ fontSize: 14, color: 'var(--dae-color-text-secondary)' }} aria-live="polite">
           24 providers
         </span>
       </div>
@@ -940,11 +940,11 @@ export const DEMOS: Record<string, Demo> = {
   onboarding: {
     controls: [],
     render: () => (
-      <div className="mer-card" style={{ width: 320, gap: 12 }}>
+      <div className="dae-card" style={{ width: 320, gap: 12 }}>
         {DEMOS.stepper.render({ current: 1 })}
         <h4>What do you need help with?</h4>
         <TagDemo kind="filter" />
-        <button type="button" className="mer-btn" data-variant="primary" data-full="true">Continue</button>
+        <button type="button" className="dae-btn" data-variant="primary" data-full="true">Continue</button>
       </div>
     ),
   },
@@ -952,7 +952,7 @@ export const DEMOS: Record<string, Demo> = {
     controls: [],
     render: () => (
       <div style={{ background: 'rgba(12,16,22,.6)', padding: 32, borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: '#fff' }}>
-        <span className="mer-spinner" />
+        <span className="dae-spinner" />
         Loading…
       </div>
     ),
@@ -962,7 +962,7 @@ export const DEMOS: Record<string, Demo> = {
     controls: [],
     layout: 'stretch',
     render: () => (
-      <table className="mer-table" style={{ maxWidth: 440 }}>
+      <table className="dae-table" style={{ maxWidth: 440 }}>
         <thead>
           <tr><th>Feature</th><th>Basic</th><th>Plus</th></tr>
         </thead>

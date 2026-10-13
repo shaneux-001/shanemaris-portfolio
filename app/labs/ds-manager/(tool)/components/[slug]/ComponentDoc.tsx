@@ -12,8 +12,8 @@ import { chain, resolve, type Mode } from '@/lib/labs/dsManager/tokens';
 import { KIND_LABEL, PLATFORM_LABEL } from '@/lib/labs/dsManager/types';
 import { useStore } from '../../../_components/Store';
 import { BASE } from '../../../_components/Shell';
-import MeridianScope from '../../../_components/meridian/MeridianScope';
-import { DEMOS, defaultsFor, type Props } from '../../../_components/meridian/demos';
+import DaedalusScope from '../../../_components/daedalus/DaedalusScope';
+import { DEMOS, defaultsFor, type Props } from '../../../_components/daedalus/demos';
 import CodeBlock, { CopyButton } from '../../../_components/CodeBlock';
 import DocFeedback, { HelpfulnessSummary, WatchButton } from '../../../_components/DocFeedback';
 import FigmaMappingView from '../../../_components/FigmaMappingView';
@@ -48,9 +48,9 @@ function Playground({ slug, values, setValues }: { slug: string; values: Props; 
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-[1fr_260px]">
-        <MeridianScope mode={mode} className={cx('flex min-h-[240px] p-8', demo.layout === 'stretch' ? 'items-center' : 'items-center justify-center')}>
+        <DaedalusScope mode={mode} className={cx('flex min-h-[240px] p-8', demo.layout === 'stretch' ? 'items-center' : 'items-center justify-center')}>
           <div className={cx('flex w-full', demo.layout === 'stretch' ? 'justify-center' : 'justify-center')}>{demo.render(values)}</div>
-        </MeridianScope>
+        </DaedalusScope>
         {demo.controls.length > 0 && (
           <div className="flex flex-col gap-3 border-t border-ks-border bg-ks-surface p-4 md:border-l md:border-t-0">
             {demo.controls.map((c) => (

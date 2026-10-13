@@ -9,9 +9,9 @@ export const TOOL = {
 };
 
 export const SYSTEM = {
-  name: 'Meridian',
-  org: 'Larkspur',
-  idPrefix: 'MER',
+  name: 'Daedalus',
+  org: 'Skyforge',
+  idPrefix: 'DAE',
 };
 
 /**

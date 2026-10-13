@@ -9,15 +9,15 @@ import CodeBlock from '../../_components/CodeBlock';
 import { LifecyclePill, PageHeader, Panel, PersonAvatar } from '../../_components/ui';
 
 const INSTALL = [
-  { id: 'web', label: 'React', code: `npm install @meridian/react @meridian/tokens` },
-  { id: 'ios', label: 'SwiftUI', code: `// Package.swift\n.package(url: "https://git.larkspur.dev/meridian/meridian-ios", from: "3.4.0")\n\n// Target dependency\n.product(name: "MeridianUI", package: "meridian-ios")` },
-  { id: 'android', label: 'Compose', code: `// build.gradle.kts\ndependencies {\n    implementation("dev.larkspur.meridian:meridian-compose:3.3.1")\n}` },
+  { id: 'web', label: 'React', code: `npm install @daedalus/react @daedalus/tokens` },
+  { id: 'ios', label: 'SwiftUI', code: `// Package.swift\n.package(url: "https://git.skyforge.dev/daedalus/daedalus-ios", from: "3.4.0")\n\n// Target dependency\n.product(name: "DaedalusUI", package: "daedalus-ios")` },
+  { id: 'android', label: 'Compose', code: `// build.gradle.kts\ndependencies {\n    implementation("dev.skyforge.daedalus:daedalus-compose:3.3.1")\n}` },
 ];
 
 const SETUP = [
-  { id: 'web', label: 'React', code: `import { MeridianProvider, Button } from '@meridian/react';\nimport '@meridian/tokens/css';\n\nexport function App() {\n  return (\n    <MeridianProvider theme="system">\n      <Button variant="primary">Book now</Button>\n    </MeridianProvider>\n  );\n}` },
-  { id: 'ios', label: 'SwiftUI', code: `import MeridianUI\n\n@main\nstruct BookingApp: App {\n    var body: some Scene {\n        WindowGroup {\n            ContentView()\n                .meridianTheme(.system)\n        }\n    }\n}` },
-  { id: 'android', label: 'Compose', code: `import meridian.compose.MeridianTheme\nimport meridian.compose.MButton\n\nsetContent {\n    MeridianTheme {\n        MButton(text = "Book now", onClick = ::book)\n    }\n}` },
+  { id: 'web', label: 'React', code: `import { DaedalusProvider, Button } from '@daedalus/react';\nimport '@daedalus/tokens/css';\n\nexport function App() {\n  return (\n    <DaedalusProvider theme="system">\n      <Button variant="primary">Book now</Button>\n    </DaedalusProvider>\n  );\n}` },
+  { id: 'ios', label: 'SwiftUI', code: `import DaedalusUI\n\n@main\nstruct BookingApp: App {\n    var body: some Scene {\n        WindowGroup {\n            ContentView()\n                .daedalusTheme(.system)\n        }\n    }\n}` },
+  { id: 'android', label: 'Compose', code: `import daedalus.compose.DaedalusTheme\nimport daedalus.compose.MButton\n\nsetContent {\n    DaedalusTheme {\n        MButton(text = "Book now", onClick = ::book)\n    }\n}` },
 ];
 
 const FLOW = [
@@ -173,7 +173,7 @@ export default function GettingStarted() {
           <Panel title="Where to ask">
             <ul className="m-0 flex list-none flex-col gap-2 p-0 text-[13.5px]">
               <li>
-                <strong>#meridian-help</strong> <span className="text-ks-fg-muted">— questions, answered within a working day</span>
+                <strong>#daedalus-help</strong> <span className="text-ks-fg-muted">— questions, answered within a working day</span>
               </li>
               <li>
                 <strong>Office hours</strong> <span className="text-ks-fg-muted">— Thursdays 2–3pm, bring a file or a PR</span>
