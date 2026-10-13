@@ -90,7 +90,7 @@ export default function DocFeedback({ slug, name }: { slug: string; name: string
               {message.trim() && (
                 <label className="flex flex-col gap-1 text-[12.5px] text-ks-fg-muted sm:max-w-[240px]">
                   Type
-                  <select value={category} onChange={(e) => setCategory(e.target.value as FeedbackCategory)} className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg">
+                  <select value={category} onChange={(e) => setCategory(e.target.value as FeedbackCategory)} className="h-8 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[13px] text-ks-fg">
                     {(Object.keys(FEEDBACK_CATEGORY_LABEL) as FeedbackCategory[]).map((c) => (
                       <option key={c} value={c}>
                         {FEEDBACK_CATEGORY_LABEL[c]}

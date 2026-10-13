@@ -223,7 +223,7 @@ export function SelectFilter<T extends string>({ value, onChange, options, label
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as T)}
-        className="h-8 rounded-md border border-ks-border bg-ks-surface pl-2.5 pr-7 text-[12.5px] text-ks-fg hover:border-ks-border-strong"
+        className="h-8 rounded-md border border-ks-border-input bg-ks-surface pl-2.5 pr-7 text-[12.5px] text-ks-fg hover:border-ks-fg-subtle"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -236,7 +236,7 @@ export function SelectFilter<T extends string>({ value, onChange, options, label
 }
 
 export const inputClass =
-  'w-full rounded-md border border-ks-border bg-ks-surface px-3 py-2 text-[13.5px] text-ks-fg placeholder:text-ks-fg-subtle hover:border-ks-border-strong focus:border-ks-accent focus:outline-none';
+  'w-full rounded-md border border-ks-border-input bg-ks-surface px-3 py-2 text-[13.5px] text-ks-fg placeholder:text-ks-fg-subtle hover:border-ks-fg-subtle focus:border-ks-accent focus:outline-none';
 
 // ── Layout ──────────────────────────────────────────────────────
 

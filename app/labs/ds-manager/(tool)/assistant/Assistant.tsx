@@ -256,7 +256,7 @@ export default function Assistant() {
                 }
               }}
               placeholder='e.g. "Do we have a chip I can remove?"'
-              className="max-h-40 min-h-[40px] flex-1 resize-none rounded-md border border-ks-border bg-ks-bg px-3 py-2 text-[14px] text-ks-fg placeholder:text-ks-fg-subtle focus:border-ks-accent focus:outline-none"
+              className="max-h-40 min-h-[40px] flex-1 resize-none rounded-md border border-ks-border-input bg-ks-bg px-3 py-2 text-[14px] text-ks-fg placeholder:text-ks-fg-subtle focus:border-ks-accent focus:outline-none"
             />
             <button type="submit" disabled={!q.trim() || busy} aria-label="Send" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-ks-accent text-ks-accent-fg disabled:opacity-40">
               <ArrowUp size={18} weight="bold" />

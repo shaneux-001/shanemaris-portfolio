@@ -81,7 +81,7 @@ export function ItemEditor({ item }: { item: SystemItem }) {
             const id = e.target.value || undefined;
             run((r) => r.updateItem(item.slug, { ownerId: id }, id ? `Ownership assigned to ${person(id)?.name}.` : 'Owner removed.'));
           }}
-          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
+          className="h-8 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
         >
           <option value="">Unassigned</option>
           {owners.map((p) => (
@@ -100,7 +100,7 @@ export function ItemEditor({ item }: { item: SystemItem }) {
             const l = e.target.value as Lifecycle;
             run((r) => r.updateItem(item.slug, { lifecycle: l }, `Lifecycle changed from ${item.lifecycle} to ${l}.`));
           }}
-          className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
+          className="h-8 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[13px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
         >
           {LIFECYCLES.map((l) => (
             <option key={l} value={l}>

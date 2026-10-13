@@ -43,7 +43,7 @@ function ModeEditor({ token, mode, value, onChange, map, tokens }: { token: Toke
     <div className="flex flex-col gap-2">
       <div className="text-[12px] font-medium capitalize text-ks-fg-muted">{typeof token.value === 'string' ? 'Value' : `${mode} mode`}</div>
       {candidates.length > 0 && (
-        <select value={isRef(value) ? value : ''} onChange={(e) => e.target.value && onChange(e.target.value)} className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 font-ks-mono text-[12px]">
+        <select value={isRef(value) ? value : ''} onChange={(e) => e.target.value && onChange(e.target.value)} className="h-8 rounded-md border border-ks-border-input bg-ks-surface px-2 font-ks-mono text-[12px]">
           <option value="">Literal value…</option>
           {candidates.map((c) => (
             <option key={c.name} value={`{${c.name}}`}>

@@ -76,7 +76,7 @@ export default function Owners() {
                     title={can('item.edit') ? undefined : 'Only the DS team can assign owners.'}
                     defaultValue=""
                     onChange={(e) => e.target.value && run((r) => r.updateItem(i.slug, { ownerId: e.target.value }, `Ownership assigned to ${person(e.target.value)?.name}.`))}
-                    className="h-7 rounded-md border border-ks-border bg-ks-surface px-2 text-[12.5px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
+                    className="h-7 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[12.5px] text-ks-fg disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <option value="">Choose…</option>
                     {people.map((p) => (

@@ -57,7 +57,7 @@ function Playground({ slug, values, setValues }: { slug: string; values: Props; 
               <label key={c.name} className={cx('flex gap-1 text-[12px] text-ks-fg-muted', c.type === 'boolean' ? 'items-center justify-between' : 'flex-col')}>
                 <span className="font-ks-mono">{c.label ?? c.name}</span>
                 {c.type === 'select' && (
-                  <select value={String(values[c.name])} onChange={(e) => setValues({ ...values, [c.name]: e.target.value })} className="h-8 rounded-md border border-ks-border bg-ks-surface px-2 text-[13px] text-ks-fg">
+                  <select value={String(values[c.name])} onChange={(e) => setValues({ ...values, [c.name]: e.target.value })} className="h-8 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[13px] text-ks-fg">
                     {c.options!.map((o) => (
                       <option key={o}>{o}</option>
                     ))}

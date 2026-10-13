@@ -201,7 +201,7 @@ export default function Dashboard() {
             {m.avgCompleteness}
             <span className="text-[28px] text-ks-fg-subtle">%</span>
           </div>
-          <div className="mb-3 flex items-center gap-3">
+          <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
             <Sparkline values={trends.avgCompleteness} width={120} height={30} />
             <Delta values={trends.avgCompleteness} suffix=" pts" />
           </div>
@@ -280,7 +280,7 @@ export default function Dashboard() {
           className="flex flex-col"
           title={`Risks (${shownRisks.length})`}
           actions={
-            <select value={riskFilter} onChange={(e) => setRiskFilter(e.target.value as typeof riskFilter)} aria-label="Filter risks" className="h-7 rounded-md border border-ks-border bg-ks-surface px-2 text-[12px]">
+            <select value={riskFilter} onChange={(e) => setRiskFilter(e.target.value as typeof riskFilter)} aria-label="Filter risks" className="h-7 rounded-md border border-ks-border-input bg-ks-surface px-2 text-[12px]">
               <option value="all">All risks</option>
               {riskKinds.map((k) => (
                 <option key={k} value={k}>

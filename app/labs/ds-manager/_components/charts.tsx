@@ -47,7 +47,7 @@ export function Delta({ values, goodWhen = 'up', suffix = '', period = 'vs last 
   const good = diff === 0 ? null : goodWhen === 'up' ? diff > 0 : diff < 0;
   const Icon = diff > 0 ? ArrowUpRight : diff < 0 ? ArrowDownRight : Minus;
   return (
-    <span className={cx('inline-flex items-center gap-0.5 text-[12px] font-medium', good === null ? 'text-ks-fg-subtle' : good ? 'text-ks-success' : 'text-ks-danger')}>
+    <span className={cx('inline-flex items-center gap-0.5 whitespace-nowrap text-[12px] font-medium', good === null ? 'text-ks-fg-subtle' : good ? 'text-ks-success' : 'text-ks-danger')}>
       <Icon size={12} weight="bold" aria-hidden="true" />
       <span className="ks-tabular">
         {diff > 0 ? '+' : ''}
