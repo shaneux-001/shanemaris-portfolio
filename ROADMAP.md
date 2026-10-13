@@ -1,6 +1,6 @@
 # Roadmap — single source of truth
 
-**Last updated: 2026-10-11.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
+**Last updated: 2026-10-12.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
 - `HANDOFF.md` — retired 2026-09-19. Its task-list role was already dead (this file replaced it months ago); its architecture/gotchas/file-map reference content moved to the new `TECH-OVERVIEW.md`, corrected against the live codebase rather than carried forward stale.
 - The Cowork artifact **"Shane Portfolio Roadmap"** (`~/Documents/Claude/Artifacts/shane-portfolio-roadmap/`) — last touched May 1, targeted a June 22 launch that's long past, and several of its own "DONE" claims turned out to be stale once the September redesign rebuilt large parts of the site. A stale banner has been added to it.
 - `IMAGE-SPEC.md` — trimmed 2026-09-19 to Priority 2 only (the 9 hidden case studies). Priority 1 is done (Heart DS, Proof Before Progress, Figma Enterprise Migration, Home, About all have real photography live) so that section was deleted rather than left with stale numbers and a wrong file extension (`.jpg` — the real files are `.png`).
@@ -292,11 +292,11 @@ _(Add new items here as they come up — this section is yours.)_
 
 ---
 
-## Planned — Design System Manager → Labs (second Labs entry)
+## Done — Daedalus (design system manager) → Labs (second Labs entry)
 
-**Status: built on `labs/ds-manager`, not yet merged (2026-10-11).** All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, a Getting started page, viewer/contributor/DS-team roles (enforced in the repository, not just the UI), docs feedback + watching with notifications, and a Figma ↔ code view (Code Connect-style property mapping, mismatch detection, library detach rates, generated Code Connect files); production build passes; every route checked for overflow at 375px. Tag `v1.2.0` on merge.
+**Shipped 2026-10-12** — built on `labs/ds-manager` (2026-10-11 → 12), merged into `main` and deployed. Further polish continues on `labs/daedalus-polish` (draft PR). All 10 build steps done, plus a polish round: Foundations (with live WCAG contrast checks), adoption-over-time + dashboard trends, releases with migration guides, a Getting started page, viewer/contributor/DS-team roles (enforced in the repository, not just the UI), docs feedback + watching with notifications, and a Figma ↔ code view (Code Connect-style property mapping, mismatch detection, library detach rates, generated Code Connect files); production build passes; every route checked for overflow at 375px. Proposed tag: `v1.2.0` (new Labs entry = MINOR), pending Shane's OK.
 
-**Open before merge:**
+**Still open (not blocking — carried to the polish branch):**
 - [x] ~~**Name.**~~ — decided 2026-10-12: fictional company **Skyforge**, design system **Daedalus** (was placeholder Larkspur / Meridian; renamed everywhere incl. package names, `dae-` CSS prefix, `DAE-` item IDs). The tool shares the system's name (**Daedalus**; Keystone placeholder retired) — all in `lib/labs/dsManager/brand.ts`, Labs listing title in `lib/projects.ts`.
 - [x] ~~**Daedalus color palette**~~ — done 2026-10-12 from Shane's four colors (#2F39A9 indigo — nudged 15° toward purple to #4B2FA4 —, #2E6FA0 steel, #49A4BB lagoon, #15D8B3 mint), each expanded to a 50–950 OKLCH ramp with the chosen color kept exact; cool indigo-tinted neutral; coral/amber re-ramped for danger/warning. Regenerate with `scripts/generate-daedalus-ramps.py`. All WCAG checks pass in both themes except `color.border.default`, kept as the deliberate planted finding (Shane confirmed 2026-10-12 — it demos the tool catching a real issue). The site's own interface now uses the Daedalus palette too (indigo accent, cool neutrals); its form fields have their own 3:1 input border so the planted failure only lives in Daedalus itself.
 - [ ] **Framing-page copy** (`app/labs/ds-manager/page.tsx`) is a draft — needs Shane's own voice pass.
