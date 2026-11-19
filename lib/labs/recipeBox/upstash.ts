@@ -1,5 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
+import type { Recipe } from './recipes';
 
 function redis(): Redis {
   const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -61,4 +62,16 @@ export async function getCalendar(): Promise<CalendarEntry[]> {
 
 export async function setCalendar(entries: CalendarEntry[]): Promise<void> {
   await redis().set(CALENDAR_KEY, entries);
+}
+
+const CUSTOM_RECIPES_KEY = 'rb_custom_recipes';
+
+/** Recipes added in the app. The bundled JSON recipes are never stored here. */
+export async function getCustomRecipes(): Promise<Recipe[]> {
+  const data = await redis().get<Recipe[]>(CUSTOM_RECIPES_KEY);
+  return data ?? [];
+}
+
+export async function setCustomRecipes(list: Recipe[]): Promise<void> {
+  await redis().set(CUSTOM_RECIPES_KEY, list);
 }

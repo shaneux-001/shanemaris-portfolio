@@ -1,14 +1,42 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { Recipe } from '@/lib/labs/recipeBox/recipes';
+import { DISH_TYPES, type Recipe } from '@/lib/labs/recipeBox/recipes';
+import type { CalendarEntry } from '@/lib/labs/recipeBox/upstash';
+import RecipeEditor from './RecipeEditor';
 
-const DISH_TYPES: Recipe['dish_type'][] = ['full meal', 'single dish', 'side dish', 'condiment/side', 'appetizer'];
-
-export default function RecipeLibrary({ recipes }: { recipes: Recipe[] }) {
+export default function RecipeLibrary({
+  recipes,
+  onRecipeSaved,
+  onRecipeDeleted,
+}: {
+  recipes: Recipe[];
+  onRecipeSaved: (recipe: Recipe) => void;
+  onRecipeDeleted: (id: string, calendar: CalendarEntry[]) => void;
+}) {
   const [query, setQuery] = useState('');
   const [dishType, setDishType] = useState<string | null>(null);
   const [selected, setSelected] = useState<Recipe | null>(null);
+  // null = closed, 'new' = adding, a Recipe = editing that one
+  const [editing, setEditing] = useState<Recipe | 'new' | null>(null);
+
+  const handleSaved = (recipe: Recipe) => {
+    onRecipeSaved(recipe);
+    setEditing(null);
+    setSelected(recipe);
+  };
+
+  const handleDelete = async (recipe: Recipe) => {
+    if (!window.confirm(`Delete "${recipe.title}"? This can't be undone.`)) return;
+    const res = await fetch(`/api/labs/recipe-box/recipes?id=${encodeURIComponent(recipe.id)}`, { method: 'DELETE' });
+    if (!res.ok) {
+      window.alert('Could not delete that recipe. Try again.');
+      return;
+    }
+    const data = await res.json();
+    onRecipeDeleted(recipe.id, data.calendar);
+    setSelected(null);
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -47,6 +75,9 @@ export default function RecipeLibrary({ recipes }: { recipes: Recipe[] }) {
             </button>
           ))}
         </div>
+        <button onClick={() => setEditing('new')} className="pr-btn-accent-outline whitespace-nowrap">
+          + Add recipe
+        </button>
       </div>
 
       <p className="text-xs text-pr-muted font-plex-mono mb-3">
@@ -60,7 +91,10 @@ export default function RecipeLibrary({ recipes }: { recipes: Recipe[] }) {
             onClick={() => setSelected(r)}
             className="pr-card text-left"
           >
-            <span className="block font-plex-mono text-[11px] text-pr-muted mb-1">{r.dish_type}</span>
+            <span className="block font-plex-mono text-[11px] text-pr-muted mb-1">
+              {r.dish_type}
+              {r.custom && <span className="ml-2 text-pr-fg-strong">· added</span>}
+            </span>
             <h3 className="font-archivo text-base font-bold text-pr-fg-strong m-0 mb-1.5 leading-snug">{r.title}</h3>
             <div className="flex flex-wrap gap-1">
               {(r.tags ?? []).slice(0, 3).map((t) => (
@@ -73,12 +107,36 @@ export default function RecipeLibrary({ recipes }: { recipes: Recipe[] }) {
         ))}
       </div>
 
-      {selected && <RecipeDetailPanel recipe={selected} onClose={() => setSelected(null)} />}
+      {selected && !editing && (
+        <RecipeDetailPanel
+          recipe={selected}
+          onClose={() => setSelected(null)}
+          onEdit={() => setEditing(selected)}
+          onDelete={() => handleDelete(selected)}
+        />
+      )}
+      {editing && (
+        <RecipeEditor
+          recipe={editing === 'new' ? undefined : editing}
+          onSaved={handleSaved}
+          onClose={() => setEditing(null)}
+        />
+      )}
     </div>
   );
 }
 
-function RecipeDetailPanel({ recipe, onClose }: { recipe: Recipe; onClose: () => void }) {
+function RecipeDetailPanel({
+  recipe,
+  onClose,
+  onEdit,
+  onDelete,
+}: {
+  recipe: Recipe;
+  onClose: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
   const markdown = useMemo(() => {
     const ing = recipe.ingredients.map((i) => `- ${[i.amount, i.unit, i.name].filter(Boolean).join(' ')}`).join('\n');
     const steps = (recipe.steps ?? []).map((s, i) => `${i + 1}. ${s}`).join('\n');
@@ -98,7 +156,7 @@ function RecipeDetailPanel({ recipe, onClose }: { recipe: Recipe; onClose: () =>
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-stretch justify-end bg-black/40" onClick={onClose}>
+    <div className="fixed inset-0 z-[110] flex items-stretch justify-end bg-black/40" onClick={onClose}>
       <aside
         onClick={(e) => e.stopPropagation()}
         className="w-full max-w-md h-full overflow-y-auto bg-pr-surface border-l border-pr-rule p-6"
@@ -137,10 +195,23 @@ function RecipeDetailPanel({ recipe, onClose }: { recipe: Recipe; onClose: () =>
         {recipe.notes && (
           <p className="text-sm text-pr-lede italic mt-4">{recipe.notes}</p>
         )}
+        {recipe.custom && recipe.source && <p className="text-xs font-plex-mono text-pr-muted mt-4">{recipe.source}</p>}
 
-        <button onClick={downloadMarkdown} className="pr-btn-secondary mt-6">
-          Download as Markdown
-        </button>
+        <div className="flex flex-wrap gap-3 mt-6">
+          <button onClick={downloadMarkdown} className="pr-btn-secondary">
+            Download as Markdown
+          </button>
+          {recipe.custom && (
+            <>
+              <button onClick={onEdit} className="pr-btn-secondary">
+                Edit
+              </button>
+              <button onClick={onDelete} className="pr-btn-secondary hover:!text-red-500">
+                Delete
+              </button>
+            </>
+          )}
+        </div>
       </aside>
     </div>
   );

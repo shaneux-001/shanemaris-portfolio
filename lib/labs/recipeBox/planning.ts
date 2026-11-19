@@ -103,11 +103,14 @@ export interface ShoppingListGroup {
   entries: { amt: string; recipeTitle: string }[];
 }
 
-export function buildShoppingList(meals: MealPlanEntry[]): ShoppingListGroup[] {
+export function buildShoppingList(
+  meals: MealPlanEntry[],
+  lookup: (id: string) => Recipe | undefined = recipeById
+): ShoppingListGroup[] {
   const groups: Record<string, ShoppingListGroup> = {};
   meals.forEach((m) => {
     [m.main, m.side].filter((id): id is string => Boolean(id)).forEach((id) => {
-      const r = recipeById(id);
+      const r = lookup(id);
       if (!r) return;
       (r.ingredients ?? []).forEach((ing) => {
         const key = (ing.name ?? '').trim().toLowerCase();
@@ -148,7 +151,11 @@ export interface PantryRow {
 }
 
 /** Cross-references the upcoming week's calendar entries against pantry stock. */
-export function computeWeekUsage(calendarLog: CalendarEntry[], pantry: PantryData): PantryRow[] {
+export function computeWeekUsage(
+  calendarLog: CalendarEntry[],
+  pantry: PantryData,
+  lookup: (id: string) => Recipe | undefined = recipeById
+): PantryRow[] {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const fmt = (d: Date) => d.toISOString().slice(0, 10);
@@ -168,7 +175,7 @@ export function computeWeekUsage(calendarLog: CalendarEntry[], pantry: PantryDat
   const needed: Record<string, { name: string; unit: string; qty: number; hasNonNumeric: boolean; hasMixedUnits: boolean }> = {};
   upcoming.forEach((entry) => {
     [entry.main, entry.side].filter((id): id is string => Boolean(id)).forEach((id) => {
-      const r = recipeById(id);
+      const r = lookup(id);
       if (!r) return;
       (r.ingredients ?? []).forEach((ing) => {
         const name = (ing.name ?? '').trim().toLowerCase();

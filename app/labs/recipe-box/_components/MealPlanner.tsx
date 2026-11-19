@@ -59,7 +59,7 @@ export default function MealPlanner({
     }
   };
 
-  const shoppingList = useMemo(() => (meals ? buildShoppingList(meals) : []), [meals]);
+  const shoppingList = useMemo(() => (meals ? buildShoppingList(meals, recipeById) : []), [meals, recipeById]);
 
   const addToCalendar = async () => {
     if (!meals) return;

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { Recipe } from '@/lib/labs/recipeBox/recipes';
 import { computeWeekUsage, type PantryRow } from '@/lib/labs/recipeBox/planning';
 import type { PantryData, PantryItem, CalendarEntry } from '@/lib/labs/recipeBox/upstash';
 
@@ -12,7 +13,11 @@ const STATUS_LABEL: Record<PantryRow['status'], string> = {
   ok: 'OK',
 };
 
-export default function PantryView({ calendar }: { calendar: CalendarEntry[] }) {
+export default function PantryView({ recipes, calendar }: { recipes: Recipe[]; calendar: CalendarEntry[] }) {
+  const recipeById = useMemo(() => {
+    const map = new Map(recipes.map((r) => [r.id, r]));
+    return (id: string) => map.get(id);
+  }, [recipes]);
   const [pantry, setPantry] = useState<PantryData>({ last_updated: null, items: [] });
   const [loading, setLoading] = useState(true);
   const [draft, setDraft] = useState<PantryItem>({ name: '', amount: '', unit: '' });
@@ -43,7 +48,7 @@ export default function PantryView({ calendar }: { calendar: CalendarEntry[] }) 
     save(pantry.items.filter((i) => i.name !== name));
   };
 
-  const usage = computeWeekUsage(calendar, pantry);
+  const usage = computeWeekUsage(calendar, pantry, recipeById);
 
   if (loading) return <p className="text-sm text-pr-muted">Loading pantry…</p>;
 

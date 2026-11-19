@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireSession } from '@/lib/labs/recipeBox/requireSession';
 import { mealPlanRateLimit } from '@/lib/labs/recipeBox/upstash';
-import { recipes, compactRecipesForPrompt } from '@/lib/labs/recipeBox/recipes';
+import { compactRecipesForPrompt } from '@/lib/labs/recipeBox/recipes';
+import { getAllRecipes } from '@/lib/labs/recipeBox/library';
 import { generateMealPlan } from '@/lib/labs/recipeBox/ai';
 import { localHeuristicPlan } from '@/lib/labs/recipeBox/planning';
 
@@ -23,10 +24,12 @@ export async function POST(request: NextRequest) {
   const numMeals = Math.min(MAX_MEALS, Math.max(1, Number(body.numMeals) || 5));
   const fridgeNotes = typeof body.fridgeNotes === 'string' ? body.fridgeNotes.slice(0, 2000) : '';
 
+  const recipes = await getAllRecipes();
+
   let meals;
   let usedFallback = false;
   try {
-    meals = await generateMealPlan(numMeals, fridgeNotes, compactRecipesForPrompt());
+    meals = await generateMealPlan(numMeals, fridgeNotes, compactRecipesForPrompt(recipes));
     if (!meals.length) throw new Error('empty plan');
   } catch (err) {
     console.error('Recipe Box: AI meal plan failed, using local fallback —', err);
