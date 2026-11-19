@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireSession } from '@/lib/labs/recipeBox/requireSession';
 import { getCalendar, setCalendar, type CalendarEntry } from '@/lib/labs/recipeBox/upstash';
-import { recipeById } from '@/lib/labs/recipeBox/recipes';
+import { getAllRecipes } from '@/lib/labs/recipeBox/library';
 
 export async function GET(request: NextRequest) {
   const unauthorized = requireSession(request);
@@ -18,6 +18,9 @@ export async function PUT(request: NextRequest) {
   if (!body || !Array.isArray(body.entries)) {
     return NextResponse.json({ error: 'Expected { entries: CalendarEntry[] }' }, { status: 400 });
   }
+
+  const ids = new Set((await getAllRecipes()).map((r) => r.id));
+  const recipeById = (id: string) => ids.has(id);
 
   const entries: CalendarEntry[] = body.entries
     .filter((e: unknown): e is Record<string, unknown> => typeof e === 'object' && e !== null)

@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import LabsHeader from '@/components/LabsHeader';
-import { recipes } from '@/lib/labs/recipeBox/recipes';
+import { recipes as bundledRecipes, type Recipe } from '@/lib/labs/recipeBox/recipes';
 import type { CalendarEntry } from '@/lib/labs/recipeBox/upstash';
 import RecipeLibrary from './_components/RecipeLibrary';
 import MealPlanner from './_components/MealPlanner';
@@ -14,12 +14,27 @@ type Tab = 'library' | 'plan' | 'calendar' | 'pantry';
 export default function RecipeBoxPage() {
   const [tab, setTab] = useState<Tab>('plan');
   const [calendar, setCalendar] = useState<CalendarEntry[]>([]);
+  const [customRecipes, setCustomRecipes] = useState<Recipe[]>([]);
+  const recipes = useMemo(() => [...bundledRecipes, ...customRecipes], [customRecipes]);
 
   useEffect(() => {
     fetch('/api/labs/recipe-box/calendar')
       .then((r) => (r.ok ? r.json() : []))
       .then(setCalendar);
+    fetch('/api/labs/recipe-box/recipes')
+      .then((r) => (r.ok ? r.json() : []))
+      .then(setCustomRecipes);
   }, []);
+
+  const handleRecipeSaved = (recipe: Recipe) =>
+    setCustomRecipes((list) =>
+      list.some((r) => r.id === recipe.id) ? list.map((r) => (r.id === recipe.id ? recipe : r)) : [...list, recipe]
+    );
+
+  const handleRecipeDeleted = (id: string, nextCalendar: CalendarEntry[]) => {
+    setCustomRecipes((list) => list.filter((r) => r.id !== id));
+    setCalendar(nextCalendar);
+  };
 
   return (
     <>
@@ -30,7 +45,7 @@ export default function RecipeBoxPage() {
             The Recipe Box
           </h1>
           <p className="pr-page-lede m-0 mb-8 leading-[1.65] text-pr-lede max-w-[56ch]">
-            ~90 family recipes, a meal planner that reasons about what&apos;s actually in the fridge, and a pantry
+            Our family recipes, a meal planner that reasons about what&apos;s actually in the fridge, and a pantry
             that keeps the shopping list honest.
           </p>
 
@@ -55,10 +70,12 @@ export default function RecipeBoxPage() {
             ))}
           </nav>
 
-          {tab === 'library' && <RecipeLibrary recipes={recipes} />}
+          {tab === 'library' && (
+            <RecipeLibrary recipes={recipes} onRecipeSaved={handleRecipeSaved} onRecipeDeleted={handleRecipeDeleted} />
+          )}
           {tab === 'plan' && <MealPlanner recipes={recipes} onCalendarUpdated={setCalendar} />}
           {tab === 'calendar' && <CalendarView recipes={recipes} calendar={calendar} onCalendarUpdated={setCalendar} />}
-          {tab === 'pantry' && <PantryView calendar={calendar} />}
+          {tab === 'pantry' && <PantryView recipes={recipes} calendar={calendar} />}
         </div>
       </main>
     </>

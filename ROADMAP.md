@@ -1,6 +1,6 @@
 # Roadmap — single source of truth
 
-**Last updated: 2026-10-12.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
+**Last updated: 2026-11-18.** This file is the ONE place tracking what's left to do on this project, and the entry point for picking this up cold — see the "Doc map" section below for everything else and what it's for. It supersedes:
 - `HANDOFF.md` — retired 2026-09-19. Its task-list role was already dead (this file replaced it months ago); its architecture/gotchas/file-map reference content moved to the new `TECH-OVERVIEW.md`, corrected against the live codebase rather than carried forward stale.
 - The Cowork artifact **"Shane Portfolio Roadmap"** (`~/Documents/Claude/Artifacts/shane-portfolio-roadmap/`) — last touched May 1, targeted a June 22 launch that's long past, and several of its own "DONE" claims turned out to be stale once the September redesign rebuilt large parts of the site. A stale banner has been added to it.
 - `IMAGE-SPEC.md` — trimmed 2026-09-19 to Priority 2 only (the 9 hidden case studies). Priority 1 is done (Heart DS, Proof Before Progress, Figma Enterprise Migration, Home, About all have real photography live) so that section was deleted rather than left with stale numbers and a wrong file extension (`.jpg` — the real files are `.png`).
@@ -289,6 +289,21 @@ separate changelog file to keep in sync.
 ## Shane's additions
 
 _(Add new items here as they come up — this section is yours.)_
+
+---
+
+## Done — Recipe Box: add, import, edit and delete recipes
+
+**Built 2026-11-18** on `labs/recipe-upload` (off `main`). The Recipe Box tab has an **+ Add recipe** form. It can be filled by hand or from **a photo of a recipe card or pasted text**: Claude (`claude-opus-5-5`, low effort, structured JSON output) fills the form, and the recipe is only saved after review. Recipes added in the app can be edited and deleted; the bundled ~90 in `master_recipes.json` stay read-only.
+
+- Added recipes live in Upstash (`rb_custom_recipes`) and are merged with the bundled JSON everywhere: library, meal planner (AI and fallback), calendar, pantry, shopping list. Deleting one also clears calendar entries that used it.
+- Imports share the existing 30/hour sliding-window limiter under their own key (`rb_recipe_import`). Photos are downscaled in the browser (1568px JPEG) before upload. The photo itself isn't stored.
+- Also fixed: the sticky site header (z-index 100) covered the top of the recipe detail panel, hiding its Close button. Both slide-out panels now sit above it.
+- Verified in the dev server against the real Upstash store: text import → save → edit → reload → delete, and 375px width. Proposed tag: `v1.3.0` (new feature = MINOR), pending Shane's OK.
+
+**Not yet verified:**
+- [ ] Photo import with a real recipe card (same code path as text, but untested with an image).
+- [ ] An added recipe being picked by the meal planner and appearing on the shopping list.
 
 ---
 
